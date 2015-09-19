@@ -8,7 +8,8 @@
 var express = require('express');
 var router = express.Router();
 var field = require('../conf/fielddef.js')
-
+var sqlhelper = require('../func/sql.js')
+var table = require('../model/table.js')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   	res.render('input', { title: 'Express' });
@@ -22,12 +23,20 @@ router.post('/update',function(req ,res ,next){
 
 })
 
-router.post('/edit',function(req ,res ,next){
-
+router.get('/edit/:id',function(req ,res ,next){
+	res.render('edit',{ id: req.params.id})
 })
 
-router.post('/new',function(req ,res ,next){
+router.get('/new',function(req ,res ,next){
+	table.insertnull(function (id) {
+		res.redirect('edit/'+id);
+	})
+})
 
+router.get('/get/:id',function(req ,res ,next){
+	table.getitem(req.params.id,function(item){
+		res.json(item);
+	})
 })
 
 module.exports = router;

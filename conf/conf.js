@@ -1,4 +1,5 @@
 conf = {
+	dbserver:"localhost",
 	dbname:"yanhandb",
 	dbuser:"root",
 	dbpwd:"123456",

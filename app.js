@@ -5,8 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// conf
+global.conf = require('./conf/conf.js')
+
+
 var routes = require('./routes/index');
 var input = require('./routes/input');
+var dbgenerator = require('./routes/dbgenerator');
+
+
 
 var app = express();
 
@@ -24,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/input', input);
+app.use('/dbgenerator', dbgenerator);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

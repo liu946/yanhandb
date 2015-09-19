@@ -394,7 +394,7 @@ data = [
             {
                 "fieldname": "是否为历史建筑",
                 "datatype": "bool",
-                "default": "否",
+                "default": "2",
                 "items": {
                     "1": "是",
                     "2": "否"
@@ -404,7 +404,7 @@ data = [
             {
                 "fieldname": "是否为具有标志性",
                 "datatype": "bool",
-                "default": "否",
+                "default": "2",
                 "items": {
                     "1": "是",
                     "2": "否"
@@ -707,7 +707,7 @@ data = [
             {
                 "fieldname": "屋脊装饰构件",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -717,7 +717,7 @@ data = [
             {
                 "fieldname": "屋顶绿化",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -727,7 +727,7 @@ data = [
             {
                 "fieldname": "太阳能屋顶",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -870,7 +870,7 @@ data = [
             {
                 "fieldname": "有无",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -910,7 +910,7 @@ data = [
             {
                 "fieldname": "有无",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -1068,7 +1068,7 @@ data = [
             {
                 "fieldname": "牌匾_有无",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -1128,7 +1128,7 @@ data = [
             {
                 "fieldname": "无障碍设计_有无",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -1382,7 +1382,7 @@ data = [
             {
                 "fieldname": "集中供暖",
                 "datatype": "bool",
-                "default": "否",
+                "default": "2",
                 "items": {
                     "1": "是",
                     "2": "否"
@@ -1605,7 +1605,7 @@ data = [
             {
                 "fieldname": "加湿功能",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -1628,7 +1628,7 @@ data = [
             {
                 "fieldname": "窗户是否可开闭",
                 "datatype": "bool",
-                "default": "否",
+                "default": "2",
                 "items": {
                     "1": "是",
                     "2": "否"
@@ -1747,7 +1747,7 @@ data = [
             {
                 "fieldname": "太阳能热水系统有无",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -1770,7 +1770,7 @@ data = [
             {
                 "fieldname": "生物质能利用有无",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -1808,7 +1808,7 @@ data = [
             {
                 "fieldname": "规模化沼气工程采用加热方式维持所需热量进行保温",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -1818,7 +1818,7 @@ data = [
             {
                 "fieldname": "地源热泵系统有无",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -1927,7 +1927,7 @@ data = [
                 "field": "ZiYuanCaiLiaoLiYongJiYouJianZhuZhuTiZaiLiYong"
             },
             {
-                "field": "ZiYuanCaiLiaoLiYongJiuCaiLiaoZaiLiYongLiangJianZhuZhuTiCaiLiaoDeZaiLiYongLv",
+                "field": "ZiYuanCaiLiaoLiYongJiuCaiLiaoZaiLiYongLiang",
                 "fieldname": "旧材料再利用量（建筑主体材料的再利用率）",
                 "datatype": "double",
                 "datasize": ".1",
@@ -1943,7 +1943,7 @@ data = [
             {
                 "fieldname": "环境保护1",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -1953,7 +1953,7 @@ data = [
             {
                 "fieldname": "环境保护2",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -2031,7 +2031,7 @@ data = [
             {
                 "fieldname": "过程管理1",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -2041,7 +2041,7 @@ data = [
             {
                 "fieldname": "过程管理2",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -2051,7 +2051,7 @@ data = [
             {
                 "fieldname": "过程管理3",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"
@@ -2087,7 +2087,7 @@ data = [
             {
                 "fieldname": "过程管理6",
                 "datatype": "bool",
-                "default": "无",
+                "default": "2",
                 "items": {
                     "1": "有",
                     "2": "无"

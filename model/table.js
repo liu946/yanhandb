@@ -54,16 +54,13 @@ var table = {
 		});
 	},
 
-	insertnull:function(callback){
-		this.usedb(function(argument) {
+	insertnull:function(callback){ 
 			var insertsql = "insert into "+global.conf.dbname+"."+global.conf.dbtable+" () values ();";
-			sqlhelper.exsql(insertsql,function(rows, fields){
-				sqlhelper.exsql("select max(id) as id from "+global.conf.dbname+"."+global.conf.dbtable+";",function(rows, fields){
+			var getmaxsql = "select max(id) as id from "+global.conf.dbname+"."+global.conf.dbtable+";";
+			var maxhandle = function(rows, fields){
 					callback(rows[0].id);
-				})
-				
-			});
-		});
+				}
+			sqlhelper.exsqllist(["USE "+global.conf.dbname+";",insertsql,getmaxsql],[,,maxhandle]);
 	},
 	getitem:function(id,callback){
 		// 注入危险

@@ -1,6 +1,6 @@
 
 var sql = {
-	// 顺序回调执行函数
+	// 单次链接，适合只执行一句的sql
 	exsql : function (sqlstr,handle) {
 		console.log('[SQL] '+sqlstr);
 		var mysql      = require('mysql');
@@ -23,6 +23,7 @@ var sql = {
 		});
 		connection.end();
 	},
+	// 顺序回调执行函数
 	// connection 用于递归执行，传递链接，调用时不需填写
 	exsqllist : function (sqlstrlist,handlerlist,connection){
 		// 新建链接

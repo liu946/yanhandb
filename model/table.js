@@ -55,8 +55,8 @@ var table = {
 	},
 
 	insertnull:function(callback){ 
-			var insertsql = "insert into "+global.conf.dbname+"."+global.conf.dbtable+" () values ();";
-			var getmaxsql = "select max(id) as id from "+global.conf.dbname+"."+global.conf.dbtable+";";
+			var insertsql = "insert into "+global.conf.dbtable+" () values ();";
+			var getmaxsql = "select max(id) as id from "+global.conf.dbtable+";";
 			var maxhandle = function(rows, fields){
 					callback(rows[0].id);
 				}
@@ -67,7 +67,6 @@ var table = {
 		sqlhelper.exsql('SELECT * FROM '+global.conf.dbname+"."+global.conf.dbtable+" WHERE `id`="+id+" LIMIT 1 ;",function(rows, fields){
 			callback(rows[0]);
 		});
-
 	}
 
 }

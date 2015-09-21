@@ -45,40 +45,54 @@ body{
 							padding: 10px;
 						}
 					}
+					.otherdata{
+						width: 60px;
+						height: 20px;
+						font-size: 12px;
+						margin: 0;
+						padding: 0 0 0 5px;
+						border: 0;
+						border-bottom: 1px solid #555;
+						display: none;
+					}
 				}
 				.expand{
 					height: 100px;
 				}
 			}
 		}
-		.clickoption{
-			position: fixed;
-			left: 5;
-			top: 5;
-			height: 100px;
-			width: 200px;
+	}
+}
+
+.clickoption{
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	z-index: 2;
+	.content{
+		float: right;
+		width: 200px;
+		margin-top: 600px;
+		.box{
+			width: 60px;
+			height: 40px;
+			display: inline-block;
 			text-align: center;
-			.box{
-				width: 60px;
-				height: 40px;
-				display: inline-block;
-				text-align: center;
-				.transition(all .2s ease-in-out);
-				&:hover{
-					.transform(scale(.8));
-				}
-				p{
-					color: #fff;
-				}
+			margin: 10px;
+			.transition(all .2s ease-in-out);
+			&:hover{
+				.transform(scale(.8));
 			}
-			.submit{
-				float: left;
-				background: #444;
+			p{
+				color: #fff;
 			}
-			.save{
-				float: right;
-				background: #777;
-			}
+		}
+		.submit{
+			background: #444;
+		}
+		.save{
+			background: #777;
 		}
 	}
 }

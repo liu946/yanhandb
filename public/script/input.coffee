@@ -32,15 +32,17 @@ putmodel = (string,array) ->
 				for k, v of b.items
 					if v == "其他______"
 						v = v.split('_')[0]
+						str += "<input type='radio' class='#{fieldid} other' name='#{fieldid}' value='#{v}'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+					else
+						str += "<input type='radio' class='#{fieldid}' name='#{fieldid}' value='#{v}'/>#{v}"
 					
-					str += "<input type='radio' class='#{fieldid}' name='#{fieldid}' value='#{v}'/>#{v}"
 					if v.length >= 10
 						str += "<br / >"
 						if itemlength >= 5 || fieldid == 'NenYuanLiYongKeZaiShengNenYuanZhiJieLiYong' || fieldid == 'NenYuanLiYongKeZaiShengNenYuanZhuanHuanLiYong'
 							mend = "style='height:250px'"
 						else
 							mend = "style='height:180px'"
-
+					
 			else if dataType is 'mutiselecttext'
 				str = ""
 				for k, v of b.items
@@ -60,11 +62,26 @@ putmodel = (string,array) ->
 
 		html += "</div><hr />"
 		string += html
-	string += "<div id='submit' class='submit'><p>提交</p></div>" 
 
-	$('#J_form').html string
+	$('#J_form').append string
 
 
 value = JSON.parse getkeyvalue('/input/field').responseText
 htmlstring = ""
 putmodel htmlstring,value
+
+target = ""
+$('.other').on 'click',() ->
+	target = $(this).attr('class').split(' ')[0]
+	input = $("##{target}_other")
+	input.css 'display','inline-block'
+
+	brothers = $(this).prevAll()
+	for b in brothers
+		$(b).on 'click',() ->
+			input.css 'display','none'
+
+	that = this
+	
+	input.on 'blur',() ->
+		$(that).val $(this).val()

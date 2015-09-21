@@ -26,8 +26,9 @@ var sql = {
 	// connection 用于递归执行，传递链接，调用时不需填写
 	exsqllist : function (sqlstrlist,handlerlist,connection){
 		// 新建链接
-		if (connection == "undefined") {
-			var connection = mysql.createConnection({
+		if (typeof(connection) == "undefined") {
+			var mysql      = require('mysql');
+			connection = mysql.createConnection({
 				host     : global.conf.dbserver,
 				user     : global.conf.dbuser,
 				password : global.conf.dbpwd
@@ -37,8 +38,9 @@ var sql = {
 		sqlstr = sqlstrlist.shift();
 		handle = handlerlist.shift();
 		// close connection ( when list is [] )
-		if (sqlstr == "undefined" ) {
+		if (typeof(sqlstr) == "undefined" ) {
 			connection.end();
+			return;
 		};
 
 		// exe sql
@@ -51,7 +53,7 @@ var sql = {
 				// callback
 				handle(results,fields);
 				// reduce next sql
-		  		exsqllist(sqlstrlist,handlerlist,connection);
+		  		sql.exsqllist(sqlstrlist,handlerlist,connection);
 			};
 		});
 

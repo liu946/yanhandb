@@ -1,8 +1,1 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
+body{margin:0;padding:0}.clear{clear:both}.container{width:100%;height:auto}.container .main{width:1000px;margin:0 auto}.container .main .content{width:90%;padding:10px 5%}.container .main .content .list{width:100%;height:100px}.container .main .content .list .note{width:20%;float:left}.container .main .content .list .input{width:80%;float:right}.container .main .content .list .input input{height:20px;width:40%;padding:5px 10px;margin:20px;font-size:16px}.container .main .content .list .input input[type=radio]{width:20px;margin:10px 5px;padding:10px}.container .main .content .list .input input[type=checkbox]{width:20px;margin:20px 5px;padding:10px}.container .main .content .list .expand{height:100px}.container .main .clickoption{position:fixed;left:5;top:5;height:100px;width:200px;text-align:center}.container .main .clickoption .box{width:60px;height:40px;display:inline-block;text-align:center;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-ms-transition:all .2s ease-in-out;transition:all .2s ease-in-out}.container .main .clickoption .box:hover{-webkit-transform:scale(.8);-moz-transform:scale(.8);-ms-transform:scale(.8);transform:scale(.8)}.container .main .clickoption .box p{color:#fff}.container .main .clickoption .submit{float:left;background:#444}.container .main .clickoption .save{float:right;background:#777}

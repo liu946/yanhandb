@@ -1,6 +1,6 @@
 
 var sql = {
-
+	// 顺序回调执行函数
 	exsql : function (sqlstr,handle) {
 		console.log('[SQL] '+sqlstr);
 		var mysql      = require('mysql');
@@ -23,6 +23,39 @@ var sql = {
 		});
 		connection.end();
 	},
+	// connection 用于递归执行，传递链接，调用时不需填写
+	exsqllist : function (sqlstrlist,handlerlist,connection){
+		// 新建链接
+		if (connection == "undefined") {
+			var connection = mysql.createConnection({
+				host     : global.conf.dbserver,
+				user     : global.conf.dbuser,
+				password : global.conf.dbpwd
+			});
+			connection.connect();
+		};
+		sqlstr = sqlstrlist.shift();
+		handle = handlerlist.shift();
+		// close connection ( when list is [] )
+		if (sqlstr == "undefined" ) {
+			connection.end();
+		};
+
+		// exe sql
+		console.log('[SQL] '+sqlstr);
+		connection.query(sqlstr, function(err, results, fields) {
+			if (err) {
+				throw err;
+			}
+			if (typeof(handle) != "undefined") {
+				// callback
+				handle(results,fields);
+				// reduce next sql
+		  		exsqllist(sqlstrlist,handlerlist,connection);
+			};
+		});
+
+	}
 
 }
 

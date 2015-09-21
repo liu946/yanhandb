@@ -48,13 +48,14 @@ var sql = {
 		connection.query(sqlstr, function(err, results, fields) {
 			if (err) {
 				throw err;
+				return;
 			}
 			if (typeof(handle) != "undefined") {
 				// callback
 				handle(results,fields);
-				// reduce next sql
-		  		sql.exsqllist(sqlstrlist,handlerlist,connection);
+				// reduce next sql	
 			};
+			sql.exsqllist(sqlstrlist,handlerlist,connection);
 		});
 
 	}

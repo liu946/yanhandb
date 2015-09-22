@@ -66,14 +66,14 @@ body{
 
 .clickoption{
 	position: fixed;
-	height: 100%;
-	width: 100%;
+	height: 100px;
+	width: 200px;
+	left: 80%;
+	top: 600px;
 	text-align: center;
-	z-index: 2;
 	.content{
 		float: right;
 		width: 200px;
-		margin-top: 600px;
 		.box{
 			width: 60px;
 			height: 40px;
@@ -81,7 +81,7 @@ body{
 			text-align: center;
 			margin: 10px;
 			.transition(all .2s ease-in-out);
-			&:hover{
+			&:active{
 				.transform(scale(.8));
 			}
 			p{
@@ -93,6 +93,22 @@ body{
 		}
 		.save{
 			background: #777;
+		}
+	}
+}
+
+.header{
+	width: 100%;
+	height: 200px;
+	background: #aaa;
+	.content{
+		width: 1000px;
+		height: 50px;
+		margin: 0 auto;
+		padding: 75px 0;
+		text-align: center;
+		h1{
+
 		}
 	}
 }

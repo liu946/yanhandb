@@ -1,5 +1,6 @@
 # input页面脚本
 
+# ajax请求获取显示页面的数据
 getkeyvalue = (url) ->
 	$.ajax
 		url: url,
@@ -12,7 +13,8 @@ getkeyvalue = (url) ->
 	.always () ->
 		console.log("complete")
 
-putmodel = (string,array) ->
+# 将获得的数据插入dom树中
+putmodel = (string,array,inputs) ->
 	html = ""
 	for a in array
 		title = a.classname
@@ -24,15 +26,18 @@ putmodel = (string,array) ->
 			fieldid = b.field
 			dataType = b.datatype
 			defaultvalue = b.default
+
+			inputs = getinputname fieldid,inputs
+			
 			mend = ""
 
 			if dataType is 'selecttext'
 				str = ""
 				itemlength = b.items.length
 				for k, v of b.items
-					if v == "其他______"
+					if v == "其他______" || v == "有______"
 						v = v.split('_')[0]
-						str += "<input type='radio' class='#{fieldid} other' name='#{fieldid}' value='#{v}'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='radio' class='#{fieldid} other' name='#{fieldid}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
 						str += "<input type='radio' class='#{fieldid}' name='#{fieldid}' value='#{v}'/>#{v}"
 					
@@ -46,7 +51,11 @@ putmodel = (string,array) ->
 			else if dataType is 'mutiselecttext'
 				str = ""
 				for k, v of b.items
-					str += "<input type='checkbox' class='#{fieldid}' name='#{fieldid}' value='#{v}'/>#{v}"
+					if v == "其他______" || v == "有______"
+						v = v.split('_')[0]
+						str += "<input type='checkbox' class='#{fieldid} other' name='#{fieldid}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+					else
+						str += "<input type='checkbox' class='#{fieldid}' name='#{fieldid}' value='#{v}'/>#{v}"
 			else
 				str = "<input type='text' id='#{fieldid}' name='#{fieldid}' />"
 				
@@ -62,26 +71,78 @@ putmodel = (string,array) ->
 
 		html += "</div><hr />"
 		string += html
-
 	$('#J_form').append string
+	return inputs
 
+# 判断checked使用与其他输入
+judgeother = (point) ->
+	target = $(point).attr('class').split(' ')
+	flag = target[1]
+	name = target[0]
 
-value = JSON.parse getkeyvalue('/input/field').responseText
-htmlstring = ""
-putmodel htmlstring,value
+	input = $("##{name}_other")
 
-target = ""
-$('.other').on 'click',() ->
-	target = $(this).attr('class').split(' ')[0]
-	input = $("##{target}_other")
-	input.css 'display','inline-block'
+	if flag == 'other'
+		input.css 'display','inline-block'
+	else
+		input.css 'display','none'
 
-	brothers = $(this).prevAll()
-	for b in brothers
-		$(b).on 'click',() ->
-			input.css 'display','none'
-
-	that = this
-	
+	that = point
 	input.on 'blur',() ->
 		$(that).val $(this).val()
+
+# 遍历，获取所有表单的name，存入数组中
+getinputname = (value,target) ->
+	for a in target
+		if a == value
+			return target
+	target.push value
+	return target
+		
+# 获取表单中目前的所有值情况
+getformvalue = (array) ->
+	data = {"id": id}
+	flag = 0
+	for i in array	
+		target = i
+		targetvalue = $("input[name=#{target}]").val()
+		if targetvalue = ''
+			flag = 1
+		data["#{target}"] = targetvalue
+	return {
+		data : data
+		flag : flag
+	}
+	
+
+# 实例化
+value = JSON.parse getkeyvalue('/input/field').responseText
+htmlstring = ""
+inputs = []
+inputs = putmodel htmlstring,value,inputs
+
+# “其他____”点击输入数据，反选取消
+$("input[type='radio']").on 'click',() ->
+	judgeother this
+$("input[type='checkbox']").on 'click',() ->
+	judgeother this
+
+# 保存功能
+$('.save').on 'click',() ->
+	target = getformvalue(inputs)
+	value = target.data
+
+	$.post '', value, (data) ->
+		console.log data
+
+# 提交功能
+$('.submit').on 'click',() ->
+	target = getformvalue(inputs)
+	value = target.data
+
+	if target.flag
+		alert "没有填写完整，请检查"
+	else
+		$.post '', value, (data) ->
+			console.log data
+

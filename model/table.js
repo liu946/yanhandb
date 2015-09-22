@@ -2,7 +2,7 @@
 var sqlhelper = require('../func/sql.js')
 
 function remove (str,pattern) {
-	str.replace(/str/)
+	return str.replace(/\'/g,'\\\'')
 }
 
 var table = {
@@ -81,9 +81,10 @@ var table = {
 		};
 		var field = "UPDATE "+this.tablename +" SET ";
 		for (var i in obj) {
-			field += " "+i+" = '"+remove(obj[i],"'")+"',";
+			field += " "+i+" = '"+remove(obj[i])+"',";
 		};
-		field += " WHERE id="+id+";";
+		field = field.substr(0,field.length-1);
+		field += " WHERE `id` = "+id+" ;";
 
 		sqlhelper.exsqllist(['USE '+global.conf.dbname,field],[,callback])
 

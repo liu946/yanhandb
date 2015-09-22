@@ -106,9 +106,9 @@ getformvalue = (array) ->
 	for i in array	
 		target = i
 		targetvalue = $("input[name=#{target}]").val()
-		if targetvalue = ''
+		if targetvalue == ''
 			flag = 1
-		data["#{target}"] = targetvalue
+		data[target] = targetvalue
 	return {
 		data : data
 		flag : flag

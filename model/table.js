@@ -74,7 +74,7 @@ var table = {
 		sqlhelper.exsql('SELECT * FROM '+global.conf.dbname+"."+global.conf.dbtable+" WHERE `id`="+id+" LIMIT 1 ;",function(rows, fields){
 			callback(rows[0]);
 		});
-	}
+	},
 	update:function  (id,obj,callback) {
 		var field = "UPDATE "+this.tablename +" SET ";
 		for (var i in obj) {

@@ -147,7 +147,7 @@ $('.save').on('click', function() {
   var target;
   target = getformvalue(inputs);
   value = target.data;
-  return $.post('', value, function(data) {
+  return $.post('/input/update', value, function(data) {
     return console.log(data);
   });
 });
@@ -159,7 +159,7 @@ $('.submit').on('click', function() {
   if (target.flag) {
     return alert("没有填写完整，请检查");
   } else {
-    return $.post('', value, function(data) {
+    return $.post('/input/update', value, function(data) {
       return console.log(data);
     });
   }

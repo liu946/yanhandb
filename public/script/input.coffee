@@ -132,7 +132,7 @@ $('.save').on 'click',() ->
 	target = getformvalue(inputs)
 	value = target.data
 
-	$.post '', value, (data) ->
+	$.post '/input/update', value, (data) ->
 		console.log data
 
 # 提交功能
@@ -143,6 +143,6 @@ $('.submit').on 'click',() ->
 	if target.flag
 		alert "没有填写完整，请检查"
 	else
-		$.post '', value, (data) ->
+		$.post '/input/update', value, (data) ->
 			console.log data
 

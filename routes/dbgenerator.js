@@ -29,7 +29,7 @@
 
 	var ctbfoo = function (){
  		ans+=ctbsql;
- 		res.render('generator', { sql: ans });		
+ 		res.render('generator', { sql: ans });
  	}
 	sqlhelper.exsqllist([cdbsql,ctbsql],[cdbfoo,ctbfoo]);
 });

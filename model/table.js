@@ -76,6 +76,9 @@ var table = {
 		});
 	},
 	update:function  (id,obj,callback) {
+		if (obj.hasOwnProperty('id')) {
+			delete obj.id;
+		};
 		var field = "UPDATE "+this.tablename +" SET ";
 		for (var i in obj) {
 			field += " "+i+" = '"+remove(obj[i],"'")+"',";

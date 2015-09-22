@@ -20,8 +20,10 @@ router.get('/field',function (req, res, next) {
 })
 
 router.post('/update',function(req ,res ,next){
-	console.log(req.body);
-	res.send('save OK');
+	table.update(req.body.id,req.body,function () {
+		res.send('save OK');
+	});
+	
 })
 
 router.get('/edit/:id',function(req ,res ,next){

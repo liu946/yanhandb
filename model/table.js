@@ -1,7 +1,14 @@
 
 var sqlhelper = require('../func/sql.js')
 
+function remove (str,pattern) {
+	str.replace(/str/)
+}
+
 var table = {
+	
+	tablename : global.conf.dbtable,
+
 	returngeneratestr : function () {
 		var data = require('../conf/fielddef.js')
 		var str='';
@@ -68,6 +75,17 @@ var table = {
 			callback(rows[0]);
 		});
 	}
+	update:function  (id,obj,callback) {
+		var field = "UPDATE "+this.tablename +" SET ";
+		for (var i in obj) {
+			field += " "+i+" = '"+remove(obj[i],"'")+"',";
+		};
+		field += " WHERE id="+id+";";
+
+		sqlhelper.exsqllist(['USE '+global.conf.dbname,field],[,callback])
+
+	}
+
 
 }
 

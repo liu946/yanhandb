@@ -11,7 +11,26 @@ getkeyvalue = (url) ->
 	.fail () ->
 		alert "获取失败！请刷新页面"
 	.always () ->
-		console.log("complete")
+		console.log "complete"
+
+getDBvalue = (url,array) ->
+	$.ajax
+		url: url,
+		dataType: 'json',
+		async: true
+	.done (data) ->
+		for k, v of data
+			a = $("##{k}")
+			if a
+				a.val(v)
+			else
+				$(".#{k}[value='#{v}']").attr 'checked'
+				$("##{k}_other").val(v).css 'display','inline-block'	
+
+	.fail () ->
+		alert "数据库获取数据失败"
+	.always () ->
+		console.log 'DB_connect'
 
 # 将获得的数据插入dom树中
 putmodel = (string,array,inputs) ->
@@ -37,9 +56,9 @@ putmodel = (string,array,inputs) ->
 				for k, v of b.items
 					if v == "其他______" || v == "有______"
 						v = v.split('_')[0]
-						str += "<input type='radio' class='#{fieldid} other' name='#{fieldid}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='radio' class='#{fieldid} other' name='#{fieldid}' value='#{v}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
-						str += "<input type='radio' class='#{fieldid}' name='#{fieldid}' value='#{v}'/>#{v}"
+						str += "<input type='radio' class='#{fieldid}' name='#{fieldid}' value='#{v}' />#{v}"
 					
 					if v.length >= 10
 						str += "<br / >"
@@ -121,6 +140,9 @@ htmlstring = ""
 inputs = []
 inputs = putmodel htmlstring,value,inputs
 
+# 获取数据库的存入的值	
+getDBvalue "/input/get/#{id}", inputs
+
 # “其他____”点击输入数据，反选取消
 $("input[type='radio']").on 'click',() ->
 	judgeother this
@@ -134,6 +156,8 @@ $('.save').on 'click',() ->
 
 	$.post '/input/update', value, (data) ->
 		console.log data
+		getDBvalue "/input/get/#{id}", inputs
+
 
 # 提交功能
 $('.submit').on 'click',() ->

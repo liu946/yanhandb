@@ -21,19 +21,20 @@ getDBvalue = function(url, array) {
     dataType: 'json',
     async: true
   }).done(function(data) {
-    var a, k, results, v;
-    results = [];
+    var a, b, k, v;
     for (k in data) {
       v = data[k];
       a = $("#" + k);
-      if (a) {
-        results.push(a.val(v));
+      if (a.index() < 0) {
+        $("#" + k).val(v);
       } else {
-        $("." + k + "[value='" + v + "']").attr('checked');
-        results.push($("#" + k + "_other").val(v).css('display', 'inline-block'));
+        b = $("." + k + "[value='" + v + "']");
+        b.prop('checked', true);
+        if (b.attr('class').split(' ')[1] === 'other') {
+          $("#" + k + "_other").val(v).css('display', 'inline-block');
+        }
       }
     }
-    return results;
   }).fail(function() {
     return alert("数据库获取数据失败");
   }).always(function() {
@@ -66,7 +67,7 @@ putmodel = function(string, array, inputs) {
           v = ref1[k];
           if (v === "其他______" || v === "有______") {
             v = v.split('_')[0];
-            str += "<input type='radio' class='" + fieldid + " other' name='" + fieldid + "' value='" + v + "' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
+            str += "<input type='radio' class='" + fieldid + " other' name='" + fieldid + "' value='null' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
           } else {
             str += "<input type='radio' class='" + fieldid + "' name='" + fieldid + "' value='" + v + "' />" + v;
           }
@@ -86,7 +87,7 @@ putmodel = function(string, array, inputs) {
           v = ref2[k];
           if (v === "其他______" || v === "有______") {
             v = v.split('_')[0];
-            str += "<input type='checkbox' class='" + fieldid + " other' name='" + fieldid + "' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
+            str += "<input type='checkbox' class='" + fieldid + " other' name='" + fieldid + "' value='null' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
           } else {
             str += "<input type='checkbox' class='" + fieldid + "' name='" + fieldid + "' value='" + v + "'/>" + v;
           }

@@ -21,12 +21,14 @@ getDBvalue = (url,array) ->
 	.done (data) ->
 		for k, v of data
 			a = $("##{k}")
-			if a
-				a.val(v)
+			if a.index() < 0
+				$("##{k}").val v
 			else
-				$(".#{k}[value='#{v}']").attr 'checked'
-				$("##{k}_other").val(v).css 'display','inline-block'	
-
+				b = $(".#{k}[value='#{v}']")
+				b.prop 'checked', true
+				if b.attr('class').split(' ')[1] == 'other'
+					$("##{k}_other").val(v).css 'display','inline-block'
+		return	
 	.fail () ->
 		alert "数据库获取数据失败"
 	.always () ->
@@ -56,7 +58,7 @@ putmodel = (string,array,inputs) ->
 				for k, v of b.items
 					if v == "其他______" || v == "有______"
 						v = v.split('_')[0]
-						str += "<input type='radio' class='#{fieldid} other' name='#{fieldid}' value='#{v}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='radio' class='#{fieldid} other' name='#{fieldid}' value='null' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
 						str += "<input type='radio' class='#{fieldid}' name='#{fieldid}' value='#{v}' />#{v}"
 					
@@ -72,7 +74,7 @@ putmodel = (string,array,inputs) ->
 				for k, v of b.items
 					if v == "其他______" || v == "有______"
 						v = v.split('_')[0]
-						str += "<input type='checkbox' class='#{fieldid} other' name='#{fieldid}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='checkbox' class='#{fieldid} other' name='#{fieldid}' value='null' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
 						str += "<input type='checkbox' class='#{fieldid}' name='#{fieldid}' value='#{v}'/>#{v}"
 			else

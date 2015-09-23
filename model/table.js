@@ -88,8 +88,15 @@ var table = {
 
 		sqlhelper.exsqllist(['USE '+global.conf.dbname,field],[,callback])
 
-	}
+	},
+	getall:function (field,callback) {
+		// body...
+		if (field=='' || typeof(field)== 'undefined') {field='*'};
 
+		sqlhelper.exsql('SELECT '+field+' FROM '+global.conf.dbname+"."+this.tablename+";",function(rows, fields){
+			callback(rows);
+		});
+	}
 
 }
 

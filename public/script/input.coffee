@@ -20,11 +20,13 @@ getDBvalue = (url,array) ->
 		async: true
 	.done (data) ->
 		for k, v of data
+			if k == 'id'
+				continue
 			a = $("##{k}")
-			if a.index() < 0
+			if a.length > 0
 				$("##{k}").val v
 			else
-				b = $(".#{k}[value='#{v}']")
+				b = $("input.#{k}[value='#{v}']")
 				b.prop 'checked', true
 				if b.attr('class').split(' ')[1] == 'other'
 					$("##{k}_other").val(v).css 'display','inline-block'

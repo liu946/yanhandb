@@ -24,11 +24,14 @@ getDBvalue = function(url, array) {
     var a, b, k, v;
     for (k in data) {
       v = data[k];
+      if (k === 'id') {
+        continue;
+      }
       a = $("#" + k);
-      if (a.index() < 0) {
+      if (a.length > 0) {
         $("#" + k).val(v);
       } else {
-        b = $("." + k + "[value='" + v + "']");
+        b = $("input." + k + "[value='" + v + "']");
         b.prop('checked', true);
         if (b.attr('class').split(' ')[1] === 'other') {
           $("#" + k + "_other").val(v).css('display', 'inline-block');

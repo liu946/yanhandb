@@ -14,7 +14,7 @@ var table = require('../model/table.js')
 router.get('/', function(req, res, next) {
   	res.render('input', { title: 'Express' });
 });
-router.get('/all', function(req, res, next) {
+router.get('/get', function(req, res, next) {
   	table.getall('id,CunZhenJiBenXinXiCunZhenMingChen',function(row){
 		res.json(row);
   	});
@@ -46,5 +46,4 @@ router.get('/get/:id',function(req ,res ,next){
 		res.json(item);
 	})
 })
-
 module.exports = router;

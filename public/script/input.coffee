@@ -22,15 +22,23 @@ getDBvalue = (url,array) ->
 		for k, v of data
 			if k == 'id'
 				continue
+
 			a = $("##{k}")
 			if a.length > 0
 				$("##{k}").val v
 			else
-				b = $("input.#{k}[value='#{v}']")
-				b.prop 'checked', true
-				if b.attr('class').split(' ')[1] == 'other'
-					$("##{k}_other").val(v).css 'display','inline-block'
-		return	
+				v1 = v.split('&')
+				for i in v1
+					b = $("input.#{k}[value='#{i}']")
+					classname = b.attr('class')
+					if classname != undefined
+						b.prop 'checked', true
+					else
+						c = $("input.#{k}[name=#{k}]").attr('class').split(' ')
+						if c.length == 3
+							$("##{k}_other").css 'display','inline-block'
+							$("##{k}_other").val i
+		return
 	.fail () ->
 		alert "数据库获取数据失败"
 	.always () ->
@@ -53,16 +61,15 @@ putmodel = (string,array,inputs) ->
 			inputs = getinputname fieldid,inputs
 			
 			mend = ""
-
+			str = ""
 			if dataType is 'selecttext'
-				str = ""
 				itemlength = b.items.length
 				for k, v of b.items
 					if v == "其他______" || v == "有______"
 						v = v.split('_')[0]
-						str += "<input type='radio' class='#{fieldid} other' name='#{fieldid}' value='null' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='radio' class='#{fieldid} selecttext other' name='#{fieldid}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
-						str += "<input type='radio' class='#{fieldid}' name='#{fieldid}' value='#{v}' />#{v}"
+						str += "<input type='radio' class='#{fieldid} selecttext' name='#{fieldid}' value='#{v}' />#{v}"
 					
 					if v.length >= 10
 						str += "<br / >"
@@ -72,13 +79,12 @@ putmodel = (string,array,inputs) ->
 							mend = "style='height:180px'"
 					
 			else if dataType is 'mutiselecttext'
-				str = ""
 				for k, v of b.items
-					if v == "其他______" || v == "有______"
+					if v == "其他______"
 						v = v.split('_')[0]
-						str += "<input type='checkbox' class='#{fieldid} other' name='#{fieldid}' value='null' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='checkbox' class='#{fieldid} mutiselecttext other' name='#{fieldid}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
-						str += "<input type='checkbox' class='#{fieldid}' name='#{fieldid}' value='#{v}'/>#{v}"
+						str += "<input type='checkbox' class='#{fieldid} mutiselecttext' name='#{fieldid}' value='#{v}'/>#{v}"
 			else
 				str = "<input type='text' id='#{fieldid}' name='#{fieldid}' />"
 				
@@ -100,7 +106,7 @@ putmodel = (string,array,inputs) ->
 # 判断checked使用与其他输入
 judgeother = (point) ->
 	target = $(point).attr('class').split(' ')
-	flag = target[1]
+	flag = target[2]
 	name = target[0]
 
 	input = $("##{name}_other")
@@ -127,11 +133,23 @@ getformvalue = (array) ->
 	data = {"id": id}
 	flag = 0
 	for i in array	
-		target = i
-		targetvalue = $("input[name=#{target}]").val()
-		if targetvalue == ''
+		target = $("input[name=#{i}]")
+		value = target.val()
+		targetclass = target.attr('class')
+		if targetclass != undefined
+			classname = targetclass.split(' ')[1]
+			if classname == 'selecttext'
+				value = $("input[name=#{i}]:checked").val()
+			else if classname == 'mutiselecttext'
+				str = ''
+				$("input[name=#{i}]:checkbox").each () ->
+					if $(this).prop('checked')
+						str += "&" + $(this).val() 
+				value = str
+
+		if value == ''
 			flag = 1
-		data[target] = targetvalue
+		data[i] = value
 	return {
 		data : data
 		flag : flag
@@ -157,7 +175,6 @@ $("input[type='checkbox']").on 'click',() ->
 $('.save').on 'click',() ->
 	target = getformvalue(inputs)
 	value = target.data
-
 	$.post '/input/update', value, (data) ->
 		console.log data
 		getDBvalue "/input/get/#{id}", inputs

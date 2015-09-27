@@ -21,7 +21,7 @@ getDBvalue = function(url, array) {
     dataType: 'json',
     async: true
   }).done(function(data) {
-    var a, b, k, v;
+    var a, b, c, classname, i, j, k, len, v, v1;
     for (k in data) {
       v = data[k];
       if (k === 'id') {
@@ -31,10 +31,20 @@ getDBvalue = function(url, array) {
       if (a.length > 0) {
         $("#" + k).val(v);
       } else {
-        b = $("input." + k + "[value='" + v + "']");
-        b.prop('checked', true);
-        if (b.attr('class').split(' ')[1] === 'other') {
-          $("#" + k + "_other").val(v).css('display', 'inline-block');
+        v1 = v.split('&');
+        for (j = 0, len = v1.length; j < len; j++) {
+          i = v1[j];
+          b = $("input." + k + "[value='" + i + "']");
+          classname = b.attr('class');
+          if (classname !== void 0) {
+            b.prop('checked', true);
+          } else {
+            c = $("input." + k + "[name=" + k + "]").attr('class').split(' ');
+            if (c.length === 3) {
+              $("#" + k + "_other").css('display', 'inline-block');
+              $("#" + k + "_other").val(i);
+            }
+          }
         }
       }
     }
@@ -62,17 +72,17 @@ putmodel = function(string, array, inputs) {
       defaultvalue = b["default"];
       inputs = getinputname(fieldid, inputs);
       mend = "";
+      str = "";
       if (dataType === 'selecttext') {
-        str = "";
         itemlength = b.items.length;
         ref1 = b.items;
         for (k in ref1) {
           v = ref1[k];
           if (v === "其他______" || v === "有______") {
             v = v.split('_')[0];
-            str += "<input type='radio' class='" + fieldid + " other' name='" + fieldid + "' value='null' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
+            str += "<input type='radio' class='" + fieldid + " selecttext other' name='" + fieldid + "' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
           } else {
-            str += "<input type='radio' class='" + fieldid + "' name='" + fieldid + "' value='" + v + "' />" + v;
+            str += "<input type='radio' class='" + fieldid + " selecttext' name='" + fieldid + "' value='" + v + "' />" + v;
           }
           if (v.length >= 10) {
             str += "<br / >";
@@ -84,15 +94,14 @@ putmodel = function(string, array, inputs) {
           }
         }
       } else if (dataType === 'mutiselecttext') {
-        str = "";
         ref2 = b.items;
         for (k in ref2) {
           v = ref2[k];
-          if (v === "其他______" || v === "有______") {
+          if (v === "其他______") {
             v = v.split('_')[0];
-            str += "<input type='checkbox' class='" + fieldid + " other' name='" + fieldid + "' value='null' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
+            str += "<input type='checkbox' class='" + fieldid + " mutiselecttext other' name='" + fieldid + "' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
           } else {
-            str += "<input type='checkbox' class='" + fieldid + "' name='" + fieldid + "' value='" + v + "'/>" + v;
+            str += "<input type='checkbox' class='" + fieldid + " mutiselecttext' name='" + fieldid + "' value='" + v + "'/>" + v;
           }
         }
       } else {
@@ -110,7 +119,7 @@ putmodel = function(string, array, inputs) {
 judgeother = function(point) {
   var flag, input, name, target, that;
   target = $(point).attr('class').split(' ');
-  flag = target[1];
+  flag = target[2];
   name = target[0];
   input = $("#" + name + "_other");
   if (flag === 'other') {
@@ -137,19 +146,34 @@ getinputname = function(value, target) {
 };
 
 getformvalue = function(array) {
-  var data, flag, i, j, len, target, targetvalue;
+  var classname, data, flag, i, j, len, str, target, targetclass, value;
   data = {
     "id": id
   };
   flag = 0;
   for (j = 0, len = array.length; j < len; j++) {
     i = array[j];
-    target = i;
-    targetvalue = $("input[name=" + target + "]").val();
-    if (targetvalue === '') {
+    target = $("input[name=" + i + "]");
+    value = target.val();
+    targetclass = target.attr('class');
+    if (targetclass !== void 0) {
+      classname = targetclass.split(' ')[1];
+      if (classname === 'selecttext') {
+        value = $("input[name=" + i + "]:checked").val();
+      } else if (classname === 'mutiselecttext') {
+        str = '';
+        $("input[name=" + i + "]:checkbox").each(function() {
+          if ($(this).prop('checked')) {
+            return str += "&" + $(this).val();
+          }
+        });
+        value = str;
+      }
+    }
+    if (value === '') {
       flag = 1;
     }
-    data[target] = targetvalue;
+    data[i] = value;
   }
   return {
     data: data,

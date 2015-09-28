@@ -39,8 +39,8 @@ getDBvalue = function(url, array) {
           if (classname !== void 0) {
             b.prop('checked', true);
           } else {
-            c = $("input." + k + "[name=" + k + "]").attr('class').split(' ');
-            if (c.length === 3) {
+            c = $("input." + k + "[value=null]").attr('class');
+            if (c !== void 0) {
               $("#" + k + "_other").css('display', 'inline-block');
               $("#" + k + "_other").val(i);
             }
@@ -80,7 +80,7 @@ putmodel = function(string, array, inputs) {
           v = ref1[k];
           if (v === "其他______" || v === "有______") {
             v = v.split('_')[0];
-            str += "<input type='radio' class='" + fieldid + " selecttext other' name='" + fieldid + "' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
+            str += "<input type='radio' class='" + fieldid + " selecttext other' name='" + fieldid + "' value='null'/>" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
           } else {
             str += "<input type='radio' class='" + fieldid + " selecttext' name='" + fieldid + "' value='" + v + "' />" + v;
           }
@@ -99,7 +99,7 @@ putmodel = function(string, array, inputs) {
           v = ref2[k];
           if (v === "其他______") {
             v = v.split('_')[0];
-            str += "<input type='checkbox' class='" + fieldid + " mutiselecttext other' name='" + fieldid + "' />" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
+            str += "<input type='checkbox' class='" + fieldid + " mutiselecttext other' name='" + fieldid + "' value='null'/>" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
           } else {
             str += "<input type='checkbox' class='" + fieldid + " mutiselecttext' name='" + fieldid + "' value='" + v + "'/>" + v;
           }

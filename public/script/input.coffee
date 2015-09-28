@@ -34,8 +34,8 @@ getDBvalue = (url,array) ->
 					if classname != undefined
 						b.prop 'checked', true
 					else
-						c = $("input.#{k}[name=#{k}]").attr('class').split(' ')
-						if c.length == 3
+						c = $("input.#{k}[value=null]").attr('class')
+						if c != undefined
 							$("##{k}_other").css 'display','inline-block'
 							$("##{k}_other").val i
 		return
@@ -67,7 +67,7 @@ putmodel = (string,array,inputs) ->
 				for k, v of b.items
 					if v == "其他______" || v == "有______"
 						v = v.split('_')[0]
-						str += "<input type='radio' class='#{fieldid} selecttext other' name='#{fieldid}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='radio' class='#{fieldid} selecttext other' name='#{fieldid}' value='null'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
 						str += "<input type='radio' class='#{fieldid} selecttext' name='#{fieldid}' value='#{v}' />#{v}"
 					
@@ -82,7 +82,7 @@ putmodel = (string,array,inputs) ->
 				for k, v of b.items
 					if v == "其他______"
 						v = v.split('_')[0]
-						str += "<input type='checkbox' class='#{fieldid} mutiselecttext other' name='#{fieldid}' />#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='checkbox' class='#{fieldid} mutiselecttext other' name='#{fieldid}' value='null'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
 						str += "<input type='checkbox' class='#{fieldid} mutiselecttext' name='#{fieldid}' value='#{v}'/>#{v}"
 			else

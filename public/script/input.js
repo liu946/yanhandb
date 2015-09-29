@@ -67,7 +67,7 @@ getDBvalue = function(url, array) {
 };
 
 putmodel = function(string, array, inputs) {
-  var a, b, dataType, defaultvalue, fieldid, fieldname, html, id, itemlength, j, k, l, len, len1, mend, ref, ref1, ref2, str, title, v;
+  var a, b, dataType, defaultvalue, fieldid, fieldname, html, id, itemlength, j, k, l, len, len1, mend, ref, ref1, ref2, ref3, str, title, v;
   html = "";
   for (j = 0, len = array.length; j < len; j++) {
     a = array[j];
@@ -114,6 +114,12 @@ putmodel = function(string, array, inputs) {
           } else {
             str += "<input type='checkbox' class='" + fieldid + " mutiselecttext' name='" + fieldid + "' value='" + v + "'/>" + v;
           }
+        }
+      } else if (dataType === 'bool') {
+        ref3 = b.items;
+        for (k in ref3) {
+          v = ref3[k];
+          str += "<input type='radio' class='" + fieldid + " selecttext' name='" + fieldid + "' value='" + k + "'/>" + v;
         }
       } else {
         str = "<input type='text' id='" + fieldid + "' name='" + fieldid + "' />";

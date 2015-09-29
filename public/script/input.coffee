@@ -86,10 +86,14 @@ putmodel = (string,array,inputs) ->
 						str += "<input type='checkbox' class='#{fieldid} mutiselecttext other' name='#{fieldid}' value='nothing'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
 						str += "<input type='checkbox' class='#{fieldid} mutiselecttext' name='#{fieldid}' value='#{v}'/>#{v}"
+
+			else if dataType is 'bool'
+				for k, v of b.items
+					str += "<input type='radio' class='#{fieldid} selecttext' name='#{fieldid}' value='#{k}'/>#{v}"
+			
 			else
 				str = "<input type='text' id='#{fieldid}' name='#{fieldid}' />"
 				
-
 			html += "<div class='list' #{mend}>
 						<div class='note'>
 							<h3>#{fieldname}</h3>

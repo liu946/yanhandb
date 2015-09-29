@@ -21,7 +21,8 @@ getDBvalue = function(url, array) {
     dataType: 'json',
     async: true
   }).done(function(data) {
-    var a, b, c, classname, i, j, k, len, v, v1;
+    var a, b, c, classname, i, k, results, v, v1;
+    results = [];
     for (k in data) {
       v = data[k];
       if (k === 'id') {
@@ -29,25 +30,35 @@ getDBvalue = function(url, array) {
       }
       a = $("#" + k);
       if (a.length > 0) {
-        $("#" + k).val(v);
+        results.push($("#" + k).val(v));
       } else {
         v1 = v.split('&');
-        for (j = 0, len = v1.length; j < len; j++) {
-          i = v1[j];
-          b = $("input." + k + "[value='" + i + "']");
-          classname = b.attr('class');
-          if (classname !== void 0) {
-            b.prop('checked', true);
-          } else {
-            c = $("input." + k + "[value=null]").attr('class');
-            if (c !== void 0) {
-              $("#" + k + "_other").css('display', 'inline-block');
-              $("#" + k + "_other").val(i);
+        results.push((function() {
+          var j, len, results1;
+          results1 = [];
+          for (j = 0, len = v1.length; j < len; j++) {
+            i = v1[j];
+            b = $("input." + k + "[value='" + i + "']");
+            classname = b.attr('class');
+            if (classname !== void 0) {
+              results1.push(b.prop('checked', true));
+            } else {
+              c = $("input." + k + "[value=nothing]").attr('class');
+              if (c !== void 0 && i !== '' && i !== 'null') {
+                $("input." + k + "[value=nothing]").prop('checked', true);
+                $("input." + k + "[value=nothing]").val(i);
+                $("#" + k + "_other").css('display', 'inline-block');
+                results1.push($("#" + k + "_other").val(i));
+              } else {
+                results1.push(void 0);
+              }
             }
           }
-        }
+          return results1;
+        })());
       }
     }
+    return results;
   }).fail(function() {
     return alert("数据库获取数据失败");
   }).always(function() {
@@ -80,7 +91,7 @@ putmodel = function(string, array, inputs) {
           v = ref1[k];
           if (v === "其他______" || v === "有______") {
             v = v.split('_')[0];
-            str += "<input type='radio' class='" + fieldid + " selecttext other' name='" + fieldid + "' value='null'/>" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
+            str += "<input type='radio' class='" + fieldid + " selecttext other' name='" + fieldid + "' value='nothing'/>" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
           } else {
             str += "<input type='radio' class='" + fieldid + " selecttext' name='" + fieldid + "' value='" + v + "' />" + v;
           }
@@ -99,7 +110,7 @@ putmodel = function(string, array, inputs) {
           v = ref2[k];
           if (v === "其他______") {
             v = v.split('_')[0];
-            str += "<input type='checkbox' class='" + fieldid + " mutiselecttext other' name='" + fieldid + "' value='null'/>" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
+            str += "<input type='checkbox' class='" + fieldid + " mutiselecttext other' name='" + fieldid + "' value='nothing'/>" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
           } else {
             str += "<input type='checkbox' class='" + fieldid + " mutiselecttext' name='" + fieldid + "' value='" + v + "'/>" + v;
           }
@@ -117,20 +128,33 @@ putmodel = function(string, array, inputs) {
 };
 
 judgeother = function(point) {
-  var flag, input, name, target, that;
+  var flag, input, name, target, that, type;
   target = $(point).attr('class').split(' ');
   flag = target[2];
+  type = target[1];
   name = target[0];
   input = $("#" + name + "_other");
-  if (flag === 'other') {
-    input.css('display', 'inline-block');
-  } else {
-    input.css('display', 'none');
+  if (type === 'mutiselecttext') {
+    if (flag === 'other') {
+      if ($(point).prop('checked')) {
+        input.css('display', 'inline-block');
+      } else {
+        input.css('display', 'none');
+      }
+      that = point;
+      return input.on('blur', function() {
+        return $(that).val($(this).val());
+      });
+    } else {
+
+    }
+  } else if (type === 'selecttext') {
+    if (flag === 'other') {
+      return input.css('display', 'inline-block');
+    } else {
+      return input.css('display', 'none');
+    }
   }
-  that = point;
-  return input.on('blur', function() {
-    return $(that).val($(this).val());
-  });
 };
 
 getinputname = function(value, target) {

@@ -34,11 +34,12 @@ getDBvalue = (url,array) ->
 					if classname != undefined
 						b.prop 'checked', true
 					else
-						c = $("input.#{k}[value=null]").attr('class')
-						if c != undefined
+						c = $("input.#{k}[value=nothing]").attr('class')
+						if c != undefined && i != '' && i != 'null'
+							$("input.#{k}[value=nothing]").prop 'checked', true
+							$("input.#{k}[value=nothing]").val i
 							$("##{k}_other").css 'display','inline-block'
 							$("##{k}_other").val i
-		return
 	.fail () ->
 		alert "数据库获取数据失败"
 	.always () ->
@@ -67,7 +68,7 @@ putmodel = (string,array,inputs) ->
 				for k, v of b.items
 					if v == "其他______" || v == "有______"
 						v = v.split('_')[0]
-						str += "<input type='radio' class='#{fieldid} selecttext other' name='#{fieldid}' value='null'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='radio' class='#{fieldid} selecttext other' name='#{fieldid}' value='nothing'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
 						str += "<input type='radio' class='#{fieldid} selecttext' name='#{fieldid}' value='#{v}' />#{v}"
 					
@@ -82,7 +83,7 @@ putmodel = (string,array,inputs) ->
 				for k, v of b.items
 					if v == "其他______"
 						v = v.split('_')[0]
-						str += "<input type='checkbox' class='#{fieldid} mutiselecttext other' name='#{fieldid}' value='null'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+						str += "<input type='checkbox' class='#{fieldid} mutiselecttext other' name='#{fieldid}' value='nothing'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
 						str += "<input type='checkbox' class='#{fieldid} mutiselecttext' name='#{fieldid}' value='#{v}'/>#{v}"
 			else
@@ -107,18 +108,27 @@ putmodel = (string,array,inputs) ->
 judgeother = (point) ->
 	target = $(point).attr('class').split(' ')
 	flag = target[2]
+	type = target[1]
 	name = target[0]
 
 	input = $("##{name}_other")
 
-	if flag == 'other'
-		input.css 'display','inline-block'
-	else
-		input.css 'display','none'
-
-	that = point
-	input.on 'blur',() ->
-		$(that).val $(this).val()
+	if type == 'mutiselecttext'
+		if flag == 'other'
+			if $(point).prop 'checked'
+				input.css 'display','inline-block'
+			else
+				input.css 'display','none'
+			that = point
+			input.on 'blur',() ->
+				$(that).val $(this).val()
+		else
+			return
+	else if type == 'selecttext'
+		if flag == 'other'
+			input.css 'display','inline-block'
+		else
+			input.css 'display','none'
 
 # 遍历，获取所有表单的name，存入数组中
 getinputname = (value,target) ->

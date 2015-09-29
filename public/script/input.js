@@ -22,6 +22,7 @@ getDBvalue = function(url, array) {
     async: true
   }).done(function(data) {
     var a, b, c, classname, i, k, results, v, v1;
+    console.log(data);
     results = [];
     for (k in data) {
       v = data[k];
@@ -32,30 +33,37 @@ getDBvalue = function(url, array) {
       if (a.length > 0) {
         results.push($("#" + k).val(v));
       } else {
-        v1 = v.split('&');
-        results.push((function() {
-          var j, len, results1;
-          results1 = [];
-          for (j = 0, len = v1.length; j < len; j++) {
-            i = v1[j];
-            b = $("input." + k + "[value='" + i + "']");
-            classname = b.attr('class');
-            if (classname !== void 0) {
-              results1.push(b.prop('checked', true));
-            } else {
-              c = $("input." + k + "[value=nothing]").attr('class');
-              if (c !== void 0 && i !== '' && i !== 'null') {
-                $("input." + k + "[value=nothing]").prop('checked', true);
-                $("input." + k + "[value=nothing]").val(i);
-                $("#" + k + "_other").css('display', 'inline-block');
-                results1.push($("#" + k + "_other").val(i));
+        if (typeof v === 'string') {
+          v1 = v.split('&');
+          results.push((function() {
+            var j, len, results1;
+            results1 = [];
+            for (j = 0, len = v1.length; j < len; j++) {
+              i = v1[j];
+              b = $("input." + k + "[value='" + i + "']");
+              classname = b.attr('class');
+              if (classname !== void 0) {
+                results1.push(b.prop('checked', true));
               } else {
-                results1.push(void 0);
+                c = $("input." + k + "[value=nothing]").attr('class');
+                if (c !== void 0 && i !== '' && i !== 'null') {
+                  $("input." + k + "[value=nothing]").prop('checked', true);
+                  $("input." + k + "[value=nothing]").val(i);
+                  $("#" + k + "_other").css('display', 'inline-block');
+                  results1.push($("#" + k + "_other").val(i));
+                } else {
+                  results1.push(void 0);
+                }
               }
             }
-          }
-          return results1;
-        })());
+            return results1;
+          })());
+        } else if (typeof v === 'number') {
+          b = $("input." + k + "[value='" + v + "']");
+          results.push(b.prop('checked', true));
+        } else {
+          results.push(void 0);
+        }
       }
     }
     return results;
@@ -156,10 +164,14 @@ judgeother = function(point) {
     }
   } else if (type === 'selecttext') {
     if (flag === 'other') {
-      return input.css('display', 'inline-block');
+      input.css('display', 'inline-block');
     } else {
-      return input.css('display', 'none');
+      input.css('display', 'none');
     }
+    that = point;
+    return input.on('blur', function() {
+      return $(that).val($(this).val());
+    });
   }
 };
 
@@ -233,8 +245,9 @@ $('.save').on('click', function() {
   var target;
   target = getformvalue(inputs);
   value = target.data;
+  console.log(value);
   return $.post('/input/update', value, function(data) {
-    console.log(data);
+    alert('保存成功');
     return getDBvalue("/input/get/" + id, inputs);
   });
 });
@@ -247,7 +260,8 @@ $('.submit').on('click', function() {
     return alert("没有填写完整，请检查");
   } else {
     return $.post('/input/update', value, function(data) {
-      return console.log(data);
+      alert('提交成功');
+      return location.href = "/";
     });
   }
 });

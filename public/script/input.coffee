@@ -19,6 +19,7 @@ getDBvalue = (url,array) ->
 		dataType: 'json',
 		async: true
 	.done (data) ->
+		console.log data
 		for k, v of data
 			if k == 'id'
 				continue
@@ -27,19 +28,23 @@ getDBvalue = (url,array) ->
 			if a.length > 0
 				$("##{k}").val v
 			else
-				v1 = v.split('&')
-				for i in v1
-					b = $("input.#{k}[value='#{i}']")
-					classname = b.attr('class')
-					if classname != undefined
-						b.prop 'checked', true
-					else
-						c = $("input.#{k}[value=nothing]").attr('class')
-						if c != undefined && i != '' && i != 'null'
-							$("input.#{k}[value=nothing]").prop 'checked', true
-							$("input.#{k}[value=nothing]").val i
-							$("##{k}_other").css 'display','inline-block'
-							$("##{k}_other").val i
+				if typeof(v) == 'string'
+					v1 = v.split('&')
+					for i in v1
+						b = $("input.#{k}[value='#{i}']")
+						classname = b.attr('class')
+						if classname != undefined
+							b.prop 'checked', true
+						else
+							c = $("input.#{k}[value=nothing]").attr('class')
+							if c != undefined && i != '' && i != 'null'
+								$("input.#{k}[value=nothing]").prop 'checked', true
+								$("input.#{k}[value=nothing]").val i
+								$("##{k}_other").css 'display','inline-block'
+								$("##{k}_other").val i
+				else if typeof(v) == 'number'
+					b = $("input.#{k}[value='#{v}']")
+					b.prop 'checked', true
 	.fail () ->
 		alert "数据库获取数据失败"
 	.always () ->
@@ -133,6 +138,9 @@ judgeother = (point) ->
 			input.css 'display','inline-block'
 		else
 			input.css 'display','none'
+		that = point
+		input.on 'blur',() ->
+			$(that).val $(this).val()
 
 # 遍历，获取所有表单的name，存入数组中
 getinputname = (value,target) ->
@@ -189,8 +197,9 @@ $("input[type='checkbox']").on 'click',() ->
 $('.save').on 'click',() ->
 	target = getformvalue(inputs)
 	value = target.data
+	console.log value
 	$.post '/input/update', value, (data) ->
-		console.log data
+		alert '保存成功'
 		getDBvalue "/input/get/#{id}", inputs
 
 
@@ -203,5 +212,6 @@ $('.submit').on 'click',() ->
 		alert "没有填写完整，请检查"
 	else
 		$.post '/input/update', value, (data) ->
-			console.log data
+			alert '提交成功'
+			location.href  = "/"
 

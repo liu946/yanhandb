@@ -10,7 +10,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: '严寒地区村镇绿色建筑体系发展目标基础与应用数据录入系统' });
 });
 
 module.exports = router;

@@ -1,9 +1,11 @@
 conf = {
-	dbserver:"localhost",
-	dbname:"yanhandb",
-	dbuser:"root",
-	dbpwd:"123456",
-	dbtable:"data"
+	db:{
+		server:"localhost",
+		name:"yanhandb",
+		user:"root",
+		pwd:"123456",
+		table:"data"
+	},
 }
 
 module.exports = conf;

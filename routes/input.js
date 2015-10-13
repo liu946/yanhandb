@@ -7,7 +7,7 @@
 
 var express = require('express');
 var router = express.Router();
-var field = require('../conf/fielddef.js')
+//var field = require('../conf/fielddef.js')
 var sqlhelper = require('../func/sql.js')
 var table = require('../model/table.js')
 /* GET home page. */

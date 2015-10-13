@@ -12,7 +12,7 @@ global.conf = require('./conf/conf.js')
 var routes = require('./routes/index');
 var input = require('./routes/input');
 var dbgenerator = require('./routes/dbgenerator');
-
+var test = require('./routes/test')
 
 
 var app = express();
@@ -32,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/input', input);
 app.use('/dbgenerator', dbgenerator);
+app.use('/test', test);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -19,32 +19,46 @@ getDBvalue = (url,array) ->
 		dataType: 'json',
 		async: true
 	.done (data) ->
-		console.log data
 		for k, v of data
 			if k == 'id'
 				continue
 
 			a = $("##{k}")
 			if a.length > 0
-				$("##{k}").val v
+				a.val v
 			else
-				if typeof(v) == 'string'
+				match = /^\&+/g
+				result = match.test(v)
+				if result
 					v1 = v.split('&')
-					for i in v1
-						b = $("input.#{k}[value='#{i}']")
-						classname = b.attr('class')
-						if classname != undefined
-							b.prop 'checked', true
-						else
-							c = $("input.#{k}[value=nothing]").attr('class')
-							if c != undefined && i != '' && i != 'null'
-								$("input.#{k}[value=nothing]").prop 'checked', true
-								$("input.#{k}[value=nothing]").val i
-								$("##{k}_other").css 'display','inline-block'
-								$("##{k}_other").val i
-				else if typeof(v) == 'number'
-					b = $("input.#{k}[value='#{v}']")
-					b.prop 'checked', true
+				else
+					v1 = [v]
+
+				ivalue = []
+				for i in v1
+					checkother = /\_+/g
+					result = checkother.test(i)
+					if result
+						ov = i.split('_')
+						inputvalue = ov[1]
+						ivalue.push ov[0]
+						$("##{k}_other").css 'display','inline-block'
+						$("##{k}_other").val inputvalue
+					else
+						ivalue.push i
+
+				$("select[name=#{k}]").val(ivalue);
+
+		# 动态加载chosen.jquery.js
+		jQuery.getScript("/script/chosen.jquery.js")
+			.done () ->
+				$('.chosen-select').chosen()
+				# “其他____”点击输入数据，反选取消
+				for dom in $("select")
+					judgeother dom
+			.fail () ->
+				alert "动态脚本加载失败"
+
 	.fail () ->
 		alert "数据库获取数据失败"
 	.always () ->
@@ -56,7 +70,7 @@ putmodel = (string,array,inputs) ->
 	for a in array
 		title = a.classname
 		id = a.class
-		html = "<div id='#{id}' class='content'>
+		html = "<div id='#{id}' class='J_content'>
 				<h1>#{title}</h1>"
 		for b in a.childfield
 			fieldname = b.fieldname
@@ -66,31 +80,35 @@ putmodel = (string,array,inputs) ->
 
 			inputs = getinputname fieldid,inputs
 			
-			mend = ""
+			
 			str = ""
 			if dataType is 'selecttext'
 				itemlength = b.items.length
+				str += "<select name='#{fieldid}' class='chosen-select'>"
+				mend = 0
 				for k, v of b.items
 					if v == "其他______" || v == "有______"
+						mend = 1
 						v = v.split('_')[0]
-						str += "<input type='radio' class='#{fieldid} selecttext other' name='#{fieldid}' value='nothing'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
-					else
-						str += "<input type='radio' class='#{fieldid} selecttext' name='#{fieldid}' value='#{v}' />#{v}"
-					
-					if v.length >= 10
-						str += "<br / >"
-						if itemlength >= 5 || fieldid == 'NenYuanLiYongKeZaiShengNenYuanZhiJieLiYong' || fieldid == 'NenYuanLiYongKeZaiShengNenYuanZhuanHuanLiYong'
-							mend = "style='height:250px'"
-						else
-							mend = "style='height:180px'"
+					str += "<option value='#{v}' class='#{fieldid}_#{v}'>#{v}</option>"
+				str += "</select>"
+				if mend
+					str += "<input type='text' class='otherdata' id='#{fieldid}_other'/>"
+					mend = 0
 					
 			else if dataType is 'mutiselecttext'
+				str += "<select name='#{fieldid}' class='chosen-select' multiple>"
+				mend = 0
 				for k, v of b.items
 					if v == "其他______"
+						mend = 1
 						v = v.split('_')[0]
-						str += "<input type='checkbox' class='#{fieldid} mutiselecttext other' name='#{fieldid}' value='nothing'/>#{v}<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 					else
-						str += "<input type='checkbox' class='#{fieldid} mutiselecttext' name='#{fieldid}' value='#{v}'/>#{v}"
+						mend = 0
+					str += "<option value='#{v}' class='#{fieldid}_#{v}'>#{v}</option>"
+				str += "</select>"
+				if mend
+					str += "<input type='text' class='otherdata' id='#{fieldid}_other'/>"
 
 			else if dataType is 'bool'
 				for k, v of b.items
@@ -99,7 +117,7 @@ putmodel = (string,array,inputs) ->
 			else
 				str = "<input type='text' id='#{fieldid}' name='#{fieldid}' />"
 				
-			html += "<div class='list' #{mend}>
+			html += "<div class='list'>
 						<div class='note'>
 							<h3>#{fieldname}</h3>
 						</div>
@@ -108,39 +126,37 @@ putmodel = (string,array,inputs) ->
 						</div>
 					</div>"
 
-		html += "</div><hr />"
+		html += "</div><div class='clear'></div><hr />"
 		string += html
 	$('#J_form').append string
 	return inputs
+	
 
 # 判断checked使用与其他输入
 judgeother = (point) ->
-	target = $(point).attr('class').split(' ')
-	flag = target[2]
-	type = target[1]
-	name = target[0]
+	id = point.id
+	type = point.name
+	input = $("##{type}_other")
 
-	input = $("##{name}_other")
+	$(point).on "change",() ->
+		flag = 0
+		value = $(point).val()
+		if value != null
+			if typeof value is 'string'
+				if value == "其他" || value == "有"
+					flag = 1
+			else if typeof value is 'object'
+				for t in $(point).val()
+					if t == "其他" || t == "有"
+						flag = 1
 
-	if type == 'mutiselecttext'
-		if flag == 'other'
-			if $(point).prop 'checked'
+			if flag
 				input.css 'display','inline-block'
 			else
 				input.css 'display','none'
-			that = point
-			input.on 'blur',() ->
-				$(that).val $(this).val()
-		else
-			return
-	else if type == 'selecttext'
-		if flag == 'other'
-			input.css 'display','inline-block'
 		else
 			input.css 'display','none'
-		that = point
-		input.on 'blur',() ->
-			$(that).val $(this).val()
+		
 
 # 遍历，获取所有表单的name，存入数组中
 getinputname = (value,target) ->
@@ -156,20 +172,26 @@ getformvalue = (array) ->
 	flag = 0
 	for i in array	
 		target = $("input[name=#{i}]")
+		if target.length < 1
+			target = $("select[name=#{i}]")
 		value = target.val()
-		targetclass = target.attr('class')
-		if targetclass != undefined
-			classname = targetclass.split(' ')[1]
-			if classname == 'selecttext'
-				value = $("input[name=#{i}]:checked").val()
-			else if classname == 'mutiselecttext'
-				str = ''
-				$("input[name=#{i}]:checkbox").each () ->
-					if $(this).prop('checked')
-						str += "&" + $(this).val() 
-				value = str
 
-		if value == ''
+		targetclass = target.attr('class')
+		if targetclass == 'chosen-select chzn-done'
+			if typeof(value) is 'object'
+				str = ''
+				if value != null
+					for a in value
+						if a == "其他" or a == "有"
+							a += "_#{$("##{i}_other").val()}"
+						str += "&" + a
+					value = str
+			else if typeof(value) is 'string'
+				if value != null
+					if value == "其他" or value == "有"
+						value += "_#{$("##{i}_other").val()}"
+
+		if value == '' || value == null
 			flag = 1
 		data[i] = value
 	return {
@@ -186,12 +208,6 @@ inputs = putmodel htmlstring,value,inputs
 
 # 获取数据库的存入的值	
 getDBvalue "/input/get/#{id}", inputs
-
-# “其他____”点击输入数据，反选取消
-$("input[type='radio']").on 'click',() ->
-	judgeother this
-$("input[type='checkbox']").on 'click',() ->
-	judgeother this
 
 # 保存功能
 $('.save').on 'click',() ->

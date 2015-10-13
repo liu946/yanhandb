@@ -21,9 +21,7 @@ getDBvalue = function(url, array) {
     dataType: 'json',
     async: true
   }).done(function(data) {
-    var a, b, c, classname, i, k, results, v, v1;
-    console.log(data);
-    results = [];
+    var a, checkother, i, inputvalue, ivalue, j, k, len, match, ov, result, v, v1;
     for (k in data) {
       v = data[k];
       if (k === 'id') {
@@ -31,42 +29,46 @@ getDBvalue = function(url, array) {
       }
       a = $("#" + k);
       if (a.length > 0) {
-        results.push($("#" + k).val(v));
+        a.val(v);
       } else {
-        if (typeof v === 'string') {
+        match = /^\&+/g;
+        result = match.test(v);
+        if (result) {
           v1 = v.split('&');
-          results.push((function() {
-            var j, len, results1;
-            results1 = [];
-            for (j = 0, len = v1.length; j < len; j++) {
-              i = v1[j];
-              b = $("input." + k + "[value='" + i + "']");
-              classname = b.attr('class');
-              if (classname !== void 0) {
-                results1.push(b.prop('checked', true));
-              } else {
-                c = $("input." + k + "[value=nothing]").attr('class');
-                if (c !== void 0 && i !== '' && i !== 'null') {
-                  $("input." + k + "[value=nothing]").prop('checked', true);
-                  $("input." + k + "[value=nothing]").val(i);
-                  $("#" + k + "_other").css('display', 'inline-block');
-                  results1.push($("#" + k + "_other").val(i));
-                } else {
-                  results1.push(void 0);
-                }
-              }
-            }
-            return results1;
-          })());
-        } else if (typeof v === 'number') {
-          b = $("input." + k + "[value='" + v + "']");
-          results.push(b.prop('checked', true));
         } else {
-          results.push(void 0);
+          v1 = [v];
         }
+        ivalue = [];
+        for (j = 0, len = v1.length; j < len; j++) {
+          i = v1[j];
+          checkother = /\_+/g;
+          result = checkother.test(i);
+          if (result) {
+            ov = i.split('_');
+            inputvalue = ov[1];
+            ivalue.push(ov[0]);
+            $("#" + k + "_other").css('display', 'inline-block');
+            $("#" + k + "_other").val(inputvalue);
+          } else {
+            ivalue.push(i);
+          }
+        }
+        $("select[name=" + k + "]").val(ivalue);
       }
     }
-    return results;
+    return jQuery.getScript("/script/chosen.jquery.js").done(function() {
+      var dom, l, len1, ref, results;
+      $('.chosen-select').chosen();
+      ref = $("select");
+      results = [];
+      for (l = 0, len1 = ref.length; l < len1; l++) {
+        dom = ref[l];
+        results.push(judgeother(dom));
+      }
+      return results;
+    }).fail(function() {
+      return alert("动态脚本加载失败");
+    });
   }).fail(function() {
     return alert("数据库获取数据失败");
   }).always(function() {
@@ -81,7 +83,7 @@ putmodel = function(string, array, inputs) {
     a = array[j];
     title = a.classname;
     id = a["class"];
-    html = "<div id='" + id + "' class='content'> <h1>" + title + "</h1>";
+    html = "<div id='" + id + "' class='J_content'> <h1>" + title + "</h1>";
     ref = a.childfield;
     for (l = 0, len1 = ref.length; l < len1; l++) {
       b = ref[l];
@@ -90,38 +92,42 @@ putmodel = function(string, array, inputs) {
       dataType = b.datatype;
       defaultvalue = b["default"];
       inputs = getinputname(fieldid, inputs);
-      mend = "";
       str = "";
       if (dataType === 'selecttext') {
         itemlength = b.items.length;
+        str += "<select name='" + fieldid + "' class='chosen-select'>";
+        mend = 0;
         ref1 = b.items;
         for (k in ref1) {
           v = ref1[k];
           if (v === "其他______" || v === "有______") {
+            mend = 1;
             v = v.split('_')[0];
-            str += "<input type='radio' class='" + fieldid + " selecttext other' name='" + fieldid + "' value='nothing'/>" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
-          } else {
-            str += "<input type='radio' class='" + fieldid + " selecttext' name='" + fieldid + "' value='" + v + "' />" + v;
           }
-          if (v.length >= 10) {
-            str += "<br / >";
-            if (itemlength >= 5 || fieldid === 'NenYuanLiYongKeZaiShengNenYuanZhiJieLiYong' || fieldid === 'NenYuanLiYongKeZaiShengNenYuanZhuanHuanLiYong') {
-              mend = "style='height:250px'";
-            } else {
-              mend = "style='height:180px'";
-            }
-          }
+          str += "<option value='" + v + "' class='" + fieldid + "_" + v + "'>" + v + "</option>";
+        }
+        str += "</select>";
+        if (mend) {
+          str += "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
+          mend = 0;
         }
       } else if (dataType === 'mutiselecttext') {
+        str += "<select name='" + fieldid + "' class='chosen-select' multiple>";
+        mend = 0;
         ref2 = b.items;
         for (k in ref2) {
           v = ref2[k];
           if (v === "其他______") {
+            mend = 1;
             v = v.split('_')[0];
-            str += "<input type='checkbox' class='" + fieldid + " mutiselecttext other' name='" + fieldid + "' value='nothing'/>" + v + "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
           } else {
-            str += "<input type='checkbox' class='" + fieldid + " mutiselecttext' name='" + fieldid + "' value='" + v + "'/>" + v;
+            mend = 0;
           }
+          str += "<option value='" + v + "' class='" + fieldid + "_" + v + "'>" + v + "</option>";
+        }
+        str += "</select>";
+        if (mend) {
+          str += "<input type='text' class='otherdata' id='" + fieldid + "_other'/>";
         }
       } else if (dataType === 'bool') {
         ref3 = b.items;
@@ -132,9 +138,9 @@ putmodel = function(string, array, inputs) {
       } else {
         str = "<input type='text' id='" + fieldid + "' name='" + fieldid + "' />";
       }
-      html += "<div class='list' " + mend + "> <div class='note'> <h3>" + fieldname + "</h3> </div> <div class='input'> " + str + " </div> </div>";
+      html += "<div class='list'> <div class='note'> <h3>" + fieldname + "</h3> </div> <div class='input'> " + str + " </div> </div>";
     }
-    html += "</div><hr />";
+    html += "</div><div class='clear'></div><hr />";
     string += html;
   }
   $('#J_form').append(string);
@@ -142,37 +148,37 @@ putmodel = function(string, array, inputs) {
 };
 
 judgeother = function(point) {
-  var flag, input, name, target, that, type;
-  target = $(point).attr('class').split(' ');
-  flag = target[2];
-  type = target[1];
-  name = target[0];
-  input = $("#" + name + "_other");
-  if (type === 'mutiselecttext') {
-    if (flag === 'other') {
-      if ($(point).prop('checked')) {
-        input.css('display', 'inline-block');
-      } else {
-        input.css('display', 'none');
+  var id, input, type;
+  id = point.id;
+  type = point.name;
+  input = $("#" + type + "_other");
+  return $(point).on("change", function() {
+    var flag, j, len, ref, t, value;
+    flag = 0;
+    value = $(point).val();
+    if (value !== null) {
+      if (typeof value === 'string') {
+        if (value === "其他" || value === "有") {
+          flag = 1;
+        }
+      } else if (typeof value === 'object') {
+        ref = $(point).val();
+        for (j = 0, len = ref.length; j < len; j++) {
+          t = ref[j];
+          if (t === "其他" || t === "有") {
+            flag = 1;
+          }
+        }
       }
-      that = point;
-      return input.on('blur', function() {
-        return $(that).val($(this).val());
-      });
+      if (flag) {
+        return input.css('display', 'inline-block');
+      } else {
+        return input.css('display', 'none');
+      }
     } else {
-
+      return input.css('display', 'none');
     }
-  } else if (type === 'selecttext') {
-    if (flag === 'other') {
-      input.css('display', 'inline-block');
-    } else {
-      input.css('display', 'none');
-    }
-    that = point;
-    return input.on('blur', function() {
-      return $(that).val($(this).val());
-    });
-  }
+  });
 };
 
 getinputname = function(value, target) {
@@ -188,7 +194,7 @@ getinputname = function(value, target) {
 };
 
 getformvalue = function(array) {
-  var classname, data, flag, i, j, len, str, target, targetclass, value;
+  var a, data, flag, i, j, l, len, len1, str, target, targetclass, value;
   data = {
     "id": id
   };
@@ -196,23 +202,33 @@ getformvalue = function(array) {
   for (j = 0, len = array.length; j < len; j++) {
     i = array[j];
     target = $("input[name=" + i + "]");
+    if (target.length < 1) {
+      target = $("select[name=" + i + "]");
+    }
     value = target.val();
     targetclass = target.attr('class');
-    if (targetclass !== void 0) {
-      classname = targetclass.split(' ')[1];
-      if (classname === 'selecttext') {
-        value = $("input[name=" + i + "]:checked").val();
-      } else if (classname === 'mutiselecttext') {
+    if (targetclass === 'chosen-select chzn-done') {
+      if (typeof value === 'object') {
         str = '';
-        $("input[name=" + i + "]:checkbox").each(function() {
-          if ($(this).prop('checked')) {
-            return str += "&" + $(this).val();
+        if (value !== null) {
+          for (l = 0, len1 = value.length; l < len1; l++) {
+            a = value[l];
+            if (a === "其他" || a === "有") {
+              a += "_" + ($("#" + i + "_other").val());
+            }
+            str += "&" + a;
           }
-        });
-        value = str;
+          value = str;
+        }
+      } else if (typeof value === 'string') {
+        if (value !== null) {
+          if (value === "其他" || value === "有") {
+            value += "_" + ($("#" + i + "_other").val());
+          }
+        }
       }
     }
-    if (value === '') {
+    if (value === '' || value === null) {
       flag = 1;
     }
     data[i] = value;
@@ -232,14 +248,6 @@ inputs = [];
 inputs = putmodel(htmlstring, value, inputs);
 
 getDBvalue("/input/get/" + id, inputs);
-
-$("input[type='radio']").on('click', function() {
-  return judgeother(this);
-});
-
-$("input[type='checkbox']").on('click', function() {
-  return judgeother(this);
-});
 
 $('.save').on('click', function() {
   var target;

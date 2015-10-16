@@ -5,6 +5,9 @@ var connection = null;
 
 function setup(db, cb) {
   require('./cunzhen')(orm, db);
+  require('./biaozhixinggouzhuwu')(orm, db);
+  require('./jiedaokongjian')(orm, db);
+  require('./kaichangkongjian')(orm, db);
 
   return cb(null, db);
 }

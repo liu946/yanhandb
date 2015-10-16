@@ -10,10 +10,10 @@ var table = {
 	// overwrite
 	originfield:function () {
 
-		for (var i = fields.length - 1; i >= 0; i--) {
-			this.protected_addattribute(fields[i])
+		for (var i = this.fields.length - 1; i >= 0; i--) {
+			this.protected_addattribute(this.fields[i])
 		};
-		return this.field;
+		return this.fields;
 	},
 
 	backendfield:function(){
@@ -29,7 +29,7 @@ var table = {
 	},
 	// protected
 	protected_addattribute:function(sigalitemobj){
-		sigalitemobj['name'] = sys.pinyin(sigalitemobj['zhname'])
+		sigalitemobj['name'] = sys.pinyin(sigalitemobj['namezh'])
 	},
 	// protected
 	protected_backenddecodefield:function (sigalitemobj) {

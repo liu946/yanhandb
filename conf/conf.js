@@ -1,10 +1,24 @@
+var path = require('path')
 conf = {
+	path       : path.normalize(path.join(__dirname, '..')),
+	port       : process.env.NODE_PORT || 3000,
+	database   : {
+	    protocol : "mysql", // or "mysql"
+	    query    : { pool: true },
+	    host     : "127.0.0.1",
+	    database : "yanhandb",
+	    user     : "root",
+	    password : "123456"
+	},
 	db:{
-		server:"localhost",
+		engine:'mysql',
+		host:"localhost",
 		name:"yanhandb",
-		user:"root",
-		pwd:"123456",
-		table:"data"
+		username:"root",
+		password:"123456",
+		ormstring:function () {
+			return this.engine+"://"+this.username+":"+this.password+"@"+this.host+"/"+this.name
+		}
 	},
 }
 

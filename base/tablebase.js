@@ -1,42 +1,35 @@
 // tablebase.js
 
-
+var sys = require('../func/sys.js')
 var table = {
 	name:'',
 	fields:
-	[{
-        "classname": "村镇基本信息",
-        "childfield": [
-            {
-                "fieldname": "村镇名称",
-                "datatype": "inputtext",
-                "datasize": 50,
-                "default": "",
-                "field": "CunZhenJiBenXinXiCunZhenMingChen"
-            },
-            {
-                "field": "CunZhenJiBenXinXiRenJunJiZhuYongDi",
-                "fieldname": "人均居住用地",
-                "datatype": "double",
-                "datasize": ".1",
-                "default": 0
-            },
-            {
-                "fieldname": "建筑布局模式",
-                "datatype": "selecttext",
-                "datasize": 100,
-                "default": "",
-                "items": {
-                    "1": " 布局规整顺应地势",
-                    "2": " 结合场地自然条件，对建筑的体形朝向和楼距等进行优化设计"
-                },
-                "field": "CunZhenJiBenXinXiJianZhuBuJuMoShi"
-            }
-        ],
-        "class": "CunZhenJiBenXinXi"
-    },
+	[
 		
-	]
+	],
+	// overwrite
+	originfield:function () {
+
+		for (var i = fields.length - 1; i >= 0; i--) {
+			this.protected_addattribute(fields[i])
+		};
+		return this.field;
+	},
+
+	backendfield:function(){
+		var backendfield = {}
+		// todo
+		throw err('not ended method!')
+	},
+	// protected
+	protected_addattribute:function(sigalitemobj){
+		sigalitemobj['name'] = sys.pinyin(sigalitemobj['zhname'])
+	},
+	// protected
+	protected_backenddecodefield:function (sigalitemobj) {
+		var type=sigalitemobj.backend
+		return type;
+	}
 }
 
 module.exports = table;

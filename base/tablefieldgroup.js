@@ -10,11 +10,14 @@ var table = sys.extend(require('../base/tablebase.js'),{
 
 	// overwrite
 	originfield:function () {
+
 		return this.private_anydeep(this.fields);
+
 	},
 	// overwrite
 	backendfield:function(){
 		var backendfield = {}
+
 		return this.private_backendanydeep(this.fields,backendfield);
 	},
 	private_anydeep:function  (field) {
@@ -51,6 +54,7 @@ var table = sys.extend(require('../base/tablebase.js'),{
 		}
 		return backendfield;
 	}
+
 })
 
 

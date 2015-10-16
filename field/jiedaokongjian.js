@@ -1,7 +1,7 @@
 
 
 var sys = require('../func/sys.js')
-module.exports = sys.extend(require('../base/tablebase.js'),
+module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 {
 	name:"jiedaokongjian",
 	namezh:"街道空间",

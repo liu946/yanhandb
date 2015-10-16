@@ -18,8 +18,12 @@ var table = {
 
 	backendfield:function(){
 		var backendfield = {}
-		// todo
-		throw err('not ended method!')
+		for (var i in this.fields) {
+			var colume = this.fields[i];
+			var pinyinstr = sys.pinyin(colume['namezh']);
+			backendfield[pinyinstr] = this.protected_backenddecodefield(colume);
+		};
+		return backendfield;
 	},
 	// protected
 	protected_addattribute:function(sigalitemobj){

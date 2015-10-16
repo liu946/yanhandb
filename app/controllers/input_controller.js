@@ -1,4 +1,6 @@
 var express = require('express');
+var fs = require('fs')
+var path = require('path')
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
@@ -12,8 +14,15 @@ router.get('/get', function(req, res, next) {
     });
 });
 
-router.get('/field',function (req, res, next) {
-  res.json(field);
+router.get('/field/:tablename',function (req, res, next) {
+  fs.readdir(path.join(__dirname,'../../field'),function (err, data) {
+    if ( 0 <= data.indexOf(req.params.tablename +'.js')) {
+      res.json(require('../../field/'+req.params.tablename).originfield());
+    }else{
+      res.send("Don't find table '"+req.params.tablename+"'")
+    }
+  })
+  
 })
 
 router.post('/update',function(req ,res ,next){

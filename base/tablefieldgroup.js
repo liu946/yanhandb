@@ -10,28 +10,47 @@ var table = sys.extend(require('../base/tablebase.js'),{
 
 	// overwrite
 	originfield:function () {
-		// todo
-		for(var group in this.fields){
-			for (var i = this.fields[group].fields.length - 1; i >= 0; i--) {
-				this.protected_addattribute(this.fields[group].fields[i])
-			};
-		}
-		return this.fields;
+		return this.private_anydeep(this.fields);
 	},
 	// overwrite
 	backendfield:function(){
 		var backendfield = {}
-		for(var group in this.fields){
-			for (var i = this.fields[group].fields.length - 1; i >= 0; i--) {
-				var pinyinstr = sys.pinyin(this.fields[group].fields[i]['namezh']);
+		return this.private_backendanydeep(this.fields,backendfield);
+	},
+	private_anydeep:function  (field) {
+		for(var i in field){
+			if(typeof(field[i]["namezh"])!="undefined"){
+				var pinyinstr = sys.pinyin(field[i]['namezh']);
+				// todo
+				// 长度检查
+				// 重复检查
+				field[i]["name"] = pinyinstr;
+			}
+			// reduce
+			if (typeof(field[i]["fields"])!="undefined") {
+					this.private_anydeep(field[i]['fields'])
+			}
+		}
 
-				// todo 长度检查，重复检查
-				backendfield[pinyinstr] = this.protected_backenddecodefield(this.fields[group].fields[i]);
-			};
+		return field;
+	},
+	private_backendanydeep:function (field,backendfield) {
+		for(var i in field) {
+
+			if (typeof(field[i]["fields"]) != "undefined") {
+
+					this.private_backendanydeep(field[i]['fields'], backendfield)
+
+			} else {
+				var pinyinstr = sys.pinyin(field[i]['namezh']);
+				// todo
+				// 长度检查
+				// 重复检查
+				backendfield[pinyinstr] = this.protected_backenddecodefield(field[i]);
+			}
 		}
 		return backendfield;
 	}
-
 })
 
 

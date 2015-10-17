@@ -24,11 +24,24 @@ getDBvalue = (url,array) ->
 				continue
 
 			a = $("##{k}")
+			b = $(".#{k}")
 			if a.length > 0
 				a.val v
+			else if b.length > 0
+				$("input.#{k}[value=#{v}]").prop 'checked',true
 			else
 				match = /^\&+/g
 				result = match.test(v)
+
+				ccsmatch = /\-+/g
+				ccsresult = ccsmatch.test v
+				if ccsresult
+					value = v.split("-")
+					# console.log value
+					$("##{k}_color").val value[0]
+					$("##{k}_light").val value[1]
+					$("##{k}_pure").val value[2]
+
 				if result
 					v1 = v.split('&')
 				else
@@ -114,6 +127,26 @@ putmodel = (string,array,inputs) ->
 				for k, v of b.items
 					str += "<input type='radio' class='#{fieldid} selecttext' name='#{fieldid}' value='#{k}'/>#{v}"
 			
+			else if dataType is 'CCS'
+				str_color = "<div class='ccs_color s_show'>颜色<select name='#{fieldid}_color' id='#{fieldid}_color'>"
+				str_light = "<div class='ccs_light s_show'>亮度<select name='#{fieldid}_light' id='#{fieldid}_light'>"
+				str_pure = "<div class='css_pure s_show'>纯度<select name='#{fieldid}_pure' id='#{fieldid}_pure'>"
+				str_end = "</select></div>"
+						
+				for k,v of b.items.color
+					str_color += "<option value='#{v}'>#{k}</option>"
+				str_color += str_end
+
+				for i in b.items.light
+					str_light += "<option value='#{i}'>#{i}</option>"
+				str_light += str_end
+
+				for i in b.items.pure
+					str_pure += "<option value='#{i}'>#{i}</option>"
+				str_pure += str_end
+
+				str = str_color + str_light + str_pure
+
 			else
 				str = "<input type='text' id='#{fieldid}' name='#{fieldid}' />"
 				
@@ -171,10 +204,14 @@ getformvalue = (array) ->
 	data = {"id": id}
 	flag = 0
 	for i in array	
-		target = $("input[name=#{i}]")
+		target = $("input[name=#{i}]:checked")
 		if target.length < 1
 			target = $("select[name=#{i}]")
-		value = target.val()
+			if target.length < 1
+				console.log target
+				value = $("select[name=#{i}_color]").val() + "-" + $("select[name=#{i}_light]").val() + "-" + $("select[name=#{i}_pure]").val()
+			else
+				value = target.val()
 
 		targetclass = target.attr('class')
 		if targetclass == 'chosen-select chzn-done'
@@ -213,7 +250,7 @@ getDBvalue "/input/get/#{id}", inputs
 $('.save').on 'click',() ->
 	target = getformvalue(inputs)
 	value = target.data
-	console.log value
+	# console.log value
 	$.post '/input/update', value, (data) ->
 		alert '保存成功'
 		getDBvalue "/input/get/#{id}", inputs

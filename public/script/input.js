@@ -21,18 +21,29 @@ getDBvalue = function(url, array) {
     dataType: 'json',
     async: true
   }).done(function(data) {
-    var a, checkother, i, inputvalue, ivalue, j, k, len, match, ov, result, v, v1;
+    var a, b, ccsmatch, ccsresult, checkother, i, inputvalue, ivalue, j, k, len, match, ov, result, v, v1, value;
     for (k in data) {
       v = data[k];
       if (k === 'id') {
         continue;
       }
       a = $("#" + k);
+      b = $("." + k);
       if (a.length > 0) {
         a.val(v);
+      } else if (b.length > 0) {
+        $("input." + k + "[value=" + v + "]").prop('checked', true);
       } else {
         match = /^\&+/g;
         result = match.test(v);
+        ccsmatch = /\-+/g;
+        ccsresult = ccsmatch.test(v);
+        if (ccsresult) {
+          value = v.split("-");
+          $("#" + k + "_color").val(value[0]);
+          $("#" + k + "_light").val(value[1]);
+          $("#" + k + "_pure").val(value[2]);
+        }
         if (result) {
           v1 = v.split('&');
         } else {
@@ -77,7 +88,7 @@ getDBvalue = function(url, array) {
 };
 
 putmodel = function(string, array, inputs) {
-  var a, b, dataType, defaultvalue, fieldid, fieldname, html, id, itemlength, j, k, l, len, len1, mend, ref, ref1, ref2, ref3, str, title, v;
+  var a, b, dataType, defaultvalue, fieldid, fieldname, html, i, id, itemlength, j, k, l, len, len1, len2, len3, m, mend, n, ref, ref1, ref2, ref3, ref4, ref5, ref6, str, str_color, str_end, str_light, str_pure, title, v;
   html = "";
   for (j = 0, len = array.length; j < len; j++) {
     a = array[j];
@@ -135,6 +146,30 @@ putmodel = function(string, array, inputs) {
           v = ref3[k];
           str += "<input type='radio' class='" + fieldid + " selecttext' name='" + fieldid + "' value='" + k + "'/>" + v;
         }
+      } else if (dataType === 'CCS') {
+        str_color = "<div class='ccs_color s_show'>颜色<select name='" + fieldid + "_color' id='" + fieldid + "_color'>";
+        str_light = "<div class='ccs_light s_show'>亮度<select name='" + fieldid + "_light' id='" + fieldid + "_light'>";
+        str_pure = "<div class='css_pure s_show'>纯度<select name='" + fieldid + "_pure' id='" + fieldid + "_pure'>";
+        str_end = "</select></div>";
+        ref4 = b.items.color;
+        for (k in ref4) {
+          v = ref4[k];
+          str_color += "<option value='" + v + "'>" + k + "</option>";
+        }
+        str_color += str_end;
+        ref5 = b.items.light;
+        for (m = 0, len2 = ref5.length; m < len2; m++) {
+          i = ref5[m];
+          str_light += "<option value='" + i + "'>" + i + "</option>";
+        }
+        str_light += str_end;
+        ref6 = b.items.pure;
+        for (n = 0, len3 = ref6.length; n < len3; n++) {
+          i = ref6[n];
+          str_pure += "<option value='" + i + "'>" + i + "</option>";
+        }
+        str_pure += str_end;
+        str = str_color + str_light + str_pure;
       } else {
         str = "<input type='text' id='" + fieldid + "' name='" + fieldid + "' />";
       }
@@ -201,11 +236,16 @@ getformvalue = function(array) {
   flag = 0;
   for (j = 0, len = array.length; j < len; j++) {
     i = array[j];
-    target = $("input[name=" + i + "]");
+    target = $("input[name=" + i + "]:checked");
     if (target.length < 1) {
       target = $("select[name=" + i + "]");
+      if (target.length < 1) {
+        console.log(target);
+        value = $("select[name=" + i + "_color]").val() + "-" + $("select[name=" + i + "_light]").val() + "-" + $("select[name=" + i + "_pure]").val();
+      } else {
+        value = target.val();
+      }
     }
-    value = target.val();
     targetclass = target.attr('class');
     if (targetclass === 'chosen-select chzn-done') {
       if (typeof value === 'object') {
@@ -253,7 +293,6 @@ $('.save').on('click', function() {
   var target;
   target = getformvalue(inputs);
   value = target.data;
-  console.log(value);
   return $.post('/input/update', value, function(data) {
     alert('保存成功');
     return getDBvalue("/input/get/" + id, inputs);

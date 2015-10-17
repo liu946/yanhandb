@@ -9,5 +9,14 @@ router.get('/', function(req, res, next) {
   })
   
 });
+
+router.get('/drop', function(req, res, next) {
+  // generator db and table
+  req.db.drop(function(err){
+    if(err){throw err;}
+    res.send("Grop table");
+  })
+
+});
 module.exports = router;
 

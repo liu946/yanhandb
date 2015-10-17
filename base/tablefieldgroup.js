@@ -21,9 +21,9 @@ var table = sys.extend(require('../base/tablebase.js'),{
 	},
 	private_addonce:function(){
 		//只跑一次，增加字段
-		var _field =  this.addedflag ? this.fields : this.private_anydeep(this.fields,"");
+		this.fields =  this.addedflag ? this.fields : this.private_anydeep(this.fields,"");
 		this.addedflag = true;
-		return _field;
+		return this.fields;
 	},
 	private_anydeep:function  (field,fatherPinYin) {
 

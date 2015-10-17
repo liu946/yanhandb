@@ -20,10 +20,7 @@ input/field/:tablename
 		},
 		forend:{
 			type:'select',
-			require:{
-				name:"LeiXing",
-				value:'1'
-			},
+
 			option:{
 				1:'人物',
 				2:'民族符号',
@@ -32,6 +29,10 @@ input/field/:tablename
 				5:'动植物',
 				6:'其他'
 			}
+		},
+		require:{
+			name:"LeiXing",
+			value:'1'
 		},
 	},
 ```

@@ -31,10 +31,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 		},
 		forend:{
 			type:'select',
-			require:{
-				name:"LeiXing",
-				value:'1'
-			},
+
 			option:{
 				1:'人物',
 				2:'民族符号',
@@ -43,6 +40,10 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 				5:'动植物',
 				6:'其他'		
 			}
+		},
+		require:{
+			name:"LeiXing",
+			value:'1'
 		},
 	},
 	{

@@ -10,7 +10,7 @@ var table = sys.extend(require('../base/tablebase.js'),{
 	addedflag:false,
 	// overwrite
 	originfield:function () {
-		return this.private_anydeep(this.fields);
+		return this.private_anydeep(this.fields,"");
 	},
 	// overwrite
 	backendfield:function(){

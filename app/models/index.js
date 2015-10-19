@@ -8,6 +8,7 @@ function setup(db, cb) {
   require('./biaozhixinggouzhuwu')(orm, db);
   require('./jiedaokongjian')(orm, db);
   require('./kaichangkongjian')(orm, db);
+  require('./tingyuanyujianzhu')(orm, db);
 
   return cb(null, db);
 }

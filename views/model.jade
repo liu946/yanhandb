@@ -1,0 +1,18 @@
+extends edit
+
+block model
+
+	.modeltype
+		.main
+			form#J_form(onsubmit='return false;',action='#')
+				.clickoption
+					.content
+						.submit.box
+							p
+								| 提交
+						.save.box
+							p
+								| 保存
+						
+	script(src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js")
+	script(src="/script/input.js")

@@ -10,7 +10,7 @@ module.exports={
 			namezh:"节水",
 			backend:{
 				type:"text"
-			}
+			},
 			forend:{
 				type:"select",
 				option:{
@@ -28,7 +28,7 @@ module.exports={
 				namezh:"雨水利用系统",
 				backend:{
 					type:"text"
-				}
+				},
 				forend:{
 					type:"select",
 					option:{
@@ -42,7 +42,7 @@ module.exports={
 				namezh:"杂排水再利用系统",
 				backend:{
 					type:"text"
-				}
+				},
 				forend:{
 					type:"select",
 					option:{
@@ -106,7 +106,7 @@ module.exports={
 			namezh:"对健康无害的材料使用",
 			backend:{
 				type:"text"
-			}
+			},
 			forend:{
 				type:"select",
 				option:{
@@ -124,7 +124,7 @@ module.exports={
 			namezh:"对既有建筑主体的再利用",
 			backend:{
 				type:"text"
-			}
+			},
 			forend:{
 				type:"select",
 				option:{
@@ -150,3 +150,4 @@ module.exports={
 	},
 	]
 }
+;

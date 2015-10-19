@@ -400,7 +400,7 @@ module.exports = {
 			require:{
 				name:"",
 				value:"true",
-			}
+			},
 			fields:
 			[
 			{
@@ -455,23 +455,24 @@ module.exports = {
 		{
 			namezh:"湿度",
 			fields:[
-			{
-				namezh:"加湿功能",
-				backend:{
-					type:"text",
-				},
-				forend:{
-					type:'select',
-					option:{
-						1:'有',
-						2:"无",
+				{
+					namezh: "加湿功能",
+					backend: {
+						type: "text",
+					},
+					forend: {
+						type: 'select',
+						option: {
+							1: '有',
+							2: "无",
+						},
 					},
 				},
 				{
 					namezh:'室内湿度',
 					backend:{
 						type:"text",
-					}
+					},
 					forend:{
 						type:"input",
 						comment:'数字%',
@@ -480,9 +481,7 @@ module.exports = {
 				]
 			},
 			]
-		},			
-		]
-	},
+		},
 	{
 		namezh:"光环境",
 		fields:[
@@ -493,7 +492,7 @@ module.exports = {
 				namezh:'侧面采光系数',
 				backend:{
 					type:"text",
-				}
+				},
 				forend:{
 					type:"input",
 					comment:'数字%',
@@ -503,7 +502,7 @@ module.exports = {
 				namezh:'侧面采光照度',
 				backend:{
 					type:"text",
-				}
+				},
 				forend:{
 					type:"input",
 					comment:'数字lx',
@@ -515,7 +514,7 @@ module.exports = {
 				namezh:'顶部采光系数',
 				backend:{
 					type:"text",
-				}
+				},
 				forend:{
 					type:"input",
 					comment:'数字%',
@@ -527,7 +526,7 @@ module.exports = {
 				namezh:'顶部采光照度',
 				backend:{
 					type:"text",
-				}
+				},
 				forend:{
 					type:"input",
 					comment:'数字lx',
@@ -605,7 +604,7 @@ module.exports = {
 				namezh:'有效自然通风的开口面积',
 				backend:{
 					type:"text",
-				}
+				},
 				forend:{
 					type:"input",
 					comment:'数字m 2',
@@ -645,8 +644,8 @@ module.exports = {
 				},
 			},
 			]
-		}
+		},
 		]
 	},
 	]
-},
+}

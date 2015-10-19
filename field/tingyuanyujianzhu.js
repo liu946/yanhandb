@@ -14,8 +14,8 @@ var tb = sys.extend(require('../base/tablefieldgroup.js'),
 fs.readdir(path, function (err,files) {
 	// body...
 	for (var i = files.length - 1; i >= 0; i--) {
-		this.fields.push(files[i])
+		this.fields.push(require(childdir+files[i]))
 	};
-})
-require(childdir+'jianzhujibenxinxi')
+});
+
 module.exports = tb;

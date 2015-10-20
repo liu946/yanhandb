@@ -10,9 +10,9 @@ router.get('/', function(req, res, next) {
   //res.render('input', { title: '严寒地区村镇绿色建筑体系发展目标基础与应用数据录入系统' });
 });
 
-router.get('/get', function(req, res, next) {
-    table.getall('id,CunZhenJiBenXinXiCunZhenMingChen',function(row){
-    res.json(row);
+router.get('/get/:tablename', function(req, res, next) {
+    req.models[req.param.tablename].getall(function(row){
+      res.json(row);
     });
 });
 
@@ -28,7 +28,6 @@ router.get('/field/:tablename',function (req, res, next) {
 })
 
 router.post('/update/:tablename/',function(req ,res ,next){
-  var updatedata = {};
   req.models[req.param.tablename].get(req.body.id,function(err,item) {
     for (var i in req.body) {
       item[i] = req.body[i];
@@ -44,9 +43,9 @@ router.get('/edit/:tablename/:id',function(req ,res ,next){
   res.render('edit',{ id: req.params.id})
 })
 
-router.get('/new',function(req ,res ,next){
-  table.insertnull(function (id) {
-    res.redirect('edit/'+id);
+router.get('/new/:tablename',function(req ,res ,next){
+  req.models[req.param.tablename].create([{}],function (err,items) {
+    res.redirect('edit/'+req.param.tablename+"/"+items['id']);
   })
 })
 

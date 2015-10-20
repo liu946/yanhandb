@@ -1,5 +1,4 @@
 // cunzhen:'js',
-
 // table defination
 
 var sys = require('../func/sys.js')

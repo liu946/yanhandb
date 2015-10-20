@@ -1,5 +1,10 @@
 module.exports = {
 	namezh:"历史建筑",
+	require:{
+		namezh:"是否是历史建筑",
+		name:"",
+		value:'1',
+	},
 	fields:
 	[
 	{

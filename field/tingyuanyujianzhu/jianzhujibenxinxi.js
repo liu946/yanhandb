@@ -133,6 +133,15 @@ module.exports = {
 			},
 		},
 	},
+		{
+			namezh:"是否是历史建筑",
+			backend:{
+				type:"boolean",
+			},
+			forend:{
+				type:"boolean",
+			}
 
+		}
 	]
 }

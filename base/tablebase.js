@@ -21,7 +21,7 @@ var table = {
 
 		for (var i in this.fields) {
 			var colume = this.fields[i];
-			var pinyinstr = sys.pinyin(colume['namezh']);
+			var pinyinstr = (sys.pinyin(colume['namezh'])).substr(0,64);
 			backendfield[pinyinstr] = this.protected_backenddecodefield(colume);
 		};
 		return backendfield;
@@ -29,7 +29,7 @@ var table = {
 	},
 	// protected
 	protected_addattribute:function(sigalitemobj){
-		sigalitemobj['name'] = sys.pinyin(sigalitemobj['namezh'])
+		sigalitemobj['name'] = (sys.pinyin(sigalitemobj['namezh'])).substr(0,64)
 	},
 	// protected
 	protected_backenddecodefield:function (sigalitemobj) {

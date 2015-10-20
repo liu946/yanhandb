@@ -12,11 +12,13 @@ var tb = sys.extend(require('../base/tablefieldgroup.js'),
 
 		]
     })
-fs.readdir(path.join(__dirname,childdir), function (err,files) {
-	// body...
-	for (var i = files.length - 1; i >= 0; i--) {
-		tb.fields.push(require(path.join(__dirname,childdir,files[i])))
-	};
-});
-
+tb.addotherfile = function(callback){
+	fs.readdir(path.join(__dirname,childdir), function (err,files) {
+		// body...
+		for (var i = files.length - 1; i >= 0; i--) {
+			tb.fields.push(require(path.join(__dirname,childdir,files[i])))
+		};
+		callback();
+	});
+}
 module.exports = tb;

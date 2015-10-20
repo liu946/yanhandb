@@ -34,7 +34,7 @@ var table = sys.extend(require('../base/tablebase.js'),{
 				// todo
 				// 长度检查
 				// 重复检查
-				field[i]["name"] = fatherPinYin.replace(/[a-z]/g,"") + pinyinstr;
+				field[i]["name"] = (fatherPinYin.replace(/[a-z]/g,"") + pinyinstr).substr(0,64);
 			}
 			// reduce
 			if (typeof(field[i]["fields"])!="undefined") {

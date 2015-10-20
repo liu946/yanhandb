@@ -27,14 +27,20 @@ router.get('/field/:tablename',function (req, res, next) {
   })
 })
 
-router.post('/update',function(req ,res ,next){
-  table.update(req.body.id,req.body,function () {
-    res.send('save OK');
-  });
-  
+router.post('/update/:tablename/',function(req ,res ,next){
+  var updatedata = {};
+  req.models[req.param.tablename].get(req.body.id,function(err,item) {
+    for (var i in req.body) {
+      item[i] = req.body[i];
+    };
+    item.save(function (err) {
+      if(err)throw err;
+      res.send('save OK!')
+    })
+  })
 })
 
-router.get('/edit/:id',function(req ,res ,next){
+router.get('/edit/:tablename/:id',function(req ,res ,next){
   res.render('edit',{ id: req.params.id})
 })
 
@@ -44,8 +50,9 @@ router.get('/new',function(req ,res ,next){
   })
 })
 
-router.get('/get/:id',function(req ,res ,next){
-  table.getitem(req.params.id,function(item){
+router.get('/get/:tablename/:id',function(req ,res ,next){
+  req.models[req.param.tablename].get(req.params.id,function(err,item){
+    if(err)throw err;
     res.json(item);
   })
 })

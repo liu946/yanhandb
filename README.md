@@ -4,6 +4,10 @@
 - 输入页面 input
 - 字段页面 input/field/:tablename (其中tablename为field文件夹下文件名，无.js)
 
+## view 访问方式
+
+IP:port/input/view/:viewname ```例如 IP:port/input/view/edit```
+view文件放在 ```//view/``` 文件夹下 ``命名 edit.jade ```
 
 ## 类型解析
 

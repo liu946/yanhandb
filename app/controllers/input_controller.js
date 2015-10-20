@@ -39,8 +39,8 @@ router.post('/update/:tablename/',function(req ,res ,next){
   })
 })
 
-router.get('/edit/:tablename/:id',function(req ,res ,next){
-  res.render('edit',{ id: req.params.id})
+router.get('/view/:viewname',function(req ,res ,next){
+  res.render(req.params.viewname)
 })
 
 router.get('/new/:tablename',function(req ,res ,next){

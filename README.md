@@ -42,7 +42,7 @@ input/field/:tablename
 ```
 forend 代表前端数据格式
 
-1. type包含 input select selectmult[ornull] input[ornull] CCS boolean 一共8种类型
+1. type包含 select selectmult[ornull] input[ornull] CCS boolean 一共7种类型
 2. require 字段出现条件，本例中为 LeiXing字段选1时出现主题字段
 3. option 在 select selectmult 出现，为选项，所有出现 “其他”、“有” 的都为可填写字段
 4. CCS为特殊颜色类型，分三个字段，见doc文档

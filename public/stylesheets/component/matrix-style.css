@@ -82,7 +82,6 @@ hr{ border-top-color:#dadada;}
 	overflow: hidden;
 	position: relative;
 	top: 6px;
-	width: 191px;
 	font-size: 20px;
 	font-weight: bold;
 }
@@ -119,7 +118,7 @@ hr{ border-top-color:#dadada;}
 /* Top user navigation */
 #user-nav {
 	position: absolute;
-	right: 285px;
+	right: 50px;
 	/*left:220px;*/
 	top: 0px;
 	z-index: 20;

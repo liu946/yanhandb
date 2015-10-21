@@ -1,6 +1,11 @@
 extends layout
 
 block content
+	link(rel='stylesheet', href='/stylesheets/component/bootstrap.min.css')
+	link(rel='stylesheet', href="/stylesheets/component/bootstrap-responsive.min.css")
+	link(rel='stylesheet', href="/stylesheets/component/matrix-style.css")
+	link(rel='stylesheet', href="/stylesheets/component/matrix-media.css")
+
 	-var a = "id = " + id
 	script!= a
 
@@ -12,28 +17,55 @@ block content
 	#user-nav.navbar.navbar-inverse
 		ul.nav
 			li
-				span.text
-					| 表格：
-				span#editnum.text
-					| 1
+				a(href="/input/view/index")
+					span.text
+						| 表格编号：
+					span#editnum.text
+						| 1
 			li
-				a(href="")
+				a(href="/input/view/index")
 					span.text
 						| 退出
 
 	#sidebar(style="OVERFLOW-Y: auto; OVERFLOW-X:hidden;")
 		ul
 			li.submennu.active
-				a.menu_a(link="")
-					| 控制面板
+				a.menu_a(link="#cunzhen")
+					| 村镇基本信息
 			li.submennu
+				a.menu_a(link="#biaozhi")
+					| 标志性构筑物
+			li.submennu
+				a.menu_a(link="#jiedao")
+					| 街道空间
+			li.submennu
+				a.menu_a(link="#kaikuo")
+					| 开敞空间
+			li.submennu
+				a.menu_a(link="#tingyuanjianzhu")
+					| 庭院与建筑
+		#sidebar-submit
+			.box
+				h3
+					| 提交
 
 	#content
 		#content-header
 			#breadcrumb
 				a.tip-bottom(href="",title="Go to home")
 					| Home
-		block model
+		#content-body
+			#cunzhen(style="display:block")
+				include cunzhen.jade
+			#biaozhi(style="display:none")
+				include biaozhi.jade
+			#jiedao(style="display:none")
+				include jiedao.jade
+			#kaikuo(style="display:none")
+				include kaikuo.jade
+			#tingyuanjianzhu(style="display:none")
+				include tingyuanjianzhu.jade
+
 			
 	script(src="/script/excanvas.min.js")
 	script(src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js")
@@ -43,40 +75,38 @@ block content
 
 	script.
 		//初始化相关元素高度
-	    function init(){
-	        $("body").height($(window).height()-80);
-	        $("#iframe-main").height($(window).height()-90);
-	        $("#sidebar").height($(window).height()-50);
-	    }
+		function init(){
+			$("body").height($(window).height()-80);
+			$("#iframe-main").height($(window).height()-90);
+			$("#sidebar").height($(window).height()-50);
+		}
 
-	    $(function(){
-	        init();
-	        $(window).resize(function(){
-	            init();
-	        });
-	    });
+		$(function(){
+			init();
+			$(window).resize(function(){
+				init();
+			});
+		});
 
-	    // This function is called from the pop-up menus to transfer to
-	    // a different page. Ignore if the value returned is a null string:
-	    function goPage (newURL) {
-	        // if url is empty, skip the menu dividers and reset the menu selection to default
-	        if (newURL != "") {
-	            // if url is "-", it is this page -- reset the menu:
-	            if (newURL == "-" ) {
-	                resetMenu();            
-	            } 
-	            // else, send page to designated URL            
-	            else {  
-	                document.location.href = newURL;
-	            }
-	        }
-	    }
+		// This function is called from the pop-up menus to transfer to
+		// a different page. Ignore if the value returned is a null string:
+		function goPage (newURL) {
+			// if url is empty, skip the menu dividers and reset the menu selection to default
+			if (newURL != "") {
+				// if url is "-", it is this page -- reset the menu:
+				if (newURL == "-" ) {
+					resetMenu();            
+				} 
+			// else, send page to designated URL            
+			else {  
+					document.location.href = newURL;
+				}
+			}
+		}
 
-	    // resets the menu selection upon entry to this page:
-	    function resetMenu() {
-	        document.gomenu.selector.selectedIndex = 2;
-	    }
+		// resets the menu selection upon entry to this page:
+		function resetMenu() {
+			document.gomenu.selector.selectedIndex = 2;
+		}
 
-	    // uniform使用示例：
-	    // $.uniform.update($(this).attr("checked", true));
-		
+

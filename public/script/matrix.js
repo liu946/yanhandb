@@ -2,8 +2,6 @@ $(document).ready(function(){
 	// === Sidebar navigation === //
 
 	$('.menu_a').click(function(e){
-		$("#iframe-main").attr("src", $(this).attr('link'));
-
 		$(".menu_a").parent('li').removeClass('active');
 
 		$(this).parent('li').addClass('active');
@@ -161,10 +159,6 @@ $(document).ready(function(){
 		
 	});
 	
-
-	$('#lightbox').live('click', function() { 
-		$('#lightbox').hide(200);
-	});
 	
 });
 

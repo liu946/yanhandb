@@ -187,7 +187,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                                 size: 20,
                             },
                             forend: {
-                                type: 'select+输入',
+                                type: 'select',
                                 defaultValue: 'null',
                                 option: {
                                     1: '有',
@@ -202,7 +202,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                                 size: 20,
                             },
                             forend: {
-                                type: 'select+输入',
+                                type: 'select',
                                 defaultValue: 'null',
                                 option: {
                                     1: '有',
@@ -217,7 +217,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                                 size: 20,
                             },
                             forend: {
-                                type: 'select+输入',
+                                type: 'select',
                                 defaultValue: 'null',
                                 option: {
                                     1: '有',
@@ -232,7 +232,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                                 size: 20,
                             },
                             forend: {
-                                type: 'select+输入',
+                                type: 'select',
                                 defaultValue: 'null',
                                 option: {
                                     1: '有',

@@ -42,8 +42,9 @@ input/field/:tablename
 ```
 forend 代表前端数据格式
 
-1. type包含select selectmult input CCS
+1. type包含 input select selectmult[ornull] input[ornull] CCS boolean 一共8种类型
 2. require 字段出现条件，本例中为 LeiXing字段选1时出现主题字段
-3. option 在 select selectmult 出现，为选项，所有出现 其他、有 的都为可填写字段
+3. option 在 select selectmult 出现，为选项，所有出现 “其他”、“有” 的都为可填写字段
 4. CCS为特殊颜色类型，分三个字段，见doc文档
-5. selectmultornull 类型为先进行有无选择，选择有之后展开选项，与selectmult相同
+5. selectmultornull 类型为先进行有无选择，选择有之后展开选项，与selectmult相同。inputornull类型同理
+6. boolean类型的，选择 有（返回 true），无（返回false）

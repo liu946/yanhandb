@@ -30,19 +30,19 @@ block content
 	#sidebar(style="OVERFLOW-Y: auto; OVERFLOW-X:hidden;")
 		ul
 			li.submennu.active
-				a.menu_a(link="#cunzhen")
+				a.menu_a(href="#cunzhen")
 					| 村镇基本信息
 			li.submennu
-				a.menu_a(link="#biaozhi")
+				a.menu_a(href="#biaozhi")
 					| 标志性构筑物
 			li.submennu
-				a.menu_a(link="#jiedao")
+				a.menu_a(href="#jiedao")
 					| 街道空间
 			li.submennu
-				a.menu_a(link="#kaikuo")
+				a.menu_a(href="#kaikuo")
 					| 开敞空间
 			li.submennu
-				a.menu_a(link="#tingyuanjianzhu")
+				a.menu_a(href="#tingyuanjianzhu")
 					| 庭院与建筑
 		#sidebar-submit
 			.box
@@ -55,15 +55,15 @@ block content
 				a.tip-bottom(href="",title="Go to home")
 					| Home
 		#content-body
-			#cunzhen(style="display:block")
+			#cunzhen.block.show
 				include cunzhen.jade
-			#biaozhi(style="display:none")
+			#biaozhi.block
 				include biaozhi.jade
-			#jiedao(style="display:none")
+			#jiedao.block
 				include jiedao.jade
-			#kaikuo(style="display:none")
+			#kaikuo.block
 				include kaikuo.jade
-			#tingyuanjianzhu(style="display:none")
+			#tingyuanjianzhu.block
 				include tingyuanjianzhu.jade
 
 			
@@ -108,5 +108,7 @@ block content
 		function resetMenu() {
 			document.gomenu.selector.selectedIndex = 2;
 		}
+
+
 
 

@@ -1,10 +1,15 @@
 $(document).ready(function(){
 	// === Sidebar navigation === //
-
 	$('.menu_a').click(function(e){
+		e.preventDefault();
 		$(".menu_a").parent('li').removeClass('active');
 
 		$(this).parent('li').addClass('active');
+
+		hash = e.currentTarget.hash;		
+		
+		$(".block").removeClass('show');
+		$(hash).addClass('show');
 	});
 	
 	$('.submenu > a').click(function(e)

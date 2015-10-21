@@ -2,17 +2,35 @@
 var Model;
 
 Model = (function() {
-  var buildkeys, getdatabyajax, gethtmlstring;
+  var CCS, buildkeys, ergodicdata, flag, flagstack, getdatabyajax, gethtmlstring, modelstack;
 
-  function Model(url1, target1) {
-    this.url = url1;
+  function Model(url, target1) {
     this.target = target1;
     this.inputnames = [];
-    this.finalhtmlstring;
+    this.finalhtmlstring = '';
     this.submitdata;
-    this.modeldata;
+    this.modeldata = getdatabyajax(url).responseJSON;
     this.dbdata;
   }
+
+  CCS = {
+    color: {
+      'R': 'rgb(255,0,0)',
+      'OR': 'rgb(255,51,0)',
+      'O': 'rgb(255,102,0)',
+      'OY': 'rgb(255,153,0)',
+      'Y': 'rgb(255,255,0)',
+      'YG': 'rgb(153,255,0)',
+      'G': 'rgb(0,255,0)',
+      'BG': 'rgb(0,255,255)',
+      'B': 'rgb(0,0,255)',
+      'BV': 'rgb(102,0,255)',
+      'V': 'rgb(255,0,255)',
+      'VR': 'rgb(255,0,102)'
+    },
+    light: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    pure: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  };
 
   getdatabyajax = function(url) {
     return $.ajax({
@@ -27,42 +45,153 @@ Model = (function() {
   };
 
   buildkeys = function(value, target) {
-    var a, i, len;
-    for (i = 0, len = target.length; i < len; i++) {
-      a = target[i];
+    var a, j, len1;
+    for (j = 0, len1 = target.length; j < len1; j++) {
+      a = target[j];
       if (a === value) {
         return target;
       }
-      target.push(value);
-      return target;
     }
+    target.push(value);
+    return target;
   };
 
   gethtmlstring = function(data, id) {
-    var ref, str, type, value;
+    var i, j, k, l, len1, len2, ref, ref1, ref2, selects, str, str_color, str_end, str_light, str_pure, tmp, type, v, value;
     type = data.type;
-    value = (ref = data.defaultValue === null) != null ? ref : {
-      "": data.defaultValue
-    };
+    value = data.defaultValue;
+    if (value === 'null') {
+      value = "";
+    }
     if (type === 'input') {
-      return str = "<input type='text' id='" + id + "' name='" + id + "' value='" + value + "'/>";
+      str = "<input type='text' id='" + id + "' class='input' name='" + id + "' value='" + value + "'/>";
     } else if (type === 'select') {
-      return str;
+      tmp = "";
+      tmp += "<select name='" + id + "' class='chosen-select select'>";
+      selects = data.option;
+      for (k in selects) {
+        v = selects[k];
+        tmp += "<option value='" + v + "' class='" + id + "_" + k + "'>" + v + "</option>";
+      }
+      str = tmp + "</select>";
+    } else if (type === 'selectmult') {
+      tmp = "";
+      tmp += "<select name='" + id + "' class='chosen-select selectmult' multiple>";
+      selects = data.option;
+      for (k in selects) {
+        v = selects[k];
+        tmp += "<option value='" + v + "' class='" + id + "_" + k + "'>" + v + "</option>";
+      }
+      str = tmp + "</select>";
+    } else if (type === 'CCS') {
+      str_color = "<div class='ccs_color s_show'>颜色<select name='" + id + "_color' class='CCS ccscolor' id='" + id + "_color'>";
+      str_light = "<div class='ccs_light s_show'>亮度<select name='" + id + "_light' class='CCS ccslight' id='" + id + "_light'>";
+      str_pure = "<div class='css_pure s_show'>纯度<select name='" + id + "_pure' class='CCS ccspure' id='" + id + "_pure'>";
+      str_end = "</select></div>";
+      ref = CCS.color;
+      for (k in ref) {
+        v = ref[k];
+        str_color += "<option style='background:" + v + "' value='" + k + "'></option>";
+        str_color += str_end;
+      }
+      ref1 = CCS.light;
+      for (j = 0, len1 = ref1.length; j < len1; j++) {
+        i = ref1[j];
+        str_light += "<option value='" + i + "'>" + i + "</option>";
+        str_light += str_end;
+      }
+      ref2 = CCS.pure;
+      for (l = 0, len2 = ref2.length; l < len2; l++) {
+        i = ref2[l];
+        str_pure += "<option value='" + i + "'>" + i + "</option>";
+        str_pure += str_end;
+      }
+      str = str_color + str_light + str_pure;
+    } else if (type === 'inputornull') {
+      tmp = "";
+      selects = data.option;
+      for (k in selects) {
+        v = selects[k];
+        if (v === "有" || v === '其他') {
+          tmp += "<input type='radio' class='inputornull other' name='" + id + "' value='" + v + "'/>" + v;
+        } else {
+          tmp += "<input type='radio' class='inputornull' name='" + id + "' value='" + v + "'/>" + v;
+        }
+      }
+      str = tmp + ("<input type='text' class='otherdata' id='" + id + "_other'/>");
+    } else if (type === 'selectmultornull') {
+      tmp = "";
+      tmp += "<select name='" + id + "' class='chosen-select selectmultornull' multiple>";
+      selects = data.option;
+      for (k in selects) {
+        v = selects[k];
+        if (v === "有" || v === '其他') {
+          tmp += "<option value='" + v + "' class='" + id + "_" + k + " other'>" + v + "</option>";
+        } else {
+          tmp += "<option value='" + v + "' class='" + id + "_" + k + "'>" + v + "</option>";
+        }
+      }
+      str = tmp + "</select>" + ("<input type='text' class='otherdata' id='" + id + "_other'/>");
+    } else {
+      str = '';
+    }
+    return str;
+  };
+
+  modelstack = new Array();
+
+  flagstack = new Array();
+
+  flag = 0;
+
+  ergodicdata = function(modeldata, inputnames, htmlstring) {
+    var a, i, j, len, len1, str, title;
+    len = modeldata.length;
+    i = 0;
+    for (j = 0, len1 = modeldata.length; j < len1; j++) {
+      a = modeldata[j];
+      console.log(a);
+      if (a.forend === void 0 && a.fields !== void 0) {
+        title = a.namezh;
+        htmlstring += "<div id='" + a.name + "' class='J_content'> <h3>" + title + "</h3></div>";
+        modelstack.push(modeldata);
+        flagstack.push(flag);
+        flag += 1;
+        modeldata = a.fields;
+        ergodicdata(modeldata, inputnames, htmlstring);
+      } else if (a.forend !== void 0 && a.fields === void 0) {
+        title = a.namezh;
+        str = gethtmlstring(a.forend, a.name);
+        inputnames = buildkeys(a.name, inputnames);
+        htmlstring += "<div class='list'> <div class='note'> <h4>" + title + "</h4> </div> <div class='shuru'> " + str + " </div> </div>";
+        delete modeldata[i];
+        i += 1;
+        if (i === len) {
+          modeldata = modelstack.pop();
+          flag = flagstack.pop();
+          delete modeldata[flag];
+          ergodicdata(modeldata, inputnames, htmlstring);
+        }
+      } else {
+        htmlstring += "";
+        i += 1;
+        if (i === len) {
+          modeldata = modelstack.pop();
+        }
+        return {
+          modeldata: modeldata,
+          inputnames: inputnames,
+          htmlstring: htmlstring
+        };
+      }
     }
   };
 
-  Model.prototype.ergodicdata = function() {
-    var str, title;
-    if (type === 'process') {
-      title = data.namezh;
-      return str = "<div id='" + data.name + "' class='J_content'> <h3>" + title + "</h3>";
-    } else if (type === 'forend') {
-      title = data.namezh;
-      return str = "<div class='list'> <div class='note'> <p>" + title + "</p> </div> <div class='input'> " + str + " </div> </div>";
-    }
+  Model.prototype.init = function() {
+    ergodicdata(this.modeldata, this.inputnames, this.finalhtmlstring);
+    console.log(this.modeldata, this.inputnames);
+    return this.target.append(this.finalhtmlstring);
   };
-
-  Model.prototype.init = function() {};
 
   return Model;
 

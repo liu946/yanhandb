@@ -1,4 +1,4 @@
-.container
+.everymodel
 	.main
 		form#J_form(onsubmit='return false;',action='#')
 			.clickoption
@@ -8,4 +8,9 @@
 							| 保存
 					
 script(src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js")
+script(src="/script/model.js")
 script.
+	var url = "/input/field/cunzhen";
+	var target = $('#J_form');
+	var model = new Model(url, target);
+	model.init();

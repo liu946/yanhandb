@@ -148,21 +148,19 @@ module.exports =
 	{
 		namezh:"有无生物质能源利用",
 		backend:{
-			type:"text",
+			type:"boolean",
 		},
 		forend:{
-			type:"select",
-			option:{
-				1:"有",
-				2:"无",
-			}
+			type:"boolean",
+
 		}
 	},
 	{
 		namezh:"生物质能源利用（沼气利用）",
 		require:{
-			name:"",
-			value:1,
+			name:"NYLYYouWuShengWuZhiNenYuanLiYong",
+			namezh:"有无生物质能源利用",
+			value:true,
 		},
 		fields:
 		[

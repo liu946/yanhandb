@@ -219,8 +219,8 @@ module.exports = {
 		{
 			namezh:"外墙保温隔热",
 			require:{
-				name:"",
-				value:"true",
+				name:"JZSNHJRHJWWHJGGRYBWYouWuWaiQiangBaoWenGeRe",
+				value:true,
 			},
 			fields:
 			[
@@ -290,8 +290,9 @@ module.exports = {
 			namezh:"屋顶保温隔热",
 
 			require:{
-				name:"",
-				value:"true",
+				name:"JZSNHJRHJYouWuWuDingBaoWenGeRe",
+				namezh:"有无屋顶保温隔热",
+				value:true,
 			},
 			fields:
 			[
@@ -398,8 +399,8 @@ module.exports = {
 		{
 			namezh:"地面保温隔热",
 			require:{
-				name:"",
-				value:"true",
+				name:"JZSNHJRHJYouWuDiMianBaoWenGeRe",
+				value:true,
 			},
 			fields:
 			[

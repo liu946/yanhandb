@@ -268,9 +268,9 @@ module.exports = {
 	{
 		namezh:"台基",
 		require:{
-			name:"",
+			name:"JZWBTZYouWuTaiJi",
 			namezh:"有无台基",
-			value:1,
+			value:true,
 		},
 		fields:
 		[
@@ -340,9 +340,9 @@ module.exports = {
 	{
 		namezh:"门",
 		require:{
-			name:"",
+			name:"JZWBTZYouWuMen",
 			namezh:"有无门",
-			value:1,
+			value:true,
 		},
 		fields:
 		[
@@ -401,8 +401,8 @@ module.exports = {
 			namezh:"南向",
 			require:{
 				namezh:"窗朝向",
-				name:"",
-				value:""
+				name:"JZWBTZCChuangChaoXiang",
+				value:"1"
 			},
 			fields:
 			[
@@ -459,9 +459,9 @@ module.exports = {
 			{
 				namezh:"可开启部分比例",
 				require:{
-					name:"",
+					name:"JZWBTZCNXYouWuBoLiMuQiang",
 					namezh:"有无玻璃幕墙",
-					value:1,
+					value:true,
 				},
 				backend:{
 					type:'text',
@@ -478,8 +478,8 @@ module.exports = {
 			namezh:"北向",
 			require:{
 				namezh:"窗朝向",
-				name:"",
-				value:""
+				name:"JZWBTZCChuangChaoXiang",
+				value:"2"
 			},
 			fields:
 			[
@@ -537,9 +537,9 @@ module.exports = {
 			{
 				namezh:"可开启部分比例",
 				require:{
-					name:"",
+					name:"JZWBTZCBXYouWuBoLiMuQiang",
 					namezh:"有无玻璃幕墙",
-					value:1,
+					value:true,
 				},
 				backend:{
 					type:'text',
@@ -556,8 +556,8 @@ module.exports = {
 			namezh:"东西向",
 			require:{
 				namezh:"窗朝向",
-				name:"",
-				value:""
+				name:"JZWBTZCChuangChaoXiang",
+				value:"3"
 			},
 			fields:
 			[
@@ -615,9 +615,9 @@ module.exports = {
 			{
 				namezh:"可开启部分比例",
 				require:{
-					name:"",
+					name:"JZWBTZCDXXYouWuBoLiMuQiang",
 					namezh:"有无玻璃幕墙",
-					value:1,
+					value:true,
 				},
 				backend:{
 					type:'text',
@@ -646,7 +646,7 @@ module.exports = {
 	{
 		namezh:"牌匾",
 		require:{
-			name:"",
+			name:"JZJBXXJianZhuXingZhi",
 			namezh:"有无牌匾",
 			value:1,
 		},

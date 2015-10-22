@@ -1,0 +1,16 @@
+.container
+	.main
+		form#T_form(onsubmit='return false;',action='#')
+			.clickoption
+				.content
+					.save.box
+						p
+							| 保存
+					
+script(src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js")
+script(src="/script/model.js")
+script.
+	var url = "/input/field/tingyuanyujianzhu";
+	var target = 'T_form';
+	var model = new Model(url, target, id);
+	model.init();

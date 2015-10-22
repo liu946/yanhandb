@@ -52,39 +52,42 @@ body{
 	.show{
 		display: block;
 	}
-	.clickoption{
-		position: fixed;
-		height: 100px;
-		width: 200px;
-		left: 80%;
-		top: 500px;
-		text-align: center;
-		.content{
-			float: right;
+	.container{
+		width: 80%;
+		margin: 0 auto;
+		.clickoption{
+			position: fixed;
+			height: 100px;
 			width: 200px;
-			.box{
-				width: 60px;
-				height: 40px;
-				display: inline-block;
-				text-align: center;
-				margin: 10px;
-				.transition(all .1s ease-in-out);
-				&:active{
-					.transform(scale(.8));
+			left: 80%;
+			top: 500px;
+			text-align: center;
+			.content{
+				float: right;
+				width: 200px;
+				.box{
+					width: 60px;
+					height: 40px;
+					display: inline-block;
+					text-align: center;
+					margin: 10px;
+					.transition(all .1s ease-in-out);
+					&:active{
+						.transform(scale(.8));
+					}
+					p{
+						color: #fff;
+						line-height: 40px;
+					}
 				}
-				p{
-					color: #fff;
-					line-height: 40px;
+				.save{
+					background: #777;
 				}
-			}
-			.save{
-				background: #777;
 			}
 		}
 	}
 
-	#J_form{
-		.J_content{}
+	form{
 		.list{
 			width: 100%;
 			height: 70px;
@@ -92,7 +95,7 @@ body{
 			padding: 0;
 			float: left;
 			.note{
-				width: 25%;
+				width: 30%;
 				float: left;
 				font-size: 13px;
 			}
@@ -101,16 +104,21 @@ body{
 				float: left;
 				input{
 					height: 20px;
-					width: 40%;
+					width: 30%;
 					font-size: 13px;
 					&[type = 'radio']{
 						width: 20px;
 						margin: 5px 5px;
 						padding: 5px;
 					}
+					&[type = 'checkbox']{
+						width: 20px;
+						margin: 5px 5px;
+						padding: 5px;
+					}
 				}
 				select{
-					width: 40%;
+					width: 30%;
 				}
 				.s_show{
 					width: 30%;
@@ -156,7 +164,7 @@ body{
 			padding: 75px 0;
 			text-align: center;
 			h1{
-
+				color: #fff;
 			}
 		}
 	}

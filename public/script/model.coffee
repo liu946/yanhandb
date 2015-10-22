@@ -194,11 +194,11 @@ class Model
 	builddbvalue = (type,value='',idp='') ->
 		if type is ('input' or 'boolean' or 'select')
 			if value isnt ("" or undefined)
-				dbvalue = "#{type}_#{value}"
+				dbvalue = "#{value}"
 
 		else if type is 'selectmult'
 			if value instanceof 'Array'
-				dbvalue = "#{type}_"
+				dbvalue = ""
 				for i in value
 					dbvalue += "#{i}&"
 
@@ -211,19 +211,19 @@ class Model
 
 		else if type is 'selectmultornull'
 			target = $("input##{idp}[type=checkbox]")
-			dbvalue = "#{type}_"
+			dbvalue = ""
 			if target.prop('checked')
 				value = $("select[name=##{idp}_other]").val()
 				if value instanceof 'Array'
 					for i in value
 						dbvalue += "#{i}&"
 				else
-					dbvalue = "#{type}_null"
+					dbvalue = "null"
 			else
-				dbvalue = "#{type}_null"
+				dbvalue = "null"
 
 		else if type is 'inputornull'
-			dbvalue = "#{type}_"
+			dbvalue = ""
 			if value is ('其他' or '有')
 				othervalue = $("##{idp}_other").val()
 				if othervalue is ("" or null)
@@ -265,56 +265,54 @@ class Model
 		return data
 
 	# 验证数据的合法性
-	checkdata = (datatype,value,key) ->
-		domtype = $("##{key}").data 'type'
-		if domtype != datatype
-			return false
-		else if type is 'input'
-				$("##{key}").val(value)
-				return true
-			else if type is 'select'
-				$("##{key}").val(value)
-				return true
-			else if type is 'selectmult'
-				if value isnt ""
-					values = value.split("&")
-					$("##{key}").val(values)
-				else
-					$("##{key}").val("")
-				return true
-			else if type is 'CCS'
+	checkdata = (value,key) ->
+		type = $("##{key}").data 'type'
+		if type is 'input'
+			$("##{key}").val(value)
+			return true
+		else if type is 'select'
+			$("##{key}").val(value)
+			return true
+		else if type is 'selectmult'
+			if value isnt ""
 				values = value.split("&")
-				$("##{key}_color").val values[0]
-				$("##{key}_light").val values[1]
-				$("##{key}_pure").val values[2]
-				return true
-			else if type is 'inputornull'
-				if value isnt ""
-					match = /\-/g
-					if match.test value
-						values = value.split "-"
-						$("##{key}").val values[0]
-						$("##{key}_other").val values[1]
-						$("##{key}_other").css 'display','inline-block'
-					else
-						$("##{key}").val value
-				else
-					$("##{key}").val value
-				return true
-			else if type is 'selectmultornull'
-				if value isnt "null"
-					values = value.split "&"
-					$("##{key}").prop 'checked',true
-					$("##{key}_other").val values
+				$("##{key}").val(values)
+			else
+				$("##{key}").val("")
+			return true
+		else if type is 'CCS'
+			values = value.split("&")
+			$("##{key}_color").val values[0]
+			$("##{key}_light").val values[1]
+			$("##{key}_pure").val values[2]
+			return true
+		else if type is 'inputornull'
+			if value isnt ""
+				match = /\-/g
+				if match.test value
+					values = value.split "-"
+					$("##{key}").val values[0]
+					$("##{key}_other").val values[1]
 					$("##{key}_other").css 'display','inline-block'
 				else
-					$("##{key}").prop 'checked',false
-				return true
-			else if type is 'boolean'
-				$("##{key} input[value=#{value}]").prop 'checked','true'
-				return true
+					$("##{key}").val value
 			else
-				return false
+				$("##{key}").val value
+			return true
+		else if type is 'selectmultornull'
+			if value isnt "null"
+				values = value.split "&"
+				$("##{key}").prop 'checked',true
+				$("##{key}_other").val values
+				$("##{key}_other").css 'display','inline-block'
+			else
+				$("##{key}").prop 'checked',false
+			return true
+		else if type is 'boolean'
+			$("##{key} input[value=#{value}]").prop 'checked','true'
+			return true
+		else
+			return false
 	# 初始化
 	init: () ->
 		len = @modeldata.length
@@ -332,12 +330,13 @@ class Model
 			if k == 'id'
 				continue
 
-			if v isnt null or v isnt ""
-				result = v.split("_")
-				datatype = result[0]
-				value = result[1]
+			if v isnt null
+				value = v
+			else 
+				value = ""
 
-			result = checkdata datatype,value,k
+			result = checkdata value,k
+
 			if !result
 				console.log '不匹配'
 

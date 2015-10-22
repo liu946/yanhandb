@@ -48,3 +48,41 @@ forend 代表前端数据格式
 4. CCS为特殊颜色类型，分三个字段，见doc文档
 5. selectmultornull 类型为先进行有无选择，选择有之后展开选项，与selectmult相同。inputornull类型同理
 6. boolean类型的，选择 有（返回 true），无（返回false）
+
+## 访问方式接口
+
+##### 注
+其中 :tablename 可以是 以下5项中的一个，其中村镇（cunzhen）为父表，其他表字段hasone村镇。
+
+```
+biaozhixinggouzhuwu
+cunzhen
+jiedaokongjian      
+kaichangkongjian     
+tingyuanyujianzhu
+```
+
+- 测试（获得OK)
+
+```input/field/:tablename```
+
+-  获得某表格全部数据的部分要显示的属性。 get -> json
+
+```input/get/:tablename```
+
+- 获得某表格字段数据 get -> json
+
+```input/field/:tablename```
+
+- 建立一个新数据 get -> 建立完毕自动跳转到???(没看你写的逻辑，这个再定)
+
+```input/new/:tablename```
+
+- 更新一条数据 post -> 'save OK!'
+
+```input/update/:tablename```
+post数据id字段为存储依据
+
+- 获得一条数据 get -> json
+
+```input/get/:tablename/:id```

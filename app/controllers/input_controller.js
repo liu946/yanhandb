@@ -1,7 +1,7 @@
 var express = require('express');
 
-var fs = require('fs')
-var path = require('path')
+var fs = require('fs');
+var path = require('path');
 
 var router = express.Router();
 
@@ -25,7 +25,7 @@ router.get('/field/:tablename',function (req, res, next) {
       res.send("Don't find table '"+req.params.tablename+"'")
     }
   })
-})
+});
 
 router.post('/update/:tablename/',function(req ,res ,next){
   req.models[req.param.tablename].get(req.body.id,function(err,item) {
@@ -37,23 +37,24 @@ router.post('/update/:tablename/',function(req ,res ,next){
       res.send('save OK!')
     })
   })
-})
+});
 
 router.get('/view/:viewname',function(req ,res ,next){
   res.render(req.params.viewname)
-})
+});
 
 router.get('/new/:tablename',function(req ,res ,next){
   req.models[req.param.tablename].create([{}],function (err,items) {
-    res.redirect('edit/'+req.param.tablename+"/"+items['id']);
-  })
-})
+    // todo
+    res.redirect('view/edit');//'+req.param.tablename+"/"+items['id']);
+  });
+});
 
 router.get('/get/:tablename/:id',function(req ,res ,next){
   req.models[req.param.tablename].get(req.params.id,function(err,item){
     if(err)throw err;
     res.json(item);
   })
-})
+});
 module.exports = router;
 

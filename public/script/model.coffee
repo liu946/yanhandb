@@ -3,7 +3,6 @@
 class Model
 	constructor: (url,@target,@id) ->
 		@inputnames = []								#每一个输入框的键值
-		@finalhtmlstring 							#最后注入的html文件字符串
 		@modeldata = getdatabyajax(url).responseJSON 	#获取的表单数据
 
 	# model类中的常量
@@ -25,7 +24,8 @@ class Model
 			light: [0,1,2,3,4,5,6,7,8,9,10],
 			pure: [0,1,2,3,4,5,6,7,8,9,10]
 		}
-	htmlstring = '' 
+	htmlstring = ''
+	reqcontainer = {}
 	
 	# 静态方法
 	# ajax请求获取数据
@@ -49,7 +49,7 @@ class Model
 	gethtmlstring = (data,id) ->
 		type = data.type
 		value = data.defaultValue
-		if value == 'null'
+		if value is 'null' or value is undefined
 			value = ""
 
 		if type is 'input' 
@@ -57,7 +57,7 @@ class Model
 
 		else if type is 'select' 
 			tmp = ""
-			tmp += "<select name='#{id}' data-type='select' class='chosen-select'>"
+			tmp += "<select name='#{id}' id='#{id}' data-type='select' class='chosen-select'>"
 			selects = data.option
 			for k, v of selects
 				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
@@ -65,7 +65,7 @@ class Model
 
 		else if type is 'selectmult' 
 			tmp = ""
-			tmp += "<select name='#{id}' data-type='selectmult' class='chosen-select' multiple>"
+			tmp += "<select name='#{id}' id='#{id}' data-type='selectmult' class='chosen-select' multiple>"
 			selects = data.option
 			for k, v of selects
 				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
@@ -88,11 +88,11 @@ class Model
 				str_pure += "<option value='#{i}'>#{i}</option>"
 			str_pure += str_end
 
-			str = str_color + str_light + str_pure
+			str = "<div id='#{id}' data-type='CCS'>" + str_color + str_light + str_pure + "</div>"
 
 		else if type is 'inputornull'
 			tmp = ""
-			tmp += "<select name='#{id}' data-type='inputornull' class='chosen-select'>"
+			tmp += "<select name='#{id}' id='#{id}' data-type='inputornull' class='chosen-select inputornull'>"
 			selects = data.option
 			for k, v of selects
 				if v is "有" || v is '其他'
@@ -102,15 +102,15 @@ class Model
 			str = tmp + "<input type='text' class='otherdata' id='#{id}_other'/>"
 
 		else if type is 'selectmultornull' 
-			tmp = "<input id='#{id}' name='#{id}' type='checkbox'>有<select name='#{id}_other' class='chosen-select otherdata' multiple>"
+			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<select name='#{id}_other' class='chosen-select otherdata' multiple>"
 			selects = data.option
 			for k, v of selects
 				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
 			str = tmp + "</select>"
 
 		else if type is 'boolean'
-			str = "<input type='radio' class='inputornull' name='#{id}' value='true'/>是
-				<input type='radio' class='inputornull' name='#{id}' value='false'/>否"
+			str = "<div id='#{id}' data-type='boolean' ><input type='radio' name='#{id}' value='true'/>是
+				<input type='radio' name='#{id}' value='false'/>否</div>"
 
 		else
 			str = ''
@@ -126,9 +126,20 @@ class Model
 			str = gethtmlstring target.forend,target.name
 			inputnames = buildkeys target.name,inputnames
 
-			htmlstring += "<div class='list'>
+			if target.require isnt undefined
+				mend = "style='display:none'"
+				storeobj = reqcontainer["#{target.require.name}"]
+				if storeobj is undefined
+					storeobj = {}
+
+				storeobj["#{target.name}"] = "#{target.require.value}"
+				reqcontainer["#{target.require.name}"] = storeobj
+
+			else
+				mend = ""
+			htmlstring += "<div class='list' #{mend}>
 							<div class='note'>
-								<h4>#{title}</h4>
+								<h5>#{title}</h5>
 							</div>
 							<div class='shuru'>
 								#{str}
@@ -181,18 +192,15 @@ class Model
 	# 判断值类型与存储方式的工具
 	# 检查传入值的正确性
 	builddbvalue = (type,value='',idp='') ->
-		flag = 0 # 判断是否满足提交条件
 		if type is ('input' or 'boolean' or 'select')
 			if value isnt ("" or undefined)
 				dbvalue = "#{type}_#{value}"
-				flag = 1
 
 		else if type is 'selectmult'
 			if value instanceof 'Array'
 				dbvalue = "#{type}_"
 				for i in value
 					dbvalue += "#{i}&"
-				flag = 1
 
 		else if type is 'CCS'
 			dbvalue = "CCS_"
@@ -200,7 +208,6 @@ class Model
 			light = $("select[name=#{i}_light]").val() 
 			pure =  $("select[name=#{i}_pure]").val()
 			dbvalue += color + "&" + light + "&" + pure
-			flag = 1
 
 		else if type is 'selectmultornull'
 			target = $("input##{idp}[type=checkbox]")
@@ -214,7 +221,6 @@ class Model
 					dbvalue = "#{type}_null"
 			else
 				dbvalue = "#{type}_null"
-			flag = 1
 
 		else if type is 'inputornull'
 			dbvalue = "#{type}_"
@@ -224,15 +230,10 @@ class Model
 					dbvalue += "#{value}-"
 				else
 					dbvalue += "#{value}-othervalue"
-				flag = 1
 			else if value isnt ("" or undefined)
 				dbvalue += "#{value}"
-				flag = 1
 
-		return {
-			dbvalue: dbvalue,
-			flag: flag
-		}
+		return dbvalue
 
 	# 获取表单中目前的所有值情况
 	getformvalue = (form,inputnames,editid) ->
@@ -259,34 +260,99 @@ class Model
 				result = builddbvalue 'input',target.val()
 
 			
-			data[i] = result.dbvalue
-			flag.push result.flag
+			data[i] = result
+			
+		return data
 
-		jundge = true
-		for f in flag
-			if f is 0
-				jundge = false
-				break;
-		
-		return {
-			data : data
-			jundge : jundge
-		}
-
+	# 验证数据的合法性
+	checkdata = (datatype,value,key) ->
+		domtype = $("##{key}").data 'type'
+		if domtype != datatype
+			return false
+		else if type is 'input'
+				$("##{key}").val(value)
+				return true
+			else if type is 'select'
+				$("##{key}").val(value)
+				return true
+			else if type is 'selectmult'
+				if value isnt ""
+					values = value.split("&")
+					$("##{key}").val(values)
+				else
+					$("##{key}").val("")
+				return true
+			else if type is 'CCS'
+				values = value.split("&")
+				$("##{key}_color").val values[0]
+				$("##{key}_light").val values[1]
+				$("##{key}_pure").val values[2]
+				return true
+			else if type is 'inputornull'
+				if value isnt ""
+					match = /\-/g
+					if match.test value
+						values = value.split "-"
+						$("##{key}").val values[0]
+						$("##{key}_other").val values[1]
+						$("##{key}_other").css 'display','inline-block'
+					else
+						$("##{key}").val value
+				else
+					$("##{key}").val value
+				return true
+			else if type is 'selectmultornull'
+				if value isnt "null"
+					values = value.split "&"
+					$("##{key}").prop 'checked',true
+					$("##{key}_other").val values
+					$("##{key}_other").css 'display','inline-block'
+				else
+					$("##{key}").prop 'checked',false
+				return true
+			else if type is 'boolean'
+				$("##{key} input[value=#{value}]").prop 'checked','true'
+				return true
+			else
+				return false
 	# 初始化
 	init: () ->
 		len = @modeldata.length
 		for i in [0...len] by 1
 			ergodicdata @modeldata,i,@inputnames,0
 
-		@finalhtmlstring = htmlstring
-		console.log @modeldata,@inputnames
-		$("##{@target}").append @finalhtmlstring
+		finalhtmlstring = htmlstring
+		console.log reqcontainer
+		$("##{@target}").append finalhtmlstring
 
 	# 获取数据库数据
-	getdbdata: () ->
+	getdbdata: (url) ->
+		dbdata = getdatabyajax(url).responseJSON
+		for k, v of dbdata
+			if k == 'id'
+				continue
 
+			if v isnt null or v isnt ""
+				result = v.split("_")
+				datatype = result[0]
+				value = result[1]
 
+			result = checkdata datatype,value,k
+			if !result
+				console.log '不匹配'
+
+		# 动态加载chosen.jquery.js
+		jQuery.getScript("/script/chosen.jquery.js")
+			.done () ->
+				$('.chosen-select').chosen()
+				# "ornull"点击输入数据，反选取消
+				for dom in $(".inputornull")
+					judgeother dom
+				for dom in $(".selectmultornull")
+					judgeother dom
+				
+			.fail () ->
+				alert "动态脚本加载失败"
 
 	savedata: (clickbtn) ->
 		$("##{clickbtn}").on 'click', () ->
@@ -296,6 +362,8 @@ class Model
 				alert '保存成功'
 			
 			return result.jundge
+
+
 
 
 

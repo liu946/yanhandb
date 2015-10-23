@@ -15,6 +15,6 @@ module.exports = function (orm, db) {
                 }
             }
         });
-        Comment.hasOne("chenzhen", db.models['cunzhen']);
+        Comment.hasOne("cunzhen", db.models['cunzhen']);
     })
 };

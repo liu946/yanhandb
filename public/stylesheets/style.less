@@ -15,6 +15,9 @@ body{
 
 // edit页面
 #sidebar{
+	.finish{
+		background: #0789c3
+	}
 	#sidebar-submit{
 		width: 100%;
 		height: 50px;
@@ -150,91 +153,74 @@ body{
 }
 
 // index页面
-.everymodel{
+.list-body{
 	width: 100%;
-	height: auto;
-	.header{
-		width: 100%;
-		height: 200px;
-		background: #666;
-		.content{
-			width: 1000px;
-			height: 50px;
-			margin: 0 auto;
-			padding: 75px 0;
-			text-align: center;
-			h1{
-				color: #fff;
-			}
+	height: 500px;
+	overflow-y: scroll;
+	#addform{
+		width: 100px;
+		height: 100px;
+		margin: 50px auto;
+		background: #27a9e3;
+		.transition(all .1s ease-in-out);
+		&:active{
+			.transform(scale(.8));
+		}
+		.icono-plus{
+			margin: 35px;
 		}
 	}
-	.main{
+	#formlist{
 		width: 80%;
-		margin: 0 auto;
-	}
-}
-#addform{
-	width: 100px;
-	height: 100px;
-	margin: 50px auto;
-	background: #27a9e3;
-	.transition(all .1s ease-in-out);
-	&:active{
-		.transform(scale(.8));
-	}
-	.icono-plus{
-		margin: 35px;
-	}
-}
-#formlist{
-	margin: 100px auto;
-	.contentlist{
-		width: 100%;
-		border: 1px solid #ddd;
-		.container{
+		margin: 100px auto;
+		.contentlist{
 			width: 100%;
-			height: 50px;
-			.id{
-				width: 10%;
-				height: 100%;
-				margin: 0;
-				text-align: center;
-				float: left;
-			}
-			.title{
-				width: 70%;
-				height: 100%;
-				margin: 0;
-				padding-left: 30px;
-				text-align: left;
-				float: left;
-			}
-			.exchange{
-				width: 10%;
-				height: 100%;
-				margin: 0;
-				float: left;
-				a{
-					width: 60px;
-					height: 30px;
-					margin: 5px;
-					padding-top: 10px;
-					font-size: 16px;
-					background: #555;
+			border: 1px solid #ddd;
+			.container{
+				width: 100%;
+				height: 50px;
+				.id{
+					width: 10%;
+					height: 100%;
+					margin: 0;
 					text-align: center;
-					display: inline-block;
-					text-decoration: none;
-					color: #fff;
-					.transition(all .1s ease-in-out);
-					&:active{
+					float: left;
+				}
+				.title{
+					width: 70%;
+					height: 100%;
+					margin: 0;
+					padding-left: 30px;
+					text-align: left;
+					float: left;
+				}
+				.exchange{
+					width: 10%;
+					height: 100%;
+					margin: 0;
+					float: left;
+					a{
+						width: 60px;
+						height: 30px;
+						margin: 5px;
+						padding-top: 10px;
+						font-size: 16px;
+						background: #555;
+						text-align: center;
+						display: inline-block;
+						text-decoration: none;
 						color: #fff;
-						.transform(scale(.5))
-					}
-					&:hover{
-						color: #fff;
-					}
-					&:link{
-						color: #fff;
+						.transition(all .1s ease-in-out);
+						&:active{
+							color: #fff;
+							.transform(scale(.5))
+						}
+						&:hover{
+							color: #fff;
+						}
+						&:link{
+							color: #fff;
+						}
 					}
 				}
 			}

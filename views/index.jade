@@ -1,17 +1,84 @@
 extends layout
 
 block content
-	.everymodel
-		.header
-			.content
-				h1
-					| 严寒地区村镇绿色建筑体系发展目标基础与应用数据录入系统
-		
-		#addform
-			.icono-plus
+	link(rel='stylesheet', href='/stylesheets/component/bootstrap.min.css')
+	link(rel='stylesheet', href="/stylesheets/component/bootstrap-responsive.min.css")
+	link(rel='stylesheet', href="/stylesheets/component/matrix-style.css")
+	link(rel='stylesheet', href="/stylesheets/component/matrix-media.css")
 
-		.main#formlist
-			.contentlist
+	#header
+		h1
+			a(href="")
+				| 严寒地区村镇绿色建筑体系发展目标基础与应用调查问卷
 
+	#sidebar(style="OVERFLOW-Y: auto; OVERFLOW-X:hidden;")
+		ul
+			li.submennu.active
+				a.menu_a(href="/input/view/index")
+					| 村镇基本信息
+			li.submennu
+				a.menu_a(href="/input/view/listbiaozhi")
+					| 标志性构筑物
+			li.submennu
+				a.menu_a(href="/input/view/listjiedao")
+					| 街道空间
+			li.submennu
+				a.menu_a(href="/input/view/listkaikuo")
+					| 开敞空间
+			li.submennu
+				a.menu_a(href="/input/view/listtingyuanjianzhu")
+					| 庭院与建筑
+
+	#content
+		#content-header
+			#breadcrumb
+				a.tip-bottom(href="#")
+					| 村镇基本信息
+		.list-body
+			#addform
+				.icono-plus
+			.main#formlist
+				.contentlist
+	script(src="/script/excanvas.min.js")
 	script(src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js")
+	script(src="/script/jquery.ui.custom.js")
+	script(src="/script/bootstrap.min.js")
+	script(src="/script/matrix.js")
 	script(src="/script/index.js")
+	script.
+		list = new List('cunzhen');
+		list.init();
+		$("#addform").on('click',function() {
+			list.add();
+		});
+		//初始化相关元素高度
+		function init(){
+			$("body").height($(window).height()-80);
+			$("#iframe-main").height($(window).height()-90);
+			$("#sidebar").height($(window).height()-50);
+		}
+		$(function(){
+			init();
+			$(window).resize(function(){
+				init();
+			});
+		});
+		// This function is called from the pop-up menus to transfer to
+		// a different page. Ignore if the value returned is a null string:
+		function goPage (newURL) {
+			// if url is empty, skip the menu dividers and reset the menu selection to default
+			if (newURL != "") {
+				// if url is "-", it is this page -- reset the menu:
+				if (newURL == "-" ) {
+					resetMenu();            
+				} 
+			// else, send page to designated URL            
+			else {  
+					document.location.href = newURL;
+				}
+			}
+		}
+		// resets the menu selection upon entry to this page:
+		function resetMenu() {
+			document.gomenu.selector.selectedIndex = 2;
+		}

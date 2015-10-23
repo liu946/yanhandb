@@ -1,9 +1,8 @@
 # 将表格数据渲染模型
 
 class Model
-	constructor: (url,@target,@id) ->
+	constructor: (@tablename,@target,@editid) ->
 		@inputnames = []								#每一个输入框的键值
-		@modeldata = getdatabyajax(url).responseJSON 	#获取的表单数据
 
 	# model类中的常量
 	CCS = {
@@ -26,12 +25,25 @@ class Model
 		}
 	htmlstring = ''
 	reqcontainer = {}
+	jundgerequire = (target) ->
+		if target.require isnt undefined
+			mend = "style='display:none'"
+			storeobj = reqcontainer["#{target.require.name}"]
+			if storeobj is undefined
+				storeobj = {}
+
+			storeobj["#{target.name}"] = "#{target.require.value}"
+			reqcontainer["#{target.require.name}"] = storeobj
+
+		else
+			mend = ""
+		return mend
 	
 	# 静态方法
 	# ajax请求获取数据
 	getdatabyajax = (url) ->
 		$.ajax
-			url: @url,
+			url: url,
 			dataType: 'json',
 			async: false
 		.done (data) ->
@@ -99,10 +111,10 @@ class Model
 					tmp += "<option value='#{v}' class='#{id}_#{k} other'>#{v}</option>"
 				else
 					tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
-			str = tmp + "<input type='text' class='otherdata' id='#{id}_other'/>"
+			str = tmp + "<input type='text' class='otherdata #{id}_other' />"
 
 		else if type is 'selectmultornull' 
-			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<select name='#{id}_other' class='chosen-select otherdata' multiple>"
+			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<select class='chosen-select otherdata #{id}_other' multiple>"
 			selects = data.option
 			for k, v of selects
 				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
@@ -119,24 +131,14 @@ class Model
 
 	# 遍历表单类型渲染数据
 	# 遍历n叉树
-	ergodicdata = (modeldata,position,inputnames,flag) ->
+	ergodicdata = (modeldata,position,inputnames) ->
 		target = modeldata[position]
 		if target.forend isnt undefined && target.fields is undefined
 			title = target.namezh
 			str = gethtmlstring target.forend,target.name
 			inputnames = buildkeys target.name,inputnames
 
-			if target.require isnt undefined
-				mend = "style='display:none'"
-				storeobj = reqcontainer["#{target.require.name}"]
-				if storeobj is undefined
-					storeobj = {}
-
-				storeobj["#{target.name}"] = "#{target.require.value}"
-				reqcontainer["#{target.require.name}"] = storeobj
-
-			else
-				mend = ""
+			mend = jundgerequire target
 			htmlstring += "<div class='list' #{mend}>
 							<div class='note'>
 								<h5>#{title}</h5>
@@ -149,29 +151,61 @@ class Model
 		else
 			len = target.fields.length
 			for i in [0...len] by 1
-				if flag is 0
+				if i == 0
 					title = target.namezh
-					htmlstring += "<div id='#{target.name}' class='J_content'>
-								<h3>#{title}</h3></div><div class='clear'></div><hr />"
-					flag = 1
+					mend = jundgerequire target
 
-				ergodicdata target.fields,i,inputnames,flag
+					htmlstring += "<div id='#{target.name}' #{mend}>
+								<h3>#{title}</h3>"
+
+				ergodicdata target.fields,i,inputnames
+				if i == len-1
+					htmlstring += "</div><div class='clear'></div><hr />"
+				
 				
 	# 判断选择框中需要手动输入类型的情况
 	judgeother = (point) ->
 		id = point.id
 		type = point.name
 		check = point.type
-		input = $("##{type}_other")
+		# 初始化一遍
+		flag = 0
+		if check is 'checkbox'
+			id = $(".#{type}_other").attr('id')
+			input = $("##{id}_chzn")
+			if $(point).prop('checked')
+				flag = 1
+			else
+				flag = 0
+		else
+			input = $(".#{type}_other")
+			value = $(point).val()
+			if value != null
+				if typeof value is 'string'
+					if value == "其他" || value == "有"
+						flag = 1
+				else if typeof value is 'object'
+					for t in $(point).val()
+						if t == "其他" || t == "有"
+							flag = 1
+				else
+					flag = 0
+		if flag
+			input.css 'display','inline-block'
+		else
+			input.css 'display','none'
 
 		$(point).on "change",() ->
 			flag = 0
 			if check is 'checkbox'
+				id = $(".#{type}_other").attr('id')
+				input = $("##{id}_chzn")
 				if $(point).prop('checked')
 					flag = 1
 				else
 					flag = 0
 			else
+				input = $(".#{type}_other")
 				value = $(point).val()
 				if value != null
 					if typeof value is 'string'
@@ -238,7 +272,6 @@ class Model
 	# 获取表单中目前的所有值情况
 	getformvalue = (form,inputnames,editid) ->
 		data = {"id": editid}
-		flag = [] # 标注哪一位出现输入不完整
 		for i in inputnames
 			target = $("##{form} input##{i}[type=text]") #input
 			if target.length < 1
@@ -313,18 +346,10 @@ class Model
 			return true
 		else
 			return false
-	# 初始化
-	init: () ->
-		len = @modeldata.length
-		for i in [0...len] by 1
-			ergodicdata @modeldata,i,@inputnames,0
-
-		finalhtmlstring = htmlstring
-		console.log reqcontainer
-		$("##{@target}").append finalhtmlstring
 
 	# 获取数据库数据
-	getdbdata: (url) ->
+	getdbdata = (tablename,id) ->
+		url = "/input/get/#{tablename}/#{id}"
 		dbdata = getdatabyajax(url).responseJSON
 		for k, v of dbdata
 			if k == 'id'
@@ -344,6 +369,12 @@ class Model
 		jQuery.getScript("/script/chosen.jquery.js")
 			.done () ->
 				$('.chosen-select').chosen()
+				herd = $(".selectmultornull")
+				for i in herd
+					id = $(i).attr('id')
+					_id = $(".#{id}_other").attr('id')
+					$("##{_id}_chzn").css "display","none"
+
 				# "ornull"点击输入数据，反选取消
 				for dom in $(".inputornull")
 					judgeother dom
@@ -353,14 +384,90 @@ class Model
 			.fail () ->
 				alert "动态脚本加载失败"
 
-	savedata: (clickbtn) ->
-		$("##{clickbtn}").on 'click', () ->
-			result = getformvalue @target,@inputnames
+	# require的自定义事件
+	reqevent = (index,condition,target) ->
+		datatype = $("##{index}").data 'type'
+		if datatype is 'boolean'
+			obj = $("##{index} input[value=#{condition}]")
 
-			$.post '/input/update', result.data, (data) ->
-				alert '保存成功'
+			if obj.prop 'checked'
+				$("##{target}").css 'display','inline-block'
+			else
+				$("##{target}").css 'display','none'
+
+			obj.on 'click',() ->
+				if $(this).prop 'checked'
+					$("##{target}").css 'display','inline-block'
+				else
+					$("##{target}").css 'display','none'
+
+		else if datatype is 'select'
+			obj = $("##{index}")
+
+			if obj.val() is condition
+				$("##{target}").css 'display','inline-block'
+			else
+				$("##{target}").css 'display','none'
+
+			obj.on "change",() ->
+				if $(this).val() is condition
+					$("##{target}").css 'display','inline-block'
+				else
+					$("##{target}").css 'display','none'
+
+		else if datatype is 'selectmult'
+			obj = $("##{index}")
+			value = obj.val()
+			flag = 0
+			for i in obj.val()
+				if i = condition
+					flag = 1
+					break
+			if flag
+				$("##{target}").css 'display','inline-block'
+			else
+				$("##{target}").css 'display','none'
+
+			obj.on "change",() ->
+				flag = 0
+				for i in obj.val()
+					if i = condition
+						flag = 1
+						break
+				if flag
+					$("##{target}").css 'display','inline-block'
+				else
+					$("##{target}").css 'display','none'
+
+	# 初始化
+	init: () ->
+		modeldata = getdatabyajax("/input/field/#{@tablename}").responseJSON
+		len = modeldata.length
+		for i in [0...len] by 1
+			ergodicdata modeldata,i,@inputnames
+		finalhtmlstring = htmlstring
+		console.log reqcontainer
+		$("##{@target}").append finalhtmlstring
+
+		getdbdata @tablename,@editid
+
+		# 遍历reqcontainer,对每一对进行事件的绑定
+		for k, v of reqcontainer
+			index = k
+			for a, b of v
+				condition = b
+				target = a
+				reqevent index,condition,target
+
+	savedata: () ->
+		result = getformvalue @target,@inputnames,@editid
+
+		$.post "/input/update/#{@tablename}", result, (data) ->
+			alert '保存成功'
+			getdbdata @tablename,@editid
+				
 			
-			return result.jundge
+			
 
 
 

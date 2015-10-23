@@ -2,13 +2,13 @@
 var Model;
 
 Model = (function() {
-  var CCS, builddbvalue, buildkeys, checkdata, ergodicdata, getdatabyajax, getformvalue, gethtmlstring, htmlstring, judgeother, reqcontainer;
+  var CCS, builddbvalue, buildkeys, checkdata, ergodicdata, getdatabyajax, getdbdata, getformvalue, gethtmlstring, htmlstring, judgeother, jundgerequire, reqcontainer, reqevent;
 
-  function Model(url, target1, id1) {
+  function Model(tablename1, target1, editid1) {
+    this.tablename = tablename1;
     this.target = target1;
-    this.id = id1;
+    this.editid = editid1;
     this.inputnames = [];
-    this.modeldata = getdatabyajax(url).responseJSON;
   }
 
   CCS = {
@@ -34,9 +34,25 @@ Model = (function() {
 
   reqcontainer = {};
 
+  jundgerequire = function(target) {
+    var mend, storeobj;
+    if (target.require !== void 0) {
+      mend = "style='display:none'";
+      storeobj = reqcontainer["" + target.require.name];
+      if (storeobj === void 0) {
+        storeobj = {};
+      }
+      storeobj["" + target.name] = "" + target.require.value;
+      reqcontainer["" + target.require.name] = storeobj;
+    } else {
+      mend = "";
+    }
+    return mend;
+  };
+
   getdatabyajax = function(url) {
     return $.ajax({
-      url: this.url,
+      url: url,
       dataType: 'json',
       async: false
     }).done(function(data) {
@@ -121,9 +137,9 @@ Model = (function() {
           tmp += "<option value='" + v + "' class='" + id + "_" + k + "'>" + v + "</option>";
         }
       }
-      str = tmp + ("<input type='text' class='otherdata' id='" + id + "_other'/>");
+      str = tmp + ("<input type='text' class='otherdata " + id + "_other' />");
     } else if (type === 'selectmultornull') {
-      tmp = "<input id='" + id + "' name='" + id + "' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<select name='" + id + "_other' class='chosen-select otherdata' multiple>";
+      tmp = "<input id='" + id + "' name='" + id + "' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<select class='chosen-select otherdata " + id + "_other' multiple>";
       selects = data.option;
       for (k in selects) {
         v = selects[k];
@@ -138,56 +154,88 @@ Model = (function() {
     return str;
   };
 
-  ergodicdata = function(modeldata, position, inputnames, flag) {
-    var i, j, len, mend, ref, results, storeobj, str, target, title;
+  ergodicdata = function(modeldata, position, inputnames) {
+    var i, j, len, mend, ref, results, str, target, title;
     target = modeldata[position];
     if (target.forend !== void 0 && target.fields === void 0) {
       title = target.namezh;
       str = gethtmlstring(target.forend, target.name);
       inputnames = buildkeys(target.name, inputnames);
-      if (target.require !== void 0) {
-        mend = "style='display:none'";
-        storeobj = reqcontainer["" + target.require.name];
-        if (storeobj === void 0) {
-          storeobj = {};
-        }
-        storeobj["" + target.name] = "" + target.require.value;
-        reqcontainer["" + target.require.name] = storeobj;
-      } else {
-        mend = "";
-      }
+      mend = jundgerequire(target);
       htmlstring += "<div class='list' " + mend + "> <div class='note'> <h5>" + title + "</h5> </div> <div class='shuru'> " + str + " </div> </div>";
     } else {
       len = target.fields.length;
       results = [];
       for (i = j = 0, ref = len; j < ref; i = j += 1) {
-        if (flag === 0) {
+        if (i === 0) {
           title = target.namezh;
-          htmlstring += "<div id='" + target.name + "' class='J_content'> <h3>" + title + "</h3></div><div class='clear'></div><hr />";
-          flag = 1;
+          mend = jundgerequire(target);
+          htmlstring += "<div id='" + target.name + "' " + mend + "> <h3>" + title + "</h3>";
         }
-        results.push(ergodicdata(target.fields, i, inputnames, flag));
+        ergodicdata(target.fields, i, inputnames);
+        if (i === len - 1) {
+          results.push(htmlstring += "</div><div class='clear'></div><hr />");
+        } else {
+          results.push(void 0);
+        }
       }
       return results;
     }
   };
 
   judgeother = function(point) {
-    var check, id, input, type;
+    var check, flag, id, input, j, len1, ref, t, type, value;
     id = point.id;
     type = point.name;
     check = point.type;
-    input = $("#" + type + "_other");
+    flag = 0;
+    if (check === 'checkbox') {
+      id = $("." + type + "_other").attr('id');
+      input = $("#" + id + "_chzn");
+      if ($(point).prop('checked')) {
+        flag = 1;
+      } else {
+        flag = 0;
+      }
+    } else {
+      input = $("." + type + "_other");
+      value = $(point).val();
+      if (value !== null) {
+        if (typeof value === 'string') {
+          if (value === "其他" || value === "有") {
+            flag = 1;
+          }
+        } else if (typeof value === 'object') {
+          ref = $(point).val();
+          for (j = 0, len1 = ref.length; j < len1; j++) {
+            t = ref[j];
+            if (t === "其他" || t === "有") {
+              flag = 1;
+            }
+          }
+        } else {
+          flag = 0;
+        }
+      }
+    }
+    if (flag) {
+      input.css('display', 'inline-block');
+    } else {
+      input.css('display', 'none');
+    }
     return $(point).on("change", function() {
-      var flag, j, len1, ref, t, value;
+      var l, len2, ref1;
       flag = 0;
       if (check === 'checkbox') {
+        id = $("." + type + "_other").attr('id');
+        input = $("#" + id + "_chzn");
         if ($(point).prop('checked')) {
           flag = 1;
         } else {
           flag = 0;
         }
       } else {
+        input = $("." + type + "_other");
         value = $(point).val();
         if (value !== null) {
           if (typeof value === 'string') {
@@ -195,9 +243,9 @@ Model = (function() {
               flag = 1;
             }
           } else if (typeof value === 'object') {
-            ref = $(point).val();
-            for (j = 0, len1 = ref.length; j < len1; j++) {
-              t = ref[j];
+            ref1 = $(point).val();
+            for (l = 0, len2 = ref1.length; l < len2; l++) {
+              t = ref1[l];
               if (t === "其他" || t === "有") {
                 flag = 1;
               }
@@ -225,11 +273,11 @@ Model = (function() {
     }
     if (type === ('input' || 'boolean' || 'select')) {
       if (value !== ("" || void 0)) {
-        dbvalue = type + "_" + value;
+        dbvalue = "" + value;
       }
     } else if (type === 'selectmult') {
       if (value instanceof 'Array') {
-        dbvalue = type + "_";
+        dbvalue = "";
         for (j = 0, len1 = value.length; j < len1; j++) {
           i = value[j];
           dbvalue += i + "&";
@@ -243,7 +291,7 @@ Model = (function() {
       dbvalue += color + "&" + light + "&" + pure;
     } else if (type === 'selectmultornull') {
       target = $("input#" + idp + "[type=checkbox]");
-      dbvalue = type + "_";
+      dbvalue = "";
       if (target.prop('checked')) {
         value = $("select[name=#" + idp + "_other]").val();
         if (value instanceof 'Array') {
@@ -252,13 +300,13 @@ Model = (function() {
             dbvalue += i + "&";
           }
         } else {
-          dbvalue = type + "_null";
+          dbvalue = "null";
         }
       } else {
-        dbvalue = type + "_null";
+        dbvalue = "null";
       }
     } else if (type === 'inputornull') {
-      dbvalue = type + "_";
+      dbvalue = "";
       if (value === ('其他' || '有')) {
         othervalue = $("#" + idp + "_other").val();
         if (othervalue === ("" || null)) {
@@ -274,11 +322,10 @@ Model = (function() {
   };
 
   getformvalue = function(form, inputnames, editid) {
-    var data, datatype, flag, i, j, len1, result, target;
+    var data, datatype, i, j, len1, result, target;
     data = {
       "id": editid
     };
-    flag = [];
     for (j = 0, len1 = inputnames.length; j < len1; j++) {
       i = inputnames[j];
       target = $("#" + form + " input#" + i + "[type=text]");
@@ -308,12 +355,10 @@ Model = (function() {
     return data;
   };
 
-  checkdata = function(datatype, value, key) {
-    var domtype, match, values;
-    domtype = $("#" + key).data('type');
-    if (domtype !== datatype) {
-      return false;
-    } else if (type === 'input') {
+  checkdata = function(value, key) {
+    var match, type, values;
+    type = $("#" + key).data('type');
+    if (type === 'input') {
       $("#" + key).val(value);
       return true;
     } else if (type === 'select') {
@@ -366,47 +411,44 @@ Model = (function() {
     }
   };
 
-  Model.prototype.init = function() {
-    var finalhtmlstring, i, j, len, ref;
-    len = this.modeldata.length;
-    for (i = j = 0, ref = len; j < ref; i = j += 1) {
-      ergodicdata(this.modeldata, i, this.inputnames, 0);
-    }
-    finalhtmlstring = htmlstring;
-    console.log(reqcontainer);
-    return $("#" + this.target).append(finalhtmlstring);
-  };
-
-  Model.prototype.getdbdata = function(url) {
-    var datatype, dbdata, k, result, v, value;
+  getdbdata = function(tablename, id) {
+    var dbdata, k, result, url, v, value;
+    url = "/input/get/" + tablename + "/" + id;
     dbdata = getdatabyajax(url).responseJSON;
     for (k in dbdata) {
       v = dbdata[k];
       if (k === 'id') {
         continue;
       }
-      if (v !== null || v !== "") {
-        result = v.split("_");
-        datatype = result[0];
-        value = result[1];
+      if (v !== null) {
+        value = v;
+      } else {
+        value = "";
       }
-      result = checkdata(datatype, value, k);
+      result = checkdata(value, k);
       if (!result) {
         console.log('不匹配');
       }
     }
     return jQuery.getScript("/script/chosen.jquery.js").done(function() {
-      var dom, j, l, len1, len2, ref, ref1, results;
+      var _id, dom, herd, i, j, l, len1, len2, len3, m, ref, ref1, results;
       $('.chosen-select').chosen();
+      herd = $(".selectmultornull");
+      for (j = 0, len1 = herd.length; j < len1; j++) {
+        i = herd[j];
+        id = $(i).attr('id');
+        _id = $("." + id + "_other").attr('id');
+        $("#" + _id + "_chzn").css("display", "none");
+      }
       ref = $(".inputornull");
-      for (j = 0, len1 = ref.length; j < len1; j++) {
-        dom = ref[j];
+      for (l = 0, len2 = ref.length; l < len2; l++) {
+        dom = ref[l];
         judgeother(dom);
       }
       ref1 = $(".selectmultornull");
       results = [];
-      for (l = 0, len2 = ref1.length; l < len2; l++) {
-        dom = ref1[l];
+      for (m = 0, len3 = ref1.length; m < len3; m++) {
+        dom = ref1[m];
         results.push(judgeother(dom));
       }
       return results;
@@ -415,14 +457,110 @@ Model = (function() {
     });
   };
 
-  Model.prototype.savedata = function(clickbtn) {
-    return $("#" + clickbtn).on('click', function() {
-      var result;
-      result = getformvalue(this.target, this.inputnames);
-      $.post('/input/update', result.data, function(data) {
-        return alert('保存成功');
+  reqevent = function(index, condition, target) {
+    var datatype, flag, i, j, len1, obj, ref, value;
+    datatype = $("#" + index).data('type');
+    if (datatype === 'boolean') {
+      obj = $("#" + index + " input[value=" + condition + "]");
+      if (obj.prop('checked')) {
+        $("#" + target).css('display', 'inline-block');
+      } else {
+        $("#" + target).css('display', 'none');
+      }
+      return obj.on('click', function() {
+        if ($(this).prop('checked')) {
+          return $("#" + target).css('display', 'inline-block');
+        } else {
+          return $("#" + target).css('display', 'none');
+        }
       });
-      return result.jundge;
+    } else if (datatype === 'select') {
+      obj = $("#" + index);
+      if (obj.val() === condition) {
+        $("#" + target).css('display', 'inline-block');
+      } else {
+        $("#" + target).css('display', 'none');
+      }
+      return obj.on("change", function() {
+        if ($(this).val() === condition) {
+          return $("#" + target).css('display', 'inline-block');
+        } else {
+          return $("#" + target).css('display', 'none');
+        }
+      });
+    } else if (datatype === 'selectmult') {
+      obj = $("#" + index);
+      value = obj.val();
+      flag = 0;
+      ref = obj.val();
+      for (j = 0, len1 = ref.length; j < len1; j++) {
+        i = ref[j];
+        if (i = condition) {
+          flag = 1;
+          break;
+        }
+      }
+      if (flag) {
+        $("#" + target).css('display', 'inline-block');
+      } else {
+        $("#" + target).css('display', 'none');
+      }
+      return obj.on("change", function() {
+        var l, len2, ref1;
+        flag = 0;
+        ref1 = obj.val();
+        for (l = 0, len2 = ref1.length; l < len2; l++) {
+          i = ref1[l];
+          if (i = condition) {
+            flag = 1;
+            break;
+          }
+        }
+        if (flag) {
+          return $("#" + target).css('display', 'inline-block');
+        } else {
+          return $("#" + target).css('display', 'none');
+        }
+      });
+    }
+  };
+
+  Model.prototype.init = function() {
+    var a, b, condition, finalhtmlstring, i, index, j, k, len, modeldata, ref, results, target, v;
+    modeldata = getdatabyajax("/input/field/" + this.tablename).responseJSON;
+    len = modeldata.length;
+    for (i = j = 0, ref = len; j < ref; i = j += 1) {
+      ergodicdata(modeldata, i, this.inputnames);
+    }
+    finalhtmlstring = htmlstring;
+    console.log(reqcontainer);
+    $("#" + this.target).append(finalhtmlstring);
+    getdbdata(this.tablename, this.editid);
+    results = [];
+    for (k in reqcontainer) {
+      v = reqcontainer[k];
+      index = k;
+      results.push((function() {
+        var results1;
+        results1 = [];
+        for (a in v) {
+          b = v[a];
+          condition = b;
+          target = a;
+          results1.push(reqevent(index, condition, target));
+        }
+        return results1;
+      })());
+    }
+    return results;
+  };
+
+  Model.prototype.savedata = function() {
+    var result;
+    result = getformvalue(this.target, this.inputnames, this.editid);
+    return $.post("/input/update/" + this.tablename, result, function(data) {
+      alert('保存成功');
+      return getdbdata(this.tablename, this.editid);
     });
   };
 

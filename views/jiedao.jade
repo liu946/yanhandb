@@ -1,16 +1,120 @@
-.container
-	.main
-		form#J_form(onsubmit='return false;',action='#')
-			.clickoption
-				.content
-					.save.box
-						p
-							| 保存
-					
-script(src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js")
-script(src="/script/model.js")
-script.
-	var url = "/input/field/jiedaokongjian";
-	var target = 'J_form';
-	var model = new Model(url, target, id);
-	model.init();
+extends layout
+
+block content
+	link(rel='stylesheet', href='/stylesheets/component/bootstrap.min.css')
+	link(rel='stylesheet', href="/stylesheets/component/bootstrap-responsive.min.css")
+	link(rel='stylesheet', href="/stylesheets/component/matrix-style.css")
+	link(rel='stylesheet', href="/stylesheets/component/matrix-media.css")
+
+	-var a = "id = " + id
+	script!= a
+
+	#header
+		h1
+			a(href="")
+				| 街道空间
+
+	#user-nav.navbar.navbar-inverse
+		ul.nav
+			li
+				a(href="/input/view/index")
+					span.text
+						| 表格编号：
+					span#editnum.text
+						| 1
+			li
+				a(href="/input/view/index")
+					span.text
+						| 退出
+
+	#sidebar(style="OVERFLOW-Y: auto; OVERFLOW-X:hidden;")
+		ul
+			li.submennu
+				a.menu_a(href="/input/view/index")
+					| 村镇基本信息
+			li.submennu
+				a.menu_a(href="/input/view/listbiaozhi")
+					| 标志性构筑物
+			li.submennu.active
+				a.menu_a(href="/input/view/listjiedao")
+					| 街道空间
+			li.submennu
+				a.menu_a(href="/input/view/listkaikuo")
+					| 开敞空间
+			li.submennu
+				a.menu_a(href="/input/view/listtingyuanjianzhu")
+					| 庭院与建筑
+
+		#sidebar-submit
+			.box
+				h3
+					| 保存
+
+	#content
+		#content-header
+			#breadcrumb
+				a.tip-bottom(href="#",title="请填写问卷")
+					| 开始输入
+		#content-body
+			.container
+				.main
+					form#C_form(onsubmit='return false;',action='#')
+
+			
+	script(src="/script/excanvas.min.js")
+	script(src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js")
+	script(src="/script/jquery.ui.custom.js")
+	script(src="/script/bootstrap.min.js")
+	script(src="/script/matrix.js")
+	script(src="/script/model.js")
+	script.
+		if(id == undefined){
+			alert("请先添加一个问卷");
+			location.href = "/input/view/index";
+		}else{
+			$("#editnum").text(id);
+		}
+		// 实例化表单
+		var tablename = "jiedaokongjian";
+		var target = 'C_form';
+		var model = new Model(tablename, target, id);
+		model.init();
+		$("#sidebar-submit .box").on('click',function(){
+			model.savedata();
+		});
+		//初始化相关元素高度
+		function init(){
+			$("body").height($(window).height()-80);
+			$("#iframe-main").height($(window).height()-90);
+			$("#sidebar").height($(window).height()-50);
+		}
+		$(function(){
+			init();
+			$(window).resize(function(){
+				init();
+			});
+		});
+		// This function is called from the pop-up menus to transfer to
+		// a different page. Ignore if the value returned is a null string:
+		function goPage (newURL) {
+			// if url is empty, skip the menu dividers and reset the menu selection to default
+			if (newURL != "") {
+				// if url is "-", it is this page -- reset the menu:
+				if (newURL == "-" ) {
+					resetMenu();            
+				} 
+			// else, send page to designated URL            
+			else {  
+					document.location.href = newURL;
+				}
+			}
+		}
+		// resets the menu selection upon entry to this page:
+		function resetMenu() {
+			document.gomenu.selector.selectedIndex = 2;
+		}
+
+
+
+
+

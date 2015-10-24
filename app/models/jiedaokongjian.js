@@ -6,13 +6,18 @@ module.exports = function (orm, db) {
 
     }
   });
+  Comment.hasOne("cunzhen", db.models['cunzhen']);
   Comment.getall= function (cb) {
-    return this.all({},{only:["BianHao","id" ]},function(err,item){
-      item.getCunzhen(cunzhen,function(err){
-        item['parent'] = {id: cunzhen.id ,namezh: cunzhen["CZJBXXCunZhenMingChen"] };
-        cb(item)
-      });
+    return this.all({},{only:["BianHao","id" ]},function(err,items){
+      for(var i in items ){
+        var item = items[i];
+        item.getCunzhen(function(err,Cunzhen){
+          item['SuoShuCunZhen'] = (Cunzhen == undefined ? null: Cunzhen["CZJBXXCunZhenMingChen"] );
+
+        });
+      }
+      cb(items)
     });
   }
-  Comment.hasOne("cunzhen", db.models['cunzhen']);
+
 };

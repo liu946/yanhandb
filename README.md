@@ -20,7 +20,7 @@ input/field/:tablename
     {
 		namezh:"主题",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:'select',

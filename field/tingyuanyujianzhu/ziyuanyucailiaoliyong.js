@@ -27,7 +27,8 @@ module.exports={
 			{
 				namezh:"雨水利用系统",
 				backend:{
-					type:"text"
+					type:"text",
+					size:100
 				},
 				forend:{
 					type:"select",
@@ -41,7 +42,8 @@ module.exports={
 			{
 				namezh:"杂排水再利用系统",
 				backend:{
-					type:"text"
+					type:"text",
+					size:100
 				},
 				forend:{
 					type:"select",
@@ -57,7 +59,7 @@ module.exports={
 		{
 			namezh:"灌溉",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",
@@ -82,7 +84,7 @@ module.exports={
 		{
 			namezh:"资源的再利用率",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"input",
@@ -93,7 +95,7 @@ module.exports={
 		{
 			namezh:"可持续森林采伐的木材（绿色木材）使用率",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"input",
@@ -105,7 +107,8 @@ module.exports={
 		{
 			namezh:"对健康无害的材料使用",
 			backend:{
-				type:"text"
+				type:"text",
+				size:30
 			},
 			forend:{
 				type:"select",
@@ -123,7 +126,8 @@ module.exports={
 		{
 			namezh:"对既有建筑主体的再利用",
 			backend:{
-				type:"text"
+				type:"text",
+				size:40
 			},
 			forend:{
 				type:"select",
@@ -139,7 +143,7 @@ module.exports={
 		{
 			namezh:"旧材料再利用量",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"input",

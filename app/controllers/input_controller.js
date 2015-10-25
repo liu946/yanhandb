@@ -27,7 +27,7 @@ router.get('/field/:tablename',function (req, res, next) {
         datajson.push({
           namezh:"所属村镇",
           name:"SuoShuCunZhen",
-          backend:{type:"text",},
+          backend:{type:"text",size:100},
           forend:{
             type:'select',
             option:optionobj,

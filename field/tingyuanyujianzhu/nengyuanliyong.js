@@ -15,7 +15,7 @@ module.exports =
 			{
 				namezh:"电",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -25,7 +25,7 @@ module.exports =
 			{
 				namezh:"煤",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -35,7 +35,7 @@ module.exports =
 			{
 				namezh:"木柴",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -45,7 +45,7 @@ module.exports =
 			{
 				namezh:"秸秆",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -55,7 +55,7 @@ module.exports =
 			{
 				namezh:"其他",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -71,7 +71,7 @@ module.exports =
 			{
 				namezh:"燃煤、烟煤",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -81,7 +81,7 @@ module.exports =
 			{
 				namezh:"燃油、燃气",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -101,7 +101,7 @@ module.exports =
 		{
 			namezh:"可再生能源的直接利用",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -116,7 +116,7 @@ module.exports =
 		{
 			namezh:"可再生能源的转换利用",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -133,7 +133,7 @@ module.exports =
 	{
 		namezh:"太阳能热水系统",
 		backend:{
-			type:"text",
+			type:"text",size:200
 		},
 		forend:{
 			type:"selectmultornull",
@@ -207,7 +207,7 @@ module.exports =
 		{
 			namezh:"规模化沼气工程采用加热方式维持所需热量进行保温",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -220,7 +220,7 @@ module.exports =
 		{
 			namezh:"地源热泵系统",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"inputornull",

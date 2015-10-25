@@ -109,7 +109,7 @@ module.exports = {
 			{
 				namezh:"集中供暖",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -122,7 +122,7 @@ module.exports = {
 			{
 				namezh:"方式",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'selectmult',
@@ -174,7 +174,7 @@ module.exports = {
 				namezh:'夏季降温措施',
 
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'selectmultornull',
@@ -192,7 +192,7 @@ module.exports = {
 			{
 				namezh:'冬季防风措施',
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'selectmultornull',
@@ -227,7 +227,7 @@ module.exports = {
 			{
 				namezh:"类型",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:
 				{
@@ -243,7 +243,7 @@ module.exports = {
 			{
 				namezh:"材料",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -260,7 +260,7 @@ module.exports = {
 			{
 				namezh:"厚度",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -300,7 +300,7 @@ module.exports = {
 			{
 				namezh:"类型",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -318,7 +318,7 @@ module.exports = {
 			{
 				namezh:"材料",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -336,7 +336,7 @@ module.exports = {
 			{
 				namezh:"厚度",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -356,7 +356,7 @@ module.exports = {
 			namezh:"外窗冬季保温措施",
 
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:'selectmultornull',
@@ -373,7 +373,7 @@ module.exports = {
 			namezh:"外门冬季保温措施",
 
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:'selectmultornull',
@@ -407,7 +407,7 @@ module.exports = {
 			{
 				namezh:"材料",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -423,7 +423,7 @@ module.exports = {
 			{
 				namezh:"厚度",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -442,7 +442,7 @@ module.exports = {
 		{
 			namezh:"设计考虑",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:'select',
@@ -472,7 +472,7 @@ module.exports = {
 				{
 					namezh:'室内湿度',
 					backend:{
-						type:"text",
+						type:"text",size:100
 					},
 					forend:{
 						type:"input",
@@ -492,7 +492,7 @@ module.exports = {
 			{
 				namezh:'侧面采光系数',
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -502,7 +502,7 @@ module.exports = {
 			{
 				namezh:'侧面采光照度',
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -514,7 +514,7 @@ module.exports = {
 			{
 				namezh:'顶部采光系数',
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -526,7 +526,7 @@ module.exports = {
 			{
 				namezh:'顶部采光照度',
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -538,7 +538,7 @@ module.exports = {
 			{
 				namezh:"采光设备",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -554,7 +554,7 @@ module.exports = {
 		{
 			namezh:"眩光对策",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:'select',
@@ -568,7 +568,7 @@ module.exports = {
 		{
 			namezh:"照明控制",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:'select',
@@ -591,7 +591,7 @@ module.exports = {
 			{
 				namezh:"窗户是否可开闭",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -604,7 +604,7 @@ module.exports = {
 			{
 				namezh:'有效自然通风的开口面积',
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"input",
@@ -619,7 +619,7 @@ module.exports = {
 			{
 				namezh:"CO2的监测",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',
@@ -633,7 +633,7 @@ module.exports = {
 			{
 				namezh:"吸烟控制",
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:'select',

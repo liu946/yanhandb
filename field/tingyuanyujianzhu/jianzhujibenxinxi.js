@@ -5,7 +5,7 @@ module.exports = {
 	{
 		namezh:'编号',
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:'input',
@@ -16,7 +16,7 @@ module.exports = {
 	{
 		namezh:'名称',
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:'input',
@@ -26,7 +26,7 @@ module.exports = {
 	
 	{
 		namezh:"建筑性质",
-		backend:{type:"text",},
+		backend:{type:"text",size:100},
 		forend:{
 			type:'select',
 			option:{
@@ -69,7 +69,7 @@ module.exports = {
 	},
 	{
 		namezh:"朝向",
-		backend:{type:"text",},
+		backend:{type:"text",size:100},
 		forend:{
 			type:'select',
 			option:{
@@ -80,7 +80,7 @@ module.exports = {
 	},
 	{
 		namezh:"结构形式",
-		backend:{type:"text",},
+		backend:{type:"text",size:100},
 		forend:{
 			type:'select',
 			option:{
@@ -91,7 +91,7 @@ module.exports = {
 	},
 	{
 		namezh:"层数",
-		backend:{type:"text",},
+		backend:{type:"text",size:100},
 		forend:{
 			type:'select',
 			option:{
@@ -102,7 +102,7 @@ module.exports = {
 	},
 	{
 		namezh:"高度",
-		backend:{type:"text",},
+		backend:{type:"text",size:100},
 		forend:{
 			type:'select',
 			option:{
@@ -113,7 +113,7 @@ module.exports = {
 	},
 	{
 		namezh:"建筑风格",
-		backend:{type:"text",},
+		backend:{type:"text",size:100},
 		forend:{
 			type:'select',
 			option:{
@@ -124,7 +124,7 @@ module.exports = {
 	},
 	{
 		namezh:"建造年代",
-		backend:{type:"text",},
+		backend:{type:"text",size:100},
 		forend:{
 			type:'select',
 			option:{

@@ -11,7 +11,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 	{
 		namezh:"类型",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:'select',
@@ -27,7 +27,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 	{
 		namezh:"主题",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:'select',
@@ -49,7 +49,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 	{
 		namezh:"材质",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:'select',
@@ -66,7 +66,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 	{
 		namezh:"与周边建筑高度比例关系",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:'select',
@@ -81,7 +81,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 	{
 		namezh:"颜色",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:'CCS',

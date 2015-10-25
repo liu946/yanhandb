@@ -8,7 +8,7 @@ module.exports = {
 		{
 			namezh:"管理体系认证",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -22,7 +22,7 @@ module.exports = {
 		{
 			namezh:"操作规程",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -35,7 +35,7 @@ module.exports = {
 		{
 			namezh:"能源资源管理激励机制",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -49,7 +49,7 @@ module.exports = {
 		{
 			namezh:"绿色教育宣传机制",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",
@@ -63,7 +63,7 @@ module.exports = {
 		{
 			namezh:"施工评价",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"input",
@@ -79,7 +79,7 @@ module.exports = {
 		{
 			namezh:"公共设施设备检查、调试",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",
@@ -92,7 +92,7 @@ module.exports = {
 		{
 			namezh:"空调通风系统检查和清洗",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",
@@ -105,7 +105,7 @@ module.exports = {
 		{
 			namezh:"非传统水源的水质和用水量记录",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",
@@ -118,7 +118,7 @@ module.exports = {
 		{
 			namezh:"智能化系统的运行效果",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -131,7 +131,7 @@ module.exports = {
 		{
 			namezh:"信息化物业管理",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",
@@ -151,7 +151,7 @@ module.exports = {
 		{
 			namezh:"无公害病虫害防治技术",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -165,7 +165,7 @@ module.exports = {
 		{
 			namezh:"栽种和移植的树木一次成活率",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"input",
@@ -175,7 +175,7 @@ module.exports = {
 		{
 			namezh:"垃圾收集站（点）及垃圾间维护",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -189,7 +189,7 @@ module.exports = {
 		{
 			namezh:"垃圾分类收集和处理",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -204,7 +204,7 @@ module.exports = {
 		{
 			namezh:"可再生能源系统利用设备维护",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",

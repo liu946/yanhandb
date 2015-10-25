@@ -110,7 +110,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 						{
 							namezh:"颜色",
 							backend:{
-								type:"text",
+								type:"text",size:100
 							},
 							forend:{
 								type:'CCS',
@@ -151,7 +151,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 						{
 							namezh:"颜色",
 							backend:{
-								type:"text",
+								type:"text",size:100
 							},
 							forend:{
 								type:'CCS',
@@ -192,7 +192,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 						{
 							namezh:"颜色",
 							backend:{
-								type:"text",
+								type:"text",size:100
 							},
 							forend:{
 								type:'CCS',

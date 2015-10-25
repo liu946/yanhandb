@@ -10,7 +10,7 @@ module.exports = {
 	{
 		namezh:"材料",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:"select",
@@ -28,7 +28,7 @@ module.exports = {
 	{
 		namezh:"高度",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:"select",
@@ -44,7 +44,7 @@ module.exports = {
 	{
 		namezh:"层数",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:"select",
@@ -64,7 +64,7 @@ module.exports = {
 		{
 			namezh:"东侧建筑",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -77,7 +77,7 @@ module.exports = {
 		{
 			namezh:"西侧建筑",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -90,7 +90,7 @@ module.exports = {
 		{
 			namezh:"南侧建筑",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -103,7 +103,7 @@ module.exports = {
 		{
 			namezh:"北侧建筑",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -118,7 +118,7 @@ module.exports = {
 	{
 		namezh:"颜色",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:"CCS",
@@ -127,7 +127,7 @@ module.exports = {
 	{
 		namezh:"建筑风格",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:"select",
@@ -141,7 +141,7 @@ module.exports = {
 	{
 		namezh:"传统格局和历史风貌遗存度",
 		backend:{
-			type:"text",
+			type:"text",size:100
 		},
 		forend:{
 			type:"select",

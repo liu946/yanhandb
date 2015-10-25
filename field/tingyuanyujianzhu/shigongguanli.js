@@ -9,7 +9,7 @@ module.exports = {
 		{
 			namezh:"采取洒水、覆盖、遮挡等降尘措施",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -23,7 +23,7 @@ module.exports = {
 		{
 			namezh:"采取有效的降噪措施。在施工场界测量并记录噪声，满足现行国家标准《建筑施工场界环境噪声排放标准》GB 12523的规定",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -37,7 +37,7 @@ module.exports = {
 
 		{
 			namezh:"可回收施工废弃物的回收率",
-			backend:{type:"text",},
+			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
 				comment:"数字%",
@@ -48,7 +48,7 @@ module.exports = {
 
 		{
 			namezh:"每10000m2建筑面积的施工固体废弃物排放量SWC",
-			backend:{type:"text",},
+			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
 				comment:"数字t",
@@ -67,7 +67,7 @@ module.exports = {
 		{
 			namezh:"施工能耗检测",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",
@@ -85,7 +85,7 @@ module.exports = {
 		{
 			namezh:"施工用水检测",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",
@@ -101,7 +101,7 @@ module.exports = {
 
 		{
 			namezh:"预拌混凝土的损耗降低率",
-			backend:{type:"text",},
+			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
 				comment:"数字%",
@@ -112,7 +112,7 @@ module.exports = {
 
 		{
 			namezh:"专业化生产的成型钢筋使用率",
-			backend:{type:"text",},
+			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
 				comment:"数字%",
@@ -123,7 +123,7 @@ module.exports = {
 
 		{
 			namezh:"现场加工钢筋损耗率LRsb",
-			backend:{type:"text",},
+			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
 				comment:"数字%",
@@ -134,7 +134,7 @@ module.exports = {
 
 		{
 			namezh:"工具式定型模板使用面积占模板工程总面积的比例Rsf",
-			backend:{type:"text",},
+			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
 				comment:"数字%",
@@ -151,7 +151,7 @@ module.exports = {
 		{
 			namezh:"参建各方进行绿色建筑重点内容的专项会审",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -165,7 +165,7 @@ module.exports = {
 		{
 			namezh:"施工过程中以施工日志记录绿色建筑重点内容的实施情况",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -180,7 +180,7 @@ module.exports = {
 		{
 			namezh:"严格控制设计文件变更，避免出现降低建筑绿色性能的重大变更",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -194,7 +194,7 @@ module.exports = {
 		{
 			namezh:"建筑的耐久性检测",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmultornull",
@@ -211,7 +211,7 @@ module.exports = {
 		{
 			namezh:"土建装修一体化施工",
 			backend:{
-				type:"text",
+				type:"text",size:200
 			},
 			forend:{
 				type:"selectmultornull",
@@ -230,7 +230,7 @@ module.exports = {
 		{
 			namezh:"工程竣工验收前，由建设单位组织有关责任单位，进行机电系统的综合调试和联合试运转，结果符合设计要求",
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",

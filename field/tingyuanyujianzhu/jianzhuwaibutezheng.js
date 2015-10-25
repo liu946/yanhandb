@@ -9,7 +9,7 @@ module.exports = {
 		{
 			namezh:"材料",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -31,7 +31,7 @@ module.exports = {
 		{
 			namezh:"形式",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -48,7 +48,7 @@ module.exports = {
 		{
 			namezh:'颜色',
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"CCS"
@@ -59,7 +59,7 @@ module.exports = {
 		{
 			namezh:"屋脊装饰构件",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -75,7 +75,7 @@ module.exports = {
 		{
 			namezh:"屋顶绿化",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -91,7 +91,7 @@ module.exports = {
 		{
 			namezh:"太阳能屋顶",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -112,7 +112,7 @@ module.exports = {
 		{
 			namezh:"位置",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -128,7 +128,7 @@ module.exports = {
 		{
 			namezh:"高度",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -145,7 +145,7 @@ module.exports = {
 		{
 			namezh:"表面材料",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -160,7 +160,7 @@ module.exports = {
 		{
 			namezh:'颜色',
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"CCS"
@@ -175,7 +175,7 @@ module.exports = {
 		{
 			namezh:"材料",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -192,7 +192,7 @@ module.exports = {
 		{
 			namezh:'外墙装饰材料',
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				1:"瓷砖",
@@ -210,7 +210,7 @@ module.exports = {
 		{
 			namezh:'主体色',
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"CCS"
@@ -219,7 +219,7 @@ module.exports = {
 		{
 			namezh:'辅助色',
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"CCS"
@@ -228,7 +228,7 @@ module.exports = {
 		{
 			namezh:'构件',
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				1:"装饰图案",
@@ -240,7 +240,7 @@ module.exports = {
 		{
 			namezh:"装饰内容",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -279,7 +279,7 @@ module.exports = {
 		{
 			namezh:"表面材料",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -299,7 +299,7 @@ module.exports = {
 		{
 			namezh:'颜色',
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"CCS"
@@ -313,7 +313,7 @@ module.exports = {
 	{
 		namezh:"台阶",
 		backend:{
-			type:"text",		
+			type:"text",size:100
 		},
 		forend:{
 			type:"selectmultornull",
@@ -349,7 +349,7 @@ module.exports = {
 		{
 			namezh:"材料",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -367,7 +367,7 @@ module.exports = {
 		{
 			namezh:'颜色',
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"CCS"
@@ -385,7 +385,7 @@ module.exports = {
 		{
 			namezh:"窗朝向",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"selectmult",
@@ -410,7 +410,7 @@ module.exports = {
 			{
 				namezh:"材料",
 				backend:{
-					type:"text",		
+					type:"text",size:100
 				},
 				forend:{
 					type:"select",
@@ -425,7 +425,7 @@ module.exports = {
 			{
 				namezh:'颜色',
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"CCS"
@@ -434,7 +434,7 @@ module.exports = {
 			{
 				namezh:"窗墙比",
 				backend:{
-					type:"text",		
+					type:"text",size:100
 				},
 				forend:{
 					type:"select",
@@ -488,7 +488,7 @@ module.exports = {
 			{
 				namezh:"材料",
 				backend:{
-					type:"text",		
+					type:"text",size:100
 				},
 				forend:{
 					type:"select",
@@ -503,7 +503,7 @@ module.exports = {
 			{
 				namezh:'颜色',
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"CCS"
@@ -512,7 +512,7 @@ module.exports = {
 			{
 				namezh:"窗墙比",
 				backend:{
-					type:"text",		
+					type:"text",size:100
 				},
 				forend:{
 					type:"select",
@@ -566,7 +566,7 @@ module.exports = {
 			{
 				namezh:"材料",
 				backend:{
-					type:"text",		
+					type:"text",size:100
 				},
 				forend:{
 					type:"select",
@@ -581,7 +581,7 @@ module.exports = {
 			{
 				namezh:'颜色',
 				backend:{
-					type:"text",
+					type:"text",size:100
 				},
 				forend:{
 					type:"CCS"
@@ -590,7 +590,7 @@ module.exports = {
 			{
 				namezh:"窗墙比",
 				backend:{
-					type:"text",		
+					type:"text",size:100
 				},
 				forend:{
 					type:"select",
@@ -655,7 +655,7 @@ module.exports = {
 		{
 			namezh:"位置",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -671,7 +671,7 @@ module.exports = {
 		{
 			namezh:'颜色',
 			backend:{
-				type:"text",
+				type:"text",size:100
 			},
 			forend:{
 				type:"CCS"
@@ -680,7 +680,7 @@ module.exports = {
 		{
 			namezh:"材质",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -698,7 +698,7 @@ module.exports = {
 		{
 			namezh:"立面比例关系",
 			backend:{
-				type:"text",		
+				type:"text",size:100
 			},
 			forend:{
 				type:"select",
@@ -716,7 +716,7 @@ module.exports = {
 	{
 		namezh:"无障碍设计",
 		backend:{
-			type:"text",		
+			type:"text",size:100
 		},
 		forend:{
 			type:"select",

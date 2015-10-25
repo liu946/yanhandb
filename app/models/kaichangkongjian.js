@@ -6,7 +6,7 @@ module.exports = function (orm, db) {
 
     }
   });
-  Comment.getall= function (cb) {
+  Comment.getall= function (cb,req) {
     return this.all({},{only:["BianHao","id","cunzhen_id" ]},function(err,items){
       var finishflag = 0;
       if(items.length === 0) cb(items);

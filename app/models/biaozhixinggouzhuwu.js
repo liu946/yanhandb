@@ -13,14 +13,21 @@ module.exports = function (orm, db) {
       for(var i in items ){
         var item = items[i];
         var cunzhenid = item.cunzhen_id;
-        req.models.cunzhen.get(cunzhenid,function(err,Cunzhen){
-          if(err) throw  err;
-          finishflag++;
-          item['SuoShuCunZhen'] = (Cunzhen == undefined ? null: Cunzhen["CZJBXXCunZhenMingChen"] );
-          if( finishflag === items.length ){
-            cb(items);
-          }
-        })
+        finishflag++;
+        if(cunzhenid===null) {
+
+          item['SuoShuCunZhen'] = null;
+        }else{
+          req.models.cunzhen.get(cunzhenid,function(err,Cunzhen){
+
+            if(err) throw err;
+            item['SuoShuCunZhen'] = (Cunzhen == undefined ? null: Cunzhen["CZJBXXCunZhenMingChen"] );
+
+          })
+        }
+        if( finishflag === items.length ){
+          cb(items);
+        }
       }
     });
   };

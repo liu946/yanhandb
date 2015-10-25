@@ -240,13 +240,16 @@ class Model
 	builddbvalue = (type,idp) ->
 		dbvalue = ""
 
-		if type is ('input' or 'boolean' or 'select')
+		if type is 'input' or type is 'select'
 			value = $("##{idp}").val()
-			if value isnt ("" or undefined or null)
+			if value isnt "" or value isnt undefined or value isnt null
 				dbvalue = "#{value}"
 			else
 				dbvalue = ""
 
+		else if type is 'boolean'
+			dbvalue = $("input[name=#{idp}]").val()
+			
 		else if type is 'selectmult'
 			value = $("##{idp}").val()
 			if value instanceof Array
@@ -296,7 +299,7 @@ class Model
 	# 验证数据的合法性
 	checkdata = (value,key) ->
 		type = $("##{key}").data 'type'
-		if value is (null or undefined or 'unll' or 'undefined')
+		if value is null or value is undefined or value is 'unll' or value is 'undefined'
 			value = ""
 
 
@@ -304,6 +307,7 @@ class Model
 			$("##{key}").val(value)
 			return true
 		else if type is 'select'
+			console.log value
 			$("##{key}").val(value)
 			return true
 		else if type is 'selectmult'
@@ -457,6 +461,7 @@ class Model
 	savedata: () ->
 		result = getformvalue @target,@inputnames,@editid
 		that = this
+		console.log result
 		$.post "/input/update/#{@tablename}", result, (data) ->
 			alert '保存成功'
 			getdbdata that.tablename,that.editid

@@ -273,13 +273,15 @@ Model = (function() {
   builddbvalue = function(type, idp) {
     var color, dbvalue, i, j, l, len1, len2, light, pure, target, value;
     dbvalue = "";
-    if (type === ('input' || 'boolean' || 'select')) {
+    if (type === 'input' || type === 'select') {
       value = $("#" + idp).val();
-      if (value !== ("" || void 0 || null)) {
+      if (value !== "" || value !== void 0 || value !== null) {
         dbvalue = "" + value;
       } else {
         dbvalue = "";
       }
+    } else if (type === 'boolean') {
+      dbvalue = $("input[name=" + idp + "]").val();
     } else if (type === 'selectmult') {
       value = $("#" + idp).val();
       if (value instanceof Array) {
@@ -338,13 +340,14 @@ Model = (function() {
   checkdata = function(value, key) {
     var type, values;
     type = $("#" + key).data('type');
-    if (value === (null || void 0 || 'unll' || 'undefined')) {
+    if (value === null || value === void 0 || value === 'unll' || value === 'undefined') {
       value = "";
     }
     if (type === 'input') {
       $("#" + key).val(value);
       return true;
     } else if (type === 'select') {
+      console.log(value);
       $("#" + key).val(value);
       return true;
     } else if (type === 'selectmult') {
@@ -536,6 +539,7 @@ Model = (function() {
     var result, that;
     result = getformvalue(this.target, this.inputnames, this.editid);
     that = this;
+    console.log(result);
     return $.post("/input/update/" + this.tablename, result, function(data) {
       alert('保存成功');
       return getdbdata(that.tablename, that.editid);

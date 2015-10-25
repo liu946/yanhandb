@@ -11,7 +11,7 @@ module.exports = function (orm, db) {
     });
   };
   Comment.getselectlist= function(cb){
-    return this.getall(function(err,item){
+    return this.getall(function(item){
       var retdata = {};
       for (var i in item ){
         retdata[item[i].id] = item[i]["CZJBXXCunZhenMingChen"];

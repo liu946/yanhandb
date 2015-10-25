@@ -19,7 +19,6 @@ module.exports = function (orm, db) {
           if( finishflag === items.length ){
             cb(items);
           }
-
         })
       }
     });

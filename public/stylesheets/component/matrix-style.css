@@ -177,7 +177,7 @@ hr{ border-top-color:#dadada;}
 
 /*滚动条美化css 适合WebKit引擎的浏览器如chrome、oprea、Safari等*/
 ::-webkit-scrollbar {  
-	width: 16px;   
+	width: 2px;   
 }  
   
 ::-webkit-scrollbar-track,  

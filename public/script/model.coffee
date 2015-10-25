@@ -114,7 +114,7 @@ class Model
 			str = tmp + "<input type='text' class='otherdata #{id}_other' />"
 
 		else if type is 'selectmultornull' 
-			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<select class='chosen-select otherdata #{id}_other' multiple>"
+			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='#{id}_other' class='chosen-select otherdata #{id}_other' multiple>"
 			selects = data.option
 			for k, v of selects
 				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
@@ -225,19 +225,22 @@ class Model
 				
 	# 判断值类型与存储方式的工具
 	# 检查传入值的正确性
-	builddbvalue = (type,value='',idp='') ->
+	builddbvalue = (type,idp) ->
+		dbvalue = ""
+
 		if type is ('input' or 'boolean' or 'select')
+			value = $("##{idp}").val()
 			if value isnt ("" or undefined)
 				dbvalue = "#{value}"
 
 		else if type is 'selectmult'
-			if value instanceof 'Array'
+			value = $("##{idp}").val()
+			if value instanceof Array
 				dbvalue = ""
 				for i in value
 					dbvalue += "#{i}&"
 
 		else if type is 'CCS'
-			dbvalue = "CCS_"
 			color = $("select[name=#{i}_color]").val() 
 			light = $("select[name=#{i}_light]").val() 
 			pure =  $("select[name=#{i}_pure]").val()
@@ -247,8 +250,8 @@ class Model
 			target = $("input##{idp}[type=checkbox]")
 			dbvalue = ""
 			if target.prop('checked')
-				value = $("select[name=##{idp}_other]").val()
-				if value instanceof 'Array'
+				value = $("select[name=#{idp}_other]").val()
+				if value instanceof Array
 					for i in value
 						dbvalue += "#{i}&"
 				else
@@ -258,12 +261,13 @@ class Model
 
 		else if type is 'inputornull'
 			dbvalue = ""
+			value = $("##{idp}").val();
 			if value is ('其他' or '有')
 				othervalue = $("##{idp}_other").val()
 				if othervalue is ("" or null)
 					dbvalue += "#{value}-"
 				else
-					dbvalue += "#{value}-othervalue"
+					dbvalue += "#{value}-#{othervalue}"
 			else if value isnt ("" or undefined)
 				dbvalue += "#{value}"
 
@@ -273,25 +277,8 @@ class Model
 	getformvalue = (form,inputnames,editid) ->
 		data = {"id": editid}
 		for i in inputnames
-			target = $("##{form} input##{i}[type=text]") #input
-			if target.length < 1
-				target = $("##{form} input[name=#{i}]:checked") #boolean
-				if target.length < 1
-					target = $("##{form} input##{i}[type=checkbox]") #selectmultornull
-					if target.length < 1
-						target = $("##{form} select[name=#{i}]") #select,selectmult,inputornull
-						if target.length < 1 #CCS
-							result = builddbvalue 'CCS',"",i
-						else
-							datatype = target.data("data")
-							result = builddbvalue datatype,target.val(),i
-					else
-						result = builddbvalue 'selectmultornull',"",i
-				else
-					result = builddbvalue 'boolean',target.val()
-			else
-				result = builddbvalue 'input',target.val()
-
+			type = $("##{i}").data('type')
+			result = builddbvalue type,i
 			
 			data[i] = result
 			
@@ -351,6 +338,7 @@ class Model
 	getdbdata = (tablename,id) ->
 		url = "/input/get/#{tablename}/#{id}"
 		dbdata = getdatabyajax(url).responseJSON
+		console.log dbdata
 		for k, v of dbdata
 			if k == 'id'
 				continue
@@ -446,7 +434,6 @@ class Model
 		for i in [0...len] by 1
 			ergodicdata modeldata,i,@inputnames
 		finalhtmlstring = htmlstring
-		console.log reqcontainer
 		$("##{@target}").append finalhtmlstring
 
 		getdbdata @tablename,@editid
@@ -461,10 +448,10 @@ class Model
 
 	savedata: () ->
 		result = getformvalue @target,@inputnames,@editid
-
+		that = this
 		$.post "/input/update/#{@tablename}", result, (data) ->
 			alert '保存成功'
-			getdbdata @tablename,@editid
+			getdbdata that.tablename,that.editid
 				
 			
 			

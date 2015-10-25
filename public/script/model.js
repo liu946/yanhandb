@@ -139,7 +139,7 @@ Model = (function() {
       }
       str = tmp + ("<input type='text' class='otherdata " + id + "_other' />");
     } else if (type === 'selectmultornull') {
-      tmp = "<input id='" + id + "' name='" + id + "' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<select class='chosen-select otherdata " + id + "_other' multiple>";
+      tmp = "<input id='" + id + "' name='" + id + "' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='" + id + "_other' class='chosen-select otherdata " + id + "_other' multiple>";
       selects = data.option;
       for (k in selects) {
         v = selects[k];
@@ -263,20 +263,17 @@ Model = (function() {
     });
   };
 
-  builddbvalue = function(type, value, idp) {
-    var color, dbvalue, i, j, l, len1, len2, light, othervalue, pure, target;
-    if (value == null) {
-      value = '';
-    }
-    if (idp == null) {
-      idp = '';
-    }
+  builddbvalue = function(type, idp) {
+    var color, dbvalue, i, j, l, len1, len2, light, othervalue, pure, target, value;
+    dbvalue = "";
     if (type === ('input' || 'boolean' || 'select')) {
+      value = $("#" + idp).val();
       if (value !== ("" || void 0)) {
         dbvalue = "" + value;
       }
     } else if (type === 'selectmult') {
-      if (value instanceof 'Array') {
+      value = $("#" + idp).val();
+      if (value instanceof Array) {
         dbvalue = "";
         for (j = 0, len1 = value.length; j < len1; j++) {
           i = value[j];
@@ -284,7 +281,6 @@ Model = (function() {
         }
       }
     } else if (type === 'CCS') {
-      dbvalue = "CCS_";
       color = $("select[name=" + i + "_color]").val();
       light = $("select[name=" + i + "_light]").val();
       pure = $("select[name=" + i + "_pure]").val();
@@ -293,8 +289,8 @@ Model = (function() {
       target = $("input#" + idp + "[type=checkbox]");
       dbvalue = "";
       if (target.prop('checked')) {
-        value = $("select[name=#" + idp + "_other]").val();
-        if (value instanceof 'Array') {
+        value = $("select[name=" + idp + "_other]").val();
+        if (value instanceof Array) {
           for (l = 0, len2 = value.length; l < len2; l++) {
             i = value[l];
             dbvalue += i + "&";
@@ -307,12 +303,13 @@ Model = (function() {
       }
     } else if (type === 'inputornull') {
       dbvalue = "";
+      value = $("#" + idp).val();
       if (value === ('其他' || '有')) {
         othervalue = $("#" + idp + "_other").val();
         if (othervalue === ("" || null)) {
           dbvalue += value + "-";
         } else {
-          dbvalue += value + "-othervalue";
+          dbvalue += value + "-" + othervalue;
         }
       } else if (value !== ("" || void 0)) {
         dbvalue += "" + value;
@@ -322,34 +319,14 @@ Model = (function() {
   };
 
   getformvalue = function(form, inputnames, editid) {
-    var data, datatype, i, j, len1, result, target;
+    var data, i, j, len1, result, type;
     data = {
       "id": editid
     };
     for (j = 0, len1 = inputnames.length; j < len1; j++) {
       i = inputnames[j];
-      target = $("#" + form + " input#" + i + "[type=text]");
-      if (target.length < 1) {
-        target = $("#" + form + " input[name=" + i + "]:checked");
-        if (target.length < 1) {
-          target = $("#" + form + " input#" + i + "[type=checkbox]");
-          if (target.length < 1) {
-            target = $("#" + form + " select[name=" + i + "]");
-            if (target.length < 1) {
-              result = builddbvalue('CCS', "", i);
-            } else {
-              datatype = target.data("data");
-              result = builddbvalue(datatype, target.val(), i);
-            }
-          } else {
-            result = builddbvalue('selectmultornull', "", i);
-          }
-        } else {
-          result = builddbvalue('boolean', target.val());
-        }
-      } else {
-        result = builddbvalue('input', target.val());
-      }
+      type = $("#" + i).data('type');
+      result = builddbvalue(type, i);
       data[i] = result;
     }
     return data;
@@ -415,6 +392,7 @@ Model = (function() {
     var dbdata, k, result, url, v, value;
     url = "/input/get/" + tablename + "/" + id;
     dbdata = getdatabyajax(url).responseJSON;
+    console.log(dbdata);
     for (k in dbdata) {
       v = dbdata[k];
       if (k === 'id') {
@@ -533,7 +511,6 @@ Model = (function() {
       ergodicdata(modeldata, i, this.inputnames);
     }
     finalhtmlstring = htmlstring;
-    console.log(reqcontainer);
     $("#" + this.target).append(finalhtmlstring);
     getdbdata(this.tablename, this.editid);
     results = [];
@@ -556,11 +533,12 @@ Model = (function() {
   };
 
   Model.prototype.savedata = function() {
-    var result;
+    var result, that;
     result = getformvalue(this.target, this.inputnames, this.editid);
+    that = this;
     return $.post("/input/update/" + this.tablename, result, function(data) {
       alert('保存成功');
-      return getdbdata(this.tablename, this.editid);
+      return getdbdata(that.tablename, that.editid);
     });
   };
 

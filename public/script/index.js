@@ -25,7 +25,7 @@ List = (function() {
     html = '';
     for (i = 0, len = data.length; i < len; i++) {
       d = data[i];
-      html += "<div class='container'> <div class='id'><p>" + d.id + "</p></div> <div class='title'><p>" + d.CunZhenJiBenXinXiCunZhenMingChen + "</p></div> <div class='exchange'><a href='/input/view/" + tablename + "/" + d.id + "'>修改</a></div> </div>";
+      html += "<div class='container'> <div class='id'><p>" + d.id + "</p></div> <div class='title'><p>" + d.CZJBXXCunZhenMingChen + "</p></div> <div class='exchange'><a href='/input/view/" + tablename + "/" + d.id + "'>修改</a></div> </div>";
     }
     return $('#formlist .contentlist').html(html);
   };

@@ -105,7 +105,7 @@ class Model
 
 		else if type is 'inputornull'
 			tmp = "<input id='#{id}' name='#{id}' data-type='inputornull' class='inputornull' type='checkbox'>有<br/>
-				<input name='#{id}_other' type='text' class='otherdata #{id}_other'>"
+				<input name='#{id}_other' type='text' class='otherdata'>"
 
 		else if type is 'selectmultornull' 
 			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='#{id}_other' class='chosen-select otherdata #{id}_other' multiple>"
@@ -167,13 +167,18 @@ class Model
 		id = point.id
 		type = point.name
 		check = point.type
-		datatype = point.dataset 'type'
+		datatype = $(point).data 'type'
 
 		# 初始化一遍
 		flag = 0
-		if check is 'checkbox'
+		if check is 'checkbox' and datatype is 'selectmultornull'
 			id = $(".#{type}_other").attr('id')
 			input = $("##{id}_chzn")
+			if $(point).prop('checked')
+				flag = 1
+			else
+				flag = 0
+		else if check is 'checkbox' and datatype is 'inputornull'
 			if $(point).prop('checked')
 				flag = 1
 			else
@@ -195,6 +200,7 @@ class Model
 			input.css 'display','inline-block'
 		else
 			input.css 'display','none'
+
 
 		$(point).on "change",() ->
 			flag = 0
@@ -236,15 +242,18 @@ class Model
 
 		if type is ('input' or 'boolean' or 'select')
 			value = $("##{idp}").val()
-			if value isnt ("" or undefined)
+			if value isnt ("" or undefined or null)
 				dbvalue = "#{value}"
+			else
+				dbvalue = ""
 
 		else if type is 'selectmult'
 			value = $("##{idp}").val()
 			if value instanceof Array
-				dbvalue = ""
 				for i in value
 					dbvalue += "#{i}&"
+			else
+				dbvalue = ""
 
 		else if type is 'CCS'
 			color = $("select[name=#{i}_color]").val() 
@@ -254,29 +263,23 @@ class Model
 
 		else if type is 'selectmultornull'
 			target = $("input##{idp}[type=checkbox]")
-			dbvalue = ""
 			if target.prop('checked')
 				value = $("select[name=#{idp}_other]").val()
 				if value instanceof Array
 					for i in value
 						dbvalue += "#{i}&"
 				else
-					dbvalue = "null"
+					dbvalue = ""
 			else
-				dbvalue = "null"
+				dbvalue = ""
 
 		else if type is 'inputornull'
-			dbvalue = ""
-			value = $("##{idp}").val();
-			if value is ('其他' or '有')
-				othervalue = $("##{idp}_other").val()
-				if othervalue is ("" or null)
-					dbvalue += "#{value}-"
-				else
-					dbvalue += "#{value}-#{othervalue}"
-			else if value isnt ("" or undefined)
-				dbvalue += "#{value}"
-
+			target = $("input##{idp}[type=checkbox]")
+			if target.prop('checked')
+				dbvalue = $("input.otherdata[name=#{idp}_other]").val();
+			else
+				dbvalue = ""
+			
 		return dbvalue
 
 	# 获取表单中目前的所有值情况
@@ -293,6 +296,10 @@ class Model
 	# 验证数据的合法性
 	checkdata = (value,key) ->
 		type = $("##{key}").data 'type'
+		if value is (null or undefined or 'unll' or 'undefined')
+			value = ""
+
+
 		if type is 'input'
 			$("##{key}").val(value)
 			return true
@@ -314,23 +321,18 @@ class Model
 			return true
 		else if type is 'inputornull'
 			if value isnt ""
-				match = /\-/g
-				if match.test value
-					values = value.split "-"
-					$("##{key}").val values[0]
-					$("##{key}_other").val values[1]
-					$("##{key}_other").css 'display','inline-block'
-				else
-					$("##{key}").val value
+				$("##{key}").prop 'checked',true
+				$("input.otherdata[name=#{key}_other]").css 'display','inline-block'
+				$("input.otherdata[name=#{key}_other]").val(value);
 			else
-				$("##{key}").val value
+				$("##{key}").prop 'checked',false
 			return true
 		else if type is 'selectmultornull'
-			if value isnt "null"
+			if value isnt ""
 				values = value.split "&"
 				$("##{key}").prop 'checked',true
-				$("##{key}_other").val values
-				$("##{key}_other").css 'display','inline-block'
+				$(".#{key}_other").val values
+				$(".#{key}_other").css 'display','inline-block'
 			else
 				$("##{key}").prop 'checked',false
 			return true

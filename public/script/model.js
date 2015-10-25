@@ -126,7 +126,7 @@ Model = (function() {
       str_pure += str_end;
       str = ("<div id='" + id + "' data-type='CCS'>") + str_color + str_light + str_pure + "</div>";
     } else if (type === 'inputornull') {
-      tmp = "<input id='" + id + "' name='" + id + "' data-type='inputornull' class='inputornull' type='checkbox'>有<br/> <input name='" + id + "_other' type='text' class='otherdata " + id + "_other'>";
+      tmp = "<input id='" + id + "' name='" + id + "' data-type='inputornull' class='inputornull' type='checkbox'>有<br/> <input name='" + id + "_other' type='text' class='otherdata'>";
     } else if (type === 'selectmultornull') {
       tmp = "<input id='" + id + "' name='" + id + "' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='" + id + "_other' class='chosen-select otherdata " + id + "_other' multiple>";
       selects = data.option;
@@ -182,11 +182,17 @@ Model = (function() {
     id = point.id;
     type = point.name;
     check = point.type;
-    datatype = point.dataset('type');
+    datatype = $(point).data('type');
     flag = 0;
-    if (check === 'checkbox') {
+    if (check === 'checkbox' && datatype === 'selectmultornull') {
       id = $("." + type + "_other").attr('id');
       input = $("#" + id + "_chzn");
+      if ($(point).prop('checked')) {
+        flag = 1;
+      } else {
+        flag = 0;
+      }
+    } else if (check === 'checkbox' && datatype === 'inputornull') {
       if ($(point).prop('checked')) {
         flag = 1;
       } else {
@@ -265,21 +271,24 @@ Model = (function() {
   };
 
   builddbvalue = function(type, idp) {
-    var color, dbvalue, i, j, l, len1, len2, light, othervalue, pure, target, value;
+    var color, dbvalue, i, j, l, len1, len2, light, pure, target, value;
     dbvalue = "";
     if (type === ('input' || 'boolean' || 'select')) {
       value = $("#" + idp).val();
-      if (value !== ("" || void 0)) {
+      if (value !== ("" || void 0 || null)) {
         dbvalue = "" + value;
+      } else {
+        dbvalue = "";
       }
     } else if (type === 'selectmult') {
       value = $("#" + idp).val();
       if (value instanceof Array) {
-        dbvalue = "";
         for (j = 0, len1 = value.length; j < len1; j++) {
           i = value[j];
           dbvalue += i + "&";
         }
+      } else {
+        dbvalue = "";
       }
     } else if (type === 'CCS') {
       color = $("select[name=" + i + "_color]").val();
@@ -288,7 +297,6 @@ Model = (function() {
       dbvalue += color + "&" + light + "&" + pure;
     } else if (type === 'selectmultornull') {
       target = $("input#" + idp + "[type=checkbox]");
-      dbvalue = "";
       if (target.prop('checked')) {
         value = $("select[name=" + idp + "_other]").val();
         if (value instanceof Array) {
@@ -297,23 +305,17 @@ Model = (function() {
             dbvalue += i + "&";
           }
         } else {
-          dbvalue = "null";
+          dbvalue = "";
         }
       } else {
-        dbvalue = "null";
+        dbvalue = "";
       }
     } else if (type === 'inputornull') {
-      dbvalue = "";
-      value = $("#" + idp).val();
-      if (value === ('其他' || '有')) {
-        othervalue = $("#" + idp + "_other").val();
-        if (othervalue === ("" || null)) {
-          dbvalue += value + "-";
-        } else {
-          dbvalue += value + "-" + othervalue;
-        }
-      } else if (value !== ("" || void 0)) {
-        dbvalue += "" + value;
+      target = $("input#" + idp + "[type=checkbox]");
+      if (target.prop('checked')) {
+        dbvalue = $("input.otherdata[name=" + idp + "_other]").val();
+      } else {
+        dbvalue = "";
       }
     }
     return dbvalue;
@@ -334,8 +336,11 @@ Model = (function() {
   };
 
   checkdata = function(value, key) {
-    var match, type, values;
+    var type, values;
     type = $("#" + key).data('type');
+    if (value === (null || void 0 || 'unll' || 'undefined')) {
+      value = "";
+    }
     if (type === 'input') {
       $("#" + key).val(value);
       return true;
@@ -358,25 +363,19 @@ Model = (function() {
       return true;
     } else if (type === 'inputornull') {
       if (value !== "") {
-        match = /\-/g;
-        if (match.test(value)) {
-          values = value.split("-");
-          $("#" + key).val(values[0]);
-          $("#" + key + "_other").val(values[1]);
-          $("#" + key + "_other").css('display', 'inline-block');
-        } else {
-          $("#" + key).val(value);
-        }
+        $("#" + key).prop('checked', true);
+        $("input.otherdata[name=" + key + "_other]").css('display', 'inline-block');
+        $("input.otherdata[name=" + key + "_other]").val(value);
       } else {
-        $("#" + key).val(value);
+        $("#" + key).prop('checked', false);
       }
       return true;
     } else if (type === 'selectmultornull') {
-      if (value !== "null") {
+      if (value !== "") {
         values = value.split("&");
         $("#" + key).prop('checked', true);
-        $("#" + key + "_other").val(values);
-        $("#" + key + "_other").css('display', 'inline-block');
+        $("." + key + "_other").val(values);
+        $("." + key + "_other").css('display', 'inline-block');
       } else {
         $("#" + key).prop('checked', false);
       }

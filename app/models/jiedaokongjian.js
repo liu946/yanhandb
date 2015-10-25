@@ -9,6 +9,7 @@ module.exports = function (orm, db) {
   Comment.getall= function (cb,req) {
     return this.find({},{only:["BianHao","id","cunzhen_id" ]},function(err,items){
       var finishflag = 0;
+      if(items.length === 0) cb(items);
       for(var i in items ){
         var item = items[i];
         var cunzhenid = item.cunzhen_id;

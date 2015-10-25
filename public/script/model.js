@@ -126,18 +126,7 @@ Model = (function() {
       str_pure += str_end;
       str = ("<div id='" + id + "' data-type='CCS'>") + str_color + str_light + str_pure + "</div>";
     } else if (type === 'inputornull') {
-      tmp = "";
-      tmp += "<select name='" + id + "' id='" + id + "' data-type='inputornull' class='chosen-select inputornull'>";
-      selects = data.option;
-      for (k in selects) {
-        v = selects[k];
-        if (v === "有" || v === '其他') {
-          tmp += "<option value='" + v + "' class='" + id + "_" + k + " other'>" + v + "</option>";
-        } else {
-          tmp += "<option value='" + v + "' class='" + id + "_" + k + "'>" + v + "</option>";
-        }
-      }
-      str = tmp + ("<input type='text' class='otherdata " + id + "_other' />");
+      tmp = "<input id='" + id + "' name='" + id + "' data-type='inputornull' class='inputornull' type='checkbox'>有<br/> <input name='" + id + "_other' type='text' class='otherdata " + id + "_other'>";
     } else if (type === 'selectmultornull') {
       tmp = "<input id='" + id + "' name='" + id + "' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='" + id + "_other' class='chosen-select otherdata " + id + "_other' multiple>";
       selects = data.option;
@@ -155,14 +144,19 @@ Model = (function() {
   };
 
   ergodicdata = function(modeldata, position, inputnames) {
-    var i, j, len, mend, ref, results, str, target, title;
+    var comment, i, j, len, mend, ref, results, str, target, title;
     target = modeldata[position];
     if (target.forend !== void 0 && target.fields === void 0) {
       title = target.namezh;
       str = gethtmlstring(target.forend, target.name);
       inputnames = buildkeys(target.name, inputnames);
+      if (target.comment !== void 0) {
+        comment = "(" + target.comment + ")";
+      } else {
+        comment = "";
+      }
       mend = jundgerequire(target);
-      htmlstring += "<div class='list' " + mend + "> <div class='note'> <h5>" + title + "</h5> </div> <div class='shuru'> " + str + " </div> </div>";
+      htmlstring += "<div class='list' " + mend + "> <div class='note'> <h5>" + title + comment + "</h5> </div> <div class='shuru'> " + str + " </div> </div>";
     } else {
       len = target.fields.length;
       results = [];
@@ -184,10 +178,11 @@ Model = (function() {
   };
 
   judgeother = function(point) {
-    var check, flag, id, input, j, len1, ref, t, type, value;
+    var check, datatype, flag, id, input, j, len1, ref, t, type, value;
     id = point.id;
     type = point.name;
     check = point.type;
+    datatype = point.dataset('type');
     flag = 0;
     if (check === 'checkbox') {
       id = $("." + type + "_other").attr('id');
@@ -226,9 +221,15 @@ Model = (function() {
     return $(point).on("change", function() {
       var l, len2, ref1;
       flag = 0;
-      if (check === 'checkbox') {
+      if (check === 'checkbox' && datatype === 'selectmultornull') {
         id = $("." + type + "_other").attr('id');
         input = $("#" + id + "_chzn");
+        if ($(point).prop('checked')) {
+          flag = 1;
+        } else {
+          flag = 0;
+        }
+      } else if (check === 'checkbox' && datatype === 'inputornull') {
         if ($(point).prop('checked')) {
           flag = 1;
         } else {

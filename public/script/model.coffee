@@ -61,6 +61,7 @@ class Model
 	gethtmlstring = (data,id) ->
 		type = data.type
 		value = data.defaultValue
+
 		if value is 'null' or value is undefined
 			value = ""
 
@@ -103,15 +104,8 @@ class Model
 			str = "<div id='#{id}' data-type='CCS'>" + str_color + str_light + str_pure + "</div>"
 
 		else if type is 'inputornull'
-			tmp = ""
-			tmp += "<select name='#{id}' id='#{id}' data-type='inputornull' class='chosen-select inputornull'>"
-			selects = data.option
-			for k, v of selects
-				if v is "有" || v is '其他'
-					tmp += "<option value='#{v}' class='#{id}_#{k} other'>#{v}</option>"
-				else
-					tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
-			str = tmp + "<input type='text' class='otherdata #{id}_other' />"
+			tmp = "<input id='#{id}' name='#{id}' data-type='inputornull' class='inputornull' type='checkbox'>有<br/>
+				<input name='#{id}_other' type='text' class='otherdata #{id}_other'>"
 
 		else if type is 'selectmultornull' 
 			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='#{id}_other' class='chosen-select otherdata #{id}_other' multiple>"
@@ -138,10 +132,15 @@ class Model
 			str = gethtmlstring target.forend,target.name
 			inputnames = buildkeys target.name,inputnames
 
+			if target.comment isnt undefined
+				comment = "(#{target.comment})"
+			else 
+				comment = ""
+
 			mend = jundgerequire target
 			htmlstring += "<div class='list' #{mend}>
 							<div class='note'>
-								<h5>#{title}</h5>
+								<h5>#{title}#{comment}</h5>
 							</div>
 							<div class='shuru'>
 								#{str}
@@ -168,6 +167,8 @@ class Model
 		id = point.id
 		type = point.name
 		check = point.type
+		datatype = point.dataset 'type'
+
 		# 初始化一遍
 		flag = 0
 		if check is 'checkbox'
@@ -197,9 +198,14 @@ class Model
 
 		$(point).on "change",() ->
 			flag = 0
-			if check is 'checkbox'
+			if check is 'checkbox' and datatype is 'selectmultornull'
 				id = $(".#{type}_other").attr('id')
 				input = $("##{id}_chzn")
+				if $(point).prop('checked')
+					flag = 1
+				else
+					flag = 0
+			else if check is 'checkbox' and datatype is 'inputornull'
 				if $(point).prop('checked')
 					flag = 1
 				else

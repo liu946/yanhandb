@@ -22,7 +22,7 @@ router.get('/field/:tablename',function (req, res, next) {
   fs.readdir(path.join(__dirname,'../../field'),function (err, data) {
     if ( 0 <= data.indexOf(req.params.tablename +'.js')) {
       var datajson = require('../../field/'+req.params.tablename).originfield();
-      if(req.param.tablename == "cunzhen" ){res.json(datajson);return;}
+      if(req.params.tablename == "cunzhen" ){res.json(datajson);return;}
       req.models.cunzhen.getselectlist(function (optionobj) {
         datajson.push({
           namezh:"所属村镇",
@@ -43,7 +43,7 @@ router.get('/field/:tablename',function (req, res, next) {
 });
 
 router.post('/update/:tablename/',function(req ,res ,next){
-  req.models[req.param.tablename].get(req.body.id,function(err,item) {
+  req.models[req.params.tablename].get(req.body.id,function(err,item) {
     for (var i in req.body) {
       if(i in item ) item[i] = req.body[i];
     };
@@ -53,7 +53,7 @@ router.post('/update/:tablename/',function(req ,res ,next){
       res.send('save OK!')
     })
     // save relations
-    if(req.param.tablename != "cunzhen" ){
+    if(req.params.tablename != "cunzhen" ){
       req.models.cunzhen.getonebyname(req.body["SuoShuCunZhen"],function(cunzhen){
         item.setCunzhen(cunzhen, function (err) {
           if(err)throw err;
@@ -66,16 +66,19 @@ router.post('/update/:tablename/',function(req ,res ,next){
 router.get('/view/:viewname',function(req ,res ,next){
   res.render(req.params.viewname)
 });
+router.get('/view/:viewname/:id',function(req ,res ,next){
+  res.render(req.params.viewname,{id:req.params.id});
+});
 
 router.get('/new/:tablename',function(req ,res ,next){
-  req.models[req.param.tablename].create([{}],function (err,items) {
+  req.models[req.params.tablename].create([{}],function (err,items) {
     // todo
-    res.redirect('view/edit');//'+req.param.tablename+"/"+items['id']);
+    res.redirect('/input/view/'+req.params.tablename+"/"+items[0]['id']);
   });
 });
 
 router.get('/get/:tablename/:id',function(req ,res ,next){
-  req.models[req.param.tablename].get(req.params.id,function(err,item){
+  req.models[req.params.tablename].get(req.params.id,function(err,item){
     if(err)throw err;
     res.json(item);
   })

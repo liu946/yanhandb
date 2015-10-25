@@ -23,7 +23,7 @@ for(var i in test){
 
 router.get('/', function(req, res, next) {
   // generator db and table
-
+  test.insertAndSetRelation(req, res, next)
   res.render('test',{testlist:testurllist})
 });
 

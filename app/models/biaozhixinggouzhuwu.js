@@ -7,14 +7,21 @@ module.exports = function (orm, db) {
     }
   });
   Comment.getall = function (cb) {
-    return this.all({},{only:["id","LeiXing" ]},function(err,items){
+    return this.all({},{only:["id","LeiXing" ,"cunzhen_id"]},function(err,items){
+      var finishflag = 0;
       for(var i in items ){
         var item = items[i];
-        item.getCunzhen(function(err,cunzhen){
-          item['SuoShuCunZhen'] = (cunzhen == undefined ? null: cunzhen["CZJBXXCunZhenMingChen"] );
-        });
+        var cunzhenid = item.cunzhen_id;
+        req.models.cunzhen.get(cunzhenid,function(err,Cunzhen){
+          if(err) throw  err;
+          finishflag++;
+          item['SuoShuCunZhen'] = (Cunzhen == undefined ? null: Cunzhen["CZJBXXCunZhenMingChen"] );
+          if( finishflag === items.length ){
+            cb(items);
+          }
+
+        })
       }
-      cb(items)
     });
   };
   Comment.hasOne("cunzhen", db.models['cunzhen']);

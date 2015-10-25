@@ -14,7 +14,7 @@ router.get('/get/:tablename', function(req, res, next) {
     var m = req.models[req.params.tablename];
     m.getall(function(row){
       res.json(row);
-    });
+    },req);
 });
 
 

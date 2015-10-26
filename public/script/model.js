@@ -97,7 +97,7 @@ Model = (function() {
       }
       tmp += "</select>";
       if (flag) {
-        str = tmp + ("<input name='" + id + "_otherinput' type='text' class='otherdata'>");
+        str = tmp + ("<input name='" + id + "_otherinput' type='text' class='otherinput'>");
       } else {
         str = tmp;
       }
@@ -114,7 +114,7 @@ Model = (function() {
       }
       tmp += "</select>";
       if (flag) {
-        str = tmp + ("<input name='" + id + "_otherinput' type='text' class='otherdata'>");
+        str = tmp + ("<input name='" + id + "_otherinput' type='text' class='otherinput'>");
       } else {
         str = tmp;
       }
@@ -143,7 +143,7 @@ Model = (function() {
       str_pure += str_end;
       str = ("<div id='" + id + "' data-type='CCS'>") + str_color + str_light + str_pure + "</div>";
     } else if (type === 'inputornull') {
-      tmp = "<input id='" + id + "' name='" + id + "' data-type='inputornull' class='inputornull' type='checkbox'>有<br/> <input name='" + id + "_other' type='text' class='otherdata'>";
+      tmp = "<input id='" + id + "' name='" + id + "' data-type='inputornull' class='inputornull' type='checkbox'>有<br/> <input name='" + id + "_other' type='text' class='otherinput'>";
     } else if (type === 'selectmultornull') {
       tmp = "<input id='" + id + "' name='" + id + "' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='" + id + "_other' id='" + id + "_other' class='chosen-select otherdata' multiple>";
       selects = data.option;
@@ -156,7 +156,7 @@ Model = (function() {
       }
       tmp += "</select>";
       if (flag) {
-        str = tmp + ("<input name='" + id + "_other_otherinput' type='text' class='otherdata'>");
+        str = tmp + ("<input name='" + id + "_other_otherinput' type='text' class='otherinput'>");
       } else {
         str = tmp;
       }
@@ -487,21 +487,21 @@ Model = (function() {
   };
 
   reqevent = function(index, condition, target) {
-    var datatype, flag, i, j, len1, obj, ref, value;
+    var datatype, flag, i, j, len1, obj, objf, ref, value;
     datatype = $("#" + index).data('type');
     if (datatype === 'boolean') {
-      obj = $("#" + index + " input[value=" + condition + "]");
+      obj = $("#" + index + " input[value=true]");
+      objf = $("#" + index + " input[value=false]");
       if (obj.prop('checked')) {
         $("#" + target).css('display', 'inline-block');
       } else {
         $("#" + target).css('display', 'none');
       }
-      return obj.on('click', function() {
-        if ($(this).prop('checked')) {
-          return $("#" + target).css('display', 'inline-block');
-        } else {
-          return $("#" + target).css('display', 'none');
-        }
+      obj.on('click', function() {
+        return $("#" + target).css('display', 'inline-block');
+      });
+      return objf.on('click', function() {
+        return $("#" + target).css('display', 'none');
       });
     } else if (datatype === 'select') {
       obj = $("#" + index);
@@ -521,12 +521,14 @@ Model = (function() {
       obj = $("#" + index);
       value = obj.val();
       flag = 0;
-      ref = obj.val();
-      for (j = 0, len1 = ref.length; j < len1; j++) {
-        i = ref[j];
-        if (i = condition) {
-          flag = 1;
-          break;
+      if (value !== null) {
+        ref = obj.val();
+        for (j = 0, len1 = ref.length; j < len1; j++) {
+          i = ref[j];
+          if (i = condition) {
+            flag = 1;
+            break;
+          }
         }
       }
       if (flag) {

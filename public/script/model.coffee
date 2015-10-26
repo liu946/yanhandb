@@ -78,7 +78,7 @@ class Model
 					flag = 1
 			tmp += "</select>"
 			if flag
-				str = tmp + "<input name='#{id}_otherinput' type='text' class='otherdata'>"
+				str = tmp + "<input name='#{id}_otherinput' type='text' class='otherinput'>"
 			else
 				str = tmp
 
@@ -92,7 +92,7 @@ class Model
 					flag = 1
 			tmp += "</select>"
 			if flag
-				str = tmp + "<input name='#{id}_otherinput' type='text' class='otherdata'>"
+				str = tmp + "<input name='#{id}_otherinput' type='text' class='otherinput'>"
 			else
 				str = tmp
 
@@ -117,7 +117,7 @@ class Model
 
 		else if type is 'inputornull'
 			tmp = "<input id='#{id}' name='#{id}' data-type='inputornull' class='inputornull' type='checkbox'>有<br/>
-				<input name='#{id}_other' type='text' class='otherdata'>"
+				<input name='#{id}_other' type='text' class='otherinput'>"
 
 		else if type is 'selectmultornull' 
 			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='#{id}_other' id='#{id}_other' class='chosen-select otherdata' multiple>"
@@ -128,7 +128,7 @@ class Model
 					flag = 1
 			tmp += "</select>"
 			if flag
-				str = tmp + "<input name='#{id}_other_otherinput' type='text' class='otherdata'>"
+				str = tmp + "<input name='#{id}_other_otherinput' type='text' class='otherinput'>"
 			else
 				str = tmp
 
@@ -432,7 +432,8 @@ class Model
 	reqevent = (index,condition,target) ->
 		datatype = $("##{index}").data 'type'
 		if datatype is 'boolean'
-			obj = $("##{index} input[value=#{condition}]")
+			obj = $("##{index} input[value=true]")
+			objf = $("##{index} input[value=false]")
 
 			if obj.prop 'checked'
 				$("##{target}").css 'display','inline-block'
@@ -440,10 +441,9 @@ class Model
 				$("##{target}").css 'display','none'
 
 			obj.on 'click',() ->
-				if $(this).prop 'checked'
-					$("##{target}").css 'display','inline-block'
-				else
-					$("##{target}").css 'display','none'
+				$("##{target}").css 'display','inline-block'
+			objf.on 'click',() ->
+				$("##{target}").css 'display','none'
 
 		else if datatype is 'select'
 			obj = $("##{index}")
@@ -463,10 +463,11 @@ class Model
 			obj = $("##{index}")
 			value = obj.val()
 			flag = 0
-			for i in obj.val()
-				if i = condition
-					flag = 1
-					break
+			if value isnt null
+				for i in obj.val()
+					if i = condition
+						flag = 1
+						break
 			if flag
 				$("##{target}").css 'display','inline-block'
 			else

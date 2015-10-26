@@ -2,33 +2,23 @@
 var tb = require('../../field/kaichangkongjian')
 module.exports = function (orm, db) {
   var Comment = db.define('kaichangkongjian', tb.backendfield(),{
+    autoFetch: true,
     methods: {
 
     }
   });
   Comment.getall= function (cb,req) {
     return this.all({},{only:["BianHao","id","cunzhen_id" ]},function(err,items){
-      var finishflag = 0;
-      if(items.length === 0) cb(items);
       for(var i in items ){
         var item = items[i];
-        var cunzhenid = item.cunzhen_id;
-        finishflag++;
-        if(cunzhenid===null) {
-
+        if(item.cunzhen_id ===null) {
           item['SuoShuCunZhen'] = null;
         }else{
-          req.models.cunzhen.get(cunzhenid,function(err,Cunzhen){
-
-            if(err) throw err;
-            item['SuoShuCunZhen'] = (Cunzhen == undefined ? null: Cunzhen["CZJBXXCunZhenMingChen"] );
-
-          })
+          item['SuoShuCunZhen'] =item.cunzhen["CZJBXXCunZhenMingChen"];
         }
-        if( finishflag === items.length ){
-          cb(items);
-        }
+
       }
+      cb(items);
     });
   }
   Comment.hasOne("cunzhen", db.models['cunzhen']);

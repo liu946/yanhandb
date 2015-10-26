@@ -2,33 +2,22 @@
 var tb = require('../../field/biaozhixinggouzhuwu')
 module.exports = function (orm, db) {
   var Comment = db.define('biaozhixinggouzhuwu', tb.backendfield(),{
+    autoFetch: true,
     methods: {
-
     }
   });
   Comment.getall = function (cb,req) {
     return this.all({},{only:["id","LeiXing" ,"cunzhen_id"]},function(err,items){
-      var finishflag = 0;
-      if(items.length === 0) cb(items);
       for(var i in items ){
         var item = items[i];
-        var cunzhenid = item.cunzhen_id;
-        finishflag++;
-        if(cunzhenid===null) {
 
+        if(item.cunzhen_id === null ){
           item['SuoShuCunZhen'] = null;
         }else{
-          req.models.cunzhen.get(cunzhenid,function(err,Cunzhen){
-
-            if(err) throw err;
-            item['SuoShuCunZhen'] = (Cunzhen == undefined ? null: Cunzhen["CZJBXXCunZhenMingChen"] );
-
-          })
-        }
-        if( finishflag === items.length ){
-          cb(items);
+          item['SuoShuCunZhen'] =item.cunzhen["CZJBXXCunZhenMingChen"];
         }
       }
+      cb(items);
     });
   };
   Comment.hasOne("cunzhen", db.models['cunzhen']);

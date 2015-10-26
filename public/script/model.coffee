@@ -61,7 +61,7 @@ class Model
 	gethtmlstring = (data,id) ->
 		type = data.type
 		value = data.defaultValue
-
+		flag = 0
 		if value is 'null' or value is undefined
 			value = ""
 
@@ -74,7 +74,13 @@ class Model
 			selects = data.option
 			for k, v of selects
 				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
-			str = tmp + "</select>"
+				if v is '有' || v is '其他'
+					flag = 1
+			tmp += "</select>"
+			if flag
+				str = tmp + "<input name='#{id}_otherinput' type='text' class='otherdata'>"
+			else
+				str = tmp
 
 		else if type is 'selectmult' 
 			tmp = ""
@@ -82,7 +88,13 @@ class Model
 			selects = data.option
 			for k, v of selects
 				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
-			str = tmp + "</select>"
+				if v is '有' || v is '其他'
+					flag = 1
+			tmp += "</select>"
+			if flag
+				str = tmp + "<input name='#{id}_otherinput' type='text' class='otherdata'>"
+			else
+				str = tmp
 
 		else if type is 'CCS' 
 			str_color = "<div class='ccs_color s_show'>颜色<select name='#{id}_color' class='CCS ccscolor' id='#{id}_color'>"
@@ -108,11 +120,17 @@ class Model
 				<input name='#{id}_other' type='text' class='otherdata'>"
 
 		else if type is 'selectmultornull' 
-			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='#{id}_other' class='chosen-select otherdata #{id}_other' multiple>"
+			tmp = "<input id='#{id}' name='#{id}' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='#{id}_other' id='#{id}_other' class='chosen-select otherdata' multiple>"
 			selects = data.option
 			for k, v of selects
 				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
-			str = tmp + "</select>"
+				if v is '有' || v is '其他'
+					flag = 1
+			tmp += "</select>"
+			if flag
+				str = tmp + "<input name='#{id}_other_otherinput' type='text' class='otherdata'>"
+			else
+				str = tmp
 
 		else if type is 'boolean'
 			str = "<div id='#{id}' data-type='boolean' ><input type='radio' name='#{id}' value='true'/>是
@@ -162,88 +180,78 @@ class Model
 					htmlstring += "</div><div class='clear'></div><hr />"
 				
 				
-	# 判断选择框中需要手动输入类型的情况
-	judgeother = (point) ->
-		id = point.id
-		type = point.name
-		check = point.type
-		datatype = $(point).data 'type'
-
-		# 初始化一遍
+	clickappear = (id,check,datatype,point) ->
 		flag = 0
 		if check is 'checkbox' and datatype is 'selectmultornull'
-			id = $(".#{type}_other").attr('id')
-			input = $("##{id}_chzn")
+			idp = "#{id}_other"
+			input = $("##{idp}_chzn")
+			input2 = $("input[name=#{idp}_otherinput]")
 			if $(point).prop('checked')
 				flag = 1
 			else
-				flag = 0
+				if input2.length > 0
+					input2.css 'display','none'
+			
+
 		else if check is 'checkbox' and datatype is 'inputornull'
+			input = $("##{id}_other")
 			if $(point).prop('checked')
 				flag = 1
-			else
-				flag = 0
+			
 		else
-			input = $(".#{type}_other")
+			input = $("input[name=#{id}_otherinput]")
 			value = $(point).val()
-			if value != null
+			if value isnt null or value isnt undefined
 				if typeof value is 'string'
 					if value == "其他" || value == "有"
 						flag = 1
 				else if typeof value is 'object'
-					for t in $(point).val()
-						if t == "其他" || t == "有"
-							flag = 1
-				else
-					flag = 0
+					if value isnt null
+						for t in value
+							if t == "其他" || t == "有"
+								flag = 1
+
 		if flag
 			input.css 'display','inline-block'
 		else
 			input.css 'display','none'
 
+	# 判断选择框中需要手动输入类型的情况
+	judgeother = (point) ->
+		id = point.id
+		check = point.type
+		datatype = $(point).data 'type'
+
+		# 初始化一遍
+		clickappear(id,check,datatype,point)
 
 		$(point).on "change",() ->
-			flag = 0
-			if check is 'checkbox' and datatype is 'selectmultornull'
-				id = $(".#{type}_other").attr('id')
-				input = $("##{id}_chzn")
-				if $(point).prop('checked')
-					flag = 1
-				else
-					flag = 0
-			else if check is 'checkbox' and datatype is 'inputornull'
-				if $(point).prop('checked')
-					flag = 1
-				else
-					flag = 0
-			else
-				input = $(".#{type}_other")
-				value = $(point).val()
-				if value != null
-					if typeof value is 'string'
-						if value == "其他" || value == "有"
-							flag = 1
-					else if typeof value is 'object'
-						for t in $(point).val()
-							if t == "其他" || t == "有"
-								flag = 1
-					else
-						flag = 0
-
-			if flag
-				input.css 'display','inline-block'
-			else
-				input.css 'display','none'
+			clickappear(id,check,datatype,point)
 				
 	# 判断值类型与存储方式的工具
-	# 检查传入值的正确性
+	# 有，其他的值得输入
+	getotherinput = (idp,type,value) ->
+		va = ""
+		if type is 'selectmultornull'
+			idp += '_other'
+		
+		if value is '有' || value is '其他'
+			va = value + "~" + $("input[name=#{idp}_otherinput]").val()
+
+		return va
+				
+	# 检查输入值的正确性
 	builddbvalue = (type,idp) ->
 		dbvalue = ""
 
 		if type is 'input' or type is 'select'
 			value = $("##{idp}").val()
 			if value isnt "" or value isnt undefined or value isnt null
-				dbvalue = "#{value}"
+				result = getotherinput idp,type,value
+				if result isnt ""
+					dbvalue = "#{result}"
+				else
+					dbvalue = "#{value}"
 			else
 				dbvalue = ""
 
@@ -254,14 +262,18 @@ class Model
 			value = $("##{idp}").val()
 			if value instanceof Array
 				for i in value
-					dbvalue += "#{i}&"
+					result = getotherinput idp,type,i
+					if result isnt ""
+						dbvalue += "#{result}&"
+					else
+						dbvalue += "#{i}&"
 			else
 				dbvalue = ""
 
 		else if type is 'CCS'
-			color = $("select[name=#{i}_color]").val() 
-			light = $("select[name=#{i}_light]").val() 
-			pure =  $("select[name=#{i}_pure]").val()
+			color = $("##{idp}_color").val() 
+			light = $("##{idp}_light").val() 
+			pure =  $("##{idp}_pure").val()
 			dbvalue += color + "&" + light + "&" + pure
 
 		else if type is 'selectmultornull'
@@ -270,7 +282,11 @@ class Model
 				value = $("select[name=#{idp}_other]").val()
 				if value instanceof Array
 					for i in value
-						dbvalue += "#{i}&"
+						result = getotherinput idp,type,i
+						if result isnt ""
+							dbvalue += "#{result}&"
+						else
+							dbvalue += "#{i}&"
 				else
 					dbvalue = ""
 			else
@@ -302,21 +318,38 @@ class Model
 		if value is null or value is undefined or value is 'unll' or value is 'undefined'
 			value = ""
 
+		match = /\~/
 
 		if type is 'input'
 			$("##{key}").val(value)
 			return true
+
 		else if type is 'select'
-			console.log value
+			if match.test value
+				values = value.split('~')
+				value = values[0]
+				other = values[1]
+				$("input[name=#{key}_otherinput]").val other
 			$("##{key}").val(value)
 			return true
+
 		else if type is 'selectmult'
 			if value isnt ""
 				values = value.split("&")
-				$("##{key}").val(values)
+				data = []
+				for i in values
+					if match.test i
+						s = i.split('~')
+						i = s[0]
+						other = s[1]
+						$("input[name=#{key}_otherinput]").val other
+					data.push i
+				
+				$("##{key}").val(data)
 			else
 				$("##{key}").val("")
 			return true
+
 		else if type is 'CCS'
 			values = value.split("&")
 			$("##{key}_color").val values[0]
@@ -334,9 +367,18 @@ class Model
 		else if type is 'selectmultornull'
 			if value isnt ""
 				values = value.split "&"
+				data = []
+				for i in values
+					if match.test i
+						s = i.split('~')
+						i = s[0]
+						other = s[1]
+						$("input[name=#{key}_other_otherinput]").val other
+					data.push i
+
 				$("##{key}").prop 'checked',true
-				$(".#{key}_other").val values
-				$(".#{key}_other").css 'display','inline-block'
+				$("##{key}_other").val data
+				$("##{key}_other").css 'display','inline-block'
 			else
 				$("##{key}").prop 'checked',false
 			return true
@@ -350,7 +392,6 @@ class Model
 	getdbdata = (tablename,id) ->
 		url = "/input/get/#{tablename}/#{id}"
 		dbdata = getdatabyajax(url).responseJSON
-		console.log dbdata
 		for k, v of dbdata
 			if k == 'id'
 				continue
@@ -380,6 +421,9 @@ class Model
 					judgeother dom
 				for dom in $(".selectmultornull")
 					judgeother dom
+				for dom in $("select")
+					judgeother dom
+				
 				
 			.fail () ->
 				alert "动态脚本加载失败"

@@ -13,18 +13,18 @@ Model = (function() {
 
   CCS = {
     color: {
-      'R': '红',
-      'OR': '橙红',
-      'O': '橙',
-      'OY': '橙黄',
-      'Y': '黄',
-      'YG': '黄绿',
-      'G': '绿',
-      'BG': '蓝绿',
-      'B': '蓝',
-      'BV': '青紫',
-      'V': '紫罗兰',
-      'VR': '紫红'
+      'R': '红_rgb(255,0,0)',
+      'OR': '橙红_rgb(255,51,0)',
+      'O': '橙_rgb(255,102,0)',
+      'OY': '橙黄_rgb(255,153,0)',
+      'Y': '黄_rgb(255,255,0)',
+      'YG': '黄绿_rgb(153,255,0)',
+      'G': '绿_rgb(0,255,0)',
+      'BG': '蓝绿_rgb(0,255,255)',
+      'B': '蓝_rgb(0,0,255)',
+      'BV': '青紫_rgb(102,0,255)',
+      'V': '紫罗兰_rgb(255,0,255)',
+      'VR': '紫红_rgb(255,0,102)'
     },
     light: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     pure: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -75,7 +75,7 @@ Model = (function() {
   };
 
   gethtmlstring = function(data, id) {
-    var flag, i, j, k, l, len1, len2, ref, ref1, ref2, selects, str, str_color, str_end, str_light, str_pure, tmp, type, v, value;
+    var flag, i, j, k, l, len1, len2, ref, ref1, ref2, selects, str, str_color, str_end, str_light, str_pure, tmp, type, v, value, vv;
     type = data.type;
     value = data.defaultValue;
     flag = 0;
@@ -126,7 +126,8 @@ Model = (function() {
       ref = CCS.color;
       for (k in ref) {
         v = ref[k];
-        str_color += "<option value='" + k + "'>" + v + "</option>";
+        vv = v.split("_");
+        str_color += "<option value='" + k + "' style='background:" + vv[1] + "'>" + vv[0] + "</option>";
       }
       str_color += str_end;
       ref1 = CCS.light;
@@ -493,12 +494,12 @@ Model = (function() {
       obj = $("#" + index + " input[value=true]");
       objf = $("#" + index + " input[value=false]");
       if (obj.prop('checked')) {
-        $("#" + target).css('display', 'inline-block');
+        $("#" + target).css('display', 'block');
       } else {
         $("#" + target).css('display', 'none');
       }
       obj.on('click', function() {
-        return $("#" + target).css('display', 'inline-block');
+        return $("#" + target).css('display', 'block');
       });
       return objf.on('click', function() {
         return $("#" + target).css('display', 'none');
@@ -506,13 +507,13 @@ Model = (function() {
     } else if (datatype === 'select') {
       obj = $("#" + index);
       if (obj.val() === condition) {
-        $("#" + target).css('display', 'inline-block');
+        $("#" + target).css('display', 'block');
       } else {
         $("#" + target).css('display', 'none');
       }
       return obj.on("change", function() {
         if ($(this).val() === condition) {
-          return $("#" + target).css('display', 'inline-block');
+          return $("#" + target).css('display', 'block');
         } else {
           return $("#" + target).css('display', 'none');
         }

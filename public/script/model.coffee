@@ -7,18 +7,18 @@ class Model
 	# model类中的常量
 	CCS = {
 			color: {
-					'R':'红',
-					'OR': '橙红',
-					'O': '橙',
-					'OY': '橙黄',
-					'Y': '黄',
-					'YG': '黄绿',
-					'G': '绿'
-					'BG': '蓝绿',
-					'B': '蓝'
-					'BV': '青紫',
-					'V': '紫罗兰',
-					'VR': '紫红'
+					'R':'红_rgb(255,0,0)',
+					'OR': '橙红_rgb(255,51,0)',
+					'O': '橙_rgb(255,102,0)',
+					'OY': '橙黄_rgb(255,153,0)',
+					'Y': '黄_rgb(255,255,0)',
+					'YG': '黄绿_rgb(153,255,0)',
+					'G': '绿_rgb(0,255,0)'
+					'BG': '蓝绿_rgb(0,255,255)',
+					'B': '蓝_rgb(0,0,255)'
+					'BV': '青紫_rgb(102,0,255)',
+					'V': '紫罗兰_rgb(255,0,255)',
+					'VR': '紫红_rgb(255,0,102)'
 				},
 			light: [0,1,2,3,4,5,6,7,8,9,10],
 			pure: [0,1,2,3,4,5,6,7,8,9,10]
@@ -103,7 +103,8 @@ class Model
 			str_end = "</select></div>"
 					
 			for k,v of CCS.color
-				str_color += "<option value='#{k}'>#{v}</option>"
+				vv = v.split("_")
+				str_color += "<option value='#{k}' style='background:#{vv[1]}'>#{vv[0]}</option>"
 			str_color += str_end
 			for i in CCS.light
 				str_light += "<option value='#{i}'>#{i}</option>"
@@ -436,12 +437,12 @@ class Model
 			objf = $("##{index} input[value=false]")
 
 			if obj.prop 'checked'
-				$("##{target}").css 'display','inline-block'
+				$("##{target}").css 'display','block'
 			else
 				$("##{target}").css 'display','none'
 
 			obj.on 'click',() ->
-				$("##{target}").css 'display','inline-block'
+				$("##{target}").css 'display','block'
 			objf.on 'click',() ->
 				$("##{target}").css 'display','none'
 
@@ -449,13 +450,13 @@ class Model
 			obj = $("##{index}")
 
 			if obj.val() is condition
-				$("##{target}").css 'display','inline-block'
+				$("##{target}").css 'display','block'
 			else
 				$("##{target}").css 'display','none'
 
 			obj.on "change",() ->
 				if $(this).val() is condition
-					$("##{target}").css 'display','inline-block'
+					$("##{target}").css 'display','block'
 				else
 					$("##{target}").css 'display','none'
 

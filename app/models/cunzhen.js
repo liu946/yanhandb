@@ -20,9 +20,9 @@ module.exports = function (orm, db) {
     });
   };
   Comment.getonebyname= function(name,cb){
-    return this.get({"CZJBXXCunZhenMingChen":name},function(err,item){
+    return this.find({"CZJBXXCunZhenMingChen":name},function(err,items){
       if(err) throw err;
-      cb(item);
+      cb(items[0]);
     })
   }
 };

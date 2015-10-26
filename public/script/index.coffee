@@ -17,12 +17,24 @@ class List
 		html = ''
 		for d in data
 			html += "<div class='container'>
-						<div class='id'><p>#{d.id}</p></div>
-						<div class='title'><p>#{d.CZJBXXCunZhenMingChen}</p></div>
-						<div class='exchange'><a href='/input/view/#{tablename}/#{d.id}'>修改</a></div>
-					</div>"
-
-		$('#formlist .contentlist').html html
+						<div class='id'><p>#{d.id}</p></div>"
+			if tablename is 'cunzhen'
+				html += "<div class='title'><p>#{d.CZJBXXCunZhenMingChen}</p></div>"
+			else if tablename is 'biaozhixinggouzhuwu'
+				html += "<div class='title'><p>#{d.SuoShuCunZhen}</p></div>
+					<div class='title'><p>#{d.LeiXing}</p></div>"
+			else if tablename is 'jiedaokongjian'
+				html += "<div class='title'><p>#{d.SuoShuCunZhen}</p></div>
+					<div class='title'><p>#{d.BianHao}</p></div>"
+			else if tablename is 'kaichangkongjian'
+				html += "<div class='title'><p>#{d.SuoShuCunZhen}</p></div>
+					<div class='title'><p>#{d.BianHao}</p></div>"
+			else if tablename is 'tingyuanyujianzhu'
+				html += "<div class='title'><p>#{d.SuoShuCunZhen}</p></div>"
+			else
+			
+			html += "<div class='exchange'><a href='/input/view/#{tablename}/#{d.id}'>修改</a></div></div>"
+		$('#formlist .contentlist').append html
 
 	init: ()->
 		data = getdatabyajax("/input/get/#{@tablename}").responseJSON

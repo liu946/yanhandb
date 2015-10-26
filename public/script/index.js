@@ -25,9 +25,23 @@ List = (function() {
     html = '';
     for (i = 0, len = data.length; i < len; i++) {
       d = data[i];
-      html += "<div class='container'> <div class='id'><p>" + d.id + "</p></div> <div class='title'><p>" + d.CZJBXXCunZhenMingChen + "</p></div> <div class='exchange'><a href='/input/view/" + tablename + "/" + d.id + "'>修改</a></div> </div>";
+      html += "<div class='container'> <div class='id'><p>" + d.id + "</p></div>";
+      if (tablename === 'cunzhen') {
+        html += "<div class='title'><p>" + d.CZJBXXCunZhenMingChen + "</p></div>";
+      } else if (tablename === 'biaozhixinggouzhuwu') {
+        html += "<div class='title'><p>" + d.SuoShuCunZhen + "</p></div> <div class='title'><p>" + d.LeiXing + "</p></div>";
+      } else if (tablename === 'jiedaokongjian') {
+        html += "<div class='title'><p>" + d.SuoShuCunZhen + "</p></div> <div class='title'><p>" + d.BianHao + "</p></div>";
+      } else if (tablename === 'kaichangkongjian') {
+        html += "<div class='title'><p>" + d.SuoShuCunZhen + "</p></div> <div class='title'><p>" + d.BianHao + "</p></div>";
+      } else if (tablename === 'tingyuanyujianzhu') {
+        html += "<div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
+      } else {
+
+      }
+      html += "<div class='exchange'><a href='/input/view/" + tablename + "/" + d.id + "'>修改</a></div></div>";
     }
-    return $('#formlist .contentlist').html(html);
+    return $('#formlist .contentlist').append(html);
   };
 
   List.prototype.init = function() {

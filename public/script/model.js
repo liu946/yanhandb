@@ -176,8 +176,8 @@ Model = (function() {
       title = target.namezh;
       str = gethtmlstring(target.forend, target.name);
       inputnames = buildkeys(target.name, inputnames);
-      if (target.comment !== void 0) {
-        comment = "(" + target.comment + ")";
+      if (target.forend.comment !== void 0) {
+        comment = "(" + target.forend.comment + ")";
       } else {
         comment = "";
       }
@@ -590,7 +590,6 @@ Model = (function() {
     var result, that;
     result = getformvalue(this.target, this.inputnames, this.editid);
     that = this;
-    console.log(result);
     return $.post("/input/update/" + this.tablename, result, function(data) {
       alert('保存成功');
       return getdbdata(that.tablename, that.editid);

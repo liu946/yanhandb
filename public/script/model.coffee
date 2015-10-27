@@ -151,8 +151,8 @@ class Model
 			str = gethtmlstring target.forend,target.name
 			inputnames = buildkeys target.name,inputnames
 
-			if target.comment isnt undefined
-				comment = "(#{target.comment})"
+			if target.forend.comment isnt undefined
+				comment = "(#{target.forend.comment})"
 			else 
 				comment = ""
 
@@ -507,7 +507,6 @@ class Model
 	savedata: () ->
 		result = getformvalue @target,@inputnames,@editid
 		that = this
-		console.log result
 		$.post "/input/update/#{@tablename}", result, (data) ->
 			alert '保存成功'
 			getdbdata that.tablename,that.editid

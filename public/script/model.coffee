@@ -417,6 +417,11 @@ class Model
 					_id = $(".#{id}_other").attr('id')
 					$("##{_id}_chzn").css "display","none"
 
+				# 修改chosen框架的bug
+				for dom in $(".chzn-container")
+					$(dom).css 'width','250px'
+				
+
 				# "ornull"点击输入数据，反选取消
 				for dom in $(".inputornull")
 					judgeother dom

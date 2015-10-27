@@ -456,7 +456,7 @@ Model = (function() {
       }
     }
     return jQuery.getScript("/script/chosen.jquery.js").done(function() {
-      var _id, dom, herd, i, j, l, len1, len2, len3, len4, m, n, ref, ref1, ref2, results;
+      var _id, dom, herd, i, j, l, len1, len2, len3, len4, len5, m, n, o, ref, ref1, ref2, ref3, results;
       $('.chosen-select').chosen();
       herd = $(".selectmultornull");
       for (j = 0, len1 = herd.length; j < len1; j++) {
@@ -465,20 +465,25 @@ Model = (function() {
         _id = $("." + id + "_other").attr('id');
         $("#" + _id + "_chzn").css("display", "none");
       }
-      ref = $(".inputornull");
+      ref = $(".chzn-container");
       for (l = 0, len2 = ref.length; l < len2; l++) {
         dom = ref[l];
-        judgeother(dom);
+        $(dom).css('width', '250px');
       }
-      ref1 = $(".selectmultornull");
+      ref1 = $(".inputornull");
       for (m = 0, len3 = ref1.length; m < len3; m++) {
         dom = ref1[m];
         judgeother(dom);
       }
-      ref2 = $("select");
-      results = [];
+      ref2 = $(".selectmultornull");
       for (n = 0, len4 = ref2.length; n < len4; n++) {
         dom = ref2[n];
+        judgeother(dom);
+      }
+      ref3 = $("select");
+      results = [];
+      for (o = 0, len5 = ref3.length; o < len5; o++) {
+        dom = ref3[o];
         results.push(judgeother(dom));
       }
       return results;

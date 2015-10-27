@@ -117,7 +117,7 @@ class Model
 			str = "<div id='#{id}' data-type='CCS'>" + str_color + str_light + str_pure + "</div>"
 
 		else if type is 'inputornull'
-			tmp = "<input id='#{id}' name='#{id}' data-type='inputornull' class='inputornull' type='checkbox'>有<br/>
+			str = "<input id='#{id}' name='#{id}' data-type='inputornull' class='inputornull' type='checkbox'>有<br/>
 				<input name='#{id}_other' type='text' class='otherinput'>"
 
 		else if type is 'selectmultornull' 
@@ -134,8 +134,8 @@ class Model
 				str = tmp
 
 		else if type is 'boolean'
-			str = "<div id='#{id}' data-type='boolean' ><input type='radio' name='#{id}' value='true'/>是
-				<input type='radio' name='#{id}' value='false'/>否</div>"
+			str = "<div id='#{id}' data-type='boolean' ><input type='radio' name='#{id}' value='1'/>是
+				<input type='radio' name='#{id}' value='0'/>否</div>"
 
 		else
 			str = ''
@@ -195,7 +195,7 @@ class Model
 			
 
 		else if check is 'checkbox' and datatype is 'inputornull'
-			input = $("##{id}_other")
+			input = $("input[name=#{id}_other]")
 			if $(point).prop('checked')
 				flag = 1
 			
@@ -213,7 +213,7 @@ class Model
 								flag = 1
 
 		if flag
-			input.css 'display','inline-block'
+			input.css 'display','block'
 		else
 			input.css 'display','none'
 
@@ -360,7 +360,7 @@ class Model
 		else if type is 'inputornull'
 			if value isnt ""
 				$("##{key}").prop 'checked',true
-				$("input.otherdata[name=#{key}_other]").css 'display','inline-block'
+				$("input.otherdata[name=#{key}_other]").css 'display','block'
 				$("input.otherdata[name=#{key}_other]").val(value);
 			else
 				$("##{key}").prop 'checked',false
@@ -379,7 +379,7 @@ class Model
 
 				$("##{key}").prop 'checked',true
 				$("##{key}_other").val data
-				$("##{key}_other").css 'display','inline-block'
+				$("##{key}_other").css 'display','block'
 			else
 				$("##{key}").prop 'checked',false
 			return true
@@ -433,8 +433,8 @@ class Model
 	reqevent = (index,condition,target) ->
 		datatype = $("##{index}").data 'type'
 		if datatype is 'boolean'
-			obj = $("##{index} input[value=true]")
-			objf = $("##{index} input[value=false]")
+			obj = $("##{index} input[value=1]")
+			objf = $("##{index} input[value=0]")
 
 			if obj.prop 'checked'
 				$("##{target}").css 'display','block'
@@ -470,7 +470,7 @@ class Model
 						flag = 1
 						break
 			if flag
-				$("##{target}").css 'display','inline-block'
+				$("##{target}").css 'display','block'
 			else
 				$("##{target}").css 'display','none'
 
@@ -481,7 +481,7 @@ class Model
 						flag = 1
 						break
 				if flag
-					$("##{target}").css 'display','inline-block'
+					$("##{target}").css 'display','block'
 				else
 					$("##{target}").css 'display','none'
 

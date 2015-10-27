@@ -144,7 +144,7 @@ Model = (function() {
       str_pure += str_end;
       str = ("<div id='" + id + "' data-type='CCS'>") + str_color + str_light + str_pure + "</div>";
     } else if (type === 'inputornull') {
-      tmp = "<input id='" + id + "' name='" + id + "' data-type='inputornull' class='inputornull' type='checkbox'>有<br/> <input name='" + id + "_other' type='text' class='otherinput'>";
+      str = "<input id='" + id + "' name='" + id + "' data-type='inputornull' class='inputornull' type='checkbox'>有<br/> <input name='" + id + "_other' type='text' class='otherinput'>";
     } else if (type === 'selectmultornull') {
       tmp = "<input id='" + id + "' name='" + id + "' data-type='selectmultornull' class='selectmultornull' type='checkbox'>有<br/><select name='" + id + "_other' id='" + id + "_other' class='chosen-select otherdata' multiple>";
       selects = data.option;
@@ -162,7 +162,7 @@ Model = (function() {
         str = tmp;
       }
     } else if (type === 'boolean') {
-      str = "<div id='" + id + "' data-type='boolean' ><input type='radio' name='" + id + "' value='true'/>是 <input type='radio' name='" + id + "' value='false'/>否</div>";
+      str = "<div id='" + id + "' data-type='boolean' ><input type='radio' name='" + id + "' value='1'/>是 <input type='radio' name='" + id + "' value='0'/>否</div>";
     } else {
       str = '';
     }
@@ -218,7 +218,7 @@ Model = (function() {
         }
       }
     } else if (check === 'checkbox' && datatype === 'inputornull') {
-      input = $("#" + id + "_other");
+      input = $("input[name=" + id + "_other]");
       if ($(point).prop('checked')) {
         flag = 1;
       }
@@ -243,7 +243,7 @@ Model = (function() {
       }
     }
     if (flag) {
-      return input.css('display', 'inline-block');
+      return input.css('display', 'block');
     } else {
       return input.css('display', 'none');
     }
@@ -401,7 +401,7 @@ Model = (function() {
     } else if (type === 'inputornull') {
       if (value !== "") {
         $("#" + key).prop('checked', true);
-        $("input.otherdata[name=" + key + "_other]").css('display', 'inline-block');
+        $("input.otherdata[name=" + key + "_other]").css('display', 'block');
         $("input.otherdata[name=" + key + "_other]").val(value);
       } else {
         $("#" + key).prop('checked', false);
@@ -423,7 +423,7 @@ Model = (function() {
         }
         $("#" + key).prop('checked', true);
         $("#" + key + "_other").val(data);
-        $("#" + key + "_other").css('display', 'inline-block');
+        $("#" + key + "_other").css('display', 'block');
       } else {
         $("#" + key).prop('checked', false);
       }
@@ -491,8 +491,8 @@ Model = (function() {
     var datatype, flag, i, j, len1, obj, objf, ref, value;
     datatype = $("#" + index).data('type');
     if (datatype === 'boolean') {
-      obj = $("#" + index + " input[value=true]");
-      objf = $("#" + index + " input[value=false]");
+      obj = $("#" + index + " input[value=1]");
+      objf = $("#" + index + " input[value=0]");
       if (obj.prop('checked')) {
         $("#" + target).css('display', 'block');
       } else {
@@ -533,7 +533,7 @@ Model = (function() {
         }
       }
       if (flag) {
-        $("#" + target).css('display', 'inline-block');
+        $("#" + target).css('display', 'block');
       } else {
         $("#" + target).css('display', 'none');
       }
@@ -549,7 +549,7 @@ Model = (function() {
           }
         }
         if (flag) {
-          return $("#" + target).css('display', 'inline-block');
+          return $("#" + target).css('display', 'block');
         } else {
           return $("#" + target).css('display', 'none');
         }

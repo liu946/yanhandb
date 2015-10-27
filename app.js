@@ -12,7 +12,9 @@ var routes = require('./conf/routes');
 var app = express();
 env(app)
 routes(app)
-
+app.get('/', function(req, res){
+  res.redirect('/input/view/index');
+})
 app.use(express.static('public'));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,6 +46,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 
 module.exports = app;

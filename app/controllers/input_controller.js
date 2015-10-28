@@ -84,5 +84,19 @@ router.get('/get/:tablename/:id',function(req ,res ,next){
     res.json(item);
   })
 });
+
+router.get('/creat/:tablename/:id',function(req,res,next){
+  req.models[req.params.tablename].get(req.params.id,function(err,item){
+    if(err)throw err;
+    var newitem = {};
+    for(var i in item){
+      if(i != "id") newitem[i] = item[i];
+    }
+    req.models[req.params.tablename].create([newitem],function(err,items){
+      if(err)throw err;
+      res.redirect('/input/view/'+req.params.tablename+"/"+items[0]['id'])
+    })
+  })
+})
 module.exports = router;
 

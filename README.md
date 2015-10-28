@@ -74,7 +74,7 @@ tingyuanyujianzhu
 
 ```input/field/:tablename```
 
-- 建立一个新数据 get -> 建立完毕自动跳转到???(没看你写的逻辑，这个再定)
+- 建立一个新数据 get -> 建立完毕自动跳转
 
 ```input/new/:tablename```
 
@@ -86,3 +86,7 @@ post数据id字段为存储依据
 - 获得一条数据 get -> json
 
 ```input/get/:tablename/:id```
+
+- 从一条数据生成新数据 get -> 建立完毕自动跳转
+
+```input/creat/:tablename/:id``` 如需要从id为5的生成新数据，那么id传5，会自动跳到一个相同的数据id=6的编辑页面

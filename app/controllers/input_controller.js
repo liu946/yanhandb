@@ -24,7 +24,7 @@ router.get('/field/:tablename',function (req, res, next) {
       var datajson = require('../../field/'+req.params.tablename).originfield();
       if(req.params.tablename == "cunzhen" ){res.json(datajson);return;}
       req.models.cunzhen.getselectlist(function (optionobj) {
-        datajson.push({
+        datajson.unshift({
           namezh:"所属村镇",
           name:"SuoShuCunZhen",
           backend:{type:"text",size:100},

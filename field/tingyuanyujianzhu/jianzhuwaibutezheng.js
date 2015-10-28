@@ -636,6 +636,11 @@ module.exports = {
 
 	{
 		namezh:"有无牌匾",
+		require:{
+			name:"JZJBXXJianZhuXingZhi",
+			namezh:"建筑性质",
+			value:2,
+		},
 		backend:{
 			type:"boolean",
 		},
@@ -646,7 +651,7 @@ module.exports = {
 	{
 		namezh:"牌匾",
 		require:{
-			name:"JZJBXXJianZhuXingZhi",
+			name:"",
 			namezh:"有无牌匾",
 			value:1,
 		},

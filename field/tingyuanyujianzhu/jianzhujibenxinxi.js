@@ -30,8 +30,7 @@ module.exports = {
 		forend:{
 			type:'select',
 			option:{
-
-				1:"居住建筑",2:"公共建筑",3:"历史建筑",
+				1:"居住建筑",2:"公共建筑",
 			},
 		},
 	},

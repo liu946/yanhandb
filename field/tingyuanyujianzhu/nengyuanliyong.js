@@ -66,6 +66,11 @@ module.exports =
 		},
 		{
 			namezh:"锅炉热效率",
+			require:{
+				namezh:"集中供暖",
+				name:"JZSNHJRHJCNJiZhongGongNuan",
+				value:1,
+			}
 			fields:
 			[
 			{

@@ -27,15 +27,15 @@ List = (function() {
       d = data[i];
       html += "<div class='container'>";
       if (tablename === 'cunzhen') {
-        html += "<div class='title'><p>" + d.id + "</p></div><div class='title'><p>" + d.CZJBXXCunZhenMingChen + "</p></div><div class='title'><p>" + d.CZJBXXSuoShuZhenYu + "</p></div>";
+        html += "<div class='title'><p>" + d.CZJBXXCunZhenMingChen + "</p></div><div class='title'><p>" + d.CZJBXXSuoShuZhenYu + "</p></div>";
       } else if (tablename === 'biaozhixinggouzhuwu') {
         html += "<div class='title'><p>" + d.LeiXing + "</p></div><div class='title'><p>" + d.BianHao + "</p></div><div class='title'><p>" + d.chunzhen_id + "</p></div><div class='title'><p>" + d.SuoShuCunZhen + "</p></div> ";
       } else if (tablename === 'jiedaokongjian') {
-        html += "<div class='title'><p>" + d.BianHao + "</p></div><div class='title'><p>" + d.id + "</p></div><div class='title'><p>" + d.cunzhen_id + "</p></div><div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
+        html += "<div class='title'><p>" + d.BianHao + "</p></div><div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
       } else if (tablename === 'kaichangkongjian') {
-        html += "<div class='title'><p>" + d.BianHao + "</p></div><div class='title'><p>" + d.id + "</p></div><div class='title'><p>" + d.cunzhen_id + "</p></div><div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
+        html += "<div class='title'><p>" + d.BianHao + "</p></div><div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
       } else if (tablename === 'tingyuanyujianzhu') {
-        html += "<div class='title'><p>"+ d.JZJBXXMingChen +"</p></div><div class='title'><p>" + d.JZJBXXBianHao + "</p></div><div class='title'><p>" + d.id + "</p></div><div class='title'><p>" + d.cunzhen_id + "</p></div><div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
+        html += "<div class='title'><p>"+ d.JZJBXXMingChen +"</p></div><div class='title'><p>" + d.JZJBXXBianHao + "</p></div><div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
       } else {
 
       }

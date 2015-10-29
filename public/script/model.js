@@ -603,6 +603,10 @@ Model = (function() {
     });
   };
 
+  Model.prototype.createnewform = function() {
+    return window.location = "/input/creat/" + this.tablename + "/" + this.editid;
+  };
+
   return Model;
 
 })();

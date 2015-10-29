@@ -518,7 +518,9 @@ class Model
 		$.post "/input/update/#{@tablename}", result, (data) ->
 			alert '保存成功'
 			getdbdata that.tablename,that.editid
-				
+
+	createnewform: () ->
+		window.location = "/input/creat/#{@tablename}/#{@editid}"
 			
 			
 

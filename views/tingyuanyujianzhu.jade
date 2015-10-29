@@ -46,9 +46,13 @@ block content
 					| 庭院与建筑
 
 		#sidebar-submit
-			.box
+			.save.box
 				h3
 					| 保存
+			br
+			.create.box
+				h3
+					| 另创建
 
 	#content
 		#content-header
@@ -79,8 +83,11 @@ block content
 		var target = 'C_form';
 		var model = new Model(tablename, target, id);
 		model.init();
-		$("#sidebar-submit .box").on('click',function(){
+		$("#sidebar-submit .save").on('click',function(){
 			model.savedata();
+		});
+		$("#sidebar-submit .create").on('click',function(){
+			model.createnewform();
 		});
 		//初始化相关元素高度
 		function init(){

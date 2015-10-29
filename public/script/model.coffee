@@ -134,7 +134,8 @@ class Model
 				str = tmp
 
 		else if type is 'boolean'
-			str = "<div id='#{id}' data-type='boolean' ><input type='radio' name='#{id}' value='1'/>是
+			str = "<div id='#{id}' data-type='boolean' >
+				<input type='radio' name='#{id}' value='1'/>是
 				<input type='radio' name='#{id}' value='0'/>否</div>"
 
 		else
@@ -296,7 +297,7 @@ class Model
 		else if type is 'inputornull'
 			target = $("input##{idp}[type=checkbox]")
 			if target.prop('checked')
-				dbvalue = $("input.otherdata[name=#{idp}_other]").val();
+				dbvalue = $("input.otherinput[name=#{idp}_other]").val();
 			else
 				dbvalue = ""
 			
@@ -360,8 +361,8 @@ class Model
 		else if type is 'inputornull'
 			if value isnt ""
 				$("##{key}").prop 'checked',true
-				$("input.otherdata[name=#{key}_other]").css 'display','block'
-				$("input.otherdata[name=#{key}_other]").val(value);
+				$("input.otherinput[name=#{key}_other]").css 'display','block'
+				$("input.otherinput[name=#{key}_other]").val(value);
 			else
 				$("##{key}").prop 'checked',false
 			return true
@@ -384,7 +385,12 @@ class Model
 				$("##{key}").prop 'checked',false
 			return true
 		else if type is 'boolean'
-			$("##{key} input[value=#{value}]").prop 'checked','true'
+			if value is true
+				mark = 1
+			else if value is false
+				mark = 0
+				
+			$("##{key} input[value=#{mark}]").prop 'checked','true'
 			return true
 		else
 			return false

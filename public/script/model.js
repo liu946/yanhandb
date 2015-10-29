@@ -162,7 +162,7 @@ Model = (function() {
         str = tmp;
       }
     } else if (type === 'boolean') {
-      str = "<div id='" + id + "' data-type='boolean' ><input type='radio' name='" + id + "' value='1'/>是 <input type='radio' name='" + id + "' value='0'/>否</div>";
+      str = "<div id='" + id + "' data-type='boolean' > <input type='radio' name='" + id + "' value='1'/>是 <input type='radio' name='" + id + "' value='0'/>否</div>";
     } else {
       str = '';
     }
@@ -332,7 +332,7 @@ Model = (function() {
     } else if (type === 'inputornull') {
       target = $("input#" + idp + "[type=checkbox]");
       if (target.prop('checked')) {
-        dbvalue = $("input.otherdata[name=" + idp + "_other]").val();
+        dbvalue = $("input.otherinput[name=" + idp + "_other]").val();
       } else {
         dbvalue = "";
       }
@@ -355,7 +355,7 @@ Model = (function() {
   };
 
   checkdata = function(value, key) {
-    var data, i, j, l, len1, len2, match, other, s, type, values;
+    var data, i, j, l, len1, len2, mark, match, other, s, type, values;
     type = $("#" + key).data('type');
     if (value === null || value === void 0 || value === 'unll' || value === 'undefined') {
       value = "";
@@ -401,8 +401,8 @@ Model = (function() {
     } else if (type === 'inputornull') {
       if (value !== "") {
         $("#" + key).prop('checked', true);
-        $("input.otherdata[name=" + key + "_other]").css('display', 'block');
-        $("input.otherdata[name=" + key + "_other]").val(value);
+        $("input.otherinput[name=" + key + "_other]").css('display', 'block');
+        $("input.otherinput[name=" + key + "_other]").val(value);
       } else {
         $("#" + key).prop('checked', false);
       }
@@ -429,7 +429,12 @@ Model = (function() {
       }
       return true;
     } else if (type === 'boolean') {
-      $("#" + key + " input[value=" + value + "]").prop('checked', 'true');
+      if (value === true) {
+        mark = 1;
+      } else if (value === false) {
+        mark = 0;
+      }
+      $("#" + key + " input[value=" + mark + "]").prop('checked', 'true');
       return true;
     } else {
       return false;

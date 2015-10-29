@@ -6,8 +6,17 @@ module.exports = function (orm, db) {
     }
   });
   Comment.getall = function (cb) {
-    return this.all({},{only:["id","CZJBXXCunZhenMingChen" ]},function(err,item){
-      cb(item)
+    var onlyfield = ["id","CZJBXXCunZhenMingChen","CZJBXXSuoShuZhenYu" ];
+    var itemscopy = [];
+    return this.all({},{only:onlyfield},function(err,items){
+      for(var i in items ){
+        var item = items[i];
+        itemscopy.push({})
+        for(var j in onlyfield){
+          itemscopy[i][onlyfield[j]]=item[onlyfield[j]];
+        }
+      }
+      cb(itemscopy);
     });
   };
   Comment.getselectlist= function(cb){

@@ -16,9 +16,6 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 		forend:{
 			type:'input',
 			defaultValue:'null',
-			option:{
-				1:"＜1次/周" ,   2:"1~2次/周"  ,  3:"3~5次/周"  ,  4:"5次以上/周"
-			},
 			comment:"英文字母+数字（对每条街道编号后分别录入下列内容）",
 		},
 	},

@@ -8,18 +8,24 @@ module.exports = function (orm, db) {
     }
   });
   Comment.getall= function (cb,req) {
-    return this.all({},{only:["BianHao","id","cunzhen_id" ]},function(err,items){
-      for(var i in items ){
-        var item = items[i];
-        if(item.cunzhen_id ===null) {
-          item['SuoShuCunZhen'] = null;
-        }else{
-          item['SuoShuCunZhen'] =item.cunzhen["CZJBXXCunZhenMingChen"];
-        }
 
-      }
-      cb(items);
-    });
+      var onlyfield = ["BianHao","id","cunzhen_id" ]
+      var itemscopy = [];
+      return this.all({},{only:onlyfield},function(err,items){
+        for(var i in items ){
+          var item = items[i];
+          itemscopy.push({})
+          for(var j in onlyfield){
+            itemscopy[i][onlyfield[j]]=item[onlyfield[j]];
+          }
+          if(item.cunzhen_id ===null) {
+            itemscopy[i]['SuoShuCunZhen'] = null;
+          }else {
+            itemscopy[i]['SuoShuCunZhen'] = item.cunzhen["CZJBXXCunZhenMingChen"];
+          }
+        }
+        cb(itemscopy);
+      });
   }
   Comment.hasOne("cunzhen", db.models['cunzhen']);
 };

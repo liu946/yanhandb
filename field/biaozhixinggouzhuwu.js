@@ -7,7 +7,18 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 	namezh:"标志性构筑物",
 	fields: 	//	[{name:分类名,fields:[与基类field相同]},分类obj,:':':']',
 	[
-
+		{
+			namezh:'编号',
+			backend:{
+				type:'text',
+				size:20,
+			},
+			forend:{
+				type:'input',
+				defaultValue:'null',
+				comment:"英文字母+数字（对每条街道编号后分别录入下列内容）",
+			},
+		},
 	{
 		namezh:"类型",
 		backend:{

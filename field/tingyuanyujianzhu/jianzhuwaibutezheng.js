@@ -407,7 +407,8 @@ module.exports = {
 			require:{
 				namezh:"窗朝向",
 				name:"JZWBTZCChuangChaoXiang",
-				value:"1"
+				value:"1",
+				valuezh:"南向"
 			},
 			fields:
 			[
@@ -484,7 +485,8 @@ module.exports = {
 			require:{
 				namezh:"窗朝向",
 				name:"JZWBTZCChuangChaoXiang",
-				value:"2"
+				value:"2",
+				valuezh:"北向"
 			},
 			fields:
 			[
@@ -562,7 +564,8 @@ module.exports = {
 			require:{
 				namezh:"窗朝向",
 				name:"JZWBTZCChuangChaoXiang",
-				value:"3"
+				value:"3",
+				valuezh:"东西向"
 			},
 			fields:
 			[
@@ -645,6 +648,7 @@ module.exports = {
 			name:"JZJBXXJianZhuXingZhi",
 			namezh:"建筑性质",
 			value:2,
+			valuezh:"公共建筑"
 		},
 		backend:{
 			type:"boolean",
@@ -658,7 +662,7 @@ module.exports = {
 		require:{
 			name:"",
 			namezh:"有无牌匾",
-			value:1,
+			value:true,
 		},
 		fields:
 		[

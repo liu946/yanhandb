@@ -54,7 +54,8 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 		},
 		require:{
 			name:"LeiXing",
-			value:'1'
+			value:'1',
+			valuezh:"雕塑"
 		},
 	},
 	{

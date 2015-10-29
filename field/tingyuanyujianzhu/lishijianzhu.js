@@ -3,7 +3,7 @@ module.exports = {
 	require:{
 		namezh:"是否是历史建筑",
 		name:"JZJBXXShiFuShiLiShiJianZhu",
-		value:'true',
+		value:true,
 	},
 	fields:
 	[

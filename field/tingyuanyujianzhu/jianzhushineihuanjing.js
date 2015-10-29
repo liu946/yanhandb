@@ -220,6 +220,7 @@ module.exports = {
 			namezh:"外墙保温隔热",
 			require:{
 				name:"JZSNHJRHJWWHJGGRYBWYouWuWaiQiangBaoWenGeRe",
+				namezh:"有无外墙保温隔热",
 				value:true,
 			},
 			fields:

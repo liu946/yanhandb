@@ -129,7 +129,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 		namezh:"垃圾箱",
 		require:{
 			namezh:"有无垃圾箱",
-			name:"",
+			name:"YouWuLaJiXiang",
 			value:true,
 		},
 		fields:
@@ -184,7 +184,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 		namezh:"座椅",
 		require:{
 			namezh:"有无座椅",
-			name:"",
+			name:"YouWuZuoYi",
 			value:true,
 		},
 		fields:
@@ -239,7 +239,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 		namezh:"树池",
 		require:{
 			namezh:"有无树池",
-			name:"",
+			name:"YouWuShuChi",
 			value:true,
 		},
 		fields:

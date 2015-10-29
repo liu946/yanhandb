@@ -73,7 +73,7 @@ class Model
 			tmp += "<select name='#{id}' id='#{id}' data-type='select' class='chosen-select'>"
 			selects = data.option
 			for k, v of selects
-				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
+				tmp += "<option value='#{v}' data-key='#{k}' class='#{id}_select'>#{v}</option>"
 				if v is '有' || v is '其他'
 					flag = 1
 			tmp += "</select>"
@@ -87,7 +87,7 @@ class Model
 			tmp += "<select name='#{id}' id='#{id}' data-type='selectmult' class='chosen-select' multiple>"
 			selects = data.option
 			for k, v of selects
-				tmp += "<option value='#{v}' class='#{id}_#{k}'>#{v}</option>"
+				tmp += "<option value='#{v}' data-key='#{k}' class='#{id}_select'>#{v}</option>"
 				if v is '有' || v is '其他'
 					flag = 1
 			tmp += "</select>"
@@ -455,6 +455,11 @@ class Model
 				$("##{target}").css 'display','none'
 
 		else if datatype is 'select'
+			for i in $("option.#{index}_select")
+				if "#{$(i).data('key')}" == condition	
+					condition = $(i).val()
+					break
+
 			obj = $("##{index}")
 
 			if obj.val() is condition
@@ -469,12 +474,17 @@ class Model
 					$("##{target}").css 'display','none'
 
 		else if datatype is 'selectmult'
+			for i in $("option.#{index}_select")
+				if "#{$(i).data('key')}" == condition	
+					condition = $(i).val()
+					break
+
 			obj = $("##{index}")
 			value = obj.val()
 			flag = 0
 			if value isnt null
 				for i in obj.val()
-					if i = condition
+					if i == condition
 						flag = 1
 						break
 			if flag
@@ -483,11 +493,14 @@ class Model
 				$("##{target}").css 'display','none'
 
 			obj.on "change",() ->
+				obj = $("##{index}")
+				value = obj.val()
 				flag = 0
-				for i in obj.val()
-					if i = condition
-						flag = 1
-						break
+				if value isnt null
+					for i in obj.val()
+						if i == condition
+							flag = 1
+							break
 				if flag
 					$("##{target}").css 'display','block'
 				else

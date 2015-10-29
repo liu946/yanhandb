@@ -90,7 +90,7 @@ Model = (function() {
       selects = data.option;
       for (k in selects) {
         v = selects[k];
-        tmp += "<option value='" + v + "' class='" + id + "_" + k + "'>" + v + "</option>";
+        tmp += "<option value='" + v + "' data-key='" + k + "' class='" + id + "_select'>" + v + "</option>";
         if (v === '有' || v === '其他') {
           flag = 1;
         }
@@ -107,7 +107,7 @@ Model = (function() {
       selects = data.option;
       for (k in selects) {
         v = selects[k];
-        tmp += "<option value='" + v + "' class='" + id + "_" + k + "'>" + v + "</option>";
+        tmp += "<option value='" + v + "' data-key='" + k + "' class='" + id + "_select'>" + v + "</option>";
         if (v === '有' || v === '其他') {
           flag = 1;
         }
@@ -495,7 +495,7 @@ Model = (function() {
   };
 
   reqevent = function(index, condition, target) {
-    var datatype, flag, i, j, len1, obj, objf, ref, value;
+    var datatype, flag, i, j, l, len1, len2, len3, m, obj, objf, ref, ref1, ref2, value;
     datatype = $("#" + index).data('type');
     if (datatype === 'boolean') {
       obj = $("#" + index + " input[value=1]");
@@ -512,6 +512,14 @@ Model = (function() {
         return $("#" + target).css('display', 'none');
       });
     } else if (datatype === 'select') {
+      ref = $("option." + index + "_select");
+      for (j = 0, len1 = ref.length; j < len1; j++) {
+        i = ref[j];
+        if (("" + ($(i).data('key'))) === condition) {
+          condition = $(i).val();
+          break;
+        }
+      }
       obj = $("#" + index);
       if (obj.val() === condition) {
         $("#" + target).css('display', 'block');
@@ -526,14 +534,22 @@ Model = (function() {
         }
       });
     } else if (datatype === 'selectmult') {
+      ref1 = $("option." + index + "_select");
+      for (l = 0, len2 = ref1.length; l < len2; l++) {
+        i = ref1[l];
+        if (("" + ($(i).data('key'))) === condition) {
+          condition = $(i).val();
+          break;
+        }
+      }
       obj = $("#" + index);
       value = obj.val();
       flag = 0;
       if (value !== null) {
-        ref = obj.val();
-        for (j = 0, len1 = ref.length; j < len1; j++) {
-          i = ref[j];
-          if (i = condition) {
+        ref2 = obj.val();
+        for (m = 0, len3 = ref2.length; m < len3; m++) {
+          i = ref2[m];
+          if (i === condition) {
             flag = 1;
             break;
           }
@@ -545,14 +561,18 @@ Model = (function() {
         $("#" + target).css('display', 'none');
       }
       return obj.on("change", function() {
-        var l, len2, ref1;
+        var len4, n, ref3;
+        obj = $("#" + index);
+        value = obj.val();
         flag = 0;
-        ref1 = obj.val();
-        for (l = 0, len2 = ref1.length; l < len2; l++) {
-          i = ref1[l];
-          if (i = condition) {
-            flag = 1;
-            break;
+        if (value !== null) {
+          ref3 = obj.val();
+          for (n = 0, len4 = ref3.length; n < len4; n++) {
+            i = ref3[n];
+            if (i === condition) {
+              flag = 1;
+              break;
+            }
           }
         }
         if (flag) {

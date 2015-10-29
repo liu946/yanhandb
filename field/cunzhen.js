@@ -11,6 +11,18 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                     namezh: '村镇基本信息',
                     fields: [
                         {
+                            namezh: '所属镇域',
+                            backend: {
+                                type: 'text',
+                                size: 50,
+                                defaultValue: 'null',
+                            },
+                            forend: {
+                                type: 'input',
+                                defaultValue: 'null',
+                            },
+                        },
+                        {
                             namezh: '村镇名称',
                             backend: {
                                 type: 'text',
@@ -133,7 +145,6 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                                 },
                             },
                         },
-
                         {
                             namezh: '水质情况',
                             fields: [

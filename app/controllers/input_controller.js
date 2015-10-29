@@ -45,6 +45,7 @@ router.get('/field/:tablename',function (req, res, next) {
 
 router.post('/update/:tablename/',function(req ,res ,next){
   req.models[req.params.tablename].get(req.body.id,function(err,item) {
+    if(err)throw err;
     for (var i in req.body) {
       if(i in item ) item[i] = req.body[i];
     };
@@ -73,7 +74,7 @@ router.get('/view/:viewname/:id',function(req ,res ,next){
 
 router.get('/new/:tablename',function(req ,res ,next){
   req.models[req.params.tablename].create([{}],function (err,items) {
-    // todo
+    if(err)throw err;
     res.redirect('/input/view/'+req.params.tablename+"/"+items[0]['id']);
   });
 });

@@ -516,7 +516,6 @@ class Model
 		$("##{@target}").append finalhtmlstring
 
 		getdbdata @tablename,@editid
-
 		# 遍历reqcontainer,对每一对进行事件的绑定
 		for k, v of reqcontainer
 			index = k

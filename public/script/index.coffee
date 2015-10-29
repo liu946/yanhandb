@@ -16,8 +16,7 @@ class List
 	addlist = (data,tablename) ->
 		html = ''
 		for d in data
-			html += "<div class='container'>
-						<div class='id'><p>#{d.id}</p></div>"
+			html += "<div class='container'>"
 			if tablename is 'cunzhen'
 				html += "<div class='title'><p>#{d.CZJBXXCunZhenMingChen}</p></div>"
 			else if tablename is 'biaozhixinggouzhuwu'

@@ -25,7 +25,7 @@ List = (function() {
     html = '';
     for (i = 0, len = data.length; i < len; i++) {
       d = data[i];
-      html += "<div class='container'> <div class='id'><p>" + d.id + "</p></div>";
+      html += "<div class='container'>";
       if (tablename === 'cunzhen') {
         html += "<div class='title'><p>" + d.CZJBXXCunZhenMingChen + "</p></div>";
       } else if (tablename === 'biaozhixinggouzhuwu') {

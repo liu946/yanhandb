@@ -70,7 +70,7 @@ module.exports =
 				namezh:"集中供暖",
 				name:"JZSNHJRHJCNJiZhongGongNuan",
 				value:1,
-			}
+			},
 			fields:
 			[
 			{

@@ -11,15 +11,26 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 		namezh:'编号',
 		backend:{
 			type:'text',
-			size:20,
+			size:50,
 		},
 		forend:{
 			type:'input',
 			defaultValue:'null',
-			option:{
-				1:"＜1次/周" ,   2:"1~2次/周"  ,  3:"3~5次/周"  ,  4:"5次以上/周"
-			},
 			comment:"英文字母+数字（对每条街道编号后分别录入下列内容）"
+		},
+	},
+	{
+		namezh:'功能',
+		backend:{
+			type:'text',
+			size:128,
+		},
+		forend:{
+			type:'select',
+			defaultValue:'null',
+			option:{
+				1:"文体活动",2:"休憩交往",3:"展示",4:"晒场",5:"其他"
+			}
 		},
 	},
 	{
@@ -33,6 +44,20 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 			defaultValue:'null',
 			option:{
 				1:'＜1',2:'1-2',3:'2-3',4:'3-6',5:'大于6',
+			}
+		},
+	},
+	{
+		namezh:'设施',
+		backend:{
+			type:'text',
+			size:128,
+		},
+		forend:{
+			type:'select',
+			defaultValue:'null',
+			option:{
+				1:"雕塑",2:"座椅",3:"健身器械",4:"其他"
 			}
 		},
 	},

@@ -456,9 +456,6 @@ Model = (function() {
         value = "";
       }
       result = checkdata(value, k);
-      if (!result) {
-        console.log('不匹配');
-      }
     }
     return jQuery.getScript("/script/chosen.jquery.js").done(function() {
       var _id, dom, herd, i, j, l, len1, len2, len3, len4, len5, m, n, o, ref, ref1, ref2, ref3, results;

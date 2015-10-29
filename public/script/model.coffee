@@ -389,7 +389,7 @@ class Model
 				mark = 1
 			else if value is false
 				mark = 0
-				
+
 			$("##{key} input[value=#{mark}]").prop 'checked','true'
 			return true
 		else
@@ -409,9 +409,6 @@ class Model
 				value = ""
 
 			result = checkdata value,k
-
-			if !result
-				console.log '不匹配'
 
 		# 动态加载chosen.jquery.js
 		jQuery.getScript("/script/chosen.jquery.js")

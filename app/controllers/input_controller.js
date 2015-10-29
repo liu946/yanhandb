@@ -34,7 +34,7 @@ router.get('/field/:tablename',function (req, res, next) {
           },
         });
         res.json(datajson);
-        datajson.pop();
+        datajson.shift();
       })
 
     }else{

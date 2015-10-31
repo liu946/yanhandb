@@ -23,11 +23,11 @@ class List
 				html += "<div class='title'><p>#{d.SuoShuCunZhen}</p></div>
 					<div class='title'><p>#{d.LeiXing}</p></div>"
 			else if tablename is 'jiedaokongjian'
-				html += "<div class='title'><p>#{d.SuoShuCunZhen}</p></div>
-					<div class='title'><p>#{d.BianHao}</p></div>"
+				html += "<div class='title'><p>#{d.BianHao}</p></div>
+					<div class='title'><p>#{d.SuoShuCunZhen}</p></div>"
 			else if tablename is 'kaichangkongjian'
-				html += "<div class='title'><p>#{d.SuoShuCunZhen}</p></div>
-					<div class='title'><p>#{d.BianHao}</p></div>"
+				html += "<div class='title'><p>#{d.BianHao}</p></div>
+					<div class='title'><p>#{d.SuoShuCunZhen}</p></div>"
 			else if tablename is 'tingyuanyujianzhu'
 				html += "<div class='title'><p>#{d.SuoShuCunZhen}</p></div>"
 			else

@@ -669,7 +669,7 @@ module.exports = {
 	{
 		namezh:"牌匾",
 		require:{
-			name:"",
+			name:"JZWBTZYouWuPaiBian",
 			namezh:"有无牌匾",
 			value:true,
 		},

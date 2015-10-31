@@ -58,19 +58,23 @@ class Model
 		target.push value
 		return target
 	# 按类别返回html字符串
-	gethtmlstring = (data,id) ->
+	gethtmlstring = (data,id,domtarget) ->
 		type = data.type
 		value = data.defaultValue
+		mend = jundgerequire domtarget
 		flag = 0
 		if value is 'null' or value is undefined
 			value = ""
 
 		if type is 'input' 
-			str = "<input type='text' id='#{id}' data-type='input' class='input' name='#{id}' value='#{value}'/>"
+			str = "<input type='text' #{mend} id='#{id}' data-type='input' class='input' name='#{id}' value='#{value}'/>"
 
 		else if type is 'select' 
 			tmp = ""
-			tmp += "<select name='#{id}' id='#{id}' data-type='select' class='chosen-select'>"
+			if mend isnt ""
+				tmp += "<select name='#{id}' #{mend} id='#{id}' data-type='select'>"
+			else
+				tmp += "<select name='#{id}' id='#{id}' data-type='select' class='chosen-select'>"
 			selects = data.option
 			for k, v of selects
 				tmp += "<option value='#{v}' data-key='#{k}' class='#{id}_select'>#{v}</option>"
@@ -96,7 +100,7 @@ class Model
 			else
 				str = tmp
 
-		else if type is 'CCS' 
+		else if type is 'CCS'
 			str_color = "<div class='ccs_color s_show'>颜色<select name='#{id}_color' class='CCS ccscolor' id='#{id}_color'>"
 			str_light = "<div class='ccs_light s_show'>亮度<select name='#{id}_light' class='CCS ccslight' id='#{id}_light'>"
 			str_pure = "<div class='css_pure s_show'>纯度<select name='#{id}_pure' class='CCS ccspure' id='#{id}_pure'>"
@@ -149,7 +153,7 @@ class Model
 		target = modeldata[position]
 		if target.forend isnt undefined && target.fields is undefined
 			title = target.namezh
-			str = gethtmlstring target.forend,target.name
+			str = gethtmlstring target.forend,target.name,target
 			inputnames = buildkeys target.name,inputnames
 
 			if target.forend.comment isnt undefined
@@ -157,8 +161,7 @@ class Model
 			else 
 				comment = ""
 
-			mend = jundgerequire target
-			htmlstring += "<div class='list' #{mend}>
+			htmlstring += "<div class='list'>
 							<div class='note'>
 								<h5>#{title}#{comment}</h5>
 							</div>
@@ -410,6 +413,7 @@ class Model
 
 			result = checkdata value,k
 
+
 		# 动态加载chosen.jquery.js
 		jQuery.getScript("/script/chosen.jquery.js")
 			.done () ->
@@ -450,6 +454,7 @@ class Model
 				$("##{target}").css 'display','none'
 
 			obj.on 'click',() ->
+				console.log $("##{target}")
 				$("##{target}").css 'display','block'
 			objf.on 'click',() ->
 				$("##{target}").css 'display','none'

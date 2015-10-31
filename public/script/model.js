@@ -74,19 +74,24 @@ Model = (function() {
     return target;
   };
 
-  gethtmlstring = function(data, id) {
-    var flag, i, j, k, l, len1, len2, ref, ref1, ref2, selects, str, str_color, str_end, str_light, str_pure, tmp, type, v, value, vv;
+  gethtmlstring = function(data, id, domtarget) {
+    var flag, i, j, k, l, len1, len2, mend, ref, ref1, ref2, selects, str, str_color, str_end, str_light, str_pure, tmp, type, v, value, vv;
     type = data.type;
     value = data.defaultValue;
+    mend = jundgerequire(domtarget);
     flag = 0;
     if (value === 'null' || value === void 0) {
       value = "";
     }
     if (type === 'input') {
-      str = "<input type='text' id='" + id + "' data-type='input' class='input' name='" + id + "' value='" + value + "'/>";
+      str = "<input type='text' " + mend + " id='" + id + "' data-type='input' class='input' name='" + id + "' value='" + value + "'/>";
     } else if (type === 'select') {
       tmp = "";
-      tmp += "<select name='" + id + "' id='" + id + "' data-type='select' class='chosen-select'>";
+      if (mend !== "") {
+        tmp += "<select name='" + id + "' " + mend + " id='" + id + "' data-type='select'>";
+      } else {
+        tmp += "<select name='" + id + "' id='" + id + "' data-type='select' class='chosen-select'>";
+      }
       selects = data.option;
       for (k in selects) {
         v = selects[k];
@@ -174,15 +179,14 @@ Model = (function() {
     target = modeldata[position];
     if (target.forend !== void 0 && target.fields === void 0) {
       title = target.namezh;
-      str = gethtmlstring(target.forend, target.name);
+      str = gethtmlstring(target.forend, target.name, target);
       inputnames = buildkeys(target.name, inputnames);
       if (target.forend.comment !== void 0) {
         comment = "(" + target.forend.comment + ")";
       } else {
         comment = "";
       }
-      mend = jundgerequire(target);
-      htmlstring += "<div class='list' " + mend + "> <div class='note'> <h5>" + title + comment + "</h5> </div> <div class='shuru'> " + str + " </div> </div>";
+      htmlstring += "<div class='list'> <div class='note'> <h5>" + title + comment + "</h5> </div> <div class='shuru'> " + str + " </div> </div>";
     } else {
       len = target.fields.length;
       results = [];
@@ -506,6 +510,7 @@ Model = (function() {
         $("#" + target).css('display', 'none');
       }
       obj.on('click', function() {
+        console.log($("#" + target));
         return $("#" + target).css('display', 'block');
       });
       return objf.on('click', function() {

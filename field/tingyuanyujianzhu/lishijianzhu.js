@@ -115,29 +115,7 @@ module.exports = {
 		},
 		]
 	},
-	{
-		namezh:"颜色",
-		backend:{
-			type:"text",size:100
-		},
-		forend:{
-			type:"CCS",
-		}
-	},
-	{
-		namezh:"建筑风格",
-		backend:{
-			type:"text",size:100
-		},
-		forend:{
-			type:"select",
-			option:{
-				1:"中式",
-				2:"欧式",
-				3:"其他",
-			}
-		}
-	},
+
 	{
 		namezh:"传统格局和历史风貌遗存度",
 		backend:{

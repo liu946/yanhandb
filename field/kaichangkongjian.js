@@ -26,7 +26,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 			size:128,
 		},
 		forend:{
-			type:'select',
+			type:'selectmult',
 			defaultValue:'null',
 			option:{
 				1:"文体活动",2:"休憩交往",3:"展示",4:"晒场",5:"其他"
@@ -54,7 +54,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 			size:128,
 		},
 		forend:{
-			type:'select',
+			type:'selectmult',
 			defaultValue:'null',
 			option:{
 				1:"雕塑",2:"座椅",3:"健身器械",4:"其他"
@@ -86,34 +86,6 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 			defaultValue:'0',
 			size:".2",
 			comment:"百分比",
-		},
-	},
-
-	{
-		namezh:'照明覆盖率',
-		backend:{
-			type:'number',
-
-		},
-		forend:{
-			type:'input',
-			defaultValue:'0',
-			size:".2",
-			comment:"百分比",
-		},
-	},
-	{
-		namezh:'垃圾清运频率',
-		backend:{
-			type:'text',
-			size:20,
-		},
-		forend:{
-			type:'select',
-			defaultValue:'null',
-			option:{
-				1:"＜1次/周" ,   2:"1~2次/周"  ,  3:"3~5次/周"  ,  4:"5次以上/周"
-			}
 		},
 	},
 	{

@@ -161,33 +161,49 @@ module.exports = {
 
 		],
 	},
-
 	{
-		namezh:"绿化面积",
+		namezh:"是否绿化",
 		backend:{
-			type:"text",size:128
+			type:'boolean'
 		},
 		forend:{
-			type:"input",
-			comment:"数字m2",
-		},
+			type:'boolean'
+		}
 	},
 	{
-		namezh:"绿化方式",
-		backend:{
-			type:"text",size:128
+		namezh:"绿化",
+		require:{
+			name:"TYTZShiFuLvHua",
+			namezh:'是否绿化',
+			value:true
 		},
-		forend:{
-			type:"selectmultornull",
-			option:{
-				1:'地面绿化',
-				2:'墙体绿化',
-				3:'屋顶绿化',
-				4:'其他',
-			}
-		},
+		fields:[
+			{
+				namezh:"绿化面积",
+				backend:{
+					type:"text",size:128
+				},
+				forend:{
+					type:"input",
+					comment:"数字m2",
+				},
+			},
+			{
+				namezh:"绿化方式",
+				backend:{
+					type:"text",size:128
+				},
+				forend:{
+					type:"selectmultornull",
+					option:{
+						1:'地面绿化',
+						2:'墙体绿化',
+						3:'屋顶绿化',
+						4:'其他',
+					}
+				},
+			},
+		]
 	},
-
-
 	]
 }

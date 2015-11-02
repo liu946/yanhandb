@@ -13,12 +13,25 @@ var tb = sys.extend(require('../base/tablefieldgroup.js'),
 		]
     })
 tb.addotherfile = function(callback){
-	fs.readdir(path.join(__dirname,childdir), function (err,files) {
+	//fs.readdir(path.join(__dirname,childdir), function (err,files) {
 		// body...
+		files = [
+		'jianzhujibenxinxi',
+		'lishijianzhu',
+		'tingyuantezheng',
+		'jianzhuwaibutezheng',
+		'jianzhushineihuanjing',
+		'nengyuanliyong',
+		'ziyuanyucailiaoliyong',
+		'shigongguanli',
+		'yunxingguanli',
+
+
+					]
 		for (var i = 0 ; i < files.length; i++) {
 			tb.fields.push(require(path.join(__dirname,childdir,files[i])))
 		};
 		callback();
-	});
+	//});
 }
 module.exports = tb;

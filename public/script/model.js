@@ -293,9 +293,9 @@ Model = (function() {
       }
     } else if (type === 'boolean') {
       value = $("input[name=" + idp + "]:checked").val();
-      if (value === 1) {
+      if (value === "1") {
         dbvalue = "true";
-      } else if (value === 0) {
+      } else if (value === "0") {
         dbvalue = "false";
       }
     } else if (type === 'selectmult') {
@@ -515,7 +515,6 @@ Model = (function() {
         $("#" + target).css('display', 'none');
       }
       obj.on('click', function() {
-        console.log($("#" + target));
         return $("#" + target).css('display', 'block');
       });
       return objf.on('click', function() {

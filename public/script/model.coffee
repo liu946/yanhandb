@@ -262,9 +262,9 @@ class Model
 
 		else if type is 'boolean'
 			value = $("input[name=#{idp}]:checked").val()
-			if value is 1
+			if value is "1"
 				dbvalue = "true"
-			else if value is 0
+			else if value is "0"
 				dbvalue = "false"
 
 		else if type is 'selectmult'
@@ -458,7 +458,6 @@ class Model
 				$("##{target}").css 'display','none'
 
 			obj.on 'click',() ->
-				console.log $("##{target}")
 				$("##{target}").css 'display','block'
 			objf.on 'click',() ->
 				$("##{target}").css 'display','none'

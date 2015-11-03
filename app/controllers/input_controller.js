@@ -82,6 +82,11 @@ router.get('/new/:tablename',function(req ,res ,next){
 router.get('/get/:tablename/:id',function(req ,res ,next){
   req.models[req.params.tablename].get(req.params.id,function(err,item){
     if(err)throw err;
+    if(item.cunzhen_id ===null) {
+      item['SuoShuCunZhen'] = null;
+    }else {
+      item['SuoShuCunZhen'] = item.cunzhen["CZJBXXCunZhenMingChen"];
+    }
     res.json(item);
   })
 });

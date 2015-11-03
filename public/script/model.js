@@ -374,6 +374,12 @@ Model = (function() {
       $("#" + key).val(value);
       return true;
     } else if (type === 'select') {
+      if (match.test(value)) {
+        values = value.split('~');
+        value = values[0];
+        other = values[1];
+        $("input[name=" + key + "_otherinput]").val(other);
+      }
       $("#" + key).val(value);
       return true;
     } else if (type === 'selectmult') {

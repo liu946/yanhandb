@@ -266,7 +266,7 @@ class Model
 				dbvalue = "true"
 			else if value is 0
 				dbvalue = "false"
-							
+
 		else if type is 'selectmult'
 			value = $("##{idp}").val()
 			if value instanceof Array
@@ -334,6 +334,11 @@ class Model
 			return true
 
 		else if type is 'select'
+			if match.test value
+				values = value.split('~')
+				value = values[0]
+				other = values[1]
+				$("input[name=#{key}_otherinput]").val other
 			$("##{key}").val(value)
 			return true
 

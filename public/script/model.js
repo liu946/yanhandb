@@ -294,9 +294,9 @@ Model = (function() {
     } else if (type === 'boolean') {
       value = $("input[name=" + idp + "]:checked").val();
       if (value === "1") {
-        dbvalue = "true";
+        dbvalue = 1;
       } else if (value === "0") {
-        dbvalue = "false";
+        dbvalue = 0;
       }
     } else if (type === 'selectmult') {
       value = $("#" + idp).val();
@@ -626,6 +626,7 @@ Model = (function() {
     var result, that;
     result = getformvalue(this.target, this.inputnames, this.editid);
     that = this;
+    console.log(result);
     return $.post("/input/update/" + this.tablename, result, function(data) {
       alert('保存成功');
       return getdbdata(that.tablename, that.editid);

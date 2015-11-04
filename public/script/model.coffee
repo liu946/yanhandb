@@ -263,9 +263,9 @@ class Model
 		else if type is 'boolean'
 			value = $("input[name=#{idp}]:checked").val()
 			if value is "1"
-				dbvalue = "true"
+				dbvalue = 1
 			else if value is "0"
-				dbvalue = "false"
+				dbvalue = 0
 
 		else if type is 'selectmult'
 			value = $("##{idp}").val()
@@ -535,6 +535,7 @@ class Model
 	savedata: () ->
 		result = getformvalue @target,@inputnames,@editid
 		that = this
+		console.log result
 		$.post "/input/update/#{@tablename}", result, (data) ->
 			alert '保存成功'
 			getdbdata that.tablename,that.editid

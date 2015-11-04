@@ -364,7 +364,7 @@ Model = (function() {
   };
 
   checkdata = function(value, key) {
-    var data, i, j, l, len1, len2, match, other, s, type, values;
+    var data, i, j, l, len1, len2, mark, match, other, s, type, values;
     type = $("#" + key).data('type');
     if (value === null || value === void 0 || value === 'unll' || value === 'undefined') {
       value = "";
@@ -438,7 +438,12 @@ Model = (function() {
       }
       return true;
     } else if (type === 'boolean') {
-      $("#" + key + " input[value=" + value + "]").prop('checked', 'true');
+      if (value === true) {
+        mark = 1;
+      } else {
+        mark = 0;
+      }
+      $("#" + key + " input[value=" + mark + "]").prop('checked', 'true');
       return true;
     } else {
       return false;

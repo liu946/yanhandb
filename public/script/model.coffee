@@ -392,7 +392,11 @@ class Model
 				$("##{key}").prop 'checked',false
 			return true
 		else if type is 'boolean'
-			$("##{key} input[value=#{value}]").prop 'checked','true'
+			if value is true
+				mark = 1
+			else
+				mark = 0
+			$("##{key} input[value=#{mark}]").prop 'checked','true'
 			return true
 		else
 			return false

@@ -263,9 +263,9 @@ class Model
 		else if type is 'boolean'
 			value = $("input[name=#{idp}]:checked").val()
 			if value is "1"
-				dbvalue = 1
+				dbvalue = "1"
 			else if value is "0"
-				dbvalue = 0
+				dbvalue = ""
 
 		else if type is 'selectmult'
 			value = $("##{idp}").val()
@@ -392,12 +392,7 @@ class Model
 				$("##{key}").prop 'checked',false
 			return true
 		else if type is 'boolean'
-			if value is true
-				mark = 1
-			else if value is false
-				mark = 0
-
-			$("##{key} input[value=#{mark}]").prop 'checked','true'
+			$("##{key} input[value=#{value}]").prop 'checked','true'
 			return true
 		else
 			return false

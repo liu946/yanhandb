@@ -294,9 +294,9 @@ Model = (function() {
     } else if (type === 'boolean') {
       value = $("input[name=" + idp + "]:checked").val();
       if (value === "1") {
-        dbvalue = 1;
+        dbvalue = "1";
       } else if (value === "0") {
-        dbvalue = 0;
+        dbvalue = "";
       }
     } else if (type === 'selectmult') {
       value = $("#" + idp).val();
@@ -364,7 +364,7 @@ Model = (function() {
   };
 
   checkdata = function(value, key) {
-    var data, i, j, l, len1, len2, mark, match, other, s, type, values;
+    var data, i, j, l, len1, len2, match, other, s, type, values;
     type = $("#" + key).data('type');
     if (value === null || value === void 0 || value === 'unll' || value === 'undefined') {
       value = "";
@@ -438,12 +438,7 @@ Model = (function() {
       }
       return true;
     } else if (type === 'boolean') {
-      if (value === true) {
-        mark = 1;
-      } else if (value === false) {
-        mark = 0;
-      }
-      $("#" + key + " input[value=" + mark + "]").prop('checked', 'true');
+      $("#" + key + " input[value=" + value + "]").prop('checked', 'true');
       return true;
     } else {
       return false;

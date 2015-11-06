@@ -11,7 +11,7 @@ module.exports = function (orm, db) {
 
       var onlyfield = ["BianHao","id","cunzhen_id" ]
       var itemscopy = [];
-      return this.all({},{only:onlyfield},function(err,items){
+      return this.all({},function(err,items){
         for(var i in items ){
           var item = items[i];
           itemscopy.push({})

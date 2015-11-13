@@ -84,7 +84,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 			type:'select',
 			defaultValue:'null',
 			option:{
-				1:"＜1次/周" ,   2:"1~2次/周"  ,  3:"3~5次/周"  ,  4:"5次以上/周"
+				1:"＜1次/周" ,   2:"1-2次/周"  ,  3:"3-5次/周"  ,  4:"5次以上/周"
 			}
 		},
 	},

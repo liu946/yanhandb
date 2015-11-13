@@ -271,7 +271,7 @@ Model = (function() {
       idp += '_other';
     }
     if (value === '有' || value === '其他') {
-      va = value + "`" + $("input[name=" + idp + "_otherinput]").val();
+      va = value + "~" + $("input[name=" + idp + "_otherinput]").val();
     }
     return va;
   };
@@ -369,13 +369,13 @@ Model = (function() {
     if (value === null || value === void 0 || value === 'unll' || value === 'undefined') {
       value = "";
     }
-    match = /\`/;
+    match = /\~/;
     if (type === 'input') {
       $("#" + key).val(value);
       return true;
     } else if (type === 'select') {
       if (match.test(value)) {
-        values = value.split('`');
+        values = value.split('~');
         value = values[0];
         other = values[1];
         $("input[name=" + key + "_otherinput]").val(other);
@@ -389,7 +389,7 @@ Model = (function() {
         for (j = 0, len1 = values.length; j < len1; j++) {
           i = values[j];
           if (match.test(i)) {
-            s = i.split('`');
+            s = i.split('~');
             i = s[0];
             other = s[1];
             $("input[name=" + key + "_otherinput]").val(other);
@@ -423,7 +423,7 @@ Model = (function() {
         for (l = 0, len2 = values.length; l < len2; l++) {
           i = values[l];
           if (match.test(i)) {
-            s = i.split('`');
+            s = i.split('~');
             i = s[0];
             other = s[1];
             $("input[name=" + key + "_other_otherinput]").val(other);

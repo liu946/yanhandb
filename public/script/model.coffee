@@ -241,7 +241,7 @@ class Model
 			idp += '_other'
 		
 		if value is '有' || value is '其他'
-			va = value + "~" + $("input[name=#{idp}_otherinput]").val()
+			va = value + "`" + $("input[name=#{idp}_otherinput]").val()
 
 		return va
 				
@@ -327,7 +327,7 @@ class Model
 		if value is null or value is undefined or value is 'unll' or value is 'undefined'
 			value = ""
 
-		match = /\~/
+		match = /\`/
 
 		if type is 'input'
 			$("##{key}").val(value)
@@ -335,7 +335,7 @@ class Model
 
 		else if type is 'select'
 			if match.test value
-				values = value.split('~')
+				values = value.split('`')
 				value = values[0]
 				other = values[1]
 				$("input[name=#{key}_otherinput]").val other
@@ -348,7 +348,7 @@ class Model
 				data = []
 				for i in values
 					if match.test i
-						s = i.split('~')
+						s = i.split('`')
 						i = s[0]
 						other = s[1]
 						$("input[name=#{key}_otherinput]").val other
@@ -379,7 +379,7 @@ class Model
 				data = []
 				for i in values
 					if match.test i
-						s = i.split('~')
+						s = i.split('`')
 						i = s[0]
 						other = s[1]
 						$("input[name=#{key}_other_otherinput]").val other

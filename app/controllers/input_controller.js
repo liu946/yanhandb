@@ -94,7 +94,7 @@ router.get('/creat/:tablename/:id',function(req,res,next){
     if(err)throw err;
     var newitem = {};
     for(var i in item){
-      if(i != "id") newitem[i] = item[i];
+      if(i != "id" && i != "SuoShuCunZhen") newitem[i] = item[i];
     }
     req.models[req.params.tablename].create([newitem],function(err,items){
       if(err)throw err;

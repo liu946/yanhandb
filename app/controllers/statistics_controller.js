@@ -50,7 +50,8 @@ router.get('/analyze/:cunzhenid', function (req, res, next) {
           reduceAddingTables(addinglist);
         })
       }else{
-        res.json(analyzeArray);
+        //res.json(analyzeArray);
+        res.render('analyze',analyzeArray);
       }
     })(addingList);
   });

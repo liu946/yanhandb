@@ -21,11 +21,17 @@ module.exports = function (orm, db) {
           if(item.cunzhen_id ===null) {
             itemscopy[i]['SuoShuCunZhen'] = null;
           }else {
+            //if(item.cunzhen === undefined)
+            //  console.log('a')
             itemscopy[i]['SuoShuCunZhen'] = item.cunzhen["CZJBXXCunZhenMingChen"];
           }
         }
         cb(itemscopy);
       });
-  }
+  };
+  Comment.judgePrint = function(){
+    var fields = tb.judgePrint();
+    return fields;
+  };
 
 };

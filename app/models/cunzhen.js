@@ -1,10 +1,20 @@
 
-var tb = require('../../field/cunzhen')
+var tb = require('../../field/cunzhen');
+var judge = require('../../judgement/cunzhen');
 module.exports = function (orm, db) {
   var Comment = db.define('cunzhen', tb.backendfield(),{
     methods: {
     }
   });
+  Comment.judgePrint = function(){
+    var fields = tb.judgePrint();
+    return fields;
+  };
+  Comment.judgement = function (fieldName){
+
+    return judge[fieldName];
+  };
+
   Comment.getall = function (cb) {
     var onlyfield = ["id","CZJBXXCunZhenMingChen","CZJBXXSuoShuZhenYu" ];
     var itemscopy = [];

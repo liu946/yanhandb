@@ -3,11 +3,13 @@
 // tablefieldgroup.js 
 // table defination
 
+
 var sys = require('../func/sys.js')
 var table = sys.extend(require('../base/tablebase.js'),{
 	name:"",
 	fields:[],
 	addedflag:false,
+	judge:{},
 	// overwrite
 	originfield:function () {
 		return this.private_anydeep(this.fields,"");
@@ -19,6 +21,12 @@ var table = sys.extend(require('../base/tablebase.js'),{
 		this.private_addonce();
 		return this.private_backendanydeep(this.fields,backendfield);
 	},
+	judgePrint:function(){
+		var backendfield = {};
+		this.private_addonce();
+		return this.private_forendandname_anydeep(this.fields,backendfield);
+	},
+
 	private_addonce:function(){
 		//只跑一次，增加字段
 		this.fields =  this.addedflag ? this.fields : this.private_anydeep(this.fields,"");
@@ -52,9 +60,20 @@ var table = sys.extend(require('../base/tablebase.js'),{
 			}
 		}
 		return backendfield;
-	}
+	},
 
-})
+	private_forendandname_anydeep: function (field,backendfield) {
+		for(var i in field) {
+			if (typeof(field[i]["fields"]) != "undefined") {
+				this.private_forendandname_anydeep(field[i]['fields'], backendfield)
+			} else {
+				backendfield[field[i]['name']]= field[i].forend;
+			 	backendfield[field[i]['name']].namezh =  field[i].namezh;
+			}
+		}
+		return backendfield;
+	},
+});
 
 
 module.exports = table;

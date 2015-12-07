@@ -26,6 +26,10 @@ module.exports = function (orm, db) {
         }
         cb(itemscopy);
       });
-  }
+  };
+  Comment.judgePrint = function(){
+    var fields = tb.judgePrint();
+    return fields;
+  };
   Comment.hasOne("cunzhen", db.models['cunzhen']);
 };

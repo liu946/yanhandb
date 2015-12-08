@@ -20,12 +20,15 @@ body {
   width: 1000px;
   margin: 0px auto;
 }
-.border .content h3 small {
-  margin-left: 20px;
+.border .content table {
+  width: 100%;
+  border: 2px solid #000;
 }
-.border .content p {
-  width: 95%;
-  margin-left: 5%;
+.border .content table tr {
+  border: 1px solid #777;
+}
+.border .content table tr td {
+  border: 1px solid #777;
 }
 .border .content pre {
   width: 95%;
@@ -35,6 +38,4 @@ body {
   white-space: -moz-pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
-  text-indent: 2em;
-  border: 1px solid #000;
 }

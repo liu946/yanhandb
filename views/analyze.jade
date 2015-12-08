@@ -1,6 +1,35 @@
+doctype html
+html(lang="en")
+    head
+        meta(http-equiv="Content-Type",content="text/html; charset=UTF-8")
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible",content="IE=Edge,chrome=1")
+        meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
 
-p=JSON.stringify(cunzhen)
-p=JSON.stringify(jiedaokongjian)
-p=JSON.stringify(kaichangkongjian)
-p=JSON.stringify(biaozhixinggouzhuwu)
-p=JSON.stringify(tingyuanyujianzhu)
+        title= title
+        link(rel='stylesheet', href='/stylesheets/analyze.css')
+    body
+        .head
+            h1
+                | 统计结果
+        .border
+            .content
+                h1
+                    | 村镇信息
+                each cz in cunzhen
+                    if cz.value != 'null'
+                        h3= cz.namezh
+                        p= cz.value
+                    if cz.judgeOutput != undefined
+                        p= cz.judgeOutput
+                    if cz.judgeReference != undefined
+                        pre= cz.judgeReference
+                h1
+                    | 标志性构筑物
+                h1
+                    | 街道空间
+                h1
+                    | 开敞空间
+                h1
+                    | 庭院与建筑
+

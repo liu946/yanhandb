@@ -30,12 +30,42 @@ body {
 .border .content table tr td {
   border: 1px solid #777;
 }
-.border .content pre {
-  width: 95%;
-  margin-left: 5%;
+.bodercast {
+  top: 0;
+  position: fixed;
+  z-index: 2;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+.bodercast .box {
+  margin: 100px auto;
+  width: 400px;
+  background: #fff;
+  border: 2px solid #777;
+}
+.bodercast .box .close {
+  width: 100%;
+  height: 20px;
+  border-bottom: 1px solid #aaa;
+}
+.bodercast .box .close a {
+  float: right;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+}
+.bodercast .box .content {
+  width: 100%;
+}
+.bodercast .box .content pre {
+  width: 80%;
+  margin: 10px 10%;
   height: auto;
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+  text-indent: 2em;
 }

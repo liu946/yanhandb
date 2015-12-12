@@ -1,0 +1,112 @@
+extends layout
+
+block content
+    link(rel='stylesheet', href='/stylesheets/component/bootstrap.min.css')
+    link(rel='stylesheet', href="/stylesheets/component/bootstrap-responsive.min.css")
+    link(rel='stylesheet', href="/stylesheets/component/matrix-style.css")
+    link(rel='stylesheet', href="/stylesheets/component/matrix-media.css")
+
+    #header
+        h1
+            a(href="")
+                | 严寒地区不同基质村镇绿色建筑体系发展目标与应用数据库
+
+    #user-nav.navbar.navbar-inverse
+        ul.nav
+            li
+                a(href="/welcome")
+                    span.text
+                        | 首页
+            li
+                a(href="/input/view/index")
+                    span.text
+                        | 录入
+            li
+                a(href="/statistics/analyzelist")
+                    span.text
+                        | 分析
+            li
+                a(href="/guide")
+                    span.text
+                        | 使用指南
+
+    #sidebar(style="OVERFLOW-Y: auto; OVERFLOW-X:hidden;")
+        ul
+            li.submenu.active
+                a.menu_a(href="#")
+                    | 村镇分析
+            
+        footer
+            .pic
+                img(src="/logo.jpg")
+            .content
+                p
+                    | 版权所有：哈尔滨工业大学建筑学院城乡规划研究所 | 哈尔滨工业大学
+                p
+                    | 本软件由“十二五”国家科技计划课题严寒地区绿色村镇体系建构与评价及关键技术（2013BAJ12B01）提供支持
+                p
+                    | Copyright 2015 Urban and Town Planning Institute, School of Architecture HIT
+                    
+    #content
+        #content-header
+            #breadcrumb
+                a.tip-bottom(href="#")
+                    | 村镇列表
+        .list-body
+            .main#formlist
+                .contentlist
+                    .container
+                        .title
+                            p
+                                | 村镇名
+                        .title
+                            p
+                                | 所属镇域
+                        
+                        .exchange
+                            p
+                                | 操作
+        
+    script(src="/script/excanvas.min.js")
+    script(src="/script/jquery.min.js")
+    script(src="/script/jquery.ui.custom.js")
+    script(src="/script/bootstrap.min.js")
+    script(src="/script/matrix.js")
+    script(src="/script/analyze.js")
+    script.
+        list = new List('cunzhen');
+        list.init();
+        $("#addform").on('click',function() {
+            list.add();
+        });
+        //初始化相关元素高度
+        function init(){
+            $("body").height($(window).height()-80);
+            $("#iframe-main").height($(window).height()-90);
+            $("#sidebar").height($(window).height()-50);
+        }
+        $(function(){
+            init();
+            $(window).resize(function(){
+                init();
+            });
+        });
+        // This function is called from the pop-up menus to transfer to
+        // a different page. Ignore if the value returned is a null string:
+        function goPage (newURL) {
+            // if url is empty, skip the menu dividers and reset the menu selection to default
+            if (newURL != "") {
+                // if url is "-", it is this page -- reset the menu:
+                if (newURL == "-" ) {
+                    resetMenu();            
+                } 
+            // else, send page to designated URL            
+            else {  
+                    document.location.href = newURL;
+                }
+            }
+        }
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }

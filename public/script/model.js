@@ -194,11 +194,11 @@ Model = (function() {
         if (i === 0) {
           title = target.namezh;
           mend = jundgerequire(target);
-          htmlstring += "<div id='" + target.name + "' " + mend + "> <h3>" + title + "</h3>";
+          htmlstring += "<div id='" + target.name + "' " + mend + " class='board'> <h3>" + title + "</h3>";
         }
         ergodicdata(target.fields, i, inputnames);
         if (i === len - 1) {
-          results.push(htmlstring += "</div><div class='clear'></div><hr />");
+          results.push(htmlstring += "<div class='clear'></div></div><hr />");
         } else {
           results.push(void 0);
         }

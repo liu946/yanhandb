@@ -37,263 +37,311 @@ html(lang="en")
         meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
 
         title= title
+
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/component/icono.min.css')
+        link(rel="stylesheet", href="/stylesheets/component/chosen.css")
+        link(rel='stylesheet', href='/stylesheets/component/bootstrap.min.css')
+        link(rel='stylesheet', href="/stylesheets/component/bootstrap-responsive.min.css")
+        link(rel='stylesheet', href="/stylesheets/component/matrix-style.css")
+        link(rel='stylesheet', href="/stylesheets/component/matrix-media.css")
         link(rel='stylesheet', href='/stylesheets/analyze.css')
     body
-        .head
+        #header
             h1
-                | 统计结果
-        .border
-            .content
-                h1
-                    | 村镇信息
-                table
-                    tbody
-                        tr
-                            td
-                                p
-                                    strong
-                                        | 名字
-                            td
-                                p
-                                    strong
-                                        | 值
-                            td
-                                p
-                                    strong
-                                        | 分数
-                            td
-                                p
-                                    strong
-                                        | 数目
-                            td
-                                p
-                                    strong
-                                        | 匹配
-                            td
-                                p
-                                    strong
-                                        | judgeOutput
-                            td
-                                p
-                                    strong
-                                        | judgeOutput 
-                    each cz in cunzhen
-                        tr
-                            td
-                                !{getvalue(cz.namezh)}
-                            td
-                                !{getvalue(cz.value)}
-                            td
-                                !{getvalue(cz.score)}
-                            td
-                                !{getvalue(cz.number)}
-                            td
-                                !{getvalue(cz.match)}
-                            td
-                                !{getvalue(cz.judgeOutput)}
-                            td
-                                !{getvalue(cz.judgeReference)}
+                a(href="")
+                    | 严寒地区不同基质村镇绿色建筑体系发展目标与应用数据库
 
-                h1
-                    | 标志性构筑物
-                table
-                    tbody
-                        tr
-                            td
-                                p
-                                    strong
-                                        | 名字
-                            td
-                                p
-                                    strong
-                                        | 值
-                            td
-                                p
-                                    strong
-                                        | 分数
-                            td
-                                p
-                                    strong
-                                        | 数目
-                            td
-                                p
-                                    strong
-                                        | 匹配
-                            td
-                                p
-                                    strong
-                                        | judgeOutput
-                            td
-                                p
-                                    strong
-                                        | judgeOutput 
-                    each bzxgzw in biaozhixinggouzhuwu
-                        tr
-                            td
-                                !{getvalue(bzxgzw.namezh)}
-                            td
-                                !{getvalue(bzxgzw.value)}
-                            td
-                                !{getvalue(bzxgzw.score)}
-                            td
-                                !{getvalue(bzxgzw.number)}
-                            td
-                                !{getvalue(bzxgzw.match)}
-                            td
-                                !{getvalue(bzxgzw.judgeOutput)}
-                            td
-                                !{getvalue(bzxgzw.judgeReference)}
-                h1
-                    | 街道空间
-                table
-                    tbody
-                        tr
-                            td
-                                p
-                                    strong
-                                        | 名字
-                            td
-                                p
-                                    strong
-                                        | 值
-                            td
-                                p
-                                    strong
-                                        | 分数
-                            td
-                                p
-                                    strong
-                                        | 数目
-                            td
-                                p
-                                    strong
-                                        | 匹配
-                            td
-                                p
-                                    strong
-                                        | judgeOutput
-                            td
-                                p
-                                    strong
-                                        | judgeOutput 
-                    each jdkj in jiedaokongjian
-                        tr
-                            td
-                                !{getvalue(jdkj.namezh)}
-                            td
-                                !{getvalue(jdkj.value)}
-                            td
-                                !{getvalue(jdkj.score)}
-                            td
-                                !{getvalue(jdkj.number)}
-                            td
-                                !{getvalue(jdkj.match)}
-                            td
-                                !{getvalue(jdkj.judgeOutput)}
-                            td
-                                !{getvalue(jdkj.judgeReference)}
-                h1
-                    | 开敞空间
-                table
-                    tbody
-                        tr
-                            td
-                                p
-                                    strong
-                                        | 名字
-                            td
-                                p
-                                    strong
-                                        | 值
-                            td
-                                p
-                                    strong
-                                        | 分数
-                            td
-                                p
-                                    strong
-                                        | 数目
-                            td
-                                p
-                                    strong
-                                        | 匹配
-                            td
-                                p
-                                    strong
-                                        | judgeOutput
-                            td
-                                p
-                                    strong
-                                        | judgeOutput 
-                    each kckj in kaichangkongjian
-                        tr
-                            td
-                                !{getvalue(kckj.namezh)}
-                            td
-                                !{getvalue(kckj.value)}
-                            td
-                                !{getvalue(kckj.score)}
-                            td
-                                !{getvalue(kckj.number)}
-                            td
-                                !{getvalue(kckj.match)}
-                            td
-                                !{getvalue(kckj.judgeOutput)}
-                            td
-                                !{getvalue(kckj.judgeReference)}
-                h1
-                    | 庭院与建筑
-                table
-                    tbody
-                        tr
-                            td
-                                p
-                                    strong
-                                        | 名字
-                            td
-                                p
-                                    strong
-                                        | 值
-                            td
-                                p
-                                    strong
-                                        | 分数
-                            td
-                                p
-                                    strong
-                                        | 数目
-                            td
-                                p
-                                    strong
-                                        | 匹配
-                            td
-                                p
-                                    strong
-                                        | judgeOutput
-                            td
-                                p
-                                    strong
-                                        | judgeOutput 
-                    each tyyjz in tingyuanyujianzhu
-                        tr
-                            td
-                                !{getvalue(tyyjz.namezh)}
-                            td
-                                !{getvalue(tyyjz.value)}
-                            td
-                                !{getvalue(tyyjz.score)}
-                            td
-                                !{getvalue(tyyjz.number)}
-                            td
-                                !{getvalue(tyyjz.match)}
-                            td
-                                !{getvalue(tyyjz.judgeOutput)}
-                            td
-                                !{getvalue(tyyjz.judgeReference)}
+        #user-nav.navbar.navbar-inverse
+            ul.nav
+                li
+                    a(href="/welcome")
+                        span.text
+                            | 首页
+                li
+                    a(href="/input/view/index")
+                        span.text
+                            | 录入
+                li
+                    a(href="/statistics/analyzelist")
+                        span.text
+                            | 分析
+                li
+                    a(href="/guide")
+                        span.text
+                            | 使用指南
+                        
+        #content
+            #content-header
+                #breadcrumb
+                    a.tip-bottom(href="/statistics/analyzelist")
+                        | 村镇列表
+            .list-body
+                .border
+                    .content
+                        h1
+                            | 村镇信息
+                        table
+                            tbody
+                                tr
+                                    td
+                                        p
+                                            strong
+                                                | 名字
+                                    td
+                                        p
+                                            strong
+                                                | 值
+                                    td
+                                        p
+                                            strong
+                                                | 分数
+                                    td
+                                        p
+                                            strong
+                                                | 数目
+                                    td
+                                        p
+                                            strong
+                                                | 匹配
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput 
+                            each cz in cunzhen
+                                tr
+                                    td
+                                        !{getvalue(cz.namezh)}
+                                    td
+                                        !{getvalue(cz.value)}
+                                    td
+                                        !{getvalue(cz.score)}
+                                    td
+                                        !{getvalue(cz.number)}
+                                    td
+                                        !{getvalue(cz.match)}
+                                    td
+                                        !{getvalue(cz.judgeOutput)}
+                                    td
+                                        !{getvalue(cz.judgeReference)}
 
+                        h1
+                            | 标志性构筑物
+                        table
+                            tbody
+                                tr
+                                    td
+                                        p
+                                            strong
+                                                | 名字
+                                    td
+                                        p
+                                            strong
+                                                | 值
+                                    td
+                                        p
+                                            strong
+                                                | 分数
+                                    td
+                                        p
+                                            strong
+                                                | 数目
+                                    td
+                                        p
+                                            strong
+                                                | 匹配
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput 
+                            each bzxgzw in biaozhixinggouzhuwu
+                                tr
+                                    td
+                                        !{getvalue(bzxgzw.namezh)}
+                                    td
+                                        !{getvalue(bzxgzw.value)}
+                                    td
+                                        !{getvalue(bzxgzw.score)}
+                                    td
+                                        !{getvalue(bzxgzw.number)}
+                                    td
+                                        !{getvalue(bzxgzw.match)}
+                                    td
+                                        !{getvalue(bzxgzw.judgeOutput)}
+                                    td
+                                        !{getvalue(bzxgzw.judgeReference)}
+                        h1
+                            | 街道空间
+                        table
+                            tbody
+                                tr
+                                    td
+                                        p
+                                            strong
+                                                | 名字
+                                    td
+                                        p
+                                            strong
+                                                | 值
+                                    td
+                                        p
+                                            strong
+                                                | 分数
+                                    td
+                                        p
+                                            strong
+                                                | 数目
+                                    td
+                                        p
+                                            strong
+                                                | 匹配
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput 
+                            each jdkj in jiedaokongjian
+                                tr
+                                    td
+                                        !{getvalue(jdkj.namezh)}
+                                    td
+                                        !{getvalue(jdkj.value)}
+                                    td
+                                        !{getvalue(jdkj.score)}
+                                    td
+                                        !{getvalue(jdkj.number)}
+                                    td
+                                        !{getvalue(jdkj.match)}
+                                    td
+                                        !{getvalue(jdkj.judgeOutput)}
+                                    td
+                                        !{getvalue(jdkj.judgeReference)}
+                        h1
+                            | 开敞空间
+                        table
+                            tbody
+                                tr
+                                    td
+                                        p
+                                            strong
+                                                | 名字
+                                    td
+                                        p
+                                            strong
+                                                | 值
+                                    td
+                                        p
+                                            strong
+                                                | 分数
+                                    td
+                                        p
+                                            strong
+                                                | 数目
+                                    td
+                                        p
+                                            strong
+                                                | 匹配
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput 
+                            each kckj in kaichangkongjian
+                                tr
+                                    td
+                                        !{getvalue(kckj.namezh)}
+                                    td
+                                        !{getvalue(kckj.value)}
+                                    td
+                                        !{getvalue(kckj.score)}
+                                    td
+                                        !{getvalue(kckj.number)}
+                                    td
+                                        !{getvalue(kckj.match)}
+                                    td
+                                        !{getvalue(kckj.judgeOutput)}
+                                    td
+                                        !{getvalue(kckj.judgeReference)}
+                        h1
+                            | 庭院与建筑
+                        table
+                            tbody
+                                tr
+                                    td
+                                        p
+                                            strong
+                                                | 名字
+                                    td
+                                        p
+                                            strong
+                                                | 值
+                                    td
+                                        p
+                                            strong
+                                                | 分数
+                                    td
+                                        p
+                                            strong
+                                                | 数目
+                                    td
+                                        p
+                                            strong
+                                                | 匹配
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput
+                                    td
+                                        p
+                                            strong
+                                                | judgeOutput 
+                            each tyyjz in tingyuanyujianzhu
+                                tr
+                                    td
+                                        !{getvalue(tyyjz.namezh)}
+                                    td
+                                        !{getvalue(tyyjz.value)}
+                                    td
+                                        !{getvalue(tyyjz.score)}
+                                    td
+                                        !{getvalue(tyyjz.number)}
+                                    td
+                                        !{getvalue(tyyjz.match)}
+                                    td
+                                        !{getvalue(tyyjz.judgeOutput)}
+                                    td
+                                        !{getvalue(tyyjz.judgeReference)}
+            footer
+                .pic
+                    img(src="/logo.jpg")
+                .content
+                    p
+                        | 版权所有：哈尔滨工业大学建筑学院城乡规划研究所 | 哈尔滨工业大学
+                    p
+                        | 本软件由“十二五”国家科技计划课题严寒地区绿色村镇体系建构与评价及关键技术（2013BAJ12B01）提供支持
+                    p
+                        | Copyright 2015 Urban and Town Planning Institute, School of Architecture HIT
         !{border}
 
-        script(src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js")
+        script(src="/script/excanvas.min.js")
+        script(src="/script/jquery.min.js")
+        script(src="/script/jquery.ui.custom.js")
+        script(src="/script/bootstrap.min.js")
+        script(src="/script/matrix.js")
         script.
             //- 对button按钮的监听
             var buttons = $('button');

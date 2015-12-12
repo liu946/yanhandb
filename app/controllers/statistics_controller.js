@@ -5,7 +5,7 @@ var express = require('express');
 
 var fs = require('fs');
 var path = require('path');
-var judge = require('../../judgement')
+var judge = require('../../judgement');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
@@ -23,7 +23,11 @@ router.get('/get/:tablename', function(req, res, next) {
 router.get('/onlyfieldNames/:tablename',function(req,res,next){
   var m = req.models[req.params.tablename];
   res.json(m.judgePrint());
-})
+});
+
+router.get('/view/:viewname',function(req,res,next){
+  res.render(req.params.viewname);
+});
 
 router.get('/analyze/:cunzhenid', function (req, res, next) {
   var globalRemark = {};
@@ -48,7 +52,7 @@ router.get('/analyze/:cunzhenid', function (req, res, next) {
             judge.addOne(items[i],m,analyzeArray[m],globalRemark);
           }
           reduceAddingTables(addinglist);
-        })
+        });
       }else{
         //res.json(analyzeArray);
         res.render('analyze',analyzeArray);

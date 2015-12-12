@@ -29,19 +29,23 @@ block content
 
 	#sidebar(style="OVERFLOW-Y: auto; OVERFLOW-X:hidden;")
 		ul
-			li.submennu
+			li.submenu
 				a.menu_a(href="/input/view/index")
 					| 村镇基本信息
-			li.submennu
-				a.menu_a(href="/input/view/listbiaozhi")
-					| 标志性构筑物
-			li.submennu.active
-				a.menu_a(href="/input/view/listjiedao")
-					| 街道空间
-			li.submennu
-				a.menu_a(href="/input/view/listkaikuo")
-					| 开敞空间
-			li.submennu
+			li.submenu
+				a(href="#")
+					| 建筑外部环境
+				ul
+					li.submenu
+						a.menu_a(href="/input/view/listbiaozhi")
+							| 标志性构筑物
+					li.submenu.active
+						a.menu_a(href="/input/view/listjiedao")
+							| 街道空间
+					li.submenu
+						a.menu_a(href="/input/view/listkaikuo")
+							| 开敞空间
+			li.submenu
 				a.menu_a(href="/input/view/listtingyuanjianzhu")
 					| 庭院与建筑
 
@@ -66,7 +70,7 @@ block content
 
 			
 	script(src="/script/excanvas.min.js")
-	script(src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js")
+	script(src="/script/jquery.min.js")
 	script(src="/script/jquery.ui.custom.js")
 	script(src="/script/bootstrap.min.js")
 	script(src="/script/matrix.js")

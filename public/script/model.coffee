@@ -177,12 +177,12 @@ class Model
 					title = target.namezh
 					mend = jundgerequire target
 
-					htmlstring += "<div id='#{target.name}' #{mend}>
+					htmlstring += "<div id='#{target.name}' #{mend} class='board'>
 								<h3>#{title}</h3>"
 
 				ergodicdata target.fields,i,inputnames
 				if i == len-1
-					htmlstring += "</div><div class='clear'></div><hr />"
+					htmlstring += "<div class='clear'></div></div><hr />"
 				
 				
 	clickappear = (id,check,datatype,point) ->

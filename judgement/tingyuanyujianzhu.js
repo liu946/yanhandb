@@ -24,7 +24,8 @@ models.export = {
     "JZJBXXZongJianZhuMianJi": {
         "type": "input",
         "comment": "m^2",
-        "namezh": "总建筑面积"
+        "namezh": "总建筑面积",
+
     },
     "JZJBXXJianZhuJiDiMianJi": {
         "type": "input",
@@ -669,7 +670,14 @@ models.export = {
     "JZSNHJSHJZaoSheng": {
         "type": "input",
         "comment": "数字dB",
-        "namezh": "噪声"
+        "namezh": "噪声",
+        'judge':{
+            '>50':1,
+            '>45':2,
+            '>40':3,
+            '>35':4,
+            'def':5,
+        },
     },
     "JZSNHJSHJGSKaiKouBuWei": {
         "type": "select",
@@ -678,7 +686,14 @@ models.export = {
             "2": "一般感觉不到交通工具的噪声",
             "3": "感觉不到交通工具的噪声"
         },
-        "namezh": "开口部位"
+        "namezh": "开口部位",
+        'judge':{
+            '1':1,
+            '2':3,
+            'def':5,
+        },
+        "judgeReference":'门窗采用密封性、保温隔热性能、隔音性能良好的型材和玻璃等材料。',
+
     },
     "JZSNHJSHJGSGeQiang": {
         "type": "select",
@@ -687,7 +702,12 @@ models.export = {
             "2": "感觉不到有人的谈话声",
             "3": "几乎听不到有人的谈话声"
         },
-        "namezh": "隔墙"
+        "namezh": "隔墙",
+        'judge':{
+            '1':1,
+            '2':3,
+            'def':5,
+        },
     },
     "JZSNHJSHJGSLouBanQingZhuangJiShengYuan": {
         "type": "select",
@@ -696,7 +716,12 @@ models.export = {
             "2": "能感觉到椅子的移动声、物体的掉落声",
             "3": "到椅子的移动声、物体的掉落声很小"
         },
-        "namezh": "楼板（轻撞击声源）"
+        "namezh": "楼板（轻撞击声源）",
+        'judge':{
+            '1':1,
+            '2':3,
+            'def':5,
+        },
     },
     "JZSNHJSHJGSLouBanQiangZhuangJiShengYuan": {
         "type": "select",
@@ -705,7 +730,12 @@ models.export = {
             "2": "能听得见欢闹与走动的声音",
             "3": "听得见欢闹与走动的声音，但无明显干扰"
         },
-        "namezh": "楼板（强撞击声源）"
+        "namezh": "楼板（强撞击声源）",
+        'judge':{
+            '1':1,
+            '2':3,
+            'def':5,
+        },
     },
     "JZSNHJSHJGSXiSheng": {
         "type": "select",
@@ -714,7 +744,14 @@ models.export = {
             "2": "墙壁、楼板、顶棚等其中一处使用了吸声材料",
             "3": "墙壁、楼板、顶棚上均使用了吸声材料"
         },
-        "namezh": "吸声"
+        "namezh": "吸声",
+        'judge':{
+            '1':1,
+            '2':3,
+            'def':5,
+        },
+        "judgeReference":'合理选用建筑围护结构构件，采取有效的隔声、减噪措施，保证室内噪声级和隔声性能符合《民用建筑隔声设计规范》（GBJ118）的要求。图8',
+
     },
     "JZSNHJRHJCNJiZhongGongNuan": {
         "type": "select",
@@ -741,12 +778,22 @@ models.export = {
     "JZSNHJRHJSWDongJiPingJunShiWen": {
         "type": "input",
         "comment": "数字℃",
-        "namezh": "冬季平均室温"
+        "namezh": "冬季平均室温",
+        'judge':{
+            '<18':1,
+            '<20':3,
+            'def':5,
+        },
     },
     "JZSNHJRHJSWXiaJiPingJunShiWen": {
         "type": "input",
         "comment": "数字℃",
-        "namezh": "夏季平均室温"
+        "namezh": "夏季平均室温",
+        'judge':{
+            '>28':1,
+            '>26':3,
+            'def':5,
+        },
     },
     "JZSNHJRHJWWHJGGRYBWXiaJiJiangWenCuoShi": {
         "type": "selectmultornull",
@@ -758,7 +805,14 @@ models.export = {
             "5": "内遮阳",
             "6": "其他"
         },
-        "namezh": "夏季降温措施"
+        "namezh": "夏季降温措施",
+        'judge':{
+            '0':1,
+            '1':3,
+            '2':4,
+            'def':5,
+        },
+        "judgeReference":'东西向外墙可种植爬藤或乔木遮阳，采用隔热通风屋面或被动蒸发屋面，外窗宜设置遮阳措施。图28、95',
     },
     "JZSNHJRHJWWHJGGRYBWDongJiFangFengCuoShi": {
         "type": "selectmultornull",
@@ -769,7 +823,15 @@ models.export = {
             "4": "建筑自设挡风构件",
             "5": "其他"
         },
-        "namezh": "冬季防风措施"
+        "namezh": "冬季防风措施",
+        'judge':{
+            '0':1,
+            '1':3,
+            '2':4,
+            'def':5,
+        },
+        "judgeReference":'图29',
+
     },
     "JZSNHJRHJWWHJGGRYBWYouWuWaiQiangBaoWenGeRe": {
         "type": "boolean",
@@ -783,7 +845,14 @@ models.export = {
             "3": "自保温",
             "4": "其他"
         },
-        "namezh": "类型"
+        "namezh": "类型",
+        'judge':{
+            '0':1,
+            '1':3,
+            '2':4,
+            'def':5,
+        },
+        "judgeReference":'采用附有保温层的外墙或自保温外墙。在墙体保温类型选择中，内保温技术由于具有对材料性能要求不高、便于施工和成本较低等特点，但内保温使内、外墙体分处于两个温度场，保温层易出现裂缝，结构寿命缩短，以及易产生热桥和不便于二次装修等缺陷。夹心保温墙体有效保护了保温材料，对保温材料要求不高，但为保证系统连接的安全性，须有连接件，构造复杂、施工困难；易产生热桥；内部易形成空气对流；外墙结构寿命短，不适合应用于村镇建筑。外保温技术由于能够避免“热桥”现象，保护主体结构和扩大室内空间等优点，被大多数村镇居民所接受，适宜应用于目前我国村镇建筑。图30',
     },
     "JZSNHJRHJWQBWGRCaiLiao": {
         "type": "select",
@@ -824,7 +893,17 @@ models.export = {
             "6": "屋顶遮阳",
             "7": "其他"
         },
-        "namezh": "类型"
+        "namezh": "类型",
+        judge:{
+            "1": 5,
+            "2": 5,
+            "3": 5,
+            "4": 5,
+            "5": 5,
+            "6": 5,
+            "7": 5,
+            'def':1,
+        }
     },
     "JZSNHJRHJWDBWGRCaiLiao": {
         "type": "select",
@@ -860,7 +939,15 @@ models.export = {
             "4": "窗内加一层玻璃",
             "5": "其他"
         },
-        "namezh": "外窗冬季保温措施"
+        "namezh": "外窗冬季保温措施",
+
+        'judge':{
+            '0':1,
+            '1':3,
+            '2':4,
+            'def':5,
+        },
+        "judgeReference":'a.门窗框与墙体间的缝隙，应采用高效保温材料填堵，宜采用施工现场灌注聚氨酯泡沫塑料或填塞聚乙烯泡沫塑料棒，再从内外侧用嵌缝密封膏（胶）密封，以减少该部位的开裂、结露和空气渗透。b.外墙保温层与门窗框之间的窗洞侧壁部位应做保温处理，保温材料与外墙保温材料一致，保温层厚度不小于20mm，以减弱该部位的热桥，提高门窗的保温性能。图63-68、90',
     },
     "JZSNHJRHJWaiMenDongJiBaoWenCuoShi": {
         "type": "selectmultornull",
@@ -871,11 +958,25 @@ models.export = {
             "4": "门外加塑料膜",
             "5": "其他"
         },
-        "namezh": "外门冬季保温措施"
+        "namezh": "外门冬季保温措施",
+        'judge':{
+            '0':1,
+            '1':3,
+            '2':4,
+            'def':5,
+        },
+        "judgeReference":'注重建筑的保温隔热性能。建筑出入口宜采用门斗、双层门、保温门帘等保温措施，设置朝南外廊时宜封闭形成阳光房，选用保温和密封性能好的门窗\na.外进户门应设置在能够避免被冬季寒风直接吹到的位置，宜设在房屋的南侧。如果由于条件所限必须将入户门设置在北侧，可于北入口处加设门斗，形成室内和室外空间之间的缓冲空间，减少室内的热量散失。\nb.建筑出入口宜采用门斗、双层门、保温门帘等保温措施',
     },
     "JZSNHJRHJYouWuDiMianBaoWenGeRe": {
         "type": "boolean",
-        "namezh": "有无地面保温隔热"
+        "namezh": "有无地面保温隔热",
+        'judge':{
+            '0':1,
+            '1':3,
+            '2':4,
+            'def':5,
+        },
+
     },
     "JZSNHJRHJDMBWGRCaiLiao": {
         "type": "select",
@@ -886,7 +987,7 @@ models.export = {
             "4": "加气泡沫混凝土",
             "5": "陶粒混凝土"
         },
-        "namezh": "材料"
+        "namezh": "材料",
     },
     "JZSNHJRHJDMBWGRHouDu": {
         "type": "select",

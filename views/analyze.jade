@@ -111,7 +111,7 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput 
+                                                | judgeOutput
                             each cz in cunzhen
                                 tr
                                     td
@@ -119,7 +119,7 @@ html(lang="en")
                                     td
                                         !{getvalue(cz.value)}
                                     td
-                                        !{getvalue(cz.score)}
+                                        !{getvalue(cz.score/cz.number)}
                                     td
                                         !{getvalue(cz.number)}
                                     td
@@ -161,7 +161,11 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput 
+                                                | judgeOutput
+                                    td
+                                        p
+                                            strong
+                                                | 比例
                             each bzxgzw in biaozhixinggouzhuwu
                                 tr
                                     td
@@ -169,7 +173,7 @@ html(lang="en")
                                     td
                                         !{getvalue(bzxgzw.value)}
                                     td
-                                        !{getvalue(bzxgzw.score)}
+                                        !{getvalue(bzxgzw.score/bzxgzw.number)}
                                     td
                                         !{getvalue(bzxgzw.number)}
                                     td
@@ -178,6 +182,7 @@ html(lang="en")
                                         !{getvalue(bzxgzw.judgeOutput)}
                                     td
                                         !{getvalue(bzxgzw.judgeReference)}
+                                    td
                         h1
                             | 街道空间
                         table
@@ -210,7 +215,11 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput 
+                                                | judgeOutput
+                                    td
+                                        p
+                                            strong
+                                                | 比例 
                             each jdkj in jiedaokongjian
                                 tr
                                     td
@@ -218,7 +227,7 @@ html(lang="en")
                                     td
                                         !{getvalue(jdkj.value)}
                                     td
-                                        !{getvalue(jdkj.score)}
+                                        !{getvalue(jdkj.score/jdkj.number)}
                                     td
                                         !{getvalue(jdkj.number)}
                                     td
@@ -227,6 +236,7 @@ html(lang="en")
                                         !{getvalue(jdkj.judgeOutput)}
                                     td
                                         !{getvalue(jdkj.judgeReference)}
+                                    td
                         h1
                             | 开敞空间
                         table
@@ -259,7 +269,11 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput 
+                                                | judgeOutput
+                                    td
+                                        p
+                                            strong
+                                                | 比例 
                             each kckj in kaichangkongjian
                                 tr
                                     td
@@ -267,7 +281,7 @@ html(lang="en")
                                     td
                                         !{getvalue(kckj.value)}
                                     td
-                                        !{getvalue(kckj.score)}
+                                        !{getvalue(kckj.score/kckj.number)}
                                     td
                                         !{getvalue(kckj.number)}
                                     td
@@ -276,6 +290,7 @@ html(lang="en")
                                         !{getvalue(kckj.judgeOutput)}
                                     td
                                         !{getvalue(kckj.judgeReference)}
+                                    td
                         h1
                             | 庭院与建筑
                         table
@@ -309,6 +324,10 @@ html(lang="en")
                                         p
                                             strong
                                                 | judgeOutput 
+                                    td
+                                        p
+                                            strong
+                                                | 比例
                             each tyyjz in tingyuanyujianzhu
                                 tr
                                     td
@@ -316,7 +335,7 @@ html(lang="en")
                                     td
                                         !{getvalue(tyyjz.value)}
                                     td
-                                        !{getvalue(tyyjz.score)}
+                                        !{getvalue(tyyjz.score/tyyjz.number)}
                                     td
                                         !{getvalue(tyyjz.number)}
                                     td
@@ -325,6 +344,7 @@ html(lang="en")
                                         !{getvalue(tyyjz.judgeOutput)}
                                     td
                                         !{getvalue(tyyjz.judgeReference)}
+                                    td
             footer
                 .pic
                     img(src="/logo.jpg")

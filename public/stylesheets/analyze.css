@@ -6,7 +6,7 @@ body {
   margin: 0;
 }
 #content footer {
-  top: 80%;
+  top: 81%;
   width: 1000px;
   margin-left: 50%;
   left: -500px;
@@ -18,6 +18,9 @@ body {
 #content footer .content {
   float: right;
   width: 70%;
+}
+#content footer .content p {
+  margin: .25em;
 }
 .border {
   width: 100%;

@@ -2,7 +2,7 @@
  * Created by liu on 15/11/18.
  */
 
-models.export = {
+module.exports = {
     "JZJBXXBianHao": {
         "type": "input",
         "comment": "字母+数字（对建筑编号后分别录入下列内容）",

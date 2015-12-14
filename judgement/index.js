@@ -6,6 +6,7 @@ var ruleGroups = {
   'cunzhen': require('./cunzhen'),
   'kaichangkongjian': require('./kaichangkongjian'),
   'jiedaokongjian': require('./jiedaokongjian'),
+  'tingyuanyujianzhu':require('./tingyuanyujianzhu')
 }
 module.exports = {
   addOne: function (item, rulesGroup, array, globalRecoder) {
@@ -18,11 +19,11 @@ module.exports = {
       if (rule.hasOwnProperty('judge')) {
         //需要判定的
         //break count 会自动跳过一些判定项
-        if(breakcount>0){
+        if (breakcount > 0) {
           breakcount--;
           oneRule['number'] = 0;
           oneRule['score'] = 0;
-        }else{
+        } else {
           switch (rule.type) {
             case 'select':
               if ('null' === item[fieldName]) {
@@ -87,7 +88,7 @@ module.exports = {
               }
               break;
             case 'boolean':
-              if(!item[fieldName]){
+              if (!item[fieldName]) {
                 breakcount = rule.break;
               }
               break;
@@ -111,30 +112,63 @@ module.exports = {
           oneRule['judgeReference'] = rule.judgeReference;
         }
       }
+
+
       // 包括无需判断的，需要加上他们的其他字段。
+
+
       if (!oneRule.hasOwnProperty('namezh') && rule.namezh) {
         oneRule['namezh'] = rule.namezh;
       }
       if (!oneRule.hasOwnProperty('value') && item[fieldName] !== undefined) {
         oneRule['value'] = item[fieldName];
+        if(globalRecoder[rulesGroup + fieldName] && globalRecoder[rulesGroup + fieldName].percent){
+          oneRule.percent= globalRecoder[rulesGroup + fieldName].percent;
+        }
+        if (rule.type === 'select') {
+          if (oneRule.percent===undefined)
+            oneRule.percent = {};
+          if (oneRule.percent[oneRule.value.toString()]===undefined)
+            oneRule.percent[oneRule.value.toString()]=0;
+
+          oneRule.percent[oneRule.value.toString()]++;
+
+        } else if (rule.type === 'selectmult' || rule.type === 'selectmultornull') {
+          var steplist = item[fieldName].split('&');
+          for (var step in steplist) {
+            var x = steplist[step];
+            if (x !== '') {
+              if (oneRule.percent === undefined)
+                oneRule.percent = {};
+              if (oneRule.percent[x] === undefined)
+                oneRule.percent[x] = 0;
+
+              oneRule.percent[x]++;
+            }
+          }
+        }
+
       }
+
       if (globalRecoder.hasOwnProperty(rulesGroup + fieldName)) {
         if (globalRecoder[rulesGroup + fieldName].score !== undefined
           && globalRecoder[rulesGroup + fieldName].number !== undefined
         ) {
           globalRecoder[rulesGroup + fieldName].score += oneRule.score;
           globalRecoder[rulesGroup + fieldName].number += oneRule.number;
-          if(oneRule.number){
-            if(globalRecoder[rulesGroup + fieldName].value==='null'){
+          if (oneRule.number) {
+            if (globalRecoder[rulesGroup + fieldName].value === 'null') {
               globalRecoder[rulesGroup + fieldName].match = (oneRule.match);
               globalRecoder[rulesGroup + fieldName].value = (oneRule.value);
-            }else{
+            } else {
               globalRecoder[rulesGroup + fieldName].match += (',' + oneRule.match);
               globalRecoder[rulesGroup + fieldName].value += (',' + oneRule.value);
             }
 
           }
+
         }
+
       } else {
         globalRecoder[rulesGroup + fieldName] = oneRule;
         array.push(oneRule);

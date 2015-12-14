@@ -41,7 +41,7 @@ router.get('/analyze/:cunzhenid', function (req, res, next) {
   req.models.cunzhen.get(id,function(err,item){
     if(err)throw err;
     judge.addOne(item,'cunzhen',analyzeArray.cunzhen,globalRemark);
-    var addingList = ['kaichangkongjian','jiedaokongjian'];
+    var addingList = ['kaichangkongjian','jiedaokongjian','tingyuanyujianzhu'];
     (function reduceAddingTables (addinglist) {
       if(addinglist.length){
         var m = addinglist.pop();

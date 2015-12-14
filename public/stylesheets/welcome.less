@@ -3,7 +3,7 @@
 body{
     margin: 0;
     height: 0;
-    background: #777;
+    background: rgb(39, 169, 277);
     .title{
         width: 100%;
         text-align: center;
@@ -11,37 +11,52 @@ body{
         margin-top: 150px;
     }
     .start{
-        width: 300px;
-        height: 150px;
+        position: absolute;
+        width: 200px;
+        height: 100px;
         margin: 100px auto;
-        background: #aaa;
+        margin-left: 50%;
+        left: -100px;
         .transition(all .2s ease-in-out);
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        border: 2px solid #fff;
         span{
-            line-height: 150px;
+            line-height: 100px;
             text-align: center;
             font-size: 24px;
         }
         &:active{
             .transform(scale(.5));
         }
+        &:hover{
+            background: #fff;
+            color: rgb(39, 169, 277);
+        }
     }
     footer{
-        width: 100%;
-        height: 200px;
+        position: absolute;
+        top: 81%;
+        width: 1000px;
+        margin-left: 50%;
+        left: -500px;
         .pic{
-            width: 15%;
-            height: 160px;
-            margin: 20px;
             float: left;
-            border-right: 2px solid #777;
+            width: 20%;
+            margin-top: 20px;
             img{
-                width: 100%;
-                height: 100%;
+                float: right;
+                margin-right: 20px;
             }
         }
         .content{
-            margin-left: 5%;
+            float: right;
+            width: 80%;
+            p{
+                margin: .25em;
+                color: #fff;
+            }
         }
-
     }
 }

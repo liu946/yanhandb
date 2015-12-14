@@ -1,7 +1,7 @@
 body {
   margin: 0;
   height: 0;
-  background: #777;
+  background: #27a9ff;
 }
 body .title {
   width: 100%;
@@ -10,17 +10,23 @@ body .title {
   margin-top: 150px;
 }
 body .start {
-  width: 300px;
-  height: 150px;
+  position: absolute;
+  width: 200px;
+  height: 100px;
   margin: 100px auto;
-  background: #aaa;
+  margin-left: 50%;
+  left: -100px;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  border: 2px solid #fff;
 }
 body .start span {
-  line-height: 150px;
+  line-height: 100px;
   text-align: center;
   font-size: 24px;
 }
@@ -30,21 +36,31 @@ body .start:active {
   -ms-transform: scale(0.5);
   transform: scale(0.5);
 }
+body .start:hover {
+  background: #fff;
+  color: #27a9ff;
+}
 body footer {
-  width: 100%;
-  height: 200px;
+  position: absolute;
+  top: 81%;
+  width: 1000px;
+  margin-left: 50%;
+  left: -500px;
 }
 body footer .pic {
-  width: 15%;
-  height: 160px;
-  margin: 20px;
   float: left;
-  border-right: 2px solid #777;
+  width: 20%;
+  margin-top: 20px;
 }
 body footer .pic img {
-  width: 100%;
-  height: 100%;
+  float: right;
+  margin-right: 20px;
 }
 body footer .content {
-  margin-left: 5%;
+  float: right;
+  width: 80%;
+}
+body footer .content p {
+  margin: .25em;
+  color: #fff;
 }

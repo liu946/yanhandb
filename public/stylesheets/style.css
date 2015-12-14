@@ -97,7 +97,7 @@ body {
 #content-body form .list {
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0 5%;
   float: left;
 }
 #content-body form .list .note {
@@ -244,4 +244,24 @@ body {
 }
 .list-body #formlist .contentlist .container .exchange a:link {
   color: #fff;
+}
+footer {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+}
+footer .pic {
+  margin: 10px auto;
+  width: 100%;
+  height: 42px;
+  display: inline-block;
+  text-align: center;
+}
+footer .pic img {
+  width: 50px;
+  height: 42px;
+}
+footer .content {
+  width: 90%;
+  margin: 0 5%;
 }

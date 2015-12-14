@@ -6,7 +6,8 @@ var ruleGroups = {
   'cunzhen': require('./cunzhen'),
   'kaichangkongjian': require('./kaichangkongjian'),
   'jiedaokongjian': require('./jiedaokongjian'),
-  'tingyuanyujianzhu':require('./tingyuanyujianzhu')
+  'tingyuanyujianzhu':require('./tingyuanyujianzhu'),
+  'biaozhixinggouzhuwu':require('./biaozhixinggouzhuwu'),
 }
 module.exports = {
   addOne: function (item, rulesGroup, array, globalRecoder) {

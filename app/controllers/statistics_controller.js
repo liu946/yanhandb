@@ -41,7 +41,7 @@ router.get('/analyze/:cunzhenid', function (req, res, next) {
   req.models.cunzhen.get(id,function(err,item){
     if(err)throw err;
     judge.addOne(item,'cunzhen',analyzeArray.cunzhen,globalRemark);
-    var addingList = ['kaichangkongjian','jiedaokongjian','tingyuanyujianzhu'];
+    var addingList = ['kaichangkongjian','biaozhixinggouzhuwu','jiedaokongjian','tingyuanyujianzhu'];
     (function reduceAddingTables (addinglist) {
       if(addinglist.length){
         var m = addinglist.pop();
@@ -50,6 +50,7 @@ router.get('/analyze/:cunzhenid', function (req, res, next) {
           for(var i in items){
             judge.addOne(items[i],m,analyzeArray[m],globalRemark);
           }
+          analyzeArray[m+'num'] = items.length;
           reduceAddingTables(addinglist);
         });
       }else{

@@ -24,7 +24,9 @@ router.get('/onlyfieldNames/:tablename',function(req,res,next){
   var m = req.models[req.params.tablename];
   res.json(m.judgePrint());
 })
-
+router.get('/analyzelist',function(req,res,next){
+  res.render('analyzelist');
+})
 router.get('/analyze/:cunzhenid', function (req, res, next) {
   var globalRemark = {};
   var id = req.params.cunzhenid;

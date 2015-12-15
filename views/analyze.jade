@@ -18,6 +18,9 @@
 -       border += addborder(data,id);
 -       return "<button data-id="+id+">详细</button>";
 -   }else{
+-        if (typeof(data) === 'number'){
+-            data = data.toFixed(2);
+-        }
 -        return "<p>"+data+"</p>";
 -   }
 - }
@@ -117,7 +120,7 @@ html(lang="en")
                         table
                             tbody
                                 tr
-                                    td
+                                    td.percentcol
                                         p
                                             strong
                                                 | 名字
@@ -147,7 +150,7 @@ html(lang="en")
                                                 | 依据
                             each cz in cunzhen
                                 tr
-                                    td
+                                    td.percentcol
                                         !{cz.namezh}
                                     td
                                         !{getvalue(cz.value)}
@@ -167,7 +170,7 @@ html(lang="en")
                         table
                             tbody
                                 tr
-                                    td
+                                    td.percentcol
                                         p
                                             strong
                                                 | 名字
@@ -201,7 +204,7 @@ html(lang="en")
                                                 | 比例
                             each bzxgzw in biaozhixinggouzhuwu
                                 tr
-                                    td
+                                    td.percentcol
                                         !{bzxgzw.namezh}
                                     td
                                         !{getvalue(bzxgzw.value)}
@@ -222,7 +225,7 @@ html(lang="en")
                         table
                             tbody
                                 tr
-                                    td
+                                    td.percentcol
                                         p
                                             strong
                                                 | 名字
@@ -256,7 +259,7 @@ html(lang="en")
                                                 | 比例 
                             each jdkj in jiedaokongjian
                                 tr
-                                    td
+                                    td.percentcol
                                         !{jdkj.namezh}
                                     td
                                         !{getvalue(jdkj.value)}
@@ -277,7 +280,7 @@ html(lang="en")
                         table
                             tbody
                                 tr
-                                    td
+                                    td.percentcol
                                         p
                                             strong
                                                 | 名字
@@ -311,7 +314,7 @@ html(lang="en")
                                                 | 比例 
                             each kckj in kaichangkongjian
                                 tr
-                                    td
+                                    td.percentcol
                                         !{kckj.namezh}
                                     td
                                         !{getvalue(kckj.value)}
@@ -332,7 +335,7 @@ html(lang="en")
                         table
                             tbody
                                 tr
-                                    td
+                                    td.percentcol
                                         p
                                             strong
                                                 | 名字
@@ -366,7 +369,7 @@ html(lang="en")
                                                 | 比例
                             each tyyjz in tingyuanyujianzhu
                                 tr
-                                    td
+                                    td.percentcol
                                         !{tyyjz.namezh}
                                     td
                                         !{getvalue(tyyjz.value)}

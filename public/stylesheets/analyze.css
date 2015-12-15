@@ -60,6 +60,9 @@ body {
   float: left;
   margin-left: 10px;
 }
+.border .content table tr .percentcol {
+  width: 100px;
+}
 .bodercast {
   top: 0;
   position: fixed;

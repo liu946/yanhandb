@@ -39,6 +39,26 @@ body {
 .border .content table tr td {
   border: 1px solid #777;
 }
+.border .content table tr td .colnum {
+  width: 100%;
+}
+.border .content table tr td .colnum .box {
+  width: 100px;
+  height: 20px;
+  float: left;
+}
+.border .content table tr td .colnum .box .percent {
+  background: #333;
+  height: 20px;
+}
+.border .content table tr td .colnum .ratename {
+  float: left;
+  margin-right: 10px;
+}
+.border .content table tr td .colnum .ratevalue {
+  float: left;
+  margin-left: 10px;
+}
 .bodercast {
   top: 0;
   position: fixed;

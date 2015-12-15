@@ -26,7 +26,40 @@
 -    var html = "<div id="+id+" class='bodercast'><div class='box'><div class='close'><a>x</a></div><div class='content'><pre>"+ data +"</pre></div></div></div>";
 -    return html;
 - }
-
+- function getJsontotalnum(jsonData){
+-   var totalnum = 0;
+-   for(var item in jsonData){
+-        totalnum += parseInt(jsonData[item]);
+-   }
+-   return totalnum;
+- }
+- function getJsonLength(jsonData){
+-   var jsonLength = 0;
+-   for(var item in jsonData){
+-        jsonLength++;
+-   }
+-   return jsonLength;
+- }
+//- 获取百分比得到柱状图
+- var getpercent = function(object,totalnum){
+-   var html = "";
+-   var rate = 0;
+-   var target = getJsonLength(object);
+-   var L = target;
+-   for(var name in object){
+-      if(L === 1) {
+-           rate = (object[name]/totalnum).toFixed(4);
+-           rate = (100*rate)+"%";
+-           html = "<div class='colnum'><p class='ratename'>"+ name +" </p><div class='box'><div class='percent' style='width:"+ rate +"'></div></div><p class='ratevalue'> "+ rate +"</p><div style='clear:both'></div></div>";
+-      }else{
+-           totalnum = getJsontotalnum(object);
+-           rate = (object[name]/totalnum).toFixed(4);
+-           rate = (100*rate).toFixed(2) + "%";
+-           html += "<div class='colnum'><p class='ratename'>"+ name +" </p><div class='box'><div class='percent' style='width:"+ rate +"'></div></div><p class='ratevalue'> "+ rate +"</p><div style='clear:both'></div>";
+-      }    
+-   } 
+-   return html;
+- }
 
 doctype html
 html(lang="en")
@@ -111,7 +144,7 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput
+                                                | judgeReference
                             each cz in cunzhen
                                 tr
                                     td
@@ -161,7 +194,7 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput
+                                                | judgeReference
                                     td
                                         p
                                             strong
@@ -183,9 +216,7 @@ html(lang="en")
                                     td
                                         !{getvalue(bzxgzw.judgeReference)}
                                     td
-                                        !{getvalue(bzxgzw.percent)}
-                                    td
-                                        !{getvalue(JSON.stringify(bzxgzw.percent))}
+                                        !{getpercent(bzxgzw.percent,biaozhixinggouzhuwunum)}
                         h1
                             | 街道空间
                         table
@@ -218,7 +249,7 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput
+                                                | judgeReference
                                     td
                                         p
                                             strong
@@ -240,7 +271,7 @@ html(lang="en")
                                     td
                                         !{getvalue(jdkj.judgeReference)}
                                     td
-                                        !{getvalue(JSON.stringify(jdkj.percent))}
+                                        !{getpercent(jdkj.percent,jiedaokongjiannum)}
                         h1
                             | 开敞空间
                         table
@@ -273,7 +304,7 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput
+                                                | judgeReference
                                     td
                                         p
                                             strong
@@ -295,7 +326,7 @@ html(lang="en")
                                     td
                                         !{getvalue(kckj.judgeReference)}
                                     td
-                                        !{getvalue(JSON.stringify(kckj.percent))}
+                                        !{getpercent(kckj.percent,kaichangkongjiannum)}
                         h1
                             | 庭院与建筑
                         table
@@ -328,7 +359,7 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput 
+                                                | judgeReference 
                                     td
                                         p
                                             strong
@@ -350,7 +381,7 @@ html(lang="en")
                                     td
                                         !{getvalue(tyyjz.judgeReference)}
                                     td
-                                        !{getvalue(JSON.stringify(tyyjz.percent))}
+                                        !{getpercent(tyyjz.percent,tingyuanyujianzhunum)}
             footer
                 .pic
                     img(src="/logo.jpg")

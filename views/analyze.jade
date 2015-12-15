@@ -11,12 +11,12 @@
 - }
 //- 判断获取值的结果，渲染到前端
 - var getvalue = function(data){
--   if(data == undefined || data == "null"){
+-   if(data === undefined || data === "null" || isNaN(data)){
 -        return "<p></p>";
 -   }else if (data.length > 20) {
 -       var id = randomid();
 -       border += addborder(data,id);
--       return "<button data-id="+id+">点击小黑板看详细内容</button>";
+-       return "<button data-id="+id+">详细</button>";
 -   }else{
 -        return "<p>"+data+"</p>";
 -   }
@@ -140,15 +140,15 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput
+                                                | 分析
                                     td
                                         p
                                             strong
-                                                | judgeReference
+                                                | 依据
                             each cz in cunzhen
                                 tr
                                     td
-                                        !{getvalue(cz.namezh)}
+                                        !{cz.namezh}
                                     td
                                         !{getvalue(cz.value)}
                                     td
@@ -190,11 +190,11 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput
+                                                | 分析
                                     td
                                         p
                                             strong
-                                                | judgeReference
+                                                | 依据
                                     td
                                         p
                                             strong
@@ -202,7 +202,7 @@ html(lang="en")
                             each bzxgzw in biaozhixinggouzhuwu
                                 tr
                                     td
-                                        !{getvalue(bzxgzw.namezh)}
+                                        !{bzxgzw.namezh}
                                     td
                                         !{getvalue(bzxgzw.value)}
                                     td
@@ -245,11 +245,11 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput
+                                                | 分析
                                     td
                                         p
                                             strong
-                                                | judgeReference
+                                                | 依据
                                     td
                                         p
                                             strong
@@ -257,7 +257,7 @@ html(lang="en")
                             each jdkj in jiedaokongjian
                                 tr
                                     td
-                                        !{getvalue(jdkj.namezh)}
+                                        !{jdkj.namezh}
                                     td
                                         !{getvalue(jdkj.value)}
                                     td
@@ -300,11 +300,11 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput
+                                                | 分析
                                     td
                                         p
                                             strong
-                                                | judgeReference
+                                                | 依据
                                     td
                                         p
                                             strong
@@ -312,7 +312,7 @@ html(lang="en")
                             each kckj in kaichangkongjian
                                 tr
                                     td
-                                        !{getvalue(kckj.namezh)}
+                                        !{kckj.namezh}
                                     td
                                         !{getvalue(kckj.value)}
                                     td
@@ -355,11 +355,11 @@ html(lang="en")
                                     td
                                         p
                                             strong
-                                                | judgeOutput
+                                                | 分析
                                     td
                                         p
                                             strong
-                                                | judgeReference 
+                                                | 依据 
                                     td
                                         p
                                             strong
@@ -367,7 +367,7 @@ html(lang="en")
                             each tyyjz in tingyuanyujianzhu
                                 tr
                                     td
-                                        !{getvalue(tyyjz.namezh)}
+                                        !{tyyjz.namezh}
                                     td
                                         !{getvalue(tyyjz.value)}
                                     td

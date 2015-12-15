@@ -53,6 +53,7 @@ body {
 }
 .border .content table tr td .colnum .ratename {
   float: left;
+  width: 100px;
   margin-right: 10px;
 }
 .border .content table tr td .colnum .ratevalue {

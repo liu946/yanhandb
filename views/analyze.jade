@@ -11,7 +11,7 @@
 - }
 //- 判断获取值的结果，渲染到前端
 - var getvalue = function(data){
--   if(data === undefined || data === "null" || isNaN(data)){
+-   if(!data){
 -        return "<p></p>";
 -   }else if (data.length > 20) {
 -       var id = randomid();

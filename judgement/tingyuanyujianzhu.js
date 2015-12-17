@@ -750,7 +750,7 @@ module.exports = {
             '2':3,
             'def':5,
         },
-        "judgeReference":'合理选用建筑围护结构构件，采取有效的隔声、减噪措施，保证室内噪声级和隔声性能符合《民用建筑隔声设计规范》（GBJ118）的要求。<img class="img" src="/static/image/8.jpg">',
+        "judgeReference":'合理选用建筑围护结构构件，采取有效的隔声、减噪措施，保证室内噪声级和隔声性能符合《民用建筑隔声设计规范》（GBJ118）的要求。<img class="img" src="/image/8.jpg">',
 
     },
     "JZSNHJRHJCNJiZhongGongNuan": {
@@ -812,7 +812,7 @@ module.exports = {
             '2':4,
             'def':5,
         },
-        "judgeReference":'东西向外墙可种植爬藤或乔木遮阳，采用隔热通风屋面或被动蒸发屋面，外窗宜设置遮阳措施。<img class="img" src="/static/image/28.jpg"><img class="img" src="/static/image/95.jpg">',
+        "judgeReference":'东西向外墙可种植爬藤或乔木遮阳，采用隔热通风屋面或被动蒸发屋面，外窗宜设置遮阳措施。<img class="img" src="/image/28.jpg"><img class="img" src="/image/95.jpg">',
     },
     "JZSNHJRHJWWHJGGRYBWDongJiFangFengCuoShi": {
         "type": "selectmultornull",
@@ -830,7 +830,7 @@ module.exports = {
             '2':4,
             'def':5,
         },
-        "judgeReference":'<img class="img" src="/static/image/29.jpg">',
+        "judgeReference":'<img class="img" src="/image/29.jpg">',
 
     },
     "JZSNHJRHJWWHJGGRYBWYouWuWaiQiangBaoWenGeRe": {
@@ -852,7 +852,7 @@ module.exports = {
             '2':4,
             'def':5,
         },
-        "judgeReference":'采用附有保温层的外墙或自保温外墙。在墙体保温类型选择中，内保温技术由于具有对材料性能要求不高、便于施工和成本较低等特点，但内保温使内、外墙体分处于两个温度场，保温层易出现裂缝，结构寿命缩短，以及易产生热桥和不便于二次装修等缺陷。夹心保温墙体有效保护了保温材料，对保温材料要求不高，但为保证系统连接的安全性，须有连接件，构造复杂、施工困难；易产生热桥；内部易形成空气对流；外墙结构寿命短，不适合应用于村镇建筑。外保温技术由于能够避免“热桥”现象，保护主体结构和扩大室内空间等优点，被大多数村镇居民所接受，适宜应用于目前我国村镇建筑。<img class="img" src="/static/image/30.jpg">',
+        "judgeReference":'采用附有保温层的外墙或自保温外墙。在墙体保温类型选择中，内保温技术由于具有对材料性能要求不高、便于施工和成本较低等特点，但内保温使内、外墙体分处于两个温度场，保温层易出现裂缝，结构寿命缩短，以及易产生热桥和不便于二次装修等缺陷。夹心保温墙体有效保护了保温材料，对保温材料要求不高，但为保证系统连接的安全性，须有连接件，构造复杂、施工困难；易产生热桥；内部易形成空气对流；外墙结构寿命短，不适合应用于村镇建筑。外保温技术由于能够避免“热桥”现象，保护主体结构和扩大室内空间等优点，被大多数村镇居民所接受，适宜应用于目前我国村镇建筑。<img class="img" src="/image/30.jpg">',
     },
     "JZSNHJRHJWQBWGRCaiLiao": {
         "type": "select",
@@ -947,7 +947,7 @@ module.exports = {
             '2':4,
             'def':5,
         },
-        "judgeReference":'a.门窗框与墙体间的缝隙，应采用高效保温材料填堵，宜采用施工现场灌注聚氨酯泡沫塑料或填塞聚乙烯泡沫塑料棒，再从内外侧用嵌缝密封膏（胶）密封，以减少该部位的开裂、结露和空气渗透。b.外墙保温层与门窗框之间的窗洞侧壁部位应做保温处理，保温材料与外墙保温材料一致，保温层厚度不小于20mm，以减弱该部位的热桥，提高门窗的保温性能。<img class="img" src="/static/image/63.jpg"><img class="img" src="/static/image/64.jpg"><img class="img" src="/static/image/65.jpg"><img class="img" src="/static/image/66.jpg"><img class="img" src="/static/image/67.jpg"><img class="img" src="/static/image/68.jpg"><img class="img" src="/static/image/90.jpg">',
+        "judgeReference":'a.门窗框与墙体间的缝隙，应采用高效保温材料填堵，宜采用施工现场灌注聚氨酯泡沫塑料或填塞聚乙烯泡沫塑料棒，再从内外侧用嵌缝密封膏（胶）密封，以减少该部位的开裂、结露和空气渗透。b.外墙保温层与门窗框之间的窗洞侧壁部位应做保温处理，保温材料与外墙保温材料一致，保温层厚度不小于20mm，以减弱该部位的热桥，提高门窗的保温性能。<img class="img" src="/image/63.jpg"><img class="img" src="/image/64.jpg"><img class="img" src="/image/65.jpg"><img class="img" src="/image/66.jpg"><img class="img" src="/image/67.jpg"><img class="img" src="/image/68.jpg"><img class="img" src="/image/90.jpg">',
     },
     "JZSNHJRHJWaiMenDongJiBaoWenCuoShi": {
         "type": "selectmultornull",
@@ -1054,7 +1054,7 @@ module.exports = {
             '<600':4,
             'def':5,
         },
-        'judgeReference':'<img class="img" src="/static/image/9.jpg">',
+        'judgeReference':'<img class="img" src="/image/9.jpg">',
 
     },
     "JZSNHJGHJZRGLYDingBuCaiGuangXiShu": {
@@ -1094,7 +1094,7 @@ module.exports = {
             '2':3,
             '3':5,
         },
-        'judgeReference':'设计采光性能最佳的建筑朝向，发挥天井、庭院、中庭的采光作用，使天然光线能照亮人员经常停留的室内空间；采用自然光调控设施，如采用反光板、反光镜、集光装置等，改善室内的自然光分布；充足的天然采光和自然通风有利于居住者的生理和心理健康，同时也有利于降低人工照明能耗。各种光源的视觉试验结果表明，在同样照度的条件下，天然光的辨认能力优于人工光，从而有利于人们工作、生活、保护视力和提高劳动生产率。居住建筑功能房间包括卧室、起居室（厅）、书房、厨房和卫生间。对于公共建筑，非功能空间包括走廊、核心筒、卫生间、电梯间、特殊功能房间，其余的为功能房间。室内照明尽量利用自然光，如不具备自然采光条件，可利用光导纤维引导照明，以充分利用阳光，减少白天对人工照明的依赖；天然采光不仅有利于照明节能，而且有利于增加室内外的自然信息交流，改善空间卫生环境，调节空间使用者的心情。建筑的地下空间和高大进深的地上空间，由于物理的封闭，很容易出现天然采光不足的情况。通过反光板、棱镜玻璃窗、天窗、下沉庭院等设计手法的采用，以及导光管等技术的采用，可以有效改善这些空间的天然采光效果。<img class="img" src="/static/image/10.jpg">',
+        'judgeReference':'设计采光性能最佳的建筑朝向，发挥天井、庭院、中庭的采光作用，使天然光线能照亮人员经常停留的室内空间；采用自然光调控设施，如采用反光板、反光镜、集光装置等，改善室内的自然光分布；充足的天然采光和自然通风有利于居住者的生理和心理健康，同时也有利于降低人工照明能耗。各种光源的视觉试验结果表明，在同样照度的条件下，天然光的辨认能力优于人工光，从而有利于人们工作、生活、保护视力和提高劳动生产率。居住建筑功能房间包括卧室、起居室（厅）、书房、厨房和卫生间。对于公共建筑，非功能空间包括走廊、核心筒、卫生间、电梯间、特殊功能房间，其余的为功能房间。室内照明尽量利用自然光，如不具备自然采光条件，可利用光导纤维引导照明，以充分利用阳光，减少白天对人工照明的依赖；天然采光不仅有利于照明节能，而且有利于增加室内外的自然信息交流，改善空间卫生环境，调节空间使用者的心情。建筑的地下空间和高大进深的地上空间，由于物理的封闭，很容易出现天然采光不足的情况。通过反光板、棱镜玻璃窗、天窗、下沉庭院等设计手法的采用，以及导光管等技术的采用，可以有效改善这些空间的天然采光效果。<img class="img" src="/image/10.jpg">',
     },
     "JZSNHJGHJXuanGuangDuiCe": {
         "type": "select",
@@ -1109,7 +1109,7 @@ module.exports = {
             '2':5,
             '3':0,
         },
-        'judgeReference':'<img class="img" src="/static/image/11.jpg"><img class="img" src="/static/image/12.jpg"><img class="img" src="/static/image/13.jpg"><img class="img" src="/static/image/14.jpg"><img class="img" src="/static/image/15.jpg">',
+        'judgeReference':'<img class="img" src="/image/11.jpg"><img class="img" src="/image/12.jpg"><img class="img" src="/image/13.jpg"><img class="img" src="/image/14.jpg"><img class="img" src="/image/15.jpg">',
     },
     "JZSNHJGHJZhaoMingKongZhi": {
         "type": "select",
@@ -1133,7 +1133,7 @@ module.exports = {
             "2": "否"
         },
         "namezh": "窗户是否可开闭",
-        'judgeReference':'合理组织室内气流，防止炊事油烟排放造成的室内空气污染和中毒。\n窗按照开启方式分类有有推拉窗、平开窗、固定窗、悬窗、转窗等。窗的开启方式选择常常跟当地的气候特点密切相关。平开窗开启方式简单，安装维修都较为便捷，通风面积在开启几种方式中最大。关闭平开窗时，橡胶密封条受挤压所产生的形变可以使窗紧密封闭，隔音、隔热、保温性能都较好，适宜在严寒地区推广。<img class="img" src="/static/image/75.jpg"><img class="img" src="/static/image/76.jpg">',
+        'judgeReference':'合理组织室内气流，防止炊事油烟排放造成的室内空气污染和中毒。\n窗按照开启方式分类有有推拉窗、平开窗、固定窗、悬窗、转窗等。窗的开启方式选择常常跟当地的气候特点密切相关。平开窗开启方式简单，安装维修都较为便捷，通风面积在开启几种方式中最大。关闭平开窗时，橡胶密封条受挤压所产生的形变可以使窗紧密封闭，隔音、隔热、保温性能都较好，适宜在严寒地区推广。<img class="img" src="/image/75.jpg"><img class="img" src="/image/76.jpg">',
     },
     "JZSNHJSNKQPZZRTFXNYouXiaoZiRanTongFengDeKaiKouMianJi": {
         "type": "input",
@@ -1250,7 +1250,7 @@ module.exports = {
             '2':4,
             'def':5,
         },
-        'judgeReference':'<img class="img" src="/static/image/79.jpg"><img class="img" src="/static/image/80.jpg"><img class="img" src="/static/image/81.jpg"><img class="img" src="/static/image/82.jpg"><img class="img" src="/static/image/83.jpg"><img class="img" src="/static/image/87.jpg"><img class="img" src="/static/image/89.jpg">',
+        'judgeReference':'<img class="img" src="/image/79.jpg"><img class="img" src="/image/80.jpg"><img class="img" src="/image/81.jpg"><img class="img" src="/image/82.jpg"><img class="img" src="/image/83.jpg"><img class="img" src="/image/87.jpg"><img class="img" src="/image/89.jpg">',
     },
     "NYLYTaiYangNenReShuiXiTong": {
         "type": "selectmultornull",
@@ -1267,7 +1267,7 @@ module.exports = {
             '2':4,
             'def':5,
         },
-        'judgeReference':'严寒地区普遍日照充足，为太阳能的应用提供了便利的条件，被动式太阳房是将太阳能用于采暖的最简单、最有效的一种形式。被动太阳房无须任何设备，经济成本较低，尤其在部分严寒地区冬季太阳能也较为丰富，只要建筑围护结构进行一定的保温节能改造，被动太阳房完全可以达到室内热环境所要求的基本标准。太阳能低温储水采暖系统也是适合严寒地区村镇的采暖系统之一。<img class="img" src="/static/image/84.jpg">',
+        'judgeReference':'严寒地区普遍日照充足，为太阳能的应用提供了便利的条件，被动式太阳房是将太阳能用于采暖的最简单、最有效的一种形式。被动太阳房无须任何设备，经济成本较低，尤其在部分严寒地区冬季太阳能也较为丰富，只要建筑围护结构进行一定的保温节能改造，被动太阳房完全可以达到室内热环境所要求的基本标准。太阳能低温储水采暖系统也是适合严寒地区村镇的采暖系统之一。<img class="img" src="/image/84.jpg">',
     },
     "NYLYYouWuShengWuZhiNenYuanLiYong": {
         "type": "boolean",
@@ -1350,7 +1350,7 @@ module.exports = {
             '2':3,
             'def':5
         },
-        'judgeReference':'节水管理制度主要包括节水方案、分户分类计量收费、节水管理机制等。\n采取有效措施避免管网漏损，选用密闭性能好的阀门、设备，使用耐腐蚀、耐久性能好的管材、管件，室外埋地管道采取有效措施避免管网漏损，设计阶段根据水平衡测试的要求安装分级计量水表；运行阶段提供用水量计量情况和管网漏损检测、整改的报告。给水系统无超压出流现象用水点供水压力不大于0.20MPa，且不小于用水器具要求的最低工作压力。按使用用途，对厨房、卫生间、绿化、空调系统、游泳池、景观等用水分别设置用水计量装置，统计用水量，或者按付费或管理单元分别设置用水计量装置统计用水量。\n建筑平均日用水量满足现行国家标准《民用建筑节水设计标准》GB 50555中的节水用水定额的要求。\na.采取有效措施避免管网漏损，选用密闭性能好的阀门、设备，使用耐腐蚀、耐久性能好的管材、管件，室外埋地管道采取有效措施避免管网漏损，设计阶段根据水平衡测试的要求安装分级计量水表；\nb.所有用水器具应满足现行标准《节水型生活用水器具》CJ164及《节水型产品技术条件与管理通则》GB/T18870的要求。 除特殊功能需求外，均应采用节水型用水器具。\n可选用以下节水器具：\n1）  节水龙头：加气节水龙头、陶瓷阀芯水龙头、停水自动关闭水龙头等；\n2）  坐便器：压力流防臭、压力流冲击式6L直排便器、3L/6L两挡节水型虹吸式排水坐便器、6L以下直排式节水型坐便器或感应式节水型坐便器，缺水地区可选用带洗手水龙头的水箱坐便器；\n3）  节水淋浴器：水温调节器、节水型淋浴喷嘴等；\n营业性公共浴室淋浴器采用恒温混合阀、脚踏开关等。<img class="img" src="/static/image/94.jpg">'
+        'judgeReference':'节水管理制度主要包括节水方案、分户分类计量收费、节水管理机制等。\n采取有效措施避免管网漏损，选用密闭性能好的阀门、设备，使用耐腐蚀、耐久性能好的管材、管件，室外埋地管道采取有效措施避免管网漏损，设计阶段根据水平衡测试的要求安装分级计量水表；运行阶段提供用水量计量情况和管网漏损检测、整改的报告。给水系统无超压出流现象用水点供水压力不大于0.20MPa，且不小于用水器具要求的最低工作压力。按使用用途，对厨房、卫生间、绿化、空调系统、游泳池、景观等用水分别设置用水计量装置，统计用水量，或者按付费或管理单元分别设置用水计量装置统计用水量。\n建筑平均日用水量满足现行国家标准《民用建筑节水设计标准》GB 50555中的节水用水定额的要求。\na.采取有效措施避免管网漏损，选用密闭性能好的阀门、设备，使用耐腐蚀、耐久性能好的管材、管件，室外埋地管道采取有效措施避免管网漏损，设计阶段根据水平衡测试的要求安装分级计量水表；\nb.所有用水器具应满足现行标准《节水型生活用水器具》CJ164及《节水型产品技术条件与管理通则》GB/T18870的要求。 除特殊功能需求外，均应采用节水型用水器具。\n可选用以下节水器具：\n1）  节水龙头：加气节水龙头、陶瓷阀芯水龙头、停水自动关闭水龙头等；\n2）  坐便器：压力流防臭、压力流冲击式6L直排便器、3L/6L两挡节水型虹吸式排水坐便器、6L以下直排式节水型坐便器或感应式节水型坐便器，缺水地区可选用带洗手水龙头的水箱坐便器；\n3）  节水淋浴器：水温调节器、节水型淋浴喷嘴等；\n营业性公共浴室淋浴器采用恒温混合阀、脚踏开关等。<img class="img" src="/image/94.jpg">'
     },
     "ZYYCLLYSZYBHYSLYWSZLYYuShuiLiYongXiTong": {
         "type": "select",
@@ -1364,7 +1364,7 @@ module.exports = {
             '2':5,
             'def':0
         },
-        'judgeReference':'对雨雪水、再生水等水资源利用的技术经济可行性进行分析和研究，进行水量平衡计算，确定雨雪水、再生水等水资源的利用方法、规模、处理工艺流程等。在水资源短缺地区，通过技术经济比较，合理采用雨水和中水回用系统；合理规划地表与屋顶雨水径流途径，最大程度降低地表径流，采用多种渗透措施增加雨水的渗透量。\n景观水体补水严禁采用市政供水和自备地下水井供水，可以采用地表水和非传统水源，取用建筑场地外的地表水时，应事先取得当地政府主管部门的许可；采用雨水和建筑中水作为水源时，水景规模应根据设计可收集利用的雨水或中水量来确定。<img class="img" src="/static/image/85.jpg"><img class="img" src="/static/image/88.jpg">'
+        'judgeReference':'对雨雪水、再生水等水资源利用的技术经济可行性进行分析和研究，进行水量平衡计算，确定雨雪水、再生水等水资源的利用方法、规模、处理工艺流程等。在水资源短缺地区，通过技术经济比较，合理采用雨水和中水回用系统；合理规划地表与屋顶雨水径流途径，最大程度降低地表径流，采用多种渗透措施增加雨水的渗透量。\n景观水体补水严禁采用市政供水和自备地下水井供水，可以采用地表水和非传统水源，取用建筑场地外的地表水时，应事先取得当地政府主管部门的许可；采用雨水和建筑中水作为水源时，水景规模应根据设计可收集利用的雨水或中水量来确定。<img class="img" src="/image/85.jpg"><img class="img" src="/image/88.jpg">'
     },
     "ZYYCLLYSZYBHYSLYWSZLYZaPaiShuiZaiLiYongXiTong": {
         "type": "select",

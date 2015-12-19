@@ -1,11 +1,11 @@
 // cunzhen:'js',
 // table defination
 
-var sys = require('../func/sys.js')
+var sys = require('../func/sys.js');
 module.exports = sys.extend(require('../base/tablefieldgroup.js'),
     {
         name: "cunzhen",
-        fields: 	//	[{name:分类名,fields:[与基类field相同]},分类obj,:':':']',
+        fields:	//	[{name:分类名,fields:[与基类field相同]},分类obj,:':':']',
             [
                 {
                     namezh: '村镇基本信息',
@@ -35,7 +35,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                             },
                         },
                         {
-                            namezh: '人均居住用地',
+                            namezh: '人均居住用地面积',
                             backend: {
                                 type: 'number',
 
@@ -44,7 +44,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                                 type: 'input',
                                 defaultValue: '0',
                                 size: ".1",
-                                comment: "m^2",
+                                comment: "㎡",
                             },
                         },
                         {
@@ -76,7 +76,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                                 type: 'input',
                                 defaultValue: '0',
                                 size: ".1",
-                                comment: "m^2",
+                                comment: "㎡",
                             },
                         },
                         {
@@ -103,7 +103,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                             },
                         },
                         {
-                            namezh: '环境污染与安全',
+                            namezh: '环境污染',
                             backend: {
                                 type: 'text',
                                 size: 20,
@@ -273,5 +273,5 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
                     ]
                 },
             ]
-    })
+    });
 

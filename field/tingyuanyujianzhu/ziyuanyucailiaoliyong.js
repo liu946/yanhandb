@@ -88,7 +88,7 @@ module.exports={
 			},
 			forend:{
 				type:"input",
-				comment:"数字%",
+				comment:"%",
 			}
 		},
 
@@ -99,7 +99,7 @@ module.exports={
 			},
 			forend:{
 				type:"input",
-				comment:"数字%",
+				comment:"%",
 			}
 		},
 
@@ -147,7 +147,7 @@ module.exports={
 			},
 			forend:{
 				type:"input",
-				comment:"（建筑主体材料的再利用率）数字%",
+				comment:"%",
 			}
 		},
 		]

@@ -16,7 +16,7 @@ module.exports = sys.extend(require('../base/tablefieldgroup.js'),
 			forend:{
 				type:'input',
 				defaultValue:'null',
-				comment:"英文字母+数字（对每条街道编号后分别录入下列内容）",
+				comment:"英文字母+数字",
 			},
 		},
 	{

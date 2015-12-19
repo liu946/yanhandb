@@ -169,7 +169,7 @@ module.exports = {
 			},
 			forend:{
 				type:"input",
-				comment:"数字%",
+				comment:"%",
 			}
 		},
 		{

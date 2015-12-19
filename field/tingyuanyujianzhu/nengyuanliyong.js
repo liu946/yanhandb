@@ -81,7 +81,7 @@ module.exports =
 				},
 				forend:{
 					type:"input",
-					comment:'数字%（有集中供暖时填写）',
+					comment:'%（有集中供暖时填写）',
 				},
 			},
 			{
@@ -91,7 +91,7 @@ module.exports =
 				},
 				forend:{
 					type:"input",
-					comment:'数字%（有集中供暖时填写）',
+					comment:'%（有集中供暖时填写）',
 				},
 			}
 			]
@@ -177,7 +177,7 @@ module.exports =
 			},
 			forend:{
 				type:"input",
-				comment:"数字%",		
+				comment:"%",
 			}
 		},
 		{
@@ -187,7 +187,7 @@ module.exports =
 			},
 			forend:{
 				type:"input",
-				comment:"数字%",		
+				comment:"%",		
 			}
 		},
 		{

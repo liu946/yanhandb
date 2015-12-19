@@ -9,7 +9,7 @@ module.exports = {
 		},
 		forend:{
 			type:'input',
-			comment:"字母+数字（对建筑编号后分别录入下列内容）"
+			comment:"字母+数字"
 		}
 	},
 	
@@ -20,7 +20,7 @@ module.exports = {
 		},
 		forend:{
 			type:'input',
-			comment:"文字（居住建筑为户主姓名、公共建筑为建筑名称）"
+			comment:"文字"
 		}
 	},
 	
@@ -39,7 +39,7 @@ module.exports = {
 		backend:{type:"number"},
 		forend:{
 			type:"input",
-			comment:"m^2"
+			comment:"㎡"
 		},
 	},
 	{
@@ -47,7 +47,7 @@ module.exports = {
 		backend:{type:"number"},
 		forend:{
 			type:"input",
-			comment:"m^2"
+			comment:"㎡"
 		},
 	},
 	{
@@ -55,7 +55,7 @@ module.exports = {
 		backend:{type:"number"},
 		forend:{
 			type:"input",
-			comment:"m^2"
+			comment:"㎡"
 		},
 	},
 	{
@@ -63,7 +63,7 @@ module.exports = {
 		backend:{type:"number"},
 		forend:{
 			type:"input",
-			comment:"m^2"
+			comment:"㎡"
 		},
 	},
 	{

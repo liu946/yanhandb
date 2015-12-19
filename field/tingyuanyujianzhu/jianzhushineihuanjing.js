@@ -13,7 +13,7 @@ module.exports = {
 			},
 			forend:{
 				type:"input",
-				comment:"数字dB"
+				comment:"噪声dB"
 
 			}
 		},
@@ -151,7 +151,7 @@ module.exports = {
 				},
 				forend:{
 					type:"input",
-					comment:"数字℃",		
+					comment:"℃",
 				}
 			},
 			{
@@ -161,7 +161,7 @@ module.exports = {
 				},
 				forend:{
 					type:"input",
-					comment:"数字℃",		
+					comment:"℃",
 				}
 			},
 			]
@@ -477,7 +477,7 @@ module.exports = {
 					},
 					forend:{
 						type:"input",
-						comment:'数字%',
+						comment:'%',
 					},
 				},
 				]
@@ -497,7 +497,7 @@ module.exports = {
 				},
 				forend:{
 					type:"input",
-					comment:'数字%',
+					comment:'%',
 				},
 			},
 			{
@@ -507,7 +507,7 @@ module.exports = {
 				},
 				forend:{
 					type:"input",
-					comment:'数字lx',
+					comment:'lx',
 				},
 			},
 
@@ -519,7 +519,7 @@ module.exports = {
 				},
 				forend:{
 					type:"input",
-					comment:'数字%',
+					comment:'%',
 				},
 			},
 
@@ -531,7 +531,7 @@ module.exports = {
 				},
 				forend:{
 					type:"input",
-					comment:'数字lx',
+					comment:'lx',
 				},
 			},
 
@@ -609,7 +609,7 @@ module.exports = {
 				},
 				forend:{
 					type:"input",
-					comment:'数字m 2',
+					comment:'㎡',
 				},
 			},
 			]

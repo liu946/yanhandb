@@ -40,7 +40,7 @@ module.exports = {
 			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
-				comment:"数字%",
+				comment:"%",
 			}
 		},
 
@@ -104,7 +104,7 @@ module.exports = {
 			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
-				comment:"数字%",
+				comment:"%",
 			}
 		},
 
@@ -115,7 +115,7 @@ module.exports = {
 			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
-				comment:"数字%",
+				comment:"%",
 			}
 		},
 
@@ -126,7 +126,7 @@ module.exports = {
 			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
-				comment:"数字%",
+				comment:"%",
 			}
 		},
 
@@ -137,7 +137,7 @@ module.exports = {
 			backend:{type:"text",size:100},
 			forend:{
 				type:"input",
-				comment:"数字%",
+				comment:"%",
 			}
 		},
 		]

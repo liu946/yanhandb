@@ -21,27 +21,30 @@ List = (function() {
   };
 
   addlist = function(data, tablename) {
-    var d, html, i, len;
+    var d, html, i, j, k, len, len1, object, v;
     html = '';
+    object = {};
     for (i = 0, len = data.length; i < len; i++) {
       d = data[i];
-      html += "<div class='container'>";
-      if (tablename === 'cunzhen') {
-        html += "<div class='title'><p>" + d.CZJBXXCunZhenMingChen + "</p></div> <div class='title'><p>" + d.CZJBXXSuoShuZhenYu + "</p></div>";
-      } else if (tablename === 'biaozhixinggouzhuwu') {
-        html += "<div class='title'><p>" + d.BianHao + "</p></div> <div class='title'><p>" + d.LeiXing + "</p></div> <div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
-      } else if (tablename === 'jiedaokongjian') {
-        html += "<div class='title'><p>" + d.BianHao + "</p></div> <div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
-      } else if (tablename === 'kaichangkongjian') {
-        html += "<div class='title'><p>" + d.BianHao + "</p></div> <div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
-      } else if (tablename === 'tingyuanyujianzhu') {
-        html += "<div class='title'><p>" + d.JZJBXXBianHao + "</p></div> <div class='title'><p>" + d.JZJBXXMingChen + "</p></div> <div class='title'><p>" + d.SuoShuCunZhen + "</p></div>";
+      if (object.hasOwnProperty(d.CZJBXXSuoShuZhenYu)) {
+        object[d.CZJBXXSuoShuZhenYu].push({
+          "name": "" + d.CZJBXXCunZhenMingChen,
+          "id": "" + d.id
+        });
       } else {
-
+        object[d.CZJBXXSuoShuZhenYu] = [];
       }
-      html += "<div class='exchange'><a href='/statistics/analyze/" + d.id + "'>分析</a></div></div>";
     }
-    return $('#formlist .contentlist').append(html);
+    for (k in object) {
+      v = object[k];
+      html += "<li class='submenu'><a href='#'>" + k + "</a><ul>";
+      for (j = 0, len1 = v.length; j < len1; j++) {
+        d = v[j];
+        html += "<li class='submenu'><a href='" + d.id + "'>" + d.name + "</a>";
+      }
+      html += "</ul>";
+    }
+    return $('#sidebar ul').html(html);
   };
 
   List.prototype.init = function() {

@@ -89,7 +89,6 @@ html(lang="en")
                     | 严寒地区不同基质村镇绿色建筑体系发展目标与应用数据库
 
         #user-nav.navbar.navbar-inverse
-            //p=JSON.stringify(tingyuanyujianzhu)
             ul.nav
                 li
                     a(href="/welcome")
@@ -100,19 +99,23 @@ html(lang="en")
                         span.text
                             | 录入
                 li
-                    a(href="/statistics/analyzelist")
+                    a(href="/statistics/analyze/1")
                         span.text
                             | 分析
                 li
                     a(href="/guide")
                         span.text
                             | 使用指南
+
+        #sidebar(style="OVERFLOW-Y: auto; OVERFLOW-X:hidden;")
+            ul
+                li.submenu.active
+                    a.menu_a(href="#")
+                        | 村镇分析
                         
         #content
             #content-header
                 #breadcrumb
-                    a.tip-bottom(href="/statistics/analyzelist")
-                        | 村镇列表
             .list-body
                 .border
                     .content
@@ -403,6 +406,7 @@ html(lang="en")
         script(src="/script/jquery.ui.custom.js")
         script(src="/script/bootstrap.min.js")
         script(src="/script/matrix.js")
+        script(src="/script/analyze.js")
         script.
             //- 对button按钮的监听
             var buttons = $('button');
@@ -419,6 +423,42 @@ html(lang="en")
                 var target = $(buttons[i]);
                 var id = target.data('id');
                 bindevent(id,target);
+            }
+            list = new List('cunzhen');
+            list.init();
+            $("#addform").on('click',function() {
+                list.add();
+            });
+            //初始化相关元素高度
+            function init(){
+                $("body").height($(window).height()-80);
+                $("#iframe-main").height($(window).height()-90);
+                $("#sidebar").height($(window).height()-50);
+            }
+            $(function(){
+                init();
+                $(window).resize(function(){
+                    init();
+                });
+            });
+            // This function is called from the pop-up menus to transfer to
+            // a different page. Ignore if the value returned is a null string:
+            function goPage (newURL) {
+                // if url is empty, skip the menu dividers and reset the menu selection to default
+                if (newURL != "") {
+                    // if url is "-", it is this page -- reset the menu:
+                    if (newURL == "-" ) {
+                        resetMenu();            
+                    } 
+                // else, send page to designated URL            
+                else {  
+                        document.location.href = newURL;
+                    }
+                }
+            }
+            // resets the menu selection upon entry to this page:
+            function resetMenu() {
+                document.gomenu.selector.selectedIndex = 2;
             }
             
 

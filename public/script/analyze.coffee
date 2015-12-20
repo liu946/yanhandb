@@ -25,7 +25,7 @@ class List
         for k,v of object
             html += "<li class='submenu'><a href='#'>#{k}</a><ul>"
             for d in v
-                html += "<li class='submenu'><a href='#{d.id}'>#{d.name}</a>"
+                html += "<li class='submenu'><a href='/statistics/analyze/#{d.id}'>#{d.name}</a>"
             html += "</ul>"
             
         $('#sidebar ul').html html

@@ -40,7 +40,7 @@ List = (function() {
       html += "<li class='submenu'><a href='#'>" + k + "</a><ul>";
       for (j = 0, len1 = v.length; j < len1; j++) {
         d = v[j];
-        html += "<li class='submenu'><a href='" + d.id + "'>" + d.name + "</a>";
+        html += "<li class='submenu'><a href='/statistics/analyze/" + d.id + "'>" + d.name + "</a>";
       }
       html += "</ul>";
     }

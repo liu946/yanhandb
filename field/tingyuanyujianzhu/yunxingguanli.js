@@ -5,20 +5,20 @@ module.exports = {
 	{
 		namezh:"管理制度",
 		fields:[
-		{
-			namezh:"管理体系认证",
-			backend:{
-				type:"text",size:200
-			},
-			forend:{
-				type:"selectmultornull",
-				option:{
-					1:"具有ISO 14001环境管理体系认证",
-					2:"具有ISO 9001质量管理体系认证",
-					3:"具有现行国家标准《能源管理体系要求》GB/T 23331的能源管理体系认证",
-				}
-			},
-		},
+		// {
+		// 	namezh:"管理体系认证",
+		// 	backend:{
+		// 		type:"text",size:200
+		// 	},
+		// 	forend:{
+		// 		type:"selectmultornull",
+		// 		option:{
+		// 			1:"具有ISO 14001环境管理体系认证",
+		// 			2:"具有ISO 9001质量管理体系认证",
+		// 			3:"具有现行国家标准《能源管理体系要求》GB/T 23331的能源管理体系认证",
+		// 		}
+		// 	},
+		// },
 		{
 			namezh:"操作规程",
 			backend:{
@@ -89,59 +89,59 @@ module.exports = {
 				}
 			},
 		},
-		{
-			namezh:"空调通风系统检查和清洗",
-			backend:{
-				type:"text",size:100
-			},
-			forend:{
-				type:"selectmultornull",
-				option:{
-					1:"制定空调通风设备和风管的检查和清洗计划",
-					2:"实施选项1中的检查和清洗计划，且记录保存完整",
-				}
-			},
-		},
-		{
-			namezh:"非传统水源的水质和用水量记录",
-			backend:{
-				type:"text",size:100
-			},
-			forend:{
-				type:"selectmultornull",
-				option:{
-					1:"定期进行水质检测，记录完整、准确",
-					2:"用水量记录完整、准确",
-				}
-			},
-		},
-		{
-			namezh:"智能化系统的运行效果",
-			backend:{
-				type:"text",size:200
-			},
-			forend:{
-				type:"selectmultornull",
-				option:{
-					1:"居住建筑的智能化系统满足现行行业标准《居住区智能化系统配置与技术要求》CJ/T 174的基本配置要求，公共建筑的智能化系统满足现行国家标准《智能建筑设计标准》GB 50314的基础配置要求",
-					2:"智能化系统工作正常，符合设计要求",
-				}
-			},
-		},
-		{
-			namezh:"信息化物业管理",
-			backend:{
-				type:"text",size:100
-			},
-			forend:{
-				type:"selectmultornull",
-				option:{
-					1:"设置物业信息管理系统",
-					2:"物业管理信息系统功能完备",
-					3:"记录数据完整",
-				}
-			},
-		},
+		// {
+		// 	namezh:"空调通风系统检查和清洗",
+		// 	backend:{
+		// 		type:"text",size:100
+		// 	},
+		// 	forend:{
+		// 		type:"selectmultornull",
+		// 		option:{
+		// 			1:"制定空调通风设备和风管的检查和清洗计划",
+		// 			2:"实施选项1中的检查和清洗计划，且记录保存完整",
+		// 		}
+		// 	},
+		// },
+		// {
+		// 	namezh:"非传统水源的水质和用水量记录",
+		// 	backend:{
+		// 		type:"text",size:100
+		// 	},
+		// 	forend:{
+		// 		type:"selectmultornull",
+		// 		option:{
+		// 			1:"定期进行水质检测，记录完整、准确",
+		// 			2:"用水量记录完整、准确",
+		// 		}
+		// 	},
+		// },
+		// {
+		// 	namezh:"智能化系统的运行效果",
+		// 	backend:{
+		// 		type:"text",size:200
+		// 	},
+		// 	forend:{
+		// 		type:"selectmultornull",
+		// 		option:{
+		// 			1:"居住建筑的智能化系统满足现行行业标准《居住区智能化系统配置与技术要求》CJ/T 174的基本配置要求，公共建筑的智能化系统满足现行国家标准《智能建筑设计标准》GB 50314的基础配置要求",
+		// 			2:"智能化系统工作正常，符合设计要求",
+		// 		}
+		// 	},
+		// },
+		// {
+		// 	namezh:"信息化物业管理",
+		// 	backend:{
+		// 		type:"text",size:100
+		// 	},
+		// 	forend:{
+		// 		type:"selectmultornull",
+		// 		option:{
+		// 			1:"设置物业信息管理系统",
+		// 			2:"物业管理信息系统功能完备",
+		// 			3:"记录数据完整",
+		// 		}
+		// 	},
+		// },
 		]
 	},
 

@@ -21,7 +21,7 @@ module.exports={
 			}
 		},
 		{
-			namezh:"雨水利用、污水再利用",
+			namezh:"雨水利用",
 			fields:[
 
 			{
@@ -92,16 +92,16 @@ module.exports={
 			}
 		},
 
-		{
-			namezh:"可持续森林采伐的木材（绿色木材）使用率",
-			backend:{
-				type:"text",size:100
-			},
-			forend:{
-				type:"input",
-				comment:"%",
-			}
-		},
+		// {
+		// 	namezh:"可持续森林采伐的木材（绿色木材）使用率",
+		// 	backend:{
+		// 		type:"text",size:100
+		// 	},
+		// 	forend:{
+		// 		type:"input",
+		// 		comment:"%",
+		// 	}
+		// },
 
 
 		{

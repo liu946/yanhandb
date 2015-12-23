@@ -586,66 +586,18 @@ module.exports = {
 		namezh:"室内空气品质",
 		fields:[
 		{
-			namezh:"自然通风性能",
-			fields:[
-
-			{
-				namezh:"窗户是否可开闭",
-				backend:{
-					type:"text",size:100
-				},
-				forend:{
-					type:'select',
-					option:{
-						1:'是',
-						2:"否",
-					},
+			namezh:"气流组织",
+			
+			backend:{
+				type:"text",size:100
+			},
+			forend:{
+				type:'selectmultornull',
+				option:{
+					1 :'重要功能区域供暖、通风的气流组织满足热环境参数设计要求',
+					2 :'避免卫生间、餐厅等区域的空气和污染物串通到其他空间或室外活动场所',
 				},
 			},
-			{
-				namezh:'有效自然通风的开口面积',
-				backend:{
-					type:"text",size:100
-				},
-				forend:{
-					type:"input",
-					comment:'㎡',
-				},
-			},
-			]
-		},
-		{
-			namezh:"运行管理",
-			fields:[
-			{
-				namezh:"CO2的监测",
-				backend:{
-					type:"text",size:100
-				},
-				forend:{
-					type:'select',
-					option:{
-						1:'无监测',
-						2:" 采用手工测量的系统",
-						3:" 采用空气品质实时中央检测系统",
-					},
-				},
-			},
-			{
-				namezh:"吸烟控制",
-				backend:{
-					type:"text",size:100
-				},
-				forend:{
-					type:'select',
-					option:{
-						1:'无控制',
-						2:"设置吸烟室，采取了防止非吸烟者被动吸烟的最低限度措施",
-						3:"全楼禁烟，或设置吸烟室、很好的采取了防止非吸烟者被动吸烟的措施",
-					},
-				},
-			},
-			]
 		},
 		]
 	},

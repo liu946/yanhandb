@@ -64,38 +64,38 @@ module.exports =
 			}
 			]
 		},
-		{
-			namezh:"锅炉热效率",
-			require:{
-				namezh:"集中供暖",
-				name:"JZSNHJRHJCNJiZhongGongNuan",
-				value:1,
-				valuezh:'是',
-			},
-			fields:
-			[
-			{
-				namezh:"燃煤、烟煤",
-				backend:{
-					type:"text",size:100
-				},
-				forend:{
-					type:"input",
-					comment:'%（有集中供暖时填写）',
-				},
-			},
-			{
-				namezh:"燃油、燃气",
-				backend:{
-					type:"text",size:100
-				},
-				forend:{
-					type:"input",
-					comment:'%（有集中供暖时填写）',
-				},
-			}
-			]
-		},
+		// {
+		// 	namezh:"锅炉热效率",
+		// 	require:{
+		// 		namezh:"集中供暖",
+		// 		name:"JZSNHJRHJCNJiZhongGongNuan",
+		// 		value:1,
+		// 		valuezh:'是',
+		// 	},
+		// 	fields:
+		// 	[
+		// 	{
+		// 		namezh:"燃煤、烟煤",
+		// 		backend:{
+		// 			type:"text",size:100
+		// 		},
+		// 		forend:{
+		// 			type:"input",
+		// 			comment:'%（有集中供暖时填写）',
+		// 		},
+		// 	},
+		// 	{
+		// 		namezh:"燃油、燃气",
+		// 		backend:{
+		// 			type:"text",size:100
+		// 		},
+		// 		forend:{
+		// 			type:"input",
+		// 			comment:'%（有集中供暖时填写）',
+		// 		},
+		// 	}
+		// 	]
+		// },
 		
 		]
 	},

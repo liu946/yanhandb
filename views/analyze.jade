@@ -29,6 +29,13 @@
 -    var html = "<div id="+id+" class='bodercast'><div class='box'><div class='close'><a>x</a></div><div class='content'><pre>"+ data +"</pre></div></div></div>";
 -    return html;
 - }
+- var getjundge = function(data){
+-    if(!data && data != 0){
+-       return "<p></p>"
+-    }else if (data <= 1){
+-       return "<p>很差</p>"
+-    } else if (data >1 && data <=2){return "<p>较差</p>"} else if(data>2 && data <=3){return "<p>一般</p>"}else if (data >3 && data<=4){return "<p>良好</p>"} else if(data > 4 && data<=5){return "<p>优秀</p>"}
+- }
 - function getJsontotalnum(jsonData){
 -   var totalnum = 0;
 -   for(var item in jsonData){
@@ -116,10 +123,20 @@ html(lang="en")
         #content
             #content-header
                 #breadcrumb
+                    a.tip-bottom(href="#cunzhenxinxi",title="信息")
+                        | 村镇信息
+                    a.tip-bottom(href="#biaozhixinggouzhuwu",title="庭院")
+                        | 标志性构筑物
+                    a.tip-bottom(href="#jiedaokongjian",title="建筑")
+                        | 街道空间
+                    a.tip-bottom(href="#kaichangkongjian",title="建筑")
+                        | 开敞空间
+                    a.tip-bottom(href="#tingyuanyujianzhu",title="建筑")
+                        | 庭院与建筑
             .list-body
                 .border
                     .content
-                        h1
+                        h1#cunzhenxinxi
                             | 村镇信息
                         table
                             tbody
@@ -165,11 +182,11 @@ html(lang="en")
                                     td
                                         !{getvalue(cz.match)}
                                     td
-                                        !{getvalue(cz.judgeOutput)}
+                                        !{getjundge(cz.score/cz.number)}
                                     td
                                         !{getvalue(cz.judgeReference)}
 
-                        h1
+                        h1#biaozhixinggouzhuwu
                             | 标志性构筑物
                         table
                             tbody
@@ -219,12 +236,12 @@ html(lang="en")
                                     td
                                         !{getvalue(bzxgzw.match)}
                                     td
-                                        !{getvalue(bzxgzw.judgeOutput)}
+                                        !{getjundge(bzxgzw.score/bzxgzw.number)}
                                     td
                                         !{getvalue(bzxgzw.judgeReference)}
                                     td
                                         !{getpercent(bzxgzw.percent,biaozhixinggouzhuwunum)}
-                        h1
+                        h1#jiedaokongjian
                             | 街道空间
                         table
                             tbody
@@ -274,12 +291,12 @@ html(lang="en")
                                     td
                                         !{getvalue(jdkj.match)}
                                     td
-                                        !{getvalue(jdkj.judgeOutput)}
+                                        !{getjundge(jdkj.score/jdkj.number)}
                                     td
                                         !{getvalue(jdkj.judgeReference)}
                                     td
                                         !{getpercent(jdkj.percent,jiedaokongjiannum)}
-                        h1
+                        h1#kaichangkongjian
                             | 开敞空间
                         table
                             tbody
@@ -329,12 +346,12 @@ html(lang="en")
                                     td
                                         !{getvalue(kckj.match)}
                                     td
-                                        !{getvalue(kckj.judgeOutput)}
+                                        !{getjundge(kckj.score/kckj.number)}
                                     td
                                         !{getvalue(kckj.judgeReference)}
                                     td
                                         !{getpercent(kckj.percent,kaichangkongjiannum)}
-                        h1
+                        h1#tingyuanyujianzhu
                             | 庭院与建筑
                         table
                             tbody
@@ -384,7 +401,7 @@ html(lang="en")
                                     td
                                         !{getvalue(tyyjz.match)}
                                     td
-                                        !{getvalue(tyyjz.judgeOutput)}
+                                        !{getjundge(tyyjz.score/tyyjz.number)}
                                     td
                                         !{getvalue(tyyjz.judgeReference)}
                                     td

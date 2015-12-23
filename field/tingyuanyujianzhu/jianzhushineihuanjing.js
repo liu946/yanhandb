@@ -13,7 +13,7 @@ module.exports = {
 			},
 			forend:{
 				type:"input",
-				comment:"噪声dB"
+				comment:"dB"
 
 			}
 		},

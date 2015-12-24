@@ -21,6 +21,7 @@ class List
                 object[d.CZJBXXSuoShuZhenYu].push({"name": "#{d.CZJBXXCunZhenMingChen}","id":"#{d.id}"})
             else
                 object[d.CZJBXXSuoShuZhenYu] = []
+                object[d.CZJBXXSuoShuZhenYu].push({"name": "#{d.CZJBXXCunZhenMingChen}","id":"#{d.id}"})
 
         for k,v of object
             html += "<li class='submenu'><a href='#'>#{k}</a><ul>"

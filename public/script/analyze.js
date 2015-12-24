@@ -33,6 +33,10 @@ List = (function() {
         });
       } else {
         object[d.CZJBXXSuoShuZhenYu] = [];
+        object[d.CZJBXXSuoShuZhenYu].push({
+          "name": "" + d.CZJBXXCunZhenMingChen,
+          "id": "" + d.id
+        });
       }
     }
     for (k in object) {

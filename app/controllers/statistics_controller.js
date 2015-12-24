@@ -38,24 +38,24 @@ router.get('/analyze/:cunzhenid', function (req, res, next) {
     biaozhixinggouzhuwu:[],
     tingyuanyujianzhu:[],
   };
+  var dataSet = {};
   req.models.cunzhen.get(id,function(err,item){
     if(err)throw err;
-    judge.addOne(item,'cunzhen',analyzeArray.cunzhen,globalRemark);
+    dataSet['cunzhen'] = item;
     var addingList = ['kaichangkongjian','biaozhixinggouzhuwu','jiedaokongjian','tingyuanyujianzhu'];
     (function reduceAddingTables (addinglist) {
       if(addinglist.length){
         var m = addinglist.pop();
         req.models[m].all({cunzhen_id:id}, function (err, items) {
-          if(err)throw err;
-          for(var i in items){
-            judge.addOne(items[i],m,analyzeArray[m],globalRemark);
-          }
+          if(err) throw err;
+          dataSet[m] = items;
           analyzeArray[m+'num'] = items.length;
           reduceAddingTables(addinglist);
         });
       }else{
         //res.json(analyzeArray);
-        res.render('analyze',analyzeArray);
+        res.json(judge.analyze(analyzeArray));
+        //res.render('analyze',analyzeArray);
       }
     })(addingList);
   });

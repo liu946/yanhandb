@@ -173,7 +173,8 @@ module.exports = {
           if (undefined === globalRecoder[rulesGroup + fieldName].percent){
             globalRecoder[rulesGroup + fieldName].percent = {};
           }
-          var color = colormap[item[fieldName].split('&')[0]].split('_')[0];
+          var color = colormap[item[fieldName].split('&')[0]];
+          color = color?color.split('_')[0] : 'NULL';
           globalRecoder[rulesGroup + fieldName].percent[color] = globalRecoder[rulesGroup + fieldName].percent[color] ? globalRecoder[rulesGroup + fieldName].percent[color]+1:1;
         }
         if (globalRecoder[rulesGroup + fieldName].score !== undefined
@@ -204,7 +205,8 @@ module.exports = {
           if (undefined === globalRecoder[rulesGroup + fieldName].percent){
             globalRecoder[rulesGroup + fieldName].percent = {};
           }
-          var color = colormap[item[fieldName].split('&')[0]].split('_')[0];
+          var color = colormap[item[fieldName].split('&')[0]];
+          color = color?color.split('_')[0] : 'NULL';
           globalRecoder[rulesGroup + fieldName].percent[color] = globalRecoder[rulesGroup + fieldName].percent[color] ? globalRecoder[rulesGroup + fieldName].percent[color]+1:1;
         }
         if(rule.judgeReference){

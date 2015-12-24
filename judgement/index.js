@@ -15,7 +15,7 @@ module.exports = {
     var rules = ruleGroups[rulesGroup];
     var breakcount = 0;
     for (var fieldName in rules) {
-      var oneRule = {}
+      var oneRule = {};
       var rule = rules[fieldName];
       var k;
       if (rule.hasOwnProperty('judge')) {
@@ -25,6 +25,7 @@ module.exports = {
           breakcount--;
           oneRule['number'] = 0;
           oneRule['score'] = 0;
+
         } else {
           switch (rule.type) {
             case 'select':
@@ -153,6 +154,7 @@ module.exports = {
       }
 
       if (globalRecoder.hasOwnProperty(rulesGroup + fieldName)) {
+        if(rule.type === 'input') globalRecoder[rulesGroup + fieldName].allvalue += item[fieldName];
         if (globalRecoder[rulesGroup + fieldName].score !== undefined
           && globalRecoder[rulesGroup + fieldName].number !== undefined
         ) {
@@ -173,118 +175,9 @@ module.exports = {
 
       } else {
         globalRecoder[rulesGroup + fieldName] = oneRule;
+        if(rule.type === 'input') globalRecoder[rulesGroup + fieldName].allvalue = item[fieldName];
         array.push(oneRule);
       }
     }
   }
-
-  analyze: function (dataSet) {
-    var analyzeArray = {
-      cunzhen:[],
-      kaichangkongjian:[],
-      jiedaokongjian:[],
-      biaozhixinggouzhuwu:[],
-      tingyuanyujianzhu:[],
-    };
-    var matchWithType = function (value,rule){
-
-    };
-
-    // cunzhen
-    var cunzhen = dataSet.cunzhen;
-    for(var fieldName in ruleGroups.cunzhen){
-      var item = {};
-      var rule = ruleGroups.cunzhen[fieldName];
-      // rules-fieldName
-      if(ruleGroups.cunzhen[fieldName].judge !== undefined){ // 不统计field
-        // for data
-        var list = [];
-        for( var recordi in cunzhen ){
-
-          // verify
-          var recordValue = cunzhen[recordi][fieldName];
-          if(-1 != ['', 'null', null, '无'].indexOf(recordValue)){  // 不统计的例子
-            // 统计如下信息
-            var match = matchWithType(recordValue,rule);
-            var score = rule.judge[match];
-            var di = {};
-            di.value = recordValue;
-            di.match = match;
-            di.score = score;
-            if(cunzhen[fieldName].hasOwnProperty('judgeOutput')){
-              di.judgeOutput = cunzhen[fieldName].judgeOutput;
-            }
-            list.push(di);
-          }
-        }
-      }
-
-      item.num = list.length;
-      item.score = sum(list,'score');
-      item.match = contact(list,'match');
-      if(rule.type === 'input' )item.avg = sum(cunzhen,fieldName)/cunzhen.length;
-      item.percent = percent(list);
-      analyzeArray.cunzhen.push(item);
-    }
-    //others
-    function getlist(data, fieldName, rule){
-      var list = [];
-      for( var recordi in data ){
-
-        // verify
-        var recordValue = data[recordi][fieldName];
-        if(-1 != ['', 'null', null, '无'].indexOf(recordValue)){  // 不统计的例子
-          // 统计如下信息
-          var match = matchWithType(recordValue,rule);
-          var score = rule.judge[match];
-          var di = {};
-          di.value = recordValue;
-          di.match = match;
-          di.score = score;
-          if(cunzhen[fieldName].hasOwnProperty('judgeOutput')){
-            di.judgeOutput = cunzhen[fieldName].judgeOutput;
-          }
-          list.push(di);
-        }
-      }
-      return list;
-    }
-    var l =  ['kaichangkongjian','biaozhixinggouzhuwu','jiedaokongjian','tingyuanyujianzhu'];
-    for( var s in l ){
-      var m = l[s];
-      for(var fieldName in ruleGroups[m]){
-        var item = {};
-        var list = getlist(dataSet[m], fieldName, ruleGroups[m][fieldName]);
-        item.num = list.length;
-        item.score = sum(list,'score');
-        item.match = contact(list,'match');
-        if(rule.type === 'input' )item.avg = sum(cunzhen,fieldName)/cunzhen.length;
-        item.percent = percent(list);
-
-        if(rule.hasOwnProperty('judgeReference')) item.judgeReference = rule.judgeReference;
-        if(rule.hasOwnProperty('namezh')) item.namezh = rule.namezh;
-        analyzeArray[m].push(item);
-      }
-
-    }
-  }
 };
-
-function sum(list,key){
-  return list.reduce(function (x, y) {
-    return x[key]+y;
-  },0)
-}
-
-function contact(list,key){
-  return list.map(function (x) {
-    return x[key];
-  }).join(',');
-}
-function percent(list){
-  var s = {};
-  list.map(function (x) {
-    s[list.value] = s[list.value] ? s[list.value] + 1 : 1;
-  });
-  return s;
-}

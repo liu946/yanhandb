@@ -76,8 +76,8 @@
 -           rate = (object[name]/totalnum).toFixed(4);
 -           rate = (100*rate).toFixed(2) + "%";
 -           html += "<div class='colnum'><p class='ratename'>"+ name +" </p><div class='box'><div class='percent' style='width:"+ rate +"'></div></div><p class='ratevalue'> "+ rate +"</p><div style='clear:both'></div>";
--      }    
--   } 
+-      }
+-   }
 -   return html;
 - }
 
@@ -129,7 +129,7 @@ html(lang="en")
                 li.submenu.active
                     a.menu_a(href="#")
                         | 村镇分析
-                        
+
         #content
             #content-header
                 #breadcrumb
@@ -184,7 +184,7 @@ html(lang="en")
                                     td.percentcol
                                         !{cz.namezh}
                                     td
-                                        !{getnumber(cz.value)}
+                                        !{getnumber(cz.allvalue/cz.number)}
                                     td
                                         !{getvalue(cz.score/cz.number)}
                                     td
@@ -238,7 +238,7 @@ html(lang="en")
                                     td.percentcol
                                         !{bzxgzw.namezh}
                                     td
-                                        !{getnumber(bzxgzw.value)}
+                                        !{getnumber(bzxgzw.allvalue/bzxgzw.number)}
                                     td
                                         !{getvalue(bzxgzw.score/bzxgzw.number)}
                                     td
@@ -293,7 +293,7 @@ html(lang="en")
                                     td.percentcol
                                         !{jdkj.namezh}
                                     td
-                                        !{getnumber(jdkj.value)}
+                                        !{getnumber(jdkj.allvalue/jdkj.number)}
                                     td
                                         !{getvalue(jdkj.score/jdkj.number)}
                                     td
@@ -348,7 +348,7 @@ html(lang="en")
                                     td.percentcol
                                         !{kckj.namezh}
                                     td
-                                        !{getnumber(kckj.value)}
+                                        !{getnumber(kckj.allvalue/kckj.number)}
                                     td
                                         !{getvalue(kckj.score/kckj.number)}
                                     td
@@ -403,7 +403,7 @@ html(lang="en")
                                     td.percentcol
                                         !{tyyjz.namezh}
                                     td
-                                        !{getnumber(tyyjz.value)}
+                                        !{getnumber(tyyjz.allvalue/tyyjz.number)}
                                     td
                                         !{getvalue(tyyjz.score/tyyjz.number)}
                                     td

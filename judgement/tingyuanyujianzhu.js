@@ -239,7 +239,7 @@ module.exports = {
             "6": "农机库",
             "7": "其他"
         },
-        "namezh": "生产"
+        "namezh": "院落功能：生产"
     },
     "TYTZYLGNShengHuo": {
         "type": "selectmult",
@@ -251,7 +251,7 @@ module.exports = {
             "5": "沼气池",
             "6": "其他"
         },
-        "namezh": "生活"
+        "namezh": "院落功能：生活"
     },
     "TYTZYLGNYuLe": {
         "type": "selectmult",
@@ -261,7 +261,7 @@ module.exports = {
             "3": "凉棚",
             "4": "其他"
         },
-        "namezh": "娱乐"
+        "namezh": "院落功能：娱乐"
     },
     "TYTZYLGNZhiBeiLvHua": {
         "type": "selectmult",
@@ -271,7 +271,7 @@ module.exports = {
             "3": "花卉/草丛",
             "4": "其他"
         },
-        "namezh": "植被绿化"
+        "namezh": "院落功能：植被绿化"
     },
     "TYTZHLYWQGaoDu": {
         "type": "select",
@@ -281,7 +281,7 @@ module.exports = {
             "3": "1.5-2m",
             "4": "＞2m"
         },
-        "namezh": "高度"
+        "namezh": "护栏与围墙高度"
     },
     "TYTZHLYWQCaiZhi": {
         "type": "select",
@@ -291,16 +291,16 @@ module.exports = {
             "3": "铁艺",
             "4": "其他"
         },
-        "namezh": "材质"
+        "namezh": "护栏与围墙材质"
     },
     "TYTZShiFuLvHua": {
         "type": "boolean",
-        "namezh": "是否绿化"
+        "namezh": "庭院是否有绿化"
     },
     "TYTZLHLvHuaMianJi": {
         "type": "input",
         "comment": "数字m2",
-        "namezh": "绿化面积"
+        "namezh": "庭院绿化面积"
     },
     "TYTZLHLvHuaFangShi": {
         "type": "selectmultornull",
@@ -310,7 +310,7 @@ module.exports = {
             "3": "屋顶绿化",
             "4": "其他"
         },
-        "namezh": "绿化方式"
+        "namezh": "庭院绿化方式"
     },
     "JZWBTZWDCaiLiao": {
         "type": "select",
@@ -325,7 +325,7 @@ module.exports = {
             "8": "塑料",
             "9": "其他"
         },
-        "namezh": "材料",
+        "namezh": "屋顶材料",
         'judgeReference':'按材料分为有木屋架、钢屋架、钢木屋架、钢筋混凝土屋架等。鼓励使用当地的石材、生土、竹木等乡土材料。-10分钟可以到达，减少机动车出行需求。设施整合集中布局、协调互补，和社会共享可提高使用效率、节约用地和投资。尊重地方文化，延续历史文脉，建设具有地域特色的现代建筑，公共建筑集中设置，配套的设施设备共享，也是提高服务效率、节约资源有效方法。兼容2种以上主要公共服务功能是指主要服务功能在建筑内部混合布局，部分空间共享使用，如建筑中设有共用的会议设施、展览设施、健身设施以及交往空间、休息空间等；小学、中学、大学等专用运动场所科学管理，在非校用时间向社会公众开放；文化、体育设施的室外活动场地错时向社会开放；办公建筑的室外场地在非办公时间向周边居民开放等。公共空间的共享既可增加公众的活动场所，有利陶冶情操、增进社会交往，又可提高各类设施和场地的使用效率，是绿色建筑倡导和鼓励的建设理念。',
     },
     "JZWBTZWDXingShi": {
@@ -337,12 +337,12 @@ module.exports = {
             "4": "单坡顶",
             "5": "其他"
         },
-        "namezh": "形式",
+        "namezh": "屋顶形式",
         'judgeReference':'根据严寒地区村镇的实际情况，村镇绿色建筑设计主要采用平屋顶、单坡顶、双坡顶和四坡顶，其中坡屋顶能够有效解决严寒气候等因素引起的变形，避免屋面积水积雪，增加室内可用空间，同时使住宅立面更加高耸美观，坡屋顶的坡度较陡可适应雨雪天气。<img class="img" src="/image/7.jpg">',
     },
     "JZWBTZWDYanSe": {
         "type": "CCS",
-        "namezh": "颜色"
+        "namezh": "屋顶颜色"
     },
     "JZWBTZWDWuJiZhuangShiGouJian": {
         "type": "select",
@@ -379,7 +379,7 @@ module.exports = {
             "3": "屋后",
             "4": "屋侧"
         },
-        "namezh": "位置"
+        "namezh": "烟囱位置"
     },
     "JZWBTZYCGaoDu": {
         "type": "select",
@@ -389,7 +389,7 @@ module.exports = {
             "3": "20cm-30cm",
             "4": "＞30cm"
         },
-        "namezh": "高度"
+        "namezh": "烟囱高度"
     },
     "JZWBTZYCBiaoMianCaiLiao": {
         "type": "select",
@@ -399,11 +399,11 @@ module.exports = {
             "3": " 饰面砂浆",
             "4": "其他"
         },
-        "namezh": "表面材料"
+        "namezh": "烟囱表面材料"
     },
     "JZWBTZYCYanSe": {
         "type": "CCS",
-        "namezh": "颜色"
+        "namezh": "烟囱颜色"
     },
     "JZWBTZQTCaiLiao": {
         "type": "select",
@@ -415,7 +415,7 @@ module.exports = {
             "5": "草土坯",
             "6": "其他"
         },
-        "namezh": "材料",
+        "namezh": "墙体材料",
         'judgeReference':'绿色农房建造应传承当地的传统构造方式，并结合现代工艺及材料对其进行改良和提升。鼓励使用当地的石材、生土、竹木等乡土材料。综合考虑技术可操作性、节能环保性、经济合理性，结合严寒地区气候特征，推荐适用于严寒地区村镇建筑的砌体种类见表1。不同类型村镇可按照其各自实际经济技术情况对外墙构造进行选择应用，将村镇依照其经济条件进行划分，分为经济条件较好村镇和经济条件一般村镇。在结构形式方面，建议经济条件较好村镇选用框架结构、钢混结构、砖混结构；建议经济条件一般村镇选用砖混结构、砖木结构。',
     },
     "JZWBTZQTWaiQiangZhuangShiCaiLiao": {
@@ -436,11 +436,11 @@ module.exports = {
     },
     "JZWBTZQTZhuTiSe": {
         "type": "CCS",
-        "namezh": "主体色"
+        "namezh": "墙体主体色"
     },
     "JZWBTZQTFuZhuSe": {
         "type": "CCS",
-        "namezh": "辅助色"
+        "namezh": "墙体辅助色"
     },
     "JZWBTZQTGouJian": {
         "type": "selectmultornull",
@@ -482,11 +482,11 @@ module.exports = {
             "8": "防腐木",
             "9": "其他"
         },
-        "namezh": "表面材料"
+        "namezh": "台基表面材料"
     },
     "JZWBTZTJYanSe": {
         "type": "CCS",
-        "namezh": "颜色"
+        "namezh": "台基颜色"
     },
     "JZWBTZTaiJie": {
         "type": "selectmultornull",
@@ -513,12 +513,12 @@ module.exports = {
             "4": "金属",
             "5": "其他"
         },
-        "namezh": "材料",
+        "namezh": "门材料",
         'judgeReference':'外进户门应设置在能够避免被冬季寒风直接吹到的位置，宜设在房屋的南侧。如果由于条件所限必须将入户门设置在北侧，可于北入口处加设门斗，形成室内和室外空间之间的缓冲空间，减少室内的热量散失。门窗采用密封性、保温隔热性能、隔音性能良好的型材和玻璃等材料。',
     },
     "JZWBTZMYanSe": {
         "type": "CCS",
-        "namezh": "颜色"
+        "namezh": "门颜色"
     },
     "JZWBTZCChuangChaoXiang": {
         "type": "selectmult",
@@ -537,12 +537,12 @@ module.exports = {
             "3": "塑钢",
             "4": "其他"
         },
-        "namezh": "材料",
+        "namezh": "南向窗材料",
         'judgeReference':'门窗采用密封性、保温隔热性能、隔音性能良好的型材和玻璃等材料。',
     },
     "JZWBTZCNXYanSe": {
         "type": "CCS",
-        "namezh": "颜色"
+        "namezh": "南向窗颜色"
     },
     "JZWBTZCNXChuangQiangBi": {
         "type": "select",
@@ -552,12 +552,12 @@ module.exports = {
             "3": " 40%-60%",
             "4": "＞60%"
         },
-        "namezh": "窗墙比",
+        "namezh": "南向窗窗墙比",
         'judgeReference':'居住建筑的窗墙比应符合《严寒和寒冷地区居住建筑节能设计标准》（JGJ26-2010）中的规定。公共建筑的窗墙比应符合《公共建筑节能设计标准》（GB50189-2005）中的规定，需要特别注意的是，当任何方向的窗墙比小于0.40时，玻璃或其他透明材料的可见光透射比不应小于0.40。\n严寒地区居住建筑窗墙比≤0.2\n严寒地区公共建筑窗墙比≤0.70',
     },
     "JZWBTZCNXYouWuBoLiMuQiang": {
         "type": "boolean",
-        "namezh": "有无玻璃幕墙"
+        "namezh": "南向有无玻璃幕墙"
     },
     "JZWBTZCNXKeKaiQiBuFenBiLi": {
         "type": "select",
@@ -576,12 +576,12 @@ module.exports = {
             "3": "塑钢",
             "4": "其他"
         },
-        "namezh": "材料",
+        "namezh": "北向窗材料",
         'judgeReference':'门窗采用密封性、保温隔热性能、隔音性能良好的型材和玻璃等材料。',
     },
     "JZWBTZCBXYanSe": {
         "type": "CCS",
-        "namezh": "颜色"
+        "namezh": "北向窗颜色"
     },
     "JZWBTZCBXChuangQiangBi": {
         "type": "select",
@@ -591,12 +591,12 @@ module.exports = {
             "3": " 40%-60%",
             "4": "＞60%"
         },
-        "namezh": "窗墙比",
+        "namezh": "北向窗窗墙比",
         'judgeReference':'居住建筑的窗墙比应符合《严寒和寒冷地区居住建筑节能设计标准》（JGJ26-2010）中的规定。公共建筑的窗墙比应符合《公共建筑节能设计标准》（GB50189-2005）中的规定，需要特别注意的是，当任何方向的窗墙比小于0.40时，玻璃或其他透明材料的可见光透射比不应小于0.40。\n严寒地区居住建筑窗墙比≤0.2\n严寒地区公共建筑窗墙比≤0.70',
     },
     "JZWBTZCBXYouWuBoLiMuQiang": {
         "type": "boolean",
-        "namezh": "有无玻璃幕墙"
+        "namezh": "北向有无玻璃幕墙"
     },
     "JZWBTZCBXKeKaiQiBuFenBiLi": {
         "type": "select",
@@ -615,12 +615,12 @@ module.exports = {
             "3": "塑钢",
             "4": "其他"
         },
-        "namezh": "材料",
+        "namezh": "东西向窗材料",
         'judgeReference':'门窗采用密封性、保温隔热性能、隔音性能良好的型材和玻璃等材料。',
     },
     "JZWBTZCDXXYanSe": {
         "type": "CCS",
-        "namezh": "颜色"
+        "namezh": "东西向窗颜色"
     },
     "JZWBTZCDXXChuangQiangBi": {
         "type": "select",
@@ -630,12 +630,12 @@ module.exports = {
             "3": " 40%-60%",
             "4": "＞60%"
         },
-        "namezh": "窗墙比",
+        "namezh": "东西向窗窗墙比",
         'judgeReference':'居住建筑的窗墙比应符合《严寒和寒冷地区居住建筑节能设计标准》（JGJ26-2010）中的规定。公共建筑的窗墙比应符合《公共建筑节能设计标准》（GB50189-2005）中的规定，需要特别注意的是，当任何方向的窗墙比小于0.40时，玻璃或其他透明材料的可见光透射比不应小于0.40。\n严寒地区居住建筑窗墙比≤0.2\n严寒地区公共建筑窗墙比≤0.70',
     },
     "JZWBTZCDXXYouWuBoLiMuQiang": {
         "type": "boolean",
-        "namezh": "有无玻璃幕墙"
+        "namezh": "东西向有无玻璃幕墙"
     },
     "JZWBTZCDXXKeKaiQiBuFenBiLi": {
         "type": "select",
@@ -659,11 +659,11 @@ module.exports = {
             "4": " 利用建筑物外窗设置",
             "5": "其他"
         },
-        "namezh": "位置"
+        "namezh": "牌匾位置"
     },
     "JZWBTZPBYanSe": {
         "type": "CCS",
-        "namezh": "颜色"
+        "namezh": "牌匾颜色"
     },
     "JZWBTZPBCaiZhi": {
         "type": "select",
@@ -676,7 +676,7 @@ module.exports = {
             "6": "喷绘布",
             "7": "其他"
         },
-        "namezh": "材质"
+        "namezh": "牌匾材质"
     },
     "JZWBTZPBLiMianBiLiGuanXi": {
         "type": "select",
@@ -687,7 +687,7 @@ module.exports = {
             "4": "30%-40%",
             "5": "＞40%"
         },
-        "namezh": "立面比例关系"
+        "namezh": "牌匾与立面比例关系"
     },
     "JZWBTZWuZhangAiSheJi": {
         "type": "select",
@@ -803,7 +803,7 @@ module.exports = {
             "7": "空调",
             "8": "其他"
         },
-        "namezh": "方式"
+        "namezh": "采暖方式"
     },
     "JZSNHJRHJSWDongJiPingJunShiWen": {
         "type": "input",
@@ -865,7 +865,7 @@ module.exports = {
     },
     "JZSNHJRHJWWHJGGRYBWYouWuWaiQiangBaoWenGeRe": {
         "type": "boolean",
-        "namezh": "有无外墙保温隔热"
+        "namezh": "有无外墙保温"
     },
     "JZSNHJRHJWQBWGRLeiXing": {
         "type": "selectmultornull",
@@ -875,7 +875,7 @@ module.exports = {
             "3": "自保温",
             "4": "其他"
         },
-        "namezh": "类型",
+        "namezh": "外墙保温类型",
         'judge':{
             '0':1,
             '1':3,
@@ -894,7 +894,7 @@ module.exports = {
             "5": "隔热反射涂料",
             "6": "其他"
         },
-        "namezh": "外墙保温隔热材料",
+        "namezh": "外墙保温材料",
         'judgeReference':'a.在保温材料的选择上，建议经济条件较好的村镇选择EPS板、XPS板、PUR板等；建议经济条件一般的村镇选择EPS板；结合村镇自身周边资源条件，二者均可因地制宜地选择草板、草砖等生态材料作为墙体保温材料（见表4）。\nb.根据建筑物的实际特点，优选屋面或外墙的保温隔热材料系统和施工方式，例如保温板粘贴、保温板干挂、聚氨酯硬泡喷涂、保温浆料涂抹等，以保证保温隔热效果，并减少材料浪费。<img class="img" src="/image/31.jpg"><img class="img" src="/image/32.jpg"><img class="img" src="/image/33.jpg"><img class="img" src="/image/34.jpg"><img class="img" src="/image/35.jpg"><img class="img" src="/image/36.jpg"><img class="img" src="/image/37.jpg"><img class="img" src="/image/38.jpg"><img class="img" src="/image/39.jpg"><img class="img" src="/image/40.jpg"><img class="img" src="/image/41.jpg"><img class="img" src="/image/42.jpg"><img class="img" src="/image/43.jpg"><img class="img" src="/image/44.jpg"><img class="img" src="/image/45.jpg"><img class="img" src="/image/46.jpg"><img class="img" src="/image/47.jpg"><img class="img" src="/image/48.jpg"><img class="img" src="/image/49.jpg">',
     },
     "JZSNHJRHJWQBWGRHouDu": {
@@ -907,11 +907,11 @@ module.exports = {
             "5": "81-100mm",
             "6": "＞100mm"
         },
-        "namezh": "厚度"
+        "namezh": "外墙保温厚度"
     },
     "JZSNHJRHJYouWuWuDingBaoWenGeRe": {
         "type": "boolean",
-        "namezh": "有无屋顶保温隔热"
+        "namezh": "有无屋顶保温"
     },
     "JZSNHJRHJWDBWGRLeiXing": {
         "type": "select",
@@ -924,7 +924,7 @@ module.exports = {
             "6": "屋顶遮阳",
             "7": "其他"
         },
-        "namezh": "类型",
+        "namezh": "屋顶保温类型",
         'judge':{
             "1": 5,
             "2": 5,
@@ -947,7 +947,7 @@ module.exports = {
             "6": "稻壳、木屑",
             "7": "其他"
         },
-        "namezh": "材料",
+        "namezh": "屋顶保温材料",
         'judgeReference':'a.保温材料方面，同时考虑保温性能与材料的本土性，经济较好的村镇可以主要选择聚苯板作为保温材料，一般村镇可以选择本土材料以相应的厚度充当保温材料（见表6）。\nb.根据建筑物的实际特点，优选屋面或外墙的保温隔热材料系统和施工方式，例如保温板粘贴、保温板干挂、聚氨酯硬泡喷涂、保温浆料涂抹等，以保证保温隔热效果，并减少材料浪费',
     },
     "JZSNHJRHJWDBWGRHouDu": {
@@ -960,7 +960,7 @@ module.exports = {
             "5": "81-100mm",
             "6": "＞100mm"
         },
-        "namezh": "厚度"
+        "namezh": "屋顶保温厚度"
     },
     "JZSNHJRHJWaiChuangDongJiBaoWenCuoShi": {
         "type": "selectmultornull",
@@ -1001,7 +1001,7 @@ module.exports = {
     },
     "JZSNHJRHJYouWuDiMianBaoWenGeRe": {
         "type": "boolean",
-        "namezh": "有无地面保温隔热",
+        "namezh": "有无地面保温",
         'judge':{
             '0':1,
             '1':3,
@@ -1019,7 +1019,7 @@ module.exports = {
             "4": "加气泡沫混凝土",
             "5": "陶粒混凝土"
         },
-        "namezh": "材料",
+        "namezh": "地面保温材料",
         'judgeReference':'<img class="img" src="/image/69.jpg"><img class="img" src="/image/70.jpg"><img class="img" src="/image/71.jpg"><img class="img" src="/image/72.jpg"><img class="img" src="/image/73.jpg"><img class="img" src="/image/74.jpg">',
     },
     "JZSNHJRHJDMBWGRHouDu": {
@@ -1032,7 +1032,7 @@ module.exports = {
             "5": "81-100mm",
             "6": "＞100mm"
         },
-        "namezh": "厚度"
+        "namezh": "地面保温厚度"
     },
     "JZSNHJRHJSheJiKaoLv": {
         "type": "select",
@@ -1041,7 +1041,7 @@ module.exports = {
             "2": " 设计中考虑了降低经窗户、外墙、屋顶、楼板和外廊进入室内的热量，在遮阳和隔热方面不存在问题",
             "3": " 充分考虑降低经窗户、外墙、屋顶、楼板和外廊进入室内的热量，具有良好的遮阳和隔热效果"
         },
-        "namezh": "设计考虑",
+        "namezh": "保温设计考虑",
         'judge':{
             '1':1,
             '2':3,

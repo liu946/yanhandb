@@ -132,7 +132,7 @@ Model = (function() {
       for (k in ref) {
         v = ref[k];
         vv = v.split("_");
-        str_color += "<option value='" + k + "' style='background:" + vv[1] + "'>" + vv[0] + "</option>";
+        str_color += "<option value='" + k + "'><p style='color:background:" + vv[1] + "'>" + vv[0] + "</p></option>";
       }
       str_color += str_end;
       ref1 = CCS.light;

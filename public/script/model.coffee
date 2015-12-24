@@ -108,7 +108,7 @@ class Model
 					
 			for k,v of CCS.color
 				vv = v.split("_")
-				str_color += "<option value='#{k}' style='background:#{vv[1]}'>#{vv[0]}</option>"
+				str_color += "<option value='#{k}'><p style='color:background:#{vv[1]}'>#{vv[0]}</p></option>"
 			str_color += str_end
 			for i in CCS.light
 				str_light += "<option value='#{i}'>#{i}</option>"

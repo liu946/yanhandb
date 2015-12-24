@@ -154,7 +154,10 @@ module.exports = {
       }
 
       if (globalRecoder.hasOwnProperty(rulesGroup + fieldName)) {
-        if(rule.type === 'input') globalRecoder[rulesGroup + fieldName].allvalue += item[fieldName];
+        if(rule.type === 'input' && item[fieldName]){
+          globalRecoder[rulesGroup + fieldName].allvalue = globalRecoder[rulesGroup + fieldName].allvalue? globalRecoder[rulesGroup + fieldName].allvalue+ item[fieldName]:item[fieldName];
+          globalRecoder[rulesGroup + fieldName].allvaluecount = globalRecoder[rulesGroup + fieldName].allvaluecount ? globalRecoder[rulesGroup + fieldName].allvaluecount + 1:1;
+        }
         if (globalRecoder[rulesGroup + fieldName].score !== undefined
           && globalRecoder[rulesGroup + fieldName].number !== undefined
         ) {
@@ -175,7 +178,10 @@ module.exports = {
 
       } else {
         globalRecoder[rulesGroup + fieldName] = oneRule;
-        if(rule.type === 'input') globalRecoder[rulesGroup + fieldName].allvalue = item[fieldName];
+        if(rule.type === 'input' && item[fieldName]){
+          globalRecoder[rulesGroup + fieldName].allvalue = globalRecoder[rulesGroup + fieldName].allvalue? globalRecoder[rulesGroup + fieldName].allvalue+ item[fieldName]:item[fieldName];
+          globalRecoder[rulesGroup + fieldName].allvaluecount = globalRecoder[rulesGroup + fieldName].allvaluecount ? globalRecoder[rulesGroup + fieldName].allvaluecount + 1:1;
+        }
         array.push(oneRule);
       }
     }

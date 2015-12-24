@@ -152,11 +152,29 @@ module.exports = {
         }
 
       }
-
+      var colormap ={'R':'红_rgb(255,0,0)',
+        'OR': '橙红_rgb(255,51,0)',
+        'O': '橙_rgb(255,102,0)',
+        'OY': '橙黄_rgb(255,153,0)',
+        'Y': '黄_rgb(255,255,0)',
+        'YG': '黄绿_rgb(153,255,0)',
+        'G': '绿_rgb(0,255,0)',
+        'BG': '蓝绿_rgb(0,255,255)',
+        'B': '蓝_rgb(0,0,255)',
+        'BV': '青紫_rgb(102,0,255)',
+        'V': '紫罗兰_rgb(255,0,255)',
+        'VR': '紫红_rgb(255,0,102)'}
       if (globalRecoder.hasOwnProperty(rulesGroup + fieldName)) {
         if(rule.type === 'input' && item[fieldName]){
           globalRecoder[rulesGroup + fieldName].allvalue = globalRecoder[rulesGroup + fieldName].allvalue? globalRecoder[rulesGroup + fieldName].allvalue+ item[fieldName]:item[fieldName];
           globalRecoder[rulesGroup + fieldName].allvaluecount = globalRecoder[rulesGroup + fieldName].allvaluecount ? globalRecoder[rulesGroup + fieldName].allvaluecount + 1:1;
+        }
+        if(rule.type === 'CCS' && item[fieldName] && item[fieldName]!='null&null&null'){
+          if (undefined === globalRecoder[rulesGroup + fieldName].percent){
+            globalRecoder[rulesGroup + fieldName].percent = {};
+          }
+          var color = colormap[item[fieldName].split('&')[0]].split('_')[0];
+          globalRecoder[rulesGroup + fieldName].percent[color] = globalRecoder[rulesGroup + fieldName].percent[color] ? globalRecoder[rulesGroup + fieldName].percent[color]+1:1;
         }
         if (globalRecoder[rulesGroup + fieldName].score !== undefined
           && globalRecoder[rulesGroup + fieldName].number !== undefined
@@ -181,6 +199,13 @@ module.exports = {
         if(rule.type === 'input' && item[fieldName]){
           globalRecoder[rulesGroup + fieldName].allvalue = globalRecoder[rulesGroup + fieldName].allvalue? globalRecoder[rulesGroup + fieldName].allvalue+ item[fieldName]:item[fieldName];
           globalRecoder[rulesGroup + fieldName].allvaluecount = globalRecoder[rulesGroup + fieldName].allvaluecount ? globalRecoder[rulesGroup + fieldName].allvaluecount + 1:1;
+        }
+        if(rule.type === 'CCS' && item[fieldName] && item[fieldName]!='null&null&null'){
+          if (undefined === globalRecoder[rulesGroup + fieldName].percent){
+            globalRecoder[rulesGroup + fieldName].percent = {};
+          }
+          var color = colormap[item[fieldName].split('&')[0]].split('_')[0];
+          globalRecoder[rulesGroup + fieldName].percent[color] = globalRecoder[rulesGroup + fieldName].percent[color] ? globalRecoder[rulesGroup + fieldName].percent[color]+1:1;
         }
         if(rule.judgeReference){
           globalRecoder[rulesGroup + fieldName].judgeReference = rule.judgeReference;

@@ -19,7 +19,9 @@ module.exports = {
     "defaultValue": "0",
     "size": ".1",
     "comment": "m^2",
-    "namezh": "人均居住用地"
+    "namezh": "人均居住用地",
+    'judgeReference':'引导宅基地紧缩，降低人均居住用地面积。<img class="img" src="/image/1.jpg">',
+
   },
   "CZJBXXJianZhuBuJuMoShi": {
     "type": "selectmult",

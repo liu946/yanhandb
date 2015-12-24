@@ -182,6 +182,9 @@ module.exports = {
           globalRecoder[rulesGroup + fieldName].allvalue = globalRecoder[rulesGroup + fieldName].allvalue? globalRecoder[rulesGroup + fieldName].allvalue+ item[fieldName]:item[fieldName];
           globalRecoder[rulesGroup + fieldName].allvaluecount = globalRecoder[rulesGroup + fieldName].allvaluecount ? globalRecoder[rulesGroup + fieldName].allvaluecount + 1:1;
         }
+        if(rule.judgeReference){
+          globalRecoder[rulesGroup + fieldName].judgeReference = rule.judgeReference;
+        }
         array.push(oneRule);
       }
     }

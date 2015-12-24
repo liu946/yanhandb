@@ -783,14 +783,14 @@ module.exports = {
         "judgeReference":'合理选用建筑围护结构构件，采取有效的隔声、减噪措施，保证室内噪声级和隔声性能符合《民用建筑隔声设计规范》（GBJ118）的要求。<img class="img" src="/image/8.jpg">',
 
     },
-    "JZSNHJRHJCNJiZhongGongNuan": {
-        "type": "select",
-        "option": {
-            "1": "是",
-            "2": "否"
-        },
-        "namezh": "集中供暖"
-    },
+    //"JZSNHJRHJCNJiZhongGongNuan": {
+    //    "type": "select",
+    //    "option": {
+    //        "1": "是",
+    //        "2": "否"
+    //    },
+    //    "namezh": "集中供暖"
+    //},
     "JZSNHJRHJCNFangShi": {
         "type": "selectmult",
         "option": {
@@ -894,7 +894,7 @@ module.exports = {
             "5": "隔热反射涂料",
             "6": "其他"
         },
-        "namezh": "材料",
+        "namezh": "外墙保温隔热材料",
         'judgeReference':'a.在保温材料的选择上，建议经济条件较好的村镇选择EPS板、XPS板、PUR板等；建议经济条件一般的村镇选择EPS板；结合村镇自身周边资源条件，二者均可因地制宜地选择草板、草砖等生态材料作为墙体保温材料（见表4）。\nb.根据建筑物的实际特点，优选屋面或外墙的保温隔热材料系统和施工方式，例如保温板粘贴、保温板干挂、聚氨酯硬泡喷涂、保温浆料涂抹等，以保证保温隔热效果，并减少材料浪费。<img class="img" src="/image/31.jpg"><img class="img" src="/image/32.jpg"><img class="img" src="/image/33.jpg"><img class="img" src="/image/34.jpg"><img class="img" src="/image/35.jpg"><img class="img" src="/image/36.jpg"><img class="img" src="/image/37.jpg"><img class="img" src="/image/38.jpg"><img class="img" src="/image/39.jpg"><img class="img" src="/image/40.jpg"><img class="img" src="/image/41.jpg"><img class="img" src="/image/42.jpg"><img class="img" src="/image/43.jpg"><img class="img" src="/image/44.jpg"><img class="img" src="/image/45.jpg"><img class="img" src="/image/46.jpg"><img class="img" src="/image/47.jpg"><img class="img" src="/image/48.jpg"><img class="img" src="/image/49.jpg">',
     },
     "JZSNHJRHJWQBWGRHouDu": {

@@ -157,7 +157,10 @@ class Model
 			inputnames = buildkeys target.name,inputnames
 
 			if target.forend.comment isnt undefined
-				comment = "(#{target.forend.comment})"
+				if target.forend.comment is ""
+					comment = ""
+				else
+					comment = "(#{target.forend.comment})"
 			else 
 				comment = ""
 

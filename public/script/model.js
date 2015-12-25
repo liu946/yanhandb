@@ -181,7 +181,7 @@ Model = (function() {
       title = target.namezh;
       str = gethtmlstring(target.forend, target.name, target);
       inputnames = buildkeys(target.name, inputnames);
-      if (target.forend.comment !== void 0) {
+      if (target.forend.comment !== void 0 || target.forend.comment !== "") {
         comment = "(" + target.forend.comment + ")";
       } else {
         comment = "";

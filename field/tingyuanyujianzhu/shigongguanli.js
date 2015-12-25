@@ -47,7 +47,7 @@ module.exports = {
 
 
 		{
-			namezh:"每10000m2建筑面积的施工固体废弃物排放量SWC",
+			namezh:"每10000㎡建筑面积的施工固体废弃物排放量SWC",
 			backend:{type:"text",size:100},
 			forend:{
 				type:"input",

@@ -156,7 +156,7 @@ class Model
 			str = gethtmlstring target.forend,target.name,target
 			inputnames = buildkeys target.name,inputnames
 
-			if target.forend.comment isnt undefined
+			if target.forend.comment isnt undefined || target.forend.comment isnt ""
 				comment = "(#{target.forend.comment})"
 			else 
 				comment = ""
